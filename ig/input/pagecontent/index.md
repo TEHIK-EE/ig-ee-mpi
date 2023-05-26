@@ -18,6 +18,6 @@ Patsiendi liike kirjeldab [patsiendi andmete koosseis](patient.html).
 
 Antud sait on välja töötatud [FHIR Shorthand](https://build.fhir.org/ig/HL7/fhir-shorthand) abiga.
 Täiendava informatsiooni FHIR Shorthand kohta saab leida [Confluence-is](https://confluence.hl7.org/display/FHIRI/FHIR+Shorthand), [GitHub-is](https://github.com/HL7/fhir-shorthand) ja [Zulip](https://chat.fhir.org) kanalis: #shorthand.
-Juurutusjuhendi lähtekood on leitav [Gitlabis](https://gitlab.com/kodality/ig/ig-mpi).
+PÜT-i juurutusjuhendi lähtekood on leitav [Gitlabis](https://gitlab.com/kodality/ig/ig-mpi).
 
-Testest
+
