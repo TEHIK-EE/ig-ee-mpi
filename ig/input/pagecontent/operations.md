@@ -513,7 +513,7 @@ ning saab vastuseks Observationi
 ```
 
 ### Puude määr
-Operatsioon tagastab [Disability](file:///Users/igor/source/hl7/ig-ee-mpi/ig/output/StructureDefinition-ee-mpi-socialhistory-disability.html) objekti
+Operatsioon tagastab [Disability](StructureDefinition-ee-mpi-socialhistory-disability.html) objekti.
 
 
 ## Tööprintsiip
