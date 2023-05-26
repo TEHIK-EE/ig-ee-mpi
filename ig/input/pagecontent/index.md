@@ -4,7 +4,7 @@
 Patsiendi üldandmete teenus PÜT (ing k MPI ehk master patient index) on keskne teenus mille raames patsiendi kohta käivad üldandmed 
 (sh haridustase, eestkoste, hooldusõigus, töövõimekao ja puude info jne) on kättesaadavad kõik ühest kohast. Erinevates registrites olevaid andmeid ei pea patsiendilt küsima vaid need liiguvad automaatselt PÜT-i. PÜT teenus tagab tervishoiuteenuse osutajate jaoks kvaliteetsema andmetöötluse ning aja kokkuhoiu patsiendi üldandmete otsimise ja sisetsamise arvelt. 
 Käesoleval saidil kirjeldatakse PÜT rakendamisega seotud juurutisjuhendit. PÜT kasutab interaktsiooniprotokollina [FHIR 
-standardit] (http://fhir.hl7.org). 
+standardit](http://fhir.hl7.org). 
 
 PÜT juurutusjuhend määratleb toetatud profiilide komplekti ja pakub iga profiili jaoks vähemalt ühe näite.
 FHIR profiili saab iseloomustada kui ühe fakti sisustusreeglistiku ning juurutusjuhendi kui kogumi sisustusreeglitest ja loenditest.
