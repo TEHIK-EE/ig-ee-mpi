@@ -51,12 +51,6 @@ Usage: #definition
 * parameter[=].max = "*"
 * parameter[=].documentation = "When target-patient-identifiers are provided, the server is expected to perform an internal lookup to identify the target patient record. The server SHALL reject the request if the provided identifiers do not resolve to a single patient record. This resolution MAY occur asynchronously, for example, as part of a review by a user."
 * parameter[=].type = #Identifier
-* parameter[+].name = #result-patient
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "The details of the Patient resource that is expected to be updated to complete with and must have the same patient.id and provided identifiers included.\r\rThis resource MUST have the link property included referencing the source patient resource.\r\rIt will be used to perform an update on the target patient resource.\r\rIn the absence of this parameter the servers should copy all identifiers from the source patient into the target patient, and include the link property (as shown in the example below).\r\rThis is often used when properties from the source patient are desired to be included in the target resource.\r\rThe receiving system may also apply other internal business rules onto the merge which may make the resource different from what is provided here."
-* parameter[=].type = #Patient
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 1
@@ -117,12 +111,6 @@ Usage: #definition
 * parameter[=].max = "*"
 * parameter[=].documentation = "When target-patient-identifiers are provided, the server is expected to perform an internal lookup to identify the target patient record. The server SHALL reject the request if the provided identifiers do not resolve to a single patient record. This resolution MAY occur asynchronously, for example, as part of a review by a user."
 * parameter[=].type = #Identifier
-* parameter[+].name = #result-patient
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "The details of the Patient resource that is expected to be updated to complete with and must have the same patient.id and provided identifiers included.\r\rThis resource MUST have the link property included referencing the source patient resource.\r\rIt will be used to perform an update on the target patient resource.\r\rIn the absence of this parameter the servers should copy all identifiers from the source patient into the target patient, and include the link property (as shown in the example below).\r\rThis is often used when properties from the source patient are desired to be included in the target resource.\r\rThe receiving system may also apply other internal business rules onto the merge which may make the resource different from what is provided here."
-* parameter[=].type = #Patient
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 1
@@ -193,12 +181,6 @@ Usage: #definition
 * parameter[=].max = "*"
 * parameter[=].documentation = "Telekom'i väärtus, e-mail või tel. number."
 * parameter[=].type = #ContactPoint
-* parameter[+].name = #nocache
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
-* parameter[=].type = #boolean
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 0
@@ -239,12 +221,12 @@ Usage: #definition
 * parameter[=].max = "1"
 * parameter[=].documentation = "The identifier we are looking for."
 * parameter[=].type = #Identifier
-* parameter[+].name = #nocache
+* parameter[+].name = #source
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
-* parameter[=].type = #boolean
+* parameter[=].documentation = "Original data source. By default *https://tehik.ee/mpi*."
+* parameter[=].type = #string
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 1
