@@ -8,7 +8,7 @@ Description: "Ametite klassifikaator"
 * include codes from system SCT where concept descendent-of #14679004 "Occupation"
 */
 
-ValueSet: JobType
+ValueSet: EEMPIJobType
 Id: job-type
 Title:     "JobType"
 Description: "Töötamise liik"
@@ -16,7 +16,7 @@ Description: "Töötamise liik"
 * ^copyright = "This value set includes content from SNOMED CT, which is copyright © 2002+ International Health Terminology Standards Development Organisation (IHTSDO), and distributed by agreement between IHTSDO and HL7. Implementer use of SNOMED CT is not covered by this agreement"
 * include codes from system SCT where concept descendent-of #365539008 "Finding of type of job (should be replaced)"
 
-Profile:        MpiSocialHistoryOccupation
+Profile:        EEMPISocialHistoryOccupation
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-occupation
 Title:          "EE MPI SocialHistory Occupation"
@@ -68,7 +68,7 @@ Description:    "Töötamine"
 * component[job].valueCodeableConcept ^short = "Tööamet."
 * component[type].code = SCT#224361009 "Type of job"
 * component[type].value[x] only CodeableConcept
-* component[type].valueCodeableConcept from JobType
+* component[type].valueCodeableConcept from EEMPIJobType
 * component[type].valueCodeableConcept ^short = "Töötamise liik."
 * component[status].code = SCT#224362002 "Employment status"
 * component[status].value[x] only CodeableConcept
@@ -78,7 +78,7 @@ Description:    "Töötamine"
 
 
 Instance: Occupation
-InstanceOf: MpiSocialHistoryOccupation
+InstanceOf: EEMPISocialHistoryOccupation
 Description: "Example of patient occupation"
 Usage: #example
 * code 

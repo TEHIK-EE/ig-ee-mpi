@@ -1,7 +1,7 @@
 Alias: MaritalStatusVS = http://hl7.org/fhir/ValueSet/marital-status
 Alias: MaritalStatusCS = http://terminology.hl7.org/CodeSystem/v3-MaritalStatus
 
-Profile:        MpiSocialHistoryMaritalStatus
+Profile:        EEMPISocialHistoryMaritalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-marital-status
 Title:          "EE MPI SocialHistory Marital Status"
@@ -33,7 +33,7 @@ Description:    "Abielu või suhte liik."
 * device ..0
 
 Instance: MaritalStatus
-InstanceOf: MpiSocialHistoryMaritalStatus
+InstanceOf: EEMPISocialHistoryMaritalStatus
 Description: "Example of patient marital status"
 Usage: #example
 * subject = Reference(Patient/pat1)

@@ -1,4 +1,4 @@
-CodeSystem:  LegalStatus
+CodeSystem:  EEMPILegalStatus
 Id:          legal-status
 Title:       "Legal Status"
 Description: "The legal status that applies to the patient. The legal status indicates the basis on which the patient is staying in a healthcare organization. This can be either voluntary or involuntary, however the legal status is always determined by a judge. A patient can also receive healthcare based on a forensic status."
@@ -13,15 +13,15 @@ Description: "The legal status that applies to the patient. The legal status ind
   * ^designation[0].language = #et
   * ^designation[=].value = "Piiratud valimisõigusega"
 
-ValueSet:    LegalStatus
+ValueSet:    EEMPILegalStatus
 Id:          legal-status
 Title:       "Legal Status"
 Description: "The legal status that applies to the patient."
 * ^experimental = false
-* include codes from system LegalStatus
+* include codes from system EEMPILegalStatus
 
 
-Profile:        MpiSocialHistoryLegalStatus
+Profile:        EEMPISocialHistoryLegalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-status
 Title:          "EE MPI SocialHistory Legal Status"
@@ -37,7 +37,7 @@ Description:    "The legal status that applies to the patient."
 * performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from LegalStatus
+* valueCodeableConcept from EEMPILegalStatus
 * note ..1 MS
 * basedOn ..0
 * partOf ..0
@@ -49,10 +49,10 @@ Description:    "The legal status that applies to the patient."
 * device ..0
 
 Instance: LegalStatus
-InstanceOf: MpiSocialHistoryLegalStatus
+InstanceOf: EEMPISocialHistoryLegalStatus
 Description: "Example of patient legal status"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer[0] = Reference(PatientIgorBossenkoWife)
-* valueCodeableConcept = LegalStatus#T0 "Teovõimeline"
+* valueCodeableConcept = EEMPILegalStatus#T0 "Teovõimeline"

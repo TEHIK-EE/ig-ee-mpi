@@ -7,7 +7,7 @@ Description: "Eeskostja liik"
 * SNOMED#365569001 "Finding of wardship"
 */
 
-ValueSet: GuardianStatus
+ValueSet: EEMPIGuardianStatus
 Id:         guardian-status
 Title:     "Guardian Status"
 Description: "Eeskostja liik"
@@ -26,7 +26,7 @@ Description: "Eeskostja liik"
 * ^compose.include.concept[=].designation[=].value = "Eestkostetav"
 
 
-Profile:        MpiSocialHistoryLegalGuardianStatus
+Profile:        EEMPISocialHistoryLegalGuardianStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-guardian-status
 Title:          "EE MPI SocialHistory Legal Guardian Status"
@@ -43,7 +43,7 @@ Description:    "Seadusliku eeskostja staatus"
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from GuardianStatus
+* valueCodeableConcept from EEMPIGuardianStatus
 * value[x] ^short = "Eeskoste liik."
 * note ..1 MS
 * basedOn ..0
@@ -56,7 +56,7 @@ Description:    "Seadusliku eeskostja staatus"
 * device ..0
 
 Instance: LegalGuardianStatus
-InstanceOf: MpiSocialHistoryLegalGuardianStatus
+InstanceOf: EEMPISocialHistoryLegalGuardianStatus
 Description: "Example of patient legal duardian"
 Usage: #example
 * subject = Reference(Patient/pat1)

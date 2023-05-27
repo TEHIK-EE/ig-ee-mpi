@@ -1,4 +1,4 @@
-CodeSystem: EducationLevel
+CodeSystem: EEMPIEducationLevel
 Id: education-level
 Title:     "Education level"
 Description: "The highest education level achieved by patient"
@@ -40,16 +40,16 @@ Description: "The highest education level achieved by patient"
 * #9 "Not elsewhere classified" "Mujal liigitamata"
 
 
-ValueSet:    EducationLevel
+ValueSet:    EEMPIEducationLevel
 Id:          education-level
 Title:       "Education Level"
 Description: "The highest education level achieved by patient"
 * ^experimental = false
-* include codes from system EducationLevel
+* include codes from system EEMPIEducationLevel
 // SCT where concept descendent-of #365460000 "Finding of education received in the past"
 
 
-Profile:        MpiSocialHistoryEducationLevel
+Profile:        EEMPISocialHistoryEducationLevel
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-education-level
 Title:          "EE MPI SocialHistory Education Level"
@@ -84,7 +84,7 @@ Description:    "Haridustase"
 * performer 0..0 MS
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from EducationLevel
+* valueCodeableConcept from EEMPIEducationLevel
 * valueCodeableConcept ^short = "Haridustase."
 * basedOn ..0
 * partOf ..0
@@ -96,10 +96,10 @@ Description:    "Haridustase"
 * device ..0
 
 Instance: EducationLevel
-InstanceOf: MpiSocialHistoryEducationLevel
+InstanceOf: EEMPISocialHistoryEducationLevel
 Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "1995-06-21T00:00:00+02:00"
-* valueCodeableConcept = EducationLevel#8
+* valueCodeableConcept = EEMPIEducationLevel#8
 // SCT#224300008 "Received university education"

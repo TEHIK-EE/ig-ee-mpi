@@ -1,4 +1,4 @@
-CodeSystem: DisabilityLevel
+CodeSystem: EEMPIDisabilityLevel
 Id: disability-level
 Title:     "Disability level"
 Description: "Puude raskusaste"
@@ -16,12 +16,12 @@ Description: "Puude raskusaste"
   * ^designation[=].value = "SYGAV_PUUE"
 
 
-ValueSet: DisabilityLevel
+ValueSet: EEMPIDisabilityLevel
 Id: disability-level
 Title:     "Disability level"
 Description: "Puude raskusaste"
 * ^experimental = false
-* include codes from system DisabilityLevel
+* include codes from system EEMPIDisabilityLevel
 /*
 * ^compose.include.system = SCT
 
@@ -48,7 +48,7 @@ Description: "Puude raskusaste"
 * ^compose.include.concept[=].designation[=].value = "Sügav puue"
 */
 
-Profile:        MpiSocialHistoryDisability
+Profile:        EEMPISocialHistoryDisability
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-disability
 Title:          "EE MPI SocialHistory Disability"
@@ -65,7 +65,7 @@ Description:    "Puude raskusaste"
 * performer ^short = "Asutus ja/või isik, kes määras puude."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from DisabilityLevel
+* valueCodeableConcept from EEMPIDisabilityLevel
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -76,10 +76,10 @@ Description:    "Puude raskusaste"
 * device ..0
 
 Instance: Disability
-InstanceOf: MpiSocialHistoryDisability
+InstanceOf: EEMPISocialHistoryDisability
 Description: "Example of patient disability"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
-* valueCodeableConcept = DisabilityLevel#keskmine "Keskmine puue"
+* valueCodeableConcept = EEMPIDisabilityLevel#keskmine "Keskmine puue"

@@ -1,4 +1,4 @@
-CodeSystem:  PowerOfAttorney
+CodeSystem:  EEMPIPowerOfAttorney
 Id:          power-of-attorney
 Title:       "PowerOfAttorney Status"
 Description: "Hooldusõiguse liik"
@@ -14,15 +14,15 @@ Description: "Hooldusõiguse liik"
 * #H20 "Täielik varahooldusõigus"
 * #H19 "Vanema õigused"
 
-ValueSet:    PowerOfAttorney
+ValueSet:    EEMPIPowerOfAttorney
 Id:          power-of-attorney
 Title:       "PowerOfAttorney Status"
 Description: "Hooldusõiguse liik"
 * ^experimental = false
-* include codes from system PowerOfAttorney
+* include codes from system EEMPIPowerOfAttorney
 
 
-Profile:        MpiSocialHistoryPowerOfAttorney
+Profile:        EEMPISocialHistoryPowerOfAttorney
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-power-of-attorney
 Title:          "EE MPI SocialHistory Power Of Attorney"
@@ -39,7 +39,7 @@ Description:    "Hooldusõigus"
 * performer ^short = "Isik(ud), kellel on hooldusõigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from PowerOfAttorney
+* valueCodeableConcept from EEMPIPowerOfAttorney
 * value[x] ^short = "Hooldusõiguse liik."
 * note ..1 MS
 * basedOn ..0
@@ -52,10 +52,10 @@ Description:    "Hooldusõigus"
 * device ..0
 
 Instance: PowerOfAttorney
-InstanceOf: MpiSocialHistoryPowerOfAttorney
+InstanceOf: EEMPISocialHistoryPowerOfAttorney
 Description: "Example of patient attorney"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer[0] = Reference(PatientIgorBossenkoWife)
-* valueCodeableConcept = PowerOfAttorney#H10 "Täielik isikuhooldusõigus"
+* valueCodeableConcept = EEMPIPowerOfAttorney#H10 "Täielik isikuhooldusõigus"
