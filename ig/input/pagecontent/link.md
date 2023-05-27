@@ -1,4 +1,4 @@
-Patsientide sidumiseks ja lahti sidumiseks MPI pakub [Link](OperationDefinition-Patient-link.html) ja [Unlink](OperationDefinition-Patient-unlink.html) operatsioonid.
+Patsientide sidumiseks ja lahti sidumiseks MPI pakub [Link](OperationDefinition-patient-link.html) ja [Unlink](OperationDefinition-patient-unlink.html) operatsioonid.
 
 ### Teised ressursid
 #### TIS

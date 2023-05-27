@@ -1,13 +1,13 @@
 Alias: $m49.htm = http://unstats.un.org/unsd/methods/m49/m49.htm
 
-Instance: Patient-link
+Instance: patient-link
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-link"
+* url = "https://fhir.ee/OperationDefinition/patient-link"
 * version = "5.0.0"
 * name = "EEMPIPatientLink"
 * title = "Patient Link"
@@ -60,14 +60,14 @@ Usage: #definition
 
 
 
-Instance: Patient-unlink
+Instance: patient-unlink
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-unlink"
+* url = "https://fhir.ee/OperationDefinition/patient-unlink"
 * version = "5.0.0"
 * name = "EEMPIPatientUnlink"
 * title = "Patient Unlink"
@@ -120,14 +120,14 @@ Usage: #definition
 
 
 
-Instance: Patient-foreigner
+Instance: patient-foreigner
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 0
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-foreigner"
+* url = "https://fhir.ee/OperationDefinition/patient-foreigner"
 * version = "5.0.0"
 * name = "EEMPIPatientForeignerSearch"
 * title = "Patient Foreigner"
@@ -190,14 +190,14 @@ Usage: #definition
 
 
 
-Instance: Patient-lookup
+Instance: patient-lookup
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-lookup"
+* url = "https://fhir.ee/OperationDefinition/patient-lookup"
 * version = "5.0.0"
 * name = "EEMPIPatientLookup"
 * title = "Patient Lookup"
@@ -236,14 +236,14 @@ Usage: #definition
 
 
 
-Instance: Patient-legal-guardian
+Instance: patient-legal-guardian
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-legal-guardian"
+* url = "https://fhir.ee/OperationDefinition/patient-legal-guardian"
 * version = "5.0.0"
 * name = "EEMPIPatientLegalGuardianStatus"
 * title = "Patient Legal Guardians"
@@ -282,14 +282,14 @@ Usage: #definition
 * parameter[=].type = #Bundle
 
 
-Instance: Patient-power-of-attorney
+Instance: patient-power-of-attorney
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-power-of-attorney"
+* url = "https://fhir.ee/OperationDefinition/patient-power-of-attorney"
 * version = "5.0.0"
 * name = "EEMPIPatientPowerOfAttorneyStatus"
 * title = "Patient power of attorneys"
@@ -328,14 +328,14 @@ Usage: #definition
 * parameter[=].type = #Bundle
 
 
-Instance: Patient-education
+Instance: patient-education
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-education"
+* url = "https://fhir.ee/OperationDefinition/patient-education"
 * version = "5.0.0"
 * name = "EEMPIPatientEducationStatus"
 * title = "Patient Education"
@@ -373,14 +373,14 @@ Usage: #definition
 * parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
 * parameter[=].type = #Bundle
 
-Instance: Patient-generate-mrn
+Instance: patient-generate-mrn
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/Patient-generate-mrn"
+* url = "https://fhir.ee/OperationDefinition/patient-generate-mrn"
 * version = "5.0.0"
 * name = "EEMPIPatientGenerateMRN"
 * title = "Generate Medical Record Number"
