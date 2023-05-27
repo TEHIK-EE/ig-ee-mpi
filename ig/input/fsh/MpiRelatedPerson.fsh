@@ -42,7 +42,7 @@ Description: "Person relationship class"
 * ^compose.include.concept[=].designation[=].value = "Eestkostja"
 * ^compose.include.concept[+].code = #DEPEN
 * ^compose.include.concept[=].designation[+].language = #et
-* ^compose.include.concept[=].designation[=].value = "Eestkostetav "
+* ^compose.include.concept[=].designation[=].value = "Eestkostetav"
 * ^compose.include.concept[+].code = #NOK
 * ^compose.include.concept[=].designation[+].language = #et
 * ^compose.include.concept[=].designation[=].value = "Sugulane"
