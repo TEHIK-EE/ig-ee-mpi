@@ -4,7 +4,7 @@ Description: "Example of organization Org1"
 Usage: #example
 * id = "Org1"
 * name = "Kodality General Hospital"
-* identifier.system = RIK
+* identifier.system = "https://fhir.ee/sid/org/est/br"
 * identifier.value = "14379569"
 * alias = "Kodality"
 * contact
