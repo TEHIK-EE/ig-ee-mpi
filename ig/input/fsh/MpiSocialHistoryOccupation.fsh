@@ -22,7 +22,6 @@ Id:             ee-mpi-socialhistory-occupation
 Title:          "EE MPI SocialHistory Occupation"
 Description:    "Töötamine"
 * status = #final (exactly)
-* category[obscat] 1..1 
 * category[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code.coding 2..2
 * code.coding ^slicing.discriminator.type = #value
