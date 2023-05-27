@@ -56,5 +56,5 @@ Usage: #example
   * use = #temp
   * country = "EE"
   * text = "Valukoja 10, Tallinn"
-  * extension[ads].valueCoding.code = https://fhir.ee/CodeSystem/ee-ads#2280361
+  * extension[ads].valueCoding = https://fhir.ee/CodeSystem/ee-ads#2280361
 
