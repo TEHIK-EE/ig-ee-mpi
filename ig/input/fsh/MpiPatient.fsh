@@ -12,3 +12,4 @@ Description: "Common MPI limitations on Patient resouce"
 * link ..0
 * contact ..0
 * maritalStatus ..0
+* communication MS 

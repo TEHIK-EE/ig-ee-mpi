@@ -75,7 +75,7 @@ Description: "MPI Patient verified during reception."
 * gender MS 
 * deceased[x] MS
 */
-* communication MS 
+
 
 
 /*
@@ -174,7 +174,7 @@ Usage: #example
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "37302102711"
 * identifier[+]
-  * system = "https://fhir.ee/sid/pid/est/uzb/ni"
+  * system = "https://fhir.ee/sid/pid/uzb/ni"
   * value = "31002736540023"
 /* identifier[+]
   * system = "https://fhir.ee/sid/pid/est/cz"
@@ -211,7 +211,7 @@ Usage: #example
   * country = "EE"
   * postalCode = "14215"
   * text = "Valukoja 10, Tallinn"
-  * extension[ads].valueCoding.code = #2280361
+  * extension[ads].valueCoding = https://fhir.ee/CodeSystem/ee-ads#2280361
 
 
 Instance: PatientJohnDoe
