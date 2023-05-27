@@ -16,16 +16,16 @@ Usage: #definition
 * useContext.valueCodeableConcept.text = "for NHIS usage"
 * jurisdiction = urn:iso:std:iso:3166#EE
 //* copyright = "Creative Commons 0"
-* sourceScopeUri = "https://fhir.ee/ValueSet/ee-patient-identity"
+* sourceScopeUri = "https://fhir.ee/ValueSet/ee-identity-system"
 * targetScopeUri = "urn:oid:1.3.6.1.4.1.28284"
 * group.source = "https://fhir.ee/CodeSystem/ee-identity-system"
 * group.target = "urn:oid:1.3.6.1.4.1.28284"
 * group.element[0].code = #https://fhir.ee/sid/pid/est/ni
-* group.element[=].display = "Estonian patient national identifier"
+* group.element[=].display = "Estonian personal national identification code"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.1
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/est/u
-* group.element[=].display = "Other unspecified patient identifier"
+* group.element[=].display = "Unknown person identifier. May be used only for backward-compatibility."
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/afg/ppn
@@ -541,7 +541,7 @@ Usage: #definition
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.528
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/mkd/ppn
-* group.element[=].display = "Passport number of Macedonia"
+* group.element[=].display = "Passport number of North Macedonia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.807
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/mys/ppn
