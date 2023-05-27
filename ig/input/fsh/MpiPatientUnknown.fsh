@@ -1,3 +1,4 @@
+/*
 ValueSet: EEMPIPatientIdentityUnknown
 Id: ee-patient-identity-unknown
 Title: "Unknown Patient Identity Systems"
@@ -6,7 +7,13 @@ Description: "Identity system acceptable for unknown patient identification"
 //* ^compose.include.system = EEBaseIdentitySystem
 //* ^compose.include.concept[+].code = #https://fhir.ee/sid/pid/est/mr
 * EEBaseIdentitySystem#https://fhir.ee/sid/pid/est/mr
-* include codes from system EEBaseIdentitySystem where concept descendent-of "https://fhir.ee/sid/pid/est/prn"
+* include codes from system EEBaseIdentitySystem where concept descendent-of "https://fhir.ee/sid/pid/est/prn" and status = "A"
+*/
+
+Invariant:  mpi-pid-1
+Description: "Only MPI MR number and internal codes are allowed."
+Expression: "system.startsWith('https://fhir.ee/sid/pid/est/mr') or system.startsWith('https://fhir.ee/sid/pid/est/prn')"
+Severity:   #error
 
 Profile: EEMPIPatientUnknown
 Parent: EEMPIPatient
@@ -22,7 +29,8 @@ Description: "For use in ED, ambulance, for anonymous patients and environmental
 * name[nickname].text ^short = "Tundmatu patsiendi hüüdnimi"
 * name[official] 0..0
 * identifier ..1
-* identifier.system from EEMPIPatientIdentityUnknown (required)
+//* identifier.system from EEMPIPatientIdentityUnknown (required)
+* identifier obeys mpi-pid-1
 * identifier ^short = "Tundmatu identifikaator"
 * gender 1..
 * telecom ..0
@@ -48,5 +56,5 @@ Usage: #example
   * use = #temp
   * country = "EE"
   * text = "Valukoja 10, Tallinn"
-  * extension[ads].valueCoding.code = #2280361
+  * extension[ads].valueCoding.code = https://fhir.ee/CodeSystem/ee-ads#2280361
 

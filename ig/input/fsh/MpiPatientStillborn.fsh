@@ -1,11 +1,18 @@
+/*
 ValueSet: EEMPIPatientIdentityStillborn
-Id: ee-patient-identity-stillborn
+Id: ee-mpi-patient-identity-stillborn
 Title: "Stillborn Patient Identity Systems"
 Description: "Identity system acceptable for stillborn patient identification"
-* ^experimental = true
-* EEBaseIdentitySystem#https://fhir.ee/sid/pid/est/npi
-* EEBaseIdentitySystem#https://fhir.ee/sid/pid/est/ni
-* include codes from system EEBaseIdentitySystem where concept descendent-of "https://fhir.ee/sid/pid/est/prn"
+* ^experimental = false
+* https://fhir.ee/CodeSystem/ee-identity-system#https://fhir.ee/sid/pid/est/npi
+* https://fhir.ee/CodeSystem/ee-identity-system#https://fhir.ee/sid/pid/est/ni
+* include codes from system EEBaseIdentitySystem where concept descendent-of "https://fhir.ee/sid/pid/est/prn" and status = "A"
+*/
+
+Invariant:  mpi-pid-2
+Description: "Only Est National ID, TAI Stillborn ID and internal codes are allowed."
+Expression: "identifier.system.startsWith('https://fhir.ee/sid/pid/est/ni') or identifier.system.startsWith('https://fhir.ee/sid/pid/est/npi') or identifier.system.startsWith('https://fhir.ee/sid/pid/est/prn')"
+Severity:   #error
 
 Profile: EEMPIPatientStillborn
 Parent: EEMPIPatient
@@ -15,7 +22,6 @@ Description: "Profiil surnult sündinu andmete kirjeldamiseks"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * active = false (exactly)
-//* gender ..1 MS
 * name ^short = "Surnult sündinu nimi võib puududa"
 * name ..1
 * name contains temp 0..1 MS
@@ -24,31 +30,15 @@ Description: "Profiil surnult sündinu andmete kirjeldamiseks"
 * name[temp].family 1..1 MS
 * name[temp].given 0..1 MS
 * name[temp].given ^short = "Surnult sündinu eesnimi võib puududa"
-/*
-* name.use = #nickname (exactly)
-* name.family 0..1 MS
-* name.given 0..1 MS
-*/
-* identifier 1..
-* identifier.system from EEMPIPatientIdentityStillborn (required)
+//* identifier.system from EEMPIPatientIdentityStillborn (required)
 * identifier ^short = "Surnult sündinu identifikaator"
+* obeys mpi-pid-2
 * telecom ..0
 * birthDate 1.. MS
-/*
-* birthDate ^short = "Patsiendi sünniaeg"
-* birthDate.extension ^slicing.discriminator.type = #value
-* birthDate.extension ^slicing.discriminator.path = "url"
-* birthDate.extension ^slicing.rules = #open
-* birthDate.extension contains $patient-birthTime named birthTime 0..1
-* birthDate.extension[birthTime] MS
-* birthDate.extension[birthTime].value[x] MS
-*/
 * deceased[x] 1..1 MS 
 * deceased[x] only dateTime
 * deceased[x] ^short = "Patsiendi surmaaeg"
-
 * address ..0
-* maritalStatus ..0
 * multipleBirth[x] 1..1 MS 
 * multipleBirth[x] only integer
 * multipleBirth[x] ^short = "Sünnijärjekord"
@@ -61,7 +51,10 @@ Usage: #example
 * id = "pat-stillborn"
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/npi"
-  * value = "60712121111"
+  * value = "60712121111" 
+* identifier[+]
+  * system = "https://fhir.ee/sid/pid/est/prn/90006399"
+  * value = "123e4567-e89b-12d3-a456-426614174000" 
 * active = false 
 * gender = #female
 * birthDate = "2007-12-12"
