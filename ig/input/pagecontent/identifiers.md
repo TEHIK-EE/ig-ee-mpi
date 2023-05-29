@@ -1,7 +1,7 @@
 Käesolev juhend kirjeldab isikute identifitseerimise dokumenteerimise korda Eesti isikukoodiga, välisriigi isiku koodiga ning tundmatute ja surnult sündinute andmete edastamisel tervise infosüsteemi MPI teenusesse. Lisaks on selgitatud dubleerivate patsientide koodide sidumise lahendust.
 
 ### Identity system
-Detailne info identifitseerimissüsteemi kohta on leitav [EEBase](https://build.fhir.org/ig/HL7EE/ig-ee-base/identity-system.html) juurutusjuhendis.
+Detailne info identifitseerimissüsteemi kohta on leitav [EEBase](https://build.fhir.org/ig/HL7EE/ig-ee-base/) juurutusjuhendis.
 
 ### Eesti isikukood
 11-kohaline Eesti isikukood, mida kasutada patsiendi tuvastamiseks lahtris „isikukood“.
@@ -48,7 +48,7 @@ Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pas
 ```
 
 ### Tundmatu isiku kood
-Kui isikukood ei ole teada ehk tegemist on nö tundmatu isikuga, siis TTO saab pärida tundmatu isikkukoodi MPI-st kasutada operatsiooni [MR numbri genereerimiseks](OperationDefinition-Patient-generate-mrn.html).
+Kui isikukood ei ole teada ehk tegemist on nö tundmatu isikuga, siis TTO saab pärida tundmatu isikkukoodi MPI-st kasutada operatsiooni [MR numbri genereerimiseks](OperationDefinition-patient-generate-mrn.html).
 Genereeritud koodi saab kasutada koos **https://fhir.ee/sid/pid/est/mr** urliga.
 
 Tundmatu isiku esitamise näide1:
