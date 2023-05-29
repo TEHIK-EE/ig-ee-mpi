@@ -1,15 +1,15 @@
-Patsientide sidumiseks ja lahti sidumiseks MPI pakub [Link](OperationDefinition-patient-link.html) ja [Unlink](OperationDefinition-patient-unlink.html) operatsioonid.
+Patsientide sidumiseks ja lahti sidumiseks pakub MPI [Link](OperationDefinition-patient-link.html) ja [Unlink](OperationDefinition-patient-unlink.html) operatsioonid.
 
 ### Teised ressursid
 #### TIS
-TIS võimaldab liita patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku lahti sidumise teenust.
+TIS võimaldab liita patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.
 
-#### Merge 
-FHIR pakub patsiendi ühendamise operatsiooni *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html)*. Tulemusena kahte patsiendi liidetakse jaadavalt ning liidetav patsient kaob ära. *Unmerge* operatsiooni ei eksisteeri, ehk tegemist mitte idempotentse tegevusega.
+#### Liitmine (Merge) 
+FHIR pakub patsiendi ühendamise operatsiooni *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html)*. Tulemusena liidetakse kaks patsienti jäädavalt (liidetav kaotatakse ära). *Unmerge* operatsiooni ei eksisteeri, ehk tegemist mitte idempotentse tegevusega.
 MPI ei paku avaliku API patsientide liitmiseks.
 
 ### Linkide kasutamine FHIR serveris
-Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii
+Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii:
 ```
 [fhir-server-base]/Observation?patient=123
 {
@@ -27,7 +27,7 @@ Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii
   ..A, L, I, T, Y
 }
 ```
-, kus 123 ja 789 on patsiendi refererence-id (või teiste sõnadega patsiendi id MPI-s). Oletame, et esimesel patsiendi on identifikaator UK123 ja teisel on EE789. Siis päring identifikaatori kohta annab samad tulemused.
+, kus 123 ja 789 on patsiendi refererence-id (või teiste sõnadega patsiendi id MPI-s). Oletame, et esimesel patsiendi on identifikaator UK123 ja teisel on EE789. Siis päring identifikaatori kohta annab samad tulemused:
 
 ```
 [fhir-server-base]/Observation?patient.identifier=UK123
@@ -47,7 +47,7 @@ Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii
 }  
 ```
 
-Peale patsientide sidumist
+Peale patsientide sidumist:
 ```
 POST [mpi]/Patient/$link
 [some headers]
@@ -70,7 +70,7 @@ POST [mpi]/Patient/$link
 }
 ```
 
-Esimene patsient muutub mitteaktiivseks ja tal tekib link teisele patsiendile koos tunnusega, et ta on asendatud
+Esimene patsient muutub mitteaktiivseks ja tal tekib link teisele patsiendile koos tunnusega, et ta on asendatud:
 ```
 GET [fhir-server-base]/Patient/123
 [some headers]
@@ -90,7 +90,7 @@ GET [fhir-server-base]/Patient/123
 }
 ```
 
-ning teisel patsiendil tekib link esimesele patsiendile koos tunnusega, et ta on seda asendanud
+ning teisel patsiendil tekib link esimesele patsiendile koos tunnusega, et ta on seda asendanud:
 ```
 GET [fhir-server-base]/Patient/789
 [some headers]
@@ -109,7 +109,7 @@ GET [fhir-server-base]/Patient/789
 }
 ```
 
-Antud muudatused ei muuda andmeid lähteregistrites, st et päringud id järgi annavad endiselt samu tulemusi
+Antud muudatused ei muuda andmeid lähteregistrites, st et päringud id järgi annavad endiselt samu tulemusi:
 ```
 [fhir-server-base]/Observation?patient=123
 {
@@ -128,7 +128,7 @@ Antud muudatused ei muuda andmeid lähteregistrites, st et päringud id järgi a
 }  
 ```
 
-Kuid tänu sidumisele päring identifikaatori järgi leiab mitte ühe patsiendi id vaid kahe. Ning päring nii ühe kui teise identifikaatori järgi tagastab sama andmehulga
+Tänu sidumisele leiab päring identifikaatori järgi mitte ühe patsiendi id vaid kahe ning päring nii ühe kui teise identifikaatori järgi tagastab sama andmehulga:
 ```
 [fhir-server-base]/Observation?patient.identifier=UK123
 {
@@ -147,7 +147,7 @@ Kuid tänu sidumisele päring identifikaatori järgi leiab mitte ühe patsiendi 
 }  
 ```
 
-Juhul kui sidumine oli tehtud ekslikult ja need kaks patsienti tuleb lahti ühendada, siis kasutatakse unlink operatsioon
+Juhul kui sidumine oli tehtud ekslikult ja need kaks patsienti tuleb lahti ühendada, siis kasutatakse unlink operatsiooni:
 ```
 POST [mpi]/Patient/$unlink
 [some headers]
@@ -169,4 +169,4 @@ POST [mpi]/Patient/$unlink
   ]
 }
 ```
-selle tulemusena lingid kahe patsiendi vahel kustutatakse ära ning source patsient (123) muutub uuesti aktiivseks. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789.
+Selle tulemusena lingid kahe patsiendi vahel kustutatakse ning lähte (source) patsient (123) muutub uuesti aktiivseks. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789 puhul.
