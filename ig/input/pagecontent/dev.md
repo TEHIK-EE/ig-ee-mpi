@@ -5,13 +5,13 @@ Testimiseks laadige alla Postman [kollektsiooni]() näidetega.
 Patsiendi andmete pärimiseks saab esitada REST päringu mis tagastab kas üksiku ressurssi või ressursside kollektsiooni (edaspidi *Bundle*).
 
 #### Ressurss
-Üksiku ressurssi tagastatakse siis kui andmed päritakse REST päringuga MPI sisemise id (viida) järgi:
+Üksik ressurss tagastatakse siis kui andmed päritakse REST päringuga MPI sisemise id (viida) järgi:
 ```
 GET {MPI}/Patient/1
 Accept: application/json
 ```
-Sõltuvalt Accept päringu väärtuses vastuseks tuleb sõnumi keha JSON või XML vormingus.
-Järgmine sektsioon sisaldab andmed minimaalse andmekoosseisuga:
+Sõltuvalt Accept päringu väärtuses tuleb vastuseks sõnumi keha JSON või XML vormingus.
+Näide sektsiooni andmetest minimaalse andmekoosseisuga:
 ```json
 {
     "resourceType": "Patient",
@@ -47,11 +47,11 @@ Patsiendi otsingu tulemusena tagastatakse [Bundle](https://www.hl7.org/fhir/bund
 ```
 GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni|37412251234
 ```
-Enne saatmist kõik erisümbolid peavad olema encode-itud:
+Enne saatmist peavad kõik erisümbolid olema encode-itud:
 ```
 GET {MPI}/Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C37412251234
 ```
-Vastusena tuleb (searchset) Bundle mis tagastab metainformatsiooni päringu kohta ja kollektsiooni kahest ressurssist (kust eemaldatud patsiendi ressurssi sisuline osa):
+Vastusena tuleb (searchset) Bundle mis tagastab metainformatsiooni päringu kohta ja kollektsiooni kahest ressursist (kust eemaldatud patsiendi ressursi sisuline osa):
 ```json
 {
     "resourceType": "Bundle",
@@ -95,32 +95,32 @@ Vastusena tuleb (searchset) Bundle mis tagastab metainformatsiooni päringu koht
 ```
 
 #### Otsing identifikaatori järgi
-MPI toetab otsingu [identifikaatori](identifiers.html) järgi.
+MPI toetab otsinguid [identifikaatori](identifiers.html) järgi.
 
 ### Operatsioonid
 Vaata [toetavate operatsioonide](operations.html) nimekirja.
 
 
 #### Ressurssi ajalugu
-Iga FHIR ressurssi muutmine loob uut ressurssi versiooni. Varasemate versioonide nimekirja saamiseks kasuta päringu:
+Iga FHIR ressurssi muutmine loob ressursist uue versiooni. Varasemate versioonide nimekirja saamiseks kasutada päringut:
 ```
 GET {MPI}/Patient/1/_history
 ```
-Ning ühte kindla versiooni saad päringuga
+Ühe kindla versiooni saab kätte päringuga:
 ```
 GET {MPI}/Patient/1/_history/2
 ```
 , kus 2 on versiooni number.
 
 #### Muudatuste ajalugu
-MPI pakub võimalust pärida nimekirja muudatud patsientidest alates kindlast ajahetkest
+MPI pakub võimaluse pärida nimekirja muudetud patsientidest alates kindlast ajahetkest:
 ```
 GET {MPI}/Patient/_history?_since=2023-03-31&_count=10
 ```
 
 ### Andmete muutmine
 #### Üldised nõuded
-Patsiendi andmete saatmiseks iga FHIR-i ressurss PEAB sisaldama ressursi tüübi (“resourceType”) ja profiili (“meta.profile”).
+Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi (“resourceType”) ja profiili (“meta.profile”).
 Uue kirje loomisel saab anda kaasa oma infosüsteemi sisemise identifikaatori (“meta.source”).
 ```json
   "resourceType": "Patient",
@@ -133,29 +133,29 @@ Uue kirje loomisel saab anda kaasa oma infosüsteemi sisemise identifikaatori (�
   "id": "1"
 ```
 
-Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html) ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsientide rregistreerimist. Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html), [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) ja [mitte inimpatsientide]() registreerimine.
+Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html) ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist. Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html), [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) ja [mitte inimpatsientide]() registreerimine.
 Iga patsiendi lisamisel või muutmisel tuleb määrata vastav profiil.
 
-#### Request
-Patsiendi loomisel/muutmisel tuleb saata päringu FHIR-i endpointile, näiteks arenduskeskkonnas aadressile: https://tis.dev.tehik.ee/mpi/fhir/Patient. 
-Päringus tuleb määrata mitu tunnust REST päringu päises (Header-is):
+#### Päring (request)
+Patsiendi loomisel/muutmisel tuleb saata päring FHIR-i endpointile, näiteks arenduskeskkonnas aadressile: https://tis.dev.tehik.ee/mpi/fhir/Patient. 
+Päringus tuleb määrata REST päringu päises (Header-is) mitmed tunnused:
 - päringu keha vormingu määramiseks (päis "Accept" väärtustega "application/json" või application/xml või "application/fhir+json" või application/fhir+xml)
 - vastuse keha vormingu määramiseks (päis "Content-Type" väärtustega "application/json" või application/xml või "application/fhir+json" või application/fhir+xml)
 - autentimine (päis "Authorization" mille sisu kirjeldatud lehel [Autentimine](auth.html))
 - unikaalne päringu id (päis "x-road-id"). 
-- selgitab miks antud päring tehtud (päis "x-road-issue"). Kasutatakse Andmejälgijas. Päise edastatakse alampäringutele teiste süsteemidesse.
-- loogilise transaktsiooni tunnus (päis "x-transaction-id" FIXME). Päise edastatakse alampäringutele teiste süsteemidesse.
-- valiidset sõnumi tuleb edastada päringu kehas. Andmekoosseisu saab leida lehel [Patsiendid](patient.html)
+- selgitada miks antud päring on tehtud (päis "x-road-issue"). Tunnust kasutatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse.
+- loogilise transaktsiooni tunnus (päis "x-transaction-id" FIXME). Päis edastatakse alampäringute puhul teistesse süsteemidesse.
+- valiidne sõnum tuleb edastada päringu kehas. Andmekoosseis on kirjeldatud lehel [Patsiendid](patient.html)
 
 
 #### Vastus (response)
-Eduka vastuse korral FHIR server tagastab HTTP koodi 20X. Näiteks uue patsiendi loomisel tagastakse HTTP-kood = "201 Created".
+Eduka vastuse korral tagastab FHIR server HTTP koodi 20X. Näiteks uue patsiendi loomisel tagastatakse HTTP-kood = "201 Created".
 Vastuse päis "Location" sisaldab lingi loodud ressursile.
 ```
 Location: {MPI}/fhir/Patient/3
 ```
-Vaikimisi loodud ressursi kehat ei tagastata. Vajadusel saate muuta vaikekäitumist määrates päiset "[Prefer](http://hl7.org/fhir/http.html#ops)".
-Loogilise vea puhul vastatakse koodiga 40x veaga. Juhul kui teenus ei ole kättesaadav tuleb 50X viga. 
-Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) vormingus. Väli "code" tüüpiliselt sisaldab ühte loogilistest [koodidest](errors.html).
+Vaikimisi loodud ressursi kehat ei tagastata. Vajadusel saate muuta vaikekäitumist määrates päises "[Prefer](http://hl7.org/fhir/http.html#ops)".
+Loogilise vea puhul tuleb koodiga 40X viga. Juhul kui teenus ei ole kättesaadav, tuleb 50X viga. 
+Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) vormingus. Väli "code" sisaldab tüüpiliselt ühte loogilistest [koodidest](errors.html).
 
 
