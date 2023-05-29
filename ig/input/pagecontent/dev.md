@@ -133,7 +133,7 @@ Uue kirje loomisel saab anda kaasa oma infosüsteemi sisemise identifikaatori (�
   "id": "1"
 ```
 
-Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html) ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist. Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html), [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) ja [mitte inimpatsientide]() registreerimine.
+Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html) ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist. Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html) ja [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) registreerimine.
 Iga patsiendi lisamisel või muutmisel tuleb määrata vastav profiil.
 
 #### Päring (request)
