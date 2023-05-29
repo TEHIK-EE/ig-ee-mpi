@@ -522,15 +522,3 @@ MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad 
 
 ### Vahemälust pärimine
 Iga operatsioon mis toetab vahemälu sisaldab parameetri *nocache*. *nocache* parameetri vaikimisi väärtuseks on *false*, s.t. vaikimisi andmed võetakse vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks tuleb määrata *true*. 
-
-<!--
-Vahemälust andmete pärimiseks tuleb esitada päring Observation endpointile koos otsitava mõiste koodiga. Näiteks:
-```
-GET {MPI}/Observation?subject=Patient/1&code=http://snomed.info/sct|1193838006 
-```
-tagastab cache-is oleva eeskostja infot.
-Kahest või rohkematest andmeallikatest andmete pärimisel tuleb loendada kõik vastavad mõisted:
-```
-GET {MPI}/Observation?subject=Patient/1&code=http://snomed.info/sct|1193838006&code=http://loinc.org|82589-3
-```
---/>
