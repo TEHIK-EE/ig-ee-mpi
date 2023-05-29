@@ -23,7 +23,7 @@ Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on id
 - CZ - Id kaart / citezenship card
 - BCT - sünnitunnistus / birth certificate.   
 
-Identifitseerimissüsteem kasutatakse väljas **system** and identifikaator või passinumber väljas **value**. Täiendavalt saab määrata dokumendinumbri lõpukuupäeva.
+Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit või passinumbrit väljal **value**. Täiendavalt saab määrata dokumendinumbri lõpukuupäeva.
 
 Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number. 
 
@@ -62,7 +62,7 @@ Tundmatu isiku esitamise näide1:
   ]
 ```
 
-TTO saab kasutada ka enda poolt genereeritud identifikaatori kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. URL TTO identifikaatori jaoks peab olema kujul **https://fhir.ee/sid/pid/est/prn/$BRcode**, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendiidentifikaatorid siis koodide mitte kattuvus peab olema lahendatud asutusesiseselt.
+TTO saab kasutada ka enda poolt genereeritud identifikaatorit kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. URL TTO identifikaatori jaoks peab olema kujul **https://fhir.ee/sid/pid/est/prn/$BRcode**, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendiidentifikaatorid siis koodide mitte kattuvus peab olema lahendatud asutusesiseselt.
 
 Tundmatu isiku esitamise näide2:
 ```json
