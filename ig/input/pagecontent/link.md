@@ -4,9 +4,7 @@ Patsientide sidumiseks ja lahti sidumiseks pakub MPI [Link](OperationDefinition-
 #### TIS
 TIS võimaldab liita patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.
 
-#### Liitmine (Merge) 
-FHIR pakub patsiendi ühendamise operatsiooni *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html)*. Tulemusena liidetakse kaks patsienti jäädavalt (liidetav kaotatakse ära). *Unmerge* operatsiooni ei eksisteeri, ehk tegemist mitte idempotentse tegevusega.
-MPI ei paku avaliku API patsientide liitmiseks.
+
 
 ### Linkide kasutamine FHIR serveris
 Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii:
@@ -170,3 +168,8 @@ POST [mpi]/Patient/$unlink
 }
 ```
 Selle tulemusena lingid kahe patsiendi vahel kustutatakse ning lähte (source) patsient (123) muutub uuesti aktiivseks. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789 puhul.
+
+
+### Liitmine (Merge) 
+Kuigi FHIR API-s esineb patsiendi ühendamise operatsioon *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html), mis liidab kahe patsiendi andmed jäädavalt (liidetav kaotatakse ära).
+MPI ei paku antud operatsiooni patsientide liitmiseks, kuna ta ei ole tagasipööratav.
