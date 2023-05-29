@@ -225,7 +225,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Original data source. By default *https://tehik.ee/mpi*."
+* parameter[=].documentation = "Original data source. Supported values: https://mpi.tehik.ee and https://rahvastikuregister.ee. By default *https://mpi.tehik.ee*."
 * parameter[=].type = #string
 * parameter[+].name = #return
 * parameter[=].use = #out

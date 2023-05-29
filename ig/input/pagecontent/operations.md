@@ -56,13 +56,13 @@ Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssid
 
 ### Eesti isikukoodiga patsiendi otsing
 Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-Patient-lookup.html) operatsiooniga. 
-Toetavate parameetrite hulka kuuluvad: identifikaator ja süsteem, kust andmeid päritakse. 
+Toetavate parameetrite hulka kuuluvad: identifikaator ja allikas, kust andmeid päritakse. 
 Hetkel toetatakse päringuna:
-- Rahvastikuregistrist (system=https://rahvastikuregister.ee)
-- MPI Patsiendiregistrist (system=https://mpi.tehik.ee)
+- Rahvastikuregistrist (source=https://rahvastikuregister.ee)
+- MPI Patsiendiregistrist (source=https://mpi.tehik.ee)
 
 ```
-GET {MPI}/Patient/$lookup?identifier=https://rahvastikuregister.ee|52007010062
+GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&source=https://rahvastikuregister.ee
 ```
 
 ```json
@@ -85,7 +85,7 @@ GET {MPI}/Patient/$lookup?identifier=https://rahvastikuregister.ee|52007010062
                 },
                 "identifier": [
                     {
-                        "system": "urn:pin:hl7.ee:pid:est:ni",
+                        "system": "https://fhir.ee/sid/pid/est/ni",
                         "value": "52007010062"
                     }
                 ],
