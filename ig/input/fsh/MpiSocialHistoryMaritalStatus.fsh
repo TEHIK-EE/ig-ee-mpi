@@ -7,6 +7,7 @@ Id:             ee-mpi-socialhistory-marital-status
 Title:          "EE MPI SocialHistory Marital Status"
 Description:    "Abielu või suhte liik."
 * status = #final (exactly)
+* category 1..
 * category[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#125680007 "Marital status" (exactly)
 * effective[x] 0..1 MS
