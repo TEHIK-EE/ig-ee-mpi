@@ -97,7 +97,7 @@ pages:
 # │ property below.                                                                                │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
-  Home: index.html
+  Esileht: index.html
   Juhendid: 
     Patsiendid: patient.html
     Identifikaatorid: identifiers.html
@@ -107,8 +107,8 @@ menu:
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:
-    "Contact Us": contact.html
-    Downloads: download.html
+    "Kontaktid": contact.html
+    Allalaadimised: download.html
     "FHIR Spec ": new-tab {{site.data.fhir.path}}index.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
