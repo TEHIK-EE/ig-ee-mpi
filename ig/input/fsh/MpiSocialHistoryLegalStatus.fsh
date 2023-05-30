@@ -25,7 +25,7 @@ Profile:        EEMPISocialHistoryLegalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-status
 Title:          "EE MPI SocialHistory Legal Status"
-Description:    "The legal status that applies to the patient."
+Description:    "Patsiendi teovõime staatus."
 * status = #final (exactly)
 * category[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#303186005 "Legal status of patient" (exactly)
