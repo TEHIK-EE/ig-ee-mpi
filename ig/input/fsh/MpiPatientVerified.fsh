@@ -2,7 +2,7 @@ Profile: EEMPIPatientVerified
 Parent: EEMPIPatient
 Id: ee-mpi-patient-verified
 Title: "EE MPI Patient Verified"
-Description: "MPI Patient verified during reception."
+Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name 1..* MS
