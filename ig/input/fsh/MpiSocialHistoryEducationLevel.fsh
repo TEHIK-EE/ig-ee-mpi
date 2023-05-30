@@ -43,7 +43,7 @@ Description: "Patsiendi kõrgeim haridustase"
 ValueSet:    EEMPIEducationLevel
 Id:          education-level
 Title:       "Education Level"
-Description: "The highest education level achieved by patient"
+Description: "Patsiendi kõrgeim haridustase"
 * ^experimental = false
 * include codes from system EEMPIEducationLevel
 // SCT where concept descendent-of #365460000 "Finding of education received in the past"
