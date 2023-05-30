@@ -16,7 +16,7 @@ Description: "The legal status that applies to the patient. The legal status ind
 ValueSet:    EEMPILegalStatus
 Id:          legal-status
 Title:       "Legal Status"
-Description: "The legal status that applies to the patient."
+Description: "Patsiendi teovõime staatus."
 * ^experimental = false
 * include codes from system EEMPILegalStatus
 
