@@ -1,7 +1,7 @@
 CodeSystem: EEMPIEducationLevel
 Id: education-level
 Title:     "Education level"
-Description: "The highest education level achieved by patient"
+Description: "Patsiendi kõrgeim haridustase"
 * ^experimental = false
 * ^content = #complete
 * ^caseSensitive = false
