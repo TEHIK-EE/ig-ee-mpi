@@ -19,7 +19,7 @@ Profile: EEMPIPatientUnknown
 Parent: EEMPIPatient
 Id: ee-mpi-patient-unknown
 Title: "EE MPI Patient Unknown"
-Description: "For use in ED, ambulance, for anonymous patients and environmental tests"
+Description: "Kasutamiseks EMO-s, kiirabis, anonüümsete patsientide ning keskkonnaproovide puhul"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * active = false (exactly)
