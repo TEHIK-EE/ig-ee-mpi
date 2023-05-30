@@ -54,7 +54,9 @@ Id:             ee-mpi-socialhistory-disability
 Title:          "EE MPI SocialHistory Disability"
 Description:    "Puude raskusaste"
 * status = #final (exactly)
-* category[obscat] = OBSCAT#social-history "Social history" (exactly)
+* category 1..
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = LN#95377-8 "Disability type" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period

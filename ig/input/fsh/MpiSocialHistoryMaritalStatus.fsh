@@ -8,7 +8,8 @@ Title:          "EE MPI SocialHistory Marital Status"
 Description:    "Abielu või suhte liik."
 * status = #final (exactly)
 * category 1..
-* category[obscat] = OBSCAT#social-history "Social history" (exactly)
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#125680007 "Marital status" (exactly)
 * effective[x] 0..1 MS
 * effective[x] only Period
@@ -38,6 +39,7 @@ InstanceOf: EEMPISocialHistoryMaritalStatus
 Description: "Example of patient marital status"
 Usage: #example
 * subject = Reference(Patient/pat1)
+* category = OBSCAT#social-history "Social history"
 * issued = "1995-06-21T00:00:00+02:00"
 * performer[+] = Reference(PatientIgorBossenkoWife)
 * valueCodeableConcept = MaritalStatusCS#M "Married"

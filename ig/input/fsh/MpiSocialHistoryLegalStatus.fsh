@@ -27,7 +27,9 @@ Id:             ee-mpi-socialhistory-legal-status
 Title:          "EE MPI SocialHistory Legal Status"
 Description:    "Patsiendi teovõime staatus."
 * status = #final (exactly)
-* category[obscat] = OBSCAT#social-history "Social history" (exactly)
+* category 1..
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#303186005 "Legal status of patient" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period

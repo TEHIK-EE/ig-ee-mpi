@@ -28,7 +28,9 @@ Id:             ee-mpi-socialhistory-power-of-attorney
 Title:          "EE MPI SocialHistory Power Of Attorney"
 Description:    "Hooldusõigus"
 * status = #final (exactly)
-* category = OBSCAT#social-history "Social history" (exactly)
+* category 1..
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#186063005 "Power of attorney observable" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period

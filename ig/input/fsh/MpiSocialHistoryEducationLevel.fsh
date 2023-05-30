@@ -55,7 +55,9 @@ Id:             ee-mpi-socialhistory-education-level
 Title:          "EE MPI SocialHistory Education Level"
 Description:    "Haridustase"
 * status = #final (exactly)
-* category[obscat] = OBSCAT#social-history "Social history" (exactly)
+* category 1..
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code.coding 2..2
 * code.coding ^slicing.discriminator.type = #value
 * code.coding ^slicing.discriminator.path = "code"

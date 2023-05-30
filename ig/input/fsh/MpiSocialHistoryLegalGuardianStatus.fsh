@@ -32,7 +32,9 @@ Id:             ee-mpi-socialhistory-legal-guardian-status
 Title:          "EE MPI SocialHistory Legal Guardian Status"
 Description:    "Seadusliku eeskostja staatus"
 * status = #final (exactly)
-* category[obscat] = OBSCAT#social-history "Social history" (exactly)
+* category 1..
+* category.coding[obscat] 1..
+* category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 * code = SCT#1193838006 "Legal guardian status" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period
