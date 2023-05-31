@@ -69,7 +69,7 @@ Näide patsiendist Saksamaa passiga:
 ```
 
 ### UC-03 Patsient ilma dokumendita
-Juhul kui vastuvõtule tuleb patsient kes ei suuda tõestada enda identiteedi siis antud patsiendi tuleb registreerida tundmatu patsiendina.
+Juhul kui vastuvõtule tuleb patsient kes ei suuda tõestada enda identiteedi või dokumendi liik ei kuulu toetatavate hulka siis antud patsiendi tuleb registreerida tundmatu patsiendina.
 Patsiendi registreerimisele võiks eelneda MRN numbri päring.
 
 Näide MRN numbri päringust:
