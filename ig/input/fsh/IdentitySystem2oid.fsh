@@ -24,8 +24,8 @@ Usage: #definition
 * group.element[=].display = "Estonian personal national identification code"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/est/u
-* group.element[=].display = "Unknown person identifier. May be used only for backward-compatibility."
+* group.element[+].code = #https://fhir.ee/sid/pid/est/mr
+* group.element[=].display = "MPI issued medical record number"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/afg/ppn
