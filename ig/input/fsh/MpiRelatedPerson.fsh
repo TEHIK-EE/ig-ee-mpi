@@ -34,6 +34,9 @@ Description: "Person relationship class"
 
 * ^compose.include.system = v3-RoleClass
 
+* ^compose.include.concept[+].code = #CON
+* ^compose.include.concept[=].designation[+].language = #et
+* ^compose.include.concept[=].designation[=].value = "Kontakt"
 * ^compose.include.concept[+].code = #ECON
 * ^compose.include.concept[=].designation[+].language = #et
 * ^compose.include.concept[=].designation[=].value = "Hädaabi kontakt"
