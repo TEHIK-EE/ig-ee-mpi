@@ -27,7 +27,7 @@ Näide sektsiooni andmetest minimaalse andmekoosseisuga:
             "value": "37412251234"
         }
     ],
-    "active": false,
+    "active": true,
     "name": [
         {
             "use": "official",

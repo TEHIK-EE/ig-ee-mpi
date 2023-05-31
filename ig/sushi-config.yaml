@@ -69,6 +69,8 @@ pages:
     title: Download  
   auth.md:
     title: Autentimine         
+  uc.md:
+    title: Kasutusjuhud       
 
 #   implementation.xml:
 #   examples.xml:
@@ -104,6 +106,7 @@ menu:
     Juhend arendajale: dev.html
     Patsientide sidumine ja lahti sidumine: link.html
     Operatsioonid: operations.html
+    Kasutusjuhud: uc.html
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:
