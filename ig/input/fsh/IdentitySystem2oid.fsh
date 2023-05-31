@@ -7,7 +7,7 @@ Usage: #definition
 * version = "1.0.0"
 * name = "IdentitySystemToOID"
 * title = "Mapping of Identity System to OID"
-* status = #draft
+* status = #active
 * experimental = true
 * date = "2023-05-26"
 * publisher = "TEHIK"

@@ -11,7 +11,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientLink"
 * title = "Patient Link"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -71,7 +71,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientUnlink"
 * title = "Patient Unlink"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -131,7 +131,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientForeignerSearch"
 * title = "Patient Foreigner"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -201,7 +201,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientLookup"
 * title = "Patient Lookup"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -247,7 +247,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientLegalGuardianStatus"
 * title = "Patient Legal Guardians"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -293,7 +293,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientPowerOfAttorneyStatus"
 * title = "Patient power of attorneys"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -339,7 +339,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientEducationStatus"
 * title = "Patient Education"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
@@ -384,7 +384,7 @@ Usage: #definition
 * version = "5.0.0"
 * name = "EEMPIPatientGenerateMRN"
 * title = "Generate Medical Record Number"
-* status = #draft
+* status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
