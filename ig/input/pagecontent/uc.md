@@ -73,7 +73,7 @@ Juhul kui vastuv천tule tuleb patsient kes ei suuda t천estada enda identiteedi v�
 Patsiendi registreerimisele v천iks eelneda MRN numbri p채ring.
 
 N채ide MRN numbri p채ringust:
-```json
+```
 POST /Patient/$mrn
 ```
 ja vastusest
