@@ -24,8 +24,7 @@ Näide patsiendist Eesti isikukoodiga:
             "use": "official",
             "family": "Tamm",
             "given": [
-                "Tiit",
-                "Priit"
+                "Tiit Priit"
             ]
         }
     ],
