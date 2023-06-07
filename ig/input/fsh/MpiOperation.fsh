@@ -420,7 +420,7 @@ Usage: #definition
 * description = "The patient disability from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = true
-* code = #education
+* code = #disability
 * resource = #Patient
 * system = false
 * type = true
