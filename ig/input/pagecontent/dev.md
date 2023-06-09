@@ -158,4 +158,8 @@ Vaikimisi loodud ressursi kehat ei tagastata. Vajadusel saate muuta vaikekäitum
 Loogilise vea puhul tuleb koodiga 40X viga. Juhul kui teenus ei ole kättesaadav, tuleb 50X viga. 
 Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) vormingus. Väli "code" sisaldab tüüpiliselt ühte loogilistest [koodidest](errors.html).
 
+#### Aeg ja ajatsoon
+Ressurside vastuvõtmisel MPI FHIR liides toetab ajad erinevates ajatsoonides, näiteks UTC `1974-12-25T23:00:00Z` või offset'iga `1974-12-26T01:00:00+02:00`. Vaata formaati [spetsifikatsioonist](http://hl7.org/fhir/datatypes.html#dateTime).
+Kui ajatsooni offset pole määratud, näiteks _date_ tüüpi puhul, siis arvestatakse et aeg on Eesti ajatsoonis ehk `Europe/Tallinn`. FHIR vastuses olevad ajad on alati toodud Eesti ajatsoonis.
+
 
