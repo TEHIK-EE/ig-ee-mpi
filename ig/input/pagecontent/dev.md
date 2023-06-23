@@ -1,5 +1,10 @@
 Antud juhend selgitab põhireeglid patsiendi andmete pärimiseks ja sõnumite koostamiseks. 
-Testimiseks laadige alla Postman [kollektsiooni](MPI_FHIR_examples.postman_collection.json) näidetega.
+Testimiseks laadige alla Postman [kollektsiooni](MPI_FHIR_examples.postman_collection.json) näidetega ja häälestage keskkonna muutujad
+```
+X_ROAD_CLIENT: ee-dev/GOV/70009770/tto-tis-klient
+HOST: https://{$host}/r1/ee-dev/GOV/70009770/tis/mpi
+```
+, kus $host on turvaserveri aadress teie lokaalvõrgus. TEHIKu partnerid saavad kasutada hostina https://10.0.13.90/r1/ee-dev/GOV/70009770/tis/mpi aktiveeritud VPNi puhul.
 
 ### Andmete pärimine
 Patsiendi andmete pärimiseks saab esitada REST päringu mis tagastab kas üksiku ressurssi või ressursside kollektsiooni (edaspidi *Bundle*).
