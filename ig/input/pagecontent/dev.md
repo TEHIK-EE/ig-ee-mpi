@@ -1,5 +1,5 @@
 Antud juhend selgitab põhireeglid patsiendi andmete pärimiseks ja sõnumite koostamiseks. 
-Testimiseks laadige alla Postman [kollektsiooni]() näidetega.
+Testimiseks laadige alla Postman [kollektsiooni](MPI_FHIR_examples.postman_collection.json) näidetega.
 
 ### Andmete pärimine
 Patsiendi andmete pärimiseks saab esitada REST päringu mis tagastab kas üksiku ressurssi või ressursside kollektsiooni (edaspidi *Bundle*).
