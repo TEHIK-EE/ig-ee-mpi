@@ -26,7 +26,19 @@ Usage: #definition
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/est/mr
 * group.element[=].display = "MPI issued medical record number"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.4
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/est/prn/70009770/kmt
+* group.element[=].display = "Mapping to TEHIK KMT oid"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/est/prn/70009770/rk
+* group.element[=].display = "Mapping to TEHIK RK oid"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/est/prn/70009770/ap
+* group.element[=].display = "Mapping to TEHIK AP oid"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/afg/ppn
 * group.element[=].display = "Passport number of Afghanistan"
