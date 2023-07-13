@@ -70,7 +70,9 @@ pages:
   auth.md:
     title: Autentimine         
   uc.md:
-    title: Kasutusjuhud       
+    title: Kasutusjuhud
+  checks.md:
+    title: Kontrollid       
 
 #   implementation.xml:
 #   examples.xml:
@@ -107,6 +109,7 @@ menu:
     Patsientide sidumine ja lahti sidumine: link.html
     Operatsioonid: operations.html
     Kasutusjuhud: uc.html
+    Kontrollid: checks.html
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:
