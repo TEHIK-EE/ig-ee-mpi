@@ -44,3 +44,6 @@ Eesti aadress on aadress mille riigikood on `EE` (Eesti).
 ##### Välismaa aadress
 Välismaa aadress on aadress mille riigiks ei ole `EE` (Eesti).
 Välismaa aadressi puhul on kohustuslik ainult riigi kood ja tekst. Välismaa aadressi puhul teisi kontrolle ei teostata.
+
+#### Identifikaatorid
+Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg.
