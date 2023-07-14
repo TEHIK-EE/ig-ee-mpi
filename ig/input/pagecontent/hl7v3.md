@@ -104,7 +104,10 @@ Sama isiku üldandmed võib salvestada/täiendada kasutades FHIR JSON identifier
 ```
 
 ### PÜT ja TIS infosüsteemide koostöö
-![PÜT arhitektuur](MPI-architecture.png)
+
+<img width="100%" alt="PÜT arhitektuur" src="MPI-architecture.png"/>
+
+<br/>
 
 PÜT koosneb mitmest kihist: andmete kiht, teenusekiht andmete kihi teenindamiseks, integratsiooni kiht, mis sisaldab mitmeid API-sid suhtlemiseks teiste osapoolte või maailmaga. FHIR API on avatud API, HL7V3 API kasutatakse uue ja vana TIS tagasiühilduvuse loomiseks, integratsioon Webmethodsi tasemel võimaldab koostöövõimet erinevate TIS moodulite vahel.
 
