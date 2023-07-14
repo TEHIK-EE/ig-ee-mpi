@@ -72,7 +72,9 @@ pages:
   uc.md:
     title: Kasutusjuhud
   checks.md:
-    title: Kontrollid       
+    title: Kontrollid    
+  hl7v3.md:
+    title: Seos HL7 V3-ga ja CDA-ga       
 
 #   implementation.xml:
 #   examples.xml:
@@ -110,6 +112,7 @@ menu:
     Operatsioonid: operations.html
     Kasutusjuhud: uc.html
     Kontrollid: checks.html
+    Seos HL7 V3-ga ja CDA-ga: hl7v3.html
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:
