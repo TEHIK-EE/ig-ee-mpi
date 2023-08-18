@@ -96,6 +96,7 @@ Description:    "Haridustase"
 * bodySite ..0
 * specimen ..0
 * device ..0
+* referenceRange ..0
 
 Instance: EducationLevel
 InstanceOf: EEMPISocialHistoryEducationLevel
