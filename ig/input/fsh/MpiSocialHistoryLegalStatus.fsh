@@ -49,6 +49,7 @@ Description:    "Patsiendi teovõime staatus."
 * bodySite ..0
 * specimen ..0
 * device ..0
+* referenceRange ..0
 
 Instance: LegalStatus
 InstanceOf: EEMPISocialHistoryLegalStatus
