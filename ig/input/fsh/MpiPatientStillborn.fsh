@@ -42,6 +42,7 @@ Description: "Profiil surnult sündinu andmete kirjeldamiseks"
 * multipleBirth[x] 1..1 MS 
 * multipleBirth[x] only integer
 * multipleBirth[x] ^short = "Sünnijärjekord"
+* communication ..0
 
 
 Instance: PatientStillborn
