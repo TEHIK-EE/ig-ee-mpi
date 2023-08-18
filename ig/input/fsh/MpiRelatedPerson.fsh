@@ -63,6 +63,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * name ^short = "Kontaktisiku nimi."
 * telecom ^short = "Kontaktisiku kontaktandmed."
 * address MS
+* photo ..0
 * address ^short = "Kontaktisiku aadress."
 * identifier ^short = "Kontaktisiku identifikaatorid."
 * communication	MS 
