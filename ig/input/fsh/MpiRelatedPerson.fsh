@@ -2,7 +2,7 @@ Alias: v3-RoleClass = http://terminology.hl7.org/CodeSystem/v3-RoleClass
 //Alias: v2-0131 = http://terminology.hl7.org/CodeSystem/v2-0131
 
 ValueSet: EEMPIPersonRelationship
-Id: ee-mpi-person-relationship
+Id: person-relationship
 Title: "Person Relationship"
 Description: "Suhe patsiendiga"
 * ^experimental = false
@@ -27,7 +27,7 @@ Description: "Suhe patsiendiga"
 * ^compose.include.concept[=].designation[=].value = "Reg.elukaaslane"
 
 ValueSet: EEMPIPersonRelationshipClass
-Id: ee-mpi-person-relationship-class
+Id: person-relationship-class
 Title: "Person Relationship Class"
 Description: "Person relationship class"
 * ^experimental = false
