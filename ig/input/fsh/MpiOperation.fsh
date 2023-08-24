@@ -461,7 +461,7 @@ Usage: #definition
 * description = "The observation of patient incapacity for work from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = true
-* code = #disability
+* code = #incapacity-for-work
 * resource = #Patient
 * system = false
 * type = true
