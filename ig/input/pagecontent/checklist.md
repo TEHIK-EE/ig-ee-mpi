@@ -3,7 +3,7 @@
 - <input type="checkbox"/> Oskab teha REST päringuid üle X-tee  
 - <input type="checkbox"/> Oskab kasutada MPI seotud terminoloogiat  CodeSystem, ValueSet
   - <input type="checkbox"/> Toetab kõik MPI defineeritud klassifikaatorid  Igas ressurssis on hulk klassifikaatoreid, mida tuleb toetada
-  - <input type="checkbox"/> Oskab jooksvalt (on-the-fly) pärida uued väärtused mpi-identity-system koodi süsteemist ja vastuvõtta ka neid patsiendisõnumid mille kohta süsteem eelnevalt ei teadnud koodisüsteemi olemasolust  GET /CodeSystem/identity-system? GET /NamingSystem?
+  - <input type="checkbox"/> Oskab jooksvalt (on-the-fly) pärida uued väärtused mpi-identity-system koodi süsteemist ja vastuvõtta ka neid patsiendisõnumid mille kohta süsteem eelnevalt ei teadnud koodisüsteemi olemasolust  `GET /CodeSystem/identity-system`? 
 - Oskab opereerida Patient ressurssiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`
@@ -26,16 +26,16 @@ Emaili regex: ^(?=.{1,64}@)[A-Za-z0-9_+-]+(\\.[A-Za-z0-9_+-]+)*@[^-][A-Za-z0-9-]
   - <input type="checkbox"/> Toetab loompatsiendi andmekoosseisu (kui TTO-l on labor või patoloogia osakond)  
   - <input type="checkbox"/> Toetab mitteelusate patsiendite andmekoosseisu, nt õhk, keskkonnaproovid, ..  (kui TTO-l on labor ja vastav raviprofiil)  
 - Oskab opereerida RelatedPerson ressurssiga  
-  - <input type="checkbox"/> RelatedPerson CRUD  GET/PUT/POST/DELETE /RelatedPerson
+  - <input type="checkbox"/> RelatedPerson CRUD  `GET/PUT/POST/DELETE /RelatedPerson`
   - <input type="checkbox"/> Seotud isikute otsingud  
-GET /RelatedPerson?identifier=system|value, GET /Patient?patient=value, GET /Patient?patient.identifier=system|value
+GET /RelatedPerson?identifier=system|value, `GET /Patient?patient=value`, `GET /Patient?patient.identifier=system|value`
   - <input type="checkbox"/> Oskab toetada mitu seosetüübi mitmest kodeerimist süsteemist  http://hl7.org/fhir/R4/valueset-relatedperson-relationshiptype.html
-- Oskab pärida sotsiaalsed näitajad  GET /Observation?category=system|social-history
-  - <input type="checkbox"/> Töövõimetus  GET /Observation?code=
-  - <input type="checkbox"/> Saadud haridus, haridustase  GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C82589-3
-  - <input type="checkbox"/> Töökoht ja amet  GET /Observation?code=
-  - <input type="checkbox"/> Hooldusõigused  GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C186063005
-  - <input type="checkbox"/> Eestkoste  GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C1193838006
+- Oskab pärida sotsiaalsed näitajad  `GET /Observation?category=system|social-history`
+  - <input type="checkbox"/> Töövõimetus  `GET /Observation?code=`
+  - <input type="checkbox"/> Saadud haridus, haridustase  `GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C82589-3`
+  - <input type="checkbox"/> Töökoht ja amet  `GET /Observation?code=`
+  - <input type="checkbox"/> Hooldusõigused  `GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C186063005`
+  - <input type="checkbox"/> Eestkoste  `GET /Observation?code=http%3A%2F%2Fsnomed.info%2Fsct%7C1193838006`
 - MPI operatsioonid  
   - <input type="checkbox"/> Oskab teha patsientide loogilist sidumist  Patient-Link
   - <input type="checkbox"/> Oskab teha patsientide loogilist lahtisidumist  Patient-Unlink
