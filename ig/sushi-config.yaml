@@ -63,6 +63,8 @@ pages:
     title: Veakoodid
   operations.md:
     title: Toetavad operatsioonid
+  checklist.md:
+    title: Checklist
   contact.md:
     title: Contact Us
   download.md:
@@ -111,8 +113,9 @@ menu:
     Patsientide sidumine ja lahti sidumine: link.html
     Operatsioonid: operations.html
     Kasutusjuhud: uc.html
-    Kontrollid: checks.html
+    Kontrollid ja terminoloogia: checks.html
     Seos HL7 V3-ga ja CDA-ga: hl7v3.html
+    Eeldused liidestujale: checklist.html    
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:

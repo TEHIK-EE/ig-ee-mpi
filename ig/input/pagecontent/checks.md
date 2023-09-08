@@ -76,7 +76,7 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 - [Observation category](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-observation-category.html)
 
 #### Kasutatav FHIR terminoogia
-- [Suhte liik | MaritalStatus](http://hl7.org/fhir/R5/valueset-marital-status.html)
+- [Suhte liik/MaritalStatus](http://hl7.org/fhir/R5/valueset-marital-status.html)
 - [Identifier use](http://hl7.org/fhir/R5/valueset-identifier-use.html)
 - [IdentifierTypeCodes](http://hl7.org/fhir/R5/valueset-identifier-type.html)
 - [AllLanguages](http://hl7.org/fhir/R5/valueset-all-languages.html)
@@ -84,6 +84,6 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 - [ContactPointUse](http://hl7.org/fhir/R5/valueset-contact-point-use.html)
 - [AddressUse](http://hl7.org/fhir/R5/valueset-address-use.html)
 - [AddressType](http://hl7.org/fhir/R5/valueset-address-type.html)
-- [Riigid | Iso316612](http://hl7.org/fhir/R5/valueset-iso3166-1-2.html)
+- [Riigid/Iso316612](http://hl7.org/fhir/R5/valueset-iso3166-1-2.html)
 
 
