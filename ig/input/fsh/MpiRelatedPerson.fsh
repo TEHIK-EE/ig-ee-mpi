@@ -68,7 +68,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * identifier ^short = "Kontaktisiku identifikaatorid."
 * communication	MS 
 * period 1..1 MS
-* relationship[person] MS
+* relationship[person] 0..1 MS
 * relationship[person] from EEMPIPersonRelationship (extensible)
 * relationship[class] MS
 * relationship[class] from EEMPIPersonRelationshipClass (extensible)
