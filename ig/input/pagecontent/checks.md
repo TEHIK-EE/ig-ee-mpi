@@ -47,3 +47,43 @@ Välismaa aadressi puhul on kohustuslik ainult riigi kood ja tekst. Välismaa aa
 
 #### Identifikaatorid
 Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg.
+
+### Kasutatav terminoloogia
+#### PÜT-is kasutatavad loendid
+- [Töövõimetuse määr](ValueSet-incapacity-for-work-category.html)
+- [Puude raskusaste](ValueSet-disability-level.html)
+- [Patsiendi kõrgeim haridustase](ValueSet-education-level.html)
+- [Eeskostja liik](ValueSet-guardian-status.html)
+- [Patsiendi teovõime staatus](ValueSet-legal-status.html)
+- [Töötamise liik](ValueSet-occupation-type.html)
+- [Suhe patsiendiga](ValueSet-person-relationship.html)
+- [Kontaktisiku tüüp](ValueSet-person-relationship-class.html)
+- [Hooldusõiguse liik](ValueSet-power-of-attorney.html)
+
+#### PÜT-is kasutatavad klassifikaatorid
+- [Töövõimetuse määr](CodeSystem-incapacity-for-work-category.html)
+- [Puude raskusaste](CodeSystem-disability-level.html)
+- [Patsiendi teovõime staatus](CodeSystem-legal-status.html)
+- [Patsiendi kõrgeim haridustase](CodeSystem-education-level.html)
+- [Hooldusõiguse liik](CodeSystem-power-of-attorney.html)
+- [Töötamise liik](CodeSystem-occupation-type.html)
+
+#### EEBase-is kaudu kasutatavad loendid
+- [Administrative Gender](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-administrative-gender.html)
+- [Person Identity System](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-patient-identity.html)
+- [Date Accuracy Indicator](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-date-accuracy-indicator.html)
+- [ADS](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-ads.html)
+- [Observation category](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-observation-category.html)
+
+#### Kasutatav FHIR terminoogia
+- [Suhte liik | MaritalStatus](http://hl7.org/fhir/R5/valueset-marital-status.html)
+- [Identifier use](http://hl7.org/fhir/R5/valueset-identifier-use.html)
+- [IdentifierTypeCodes](http://hl7.org/fhir/R5/valueset-identifier-type.html)
+- [AllLanguages](http://hl7.org/fhir/R5/valueset-all-languages.html)
+- [NameUse](http://hl7.org/fhir/R5/valueset-name-use.html)
+- [ContactPointUse](http://hl7.org/fhir/R5/valueset-contact-point-use.html)
+- [AddressUse](http://hl7.org/fhir/R5/valueset-address-use.html)
+- [AddressType](http://hl7.org/fhir/R5/valueset-address-type.html)
+- [Riigid | Iso316612](http://hl7.org/fhir/R5/valueset-iso3166-1-2.html)
+
+
