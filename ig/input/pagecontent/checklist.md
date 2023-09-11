@@ -1,8 +1,8 @@
-## Checklist MPI-ga liidestava tarkvara jaoks
+## Checklist MPI-ga liidestuva tarkvara jaoks
 
 - <input type="checkbox"/> Oskab kasutada [FHIR terminoloogiat](https://build.fhir.org/ig/TEHIK-EE/TerminologyServices).
-  - <input type="checkbox"/> Toetab kõik [PÜTis kasutatud klassifikaatorid ja loendid](checks.html#kasutatav-terminoloogia).
-- Oskab opereerida [Patient](http://hl7.org/fhir/patient.html) ressurssiga  
+  - <input type="checkbox"/> Toetab kõiki [PÜTis kasutatud klassifikaatoreid ja loendeid](checks.html#kasutatav-terminoloogia).
+- Oskab opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`
   - <input type="checkbox"/> Uue patsiendi lisamine  `POST /Patient`
