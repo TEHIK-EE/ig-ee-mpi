@@ -487,3 +487,44 @@ Usage: #definition
 * parameter[=].type = #Bundle
 
 
+Instance: patient-occupation
+InstanceOf: OperationDefinition
+Usage: #definition
+* url = "https://fhir.ee/OperationDefinition/patient-occupation"
+* version = "5.0.0"
+* name = "EEMPIPatientOccupation"
+* title = "Patient occupation"
+* status = #active
+* kind = #operation
+* experimental = false
+* date = "2023-03-26T15:21:02+11:00"
+* publisher = "HL7 Estonia"
+* description = "The observation of patient occupations from Employment Register (TÖR)."
+* jurisdiction = $m49.htm#Estonia "Estonia"
+* affectsState = true
+* code = #occupation
+* resource = #Patient
+* system = false
+* type = true
+* instance = false
+* parameter[0].name = #patient
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "A direct resource reference to the patient resource."
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
+* parameter[=].type = #boolean
+* parameter[+].name = #return
+* parameter[=].use = #out
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].type = #Bundle
+
+
