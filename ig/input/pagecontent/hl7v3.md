@@ -82,7 +82,7 @@ V3/CDA sõnumites on kasutatud OID põhiseid identifikaatoreid. PÜT-i FHIR liid
 ```
 /Patient?identifier=urn:oid:1.3.6.1.4.1.28284.6.2.2.1%7C48905059995
 ```
-Seoste kirjeldamiseks TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on loodud vastavustabel [ConceptMap-identity-system-to-oid](https://fhir.ee/ImplementationGuide/mpi/ConceptMap-identity-system-to-oid.html).
+Seoste kirjeldamiseks TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on loodud vastavustabel [ConceptMap-identity-system-to-oid](ConceptMap-identity-system-to-oid.html).
 
 Näide: CDA dokument salvestatud TIS-i kasutades XML-is id elementi
 ```xml
