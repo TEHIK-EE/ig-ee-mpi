@@ -68,7 +68,7 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 - [Hooldusõiguse liik](CodeSystem-power-of-attorney.html)
 - [Töötamise liik](CodeSystem-occupation-type.html)
 
-#### EEBase-is kaudu kasutatavad loendid
+#### EEBase-i kaudu kasutatavad loendid
 - [Administrative Gender](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-administrative-gender.html)
 - [Person Identity System](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-patient-identity.html)
 - [Date Accuracy Indicator](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-date-accuracy-indicator.html)
