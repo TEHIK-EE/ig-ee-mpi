@@ -8,20 +8,20 @@
   - <input type="checkbox"/> Uue patsiendi lisamine  `POST /Patient`
   - <input type="checkbox"/> Oskab otsida patsiendi identifikaatori alusel  `GET /Patient?identifier=..`
   - <input type="checkbox"/> Toetab [ADS](https://geoportaal.maaamet.ee/est/Teenused/Integreeritav-aadressiotsing-In-ADS-p504.html)-i. Oskab vastuvõtta ja saata aadressi ADS kujul.  
-  - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametliku telefoninumbri, emaili ja aadressi kuju  
-- Arvestav erinevate [patsiendiliigitega](patient.html)
-  - <input type="checkbox"/> Toetab [tuvastutud patsiendi](StructureDefinition-ee-mpi-patient-verified.html) andmekoosseisu.
-  - <input type="checkbox"/> Toetab [tundmatu, anonüümse patsiendi](StructureDefinition-ee-mpi-patient-unknown.html) või mitteelusate patsiendite (nt õhk, keskkonnaproovid, ..) andmekoosseisu (kui TTO-l on vastav raviprofiil)
+  - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametlikku telefoninumbri, emaili ja aadressi kuju  
+- Arvestab erinevate [patsiendi liikidega](patient.html)
+  - <input type="checkbox"/> Toetab [tuvastatud patsiendi](StructureDefinition-ee-mpi-patient-verified.html) andmekoosseisu.
+  - <input type="checkbox"/> Toetab [tundmatu, anonüümse patsiendi](StructureDefinition-ee-mpi-patient-unknown.html) või mitte-elusa patsiendi (nt õhk, keskkonnaproovid, ..) andmekoosseisu (kui TTO-l on vastav raviprofiil)
   - Arvestab, et tulevikus tuleb toetada 
-    - <input type="checkbox"/> [vastsündinu patsiendi](StructureDefinition-ee-mpi-patient-newborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)
-    - <input type="checkbox"/> [surnultsündinu patsiendi](StructureDefinition-ee-mpi-patient-stillborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)  
-- Oskab opereerida [RelatedPerson](http://hl7.org/fhir/relatedperson.html) ressurssiga  
-  - <input type="checkbox"/> Toetab [seotud isiku](StructureDefinition-ee-mpi-related-person.html) andmekoosseisuga `GET/PUT/POST/DELETE /RelatedPerson`
+    - <input type="checkbox"/> [vastsündinud patsiendi](StructureDefinition-ee-mpi-patient-newborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)
+    - <input type="checkbox"/> [surnultsündinud patsiendi](StructureDefinition-ee-mpi-patient-stillborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)  
+- Oskab opereerida [RelatedPerson](http://hl7.org/fhir/relatedperson.html) ressursiga  
+  - <input type="checkbox"/> Toetab [seotud isiku](StructureDefinition-ee-mpi-related-person.html) andmekoosseisu `GET/PUT/POST/DELETE /RelatedPerson`
   - <input type="checkbox"/> Toetab seotud isikute otsingut `GET /RelatedPerson?patient=value`
-  - <input type="checkbox"/> Toetab mitu seosetüübi mitmest kodeerimist süsteemist - [kontaktisiku tüübi](ValueSet-person-relationship-class.html) ja [suhe patsiendiga](ValueSet-person-relationship.html).
-- Oskab kasutada [MPI operatsioonid](operations.html), s.h.
+  - <input type="checkbox"/> Toetab mitut seosetüüpi mitmest kodeerimissüsteemist - [kontaktisiku tüübi](ValueSet-person-relationship-class.html) ja [suhe patsiendiga](ValueSet-person-relationship.html).
+- Oskab kasutada [MPI operatsioone](operations.html), s.h.
   - <input type="checkbox"/> [töövõimetuse päringut](OperationDefinition-patient-incapacity-for-work.html)
-  - <input type="checkbox"/> [puue päringut](OperationDefinition-patient-disability.html)
+  - <input type="checkbox"/> [puude päringut](OperationDefinition-patient-disability.html)
   - <input type="checkbox"/> [hariduse päringut](OperationDefinition-patient-education.html)
   - <input type="checkbox"/> [töökoha päringut](OperationDefinition-patient-occupation.html)
   - <input type="checkbox"/> [hooldusõiguste päringut](OperationDefinition-patient-legal-guardian.html)
@@ -29,14 +29,14 @@
   - <input type="checkbox"/> [patsientide loogilist sidumist ja lahtisidumist](link.html)
   - <input type="checkbox"/> [MPI identifikaatori loomist](OperationDefinition-patient-generate-mrn.html)
   - <input type="checkbox"/> ~~Tulevikus oskab genereerida surnultsündinu patsiendi identifikaatori (kui TTO-l on vastav raviprofiil)~~
-  - <input type="checkbox"/> [välimsaalaste otsingut](OperationDefinition-patient-foreigner.html)
+  - <input type="checkbox"/> [välismaalase otsingut](OperationDefinition-patient-foreigner.html)
 - Tehnilised nõuded  
   - <input type="checkbox"/> Oskab teha [REST päringuid üle X-tee](https://blog.ria.ee/x-road-rest-tugi). 
-  - <input type="checkbox"/> Omab [FHIR tugi](http://fhir.hl7.org). Oskab kasutada [RESTful API](http://hl7.org/fhir/documentation.html).
+  - <input type="checkbox"/> Omab [FHIR tuge](http://fhir.hl7.org). Oskab kasutada [RESTful API-t](http://hl7.org/fhir/documentation.html).
     - <input type="checkbox"/> Oskab kuvada kasutajale vead, mida tagastab MPI [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) elemendist.
-    - <input type="checkbox"/> Oskab koostada [Search](http://hl7.org/fhir/search.html) päringu, millele tagastakse kogum ressurssidest [Bundle](http://hl7.org/fhir/bundle.html).
-    - <input type="checkbox"/> Oskab koostada komplekssõnumi, mis koosneb mitmest ressurssidest [Bundle](http://hl7.org/fhir/bundle.html).
-  - <input type="checkbox"/> Oskab määrata [profiili](http://hl7.org/fhir/profiling.html) iga muudetavale ressurssi kohta  POST ja PUT tegevuste puhul.
+    - <input type="checkbox"/> Oskab koostada [Search](http://hl7.org/fhir/search.html) päringut, millele tagastakse kogum ressurssidest [Bundle](http://hl7.org/fhir/bundle.html).
+    - <input type="checkbox"/> Oskab koostada komplekssõnumit, mis koosneb mitmest ressursist [Bundle](http://hl7.org/fhir/bundle.html).
+  - <input type="checkbox"/> Oskab määrata [profiili](http://hl7.org/fhir/profiling.html) iga muudetava ressurssi kohta  POST ja PUT tegevuste puhul.
   - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
 - Protsess  
-  - <input type="checkbox"/> MPI integreeritud TTO kõikide patsiendi andmete käsitletavate rakenduste põhivoosse.
+  - <input type="checkbox"/> MPI on integreeritud TTO kõikidesse patsiendi andmeid käsitlevate rakenduste põhivoogudesse.
