@@ -8,7 +8,7 @@ Usage: #definition
 * name = "IdentitySystemToOID"
 * title = "Mapping of Identity System to OID"
 * status = #active
-* experimental = true
+* experimental = false
 * date = "2023-05-26"
 * publisher = "TEHIK"
 * description = "A mapping between the Identity System for person identification and ENHIS OID systems"
