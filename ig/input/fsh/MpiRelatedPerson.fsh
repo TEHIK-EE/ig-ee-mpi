@@ -9,7 +9,6 @@ Description: "Suhe patsiendiga"
 * ^copyright = "This value set includes content from SNOMED CT, which is copyright © 2002+ International Health Terminology Standards Development Organisation (IHTSDO), and distributed by agreement between IHTSDO and HL7. Implementer use of SNOMED CT is not covered by this agreement"
 
 * ^compose.include.system = SCT
-
 * ^compose.include.concept[+].code = #72705000
 * ^compose.include.concept[=].designation[+].language = #et
 * ^compose.include.concept[=].designation[=].value = "Ema"
@@ -66,7 +65,6 @@ Usage: #definition
 * useContext.code = $usage-context-type#venue
 * useContext.valueCodeableConcept.text = "for NHIS usage"
 * jurisdiction = urn:iso:std:iso:3166#EE
-//* copyright = "Creative Commons 0"
 * sourceScopeUri = "urn:oid:1.3.6.1.4.1.28284.6.2.3.5"
 * targetScopeUri = "https://fhir.ee/ValueSet/person-relationship"
 * group.source = "urn:oid:1.3.6.1.4.1.28284.6.2.3.5"
@@ -163,7 +161,6 @@ Usage: #definition
 * useContext.code = $usage-context-type#venue
 * useContext.valueCodeableConcept.text = "for NHIS usage"
 * jurisdiction = urn:iso:std:iso:3166#EE
-//* copyright = "Creative Commons 0"
 * sourceScopeUri = "https://fhir.ee/ValueSet/person-relationship"
 * targetScopeUri = "urn:oid:1.3.6.1.4.1.28284.6.2.3.5"
 * group.source = SCT
@@ -218,10 +215,11 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * identifier ^short = "Kontaktisiku identifikaatorid."
 * communication	MS 
 * period 1..1 MS
+* relationship ^slicing.rules = #closed
 * relationship[person] 0..1 MS
-* relationship[person] from EEMPIPersonRelationship (extensible)
+* relationship[person] from EEMPIPersonRelationship (required)
 * relationship[class] MS
-* relationship[class] from EEMPIPersonRelationshipClass (extensible)
+* relationship[class] from EEMPIPersonRelationshipClass (required)
 
 
 Instance: PatientIgorBossenkoSon
@@ -234,7 +232,9 @@ Usage: #example
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "39510212711"
 * name.text = "Son of Igor"
-* relationship = SCT#67822003 "Child"
+* relationship[person] = SCT#67822003 "Child"
+//example of not allowed value
+//* relationship[class] = v3-RoleClass#NOK "Next of kin"
 * active = true
 * period.start = "1995-10-21"
 
@@ -245,8 +245,8 @@ Usage: #example
 * id = "relpat12"
 * patient = Reference(Patient/pat1)
 * name.text = "Wife of Igor"
-* relationship[0] = SCT#127848009 "Spouse"
-* relationship[+] = v3-RoleClass#CON "Contact"
+* relationship[person] = SCT#127848009 "Spouse"
+* relationship[class] = v3-RoleClass#CON "Contact"
 * active = true
 * period.start = "1995-06-22"
 
