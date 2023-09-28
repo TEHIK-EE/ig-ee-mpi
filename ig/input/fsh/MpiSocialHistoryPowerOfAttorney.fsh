@@ -9,7 +9,7 @@ Description: "Hooldusõiguse liik"
 * #H11 "Osaline isikuhooldusõigus"
 * #H21 "Osaline varahooldusõigus"
 * #H12 "Piiratud isikuhooldusõigus"
-* #H22 "Piiratud varahooldusõigus" 
+* #H22 "Piiratud varahooldusõigus"
 * #H10 "Täielik isikuhooldusõigus"
 * #H20 "Täielik varahooldusõigus"
 * #H19 "Vanema õigused"
@@ -36,11 +36,11 @@ Description:    "Hooldusõigus"
 * effective[x] only Period
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 1.. MS 
+* performer 1.. MS
 * performer only Reference(EEBaseRelatedPerson)
 * performer ^short = "Isik(ud), kellel on hooldusõigus."
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from EEMPIPowerOfAttorney
 * value[x] ^short = "Hooldusõiguse liik."
 * note ..1 MS
@@ -51,11 +51,12 @@ Description:    "Hooldusõigus"
 * method ..0
 * bodySite ..0
 * specimen ..0
-* device ..0 
+* device ..0
 * interpretation ..0
 * bodyStructure ..0
 * referenceRange ..0
 
+//FIXME use contained related person and correct value
 Instance: PowerOfAttorney
 InstanceOf: EEMPISocialHistoryPowerOfAttorney
 Description: "Example of patient attorney"

@@ -112,129 +112,91 @@ Tüüpiliselt tagastatav Observation ressurss ei sisalda **"id"** väärtust ja 
 Sotsiaalsete tunnuste operatsioonid pärivad alati andmed allikregistritest (sõltumatu andmete olemasolust vahemälus).
 
 ### Seadusliku eeskostja staatus
-Andmed päritakse [$legal-guardian](OperationDefinition-Patient-legal-guardian.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+Andmed päritakse [$legal-guardian](OperationDefinition-Patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja oodatud seaduslik staatus SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
+
+Näiteks eestkostetavate leidmine:
 ```
-GET {MPI}/Patient/$legal-guardian?patient=Patient/3744
+GET {MPI}/Patient/$legal-guardian?patient=Patient/572&legal-status=365569001
 ```
 ning saab vastuseks Observationi:
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "1193838006",
-                            "display": "Legal guardian status"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T12:58:38.136+00:00",
-                "performer": [
-                    {
-                        "reference": "RelatedPerson/3746"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/legal-capacity-type",
-                            "display": "FIXME"
-                        }
-                    ]
-                },
-                "note": [
-                    {
-                        "text": "gfhsgadfjsfgdhjk\n"
-                    }
-                ]
-            }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-legal-guardian-status"
+          ]
         },
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "1193838006",
-                            "display": "Legal guardian status"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T12:58:38.350+00:00",
-                "performer": [
-                    {
-                        "reference": "RelatedPerson/3747"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/legal-capacity-type",
-                            "display": "FIXME"
-                        }
-                    ]
-                },
-                "note": [
-                    {
-                        "text": "gfhsgadfjsfgdhjk\n"
-                    }
+        "contained": [
+          {
+            "resourceType": "RelatedPerson",
+            "id": "82b67ea1-fc05-44aa-8cbe-af272bbf0a0f",
+            "identifier": [
+              {
+                "system": "https://fhir.ee/sid/pid/est/ni",
+                "value": "52009010061"
+              }
+            ],
+            "name": [
+              {
+                "family": "PEREA",
+                "given": [
+                  "ALBERT"
                 ]
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "58626002",
+              "display": "Legal guardian status"
             }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/572"
+        },
+        "effectivePeriod": {
+          "start": "2020-09-28T00:00:00+03:00"
+        },
+        "issued": "2023-09-28T11:01:51.608+03:00",
+        "performer": [
+          {
+            "reference": "RelatedPerson/#82b67ea1-fc05-44aa-8cbe-af272bbf0a0f"
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "365569001",
+              "display": "Finding of wardship"
+            }
+          ]
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
@@ -246,210 +208,154 @@ GET {MPI}/Patient/$power-of-attorney?patient=Patient/3744
 ning saab vastuseks Observationi:
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "186063005"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T13:02:32.726+00:00",
-                "performer": [
-                    {
-                        "type": "RelatedPerson"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/guardian-rights",
-                            "display": "täielik isikuhooldusõigus"
-                        }
-                    ]
-                }
-            }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
+          ]
         },
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "186063005"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T13:02:32.726+00:00",
-                "performer": [
-                    {
-                        "type": "RelatedPerson"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/guardian-rights",
-                            "display": "täielik varahooldusõigus"
-                        }
-                    ]
-                }
+        "contained": [
+          {
+            "resourceType": "RelatedPerson",
+            "id": "6fb272a7-fb03-480d-baa8-343c3b0d3083",
+            "identifier": [
+              {
+                "system": "https://fhir.ee/sid/pid/est/ni",
+                "value": "46905292713"
+              }
+            ],
+            "name": [
+              {
+                "family": "KOVVALVII",
+                "given": [
+                  "URVE"
+                ]
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "186063005",
+              "display": "Power of attorney"
             }
+          ]
         },
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "186063005"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T13:02:32.726+00:00",
-                "performer": [
-                    {
-                        "type": "RelatedPerson"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/guardian-rights",
-                            "display": "täielik isikuhooldusõigus"
-                        }
-                    ]
-                }
-            }
+        "subject": {
+          "reference": "Patient/357"
         },
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-legal-guardian-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "186063005"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "effectivePeriod": {
-                    "start": "2020-09-28T00:00:00+03:00"
-                },
-                "issued": "2023-04-27T13:02:32.726+00:00",
-                "performer": [
-                    {
-                        "type": "RelatedPerson"
-                    }
-                ],
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/guardian-rights",
-                            "display": "täielik varahooldusõigus"
-                        }
-                    ]
-                }
+        "effectivePeriod": {
+          "start": "2010-07-01T00:00:00+03:00"
+        },
+        "issued": "2023-09-28T11:09:55.591+03:00",
+        "performer": [
+          {
+            "reference": "RelatedPerson/#6fb272a7-fb03-480d-baa8-343c3b0d3083"
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://fhir.ee/CodeSystem/power-of-attorney",
+              "code": "H10",
+              "display": "Täielik isikuhooldusõigus"
             }
+          ]
         }
-    ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "RelatedPerson",
+            "id": "e835651a-3587-4e6c-a4d7-06df450143e9",
+            "identifier": [
+              {
+                "system": "https://fhir.ee/sid/pid/est/ni",
+                "value": "46905292713"
+              }
+            ],
+            "name": [
+              {
+                "family": "KOVVALVII",
+                "given": [
+                  "URVE"
+                ]
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "186063005",
+              "display": "Power of attorney"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/357"
+        },
+        "effectivePeriod": {
+          "start": "2010-07-01T00:00:00+03:00"
+        },
+        "issued": "2023-09-28T11:09:55.592+03:00",
+        "performer": [
+          {
+            "reference": "RelatedPerson/#e835651a-3587-4e6c-a4d7-06df450143e9"
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://fhir.ee/CodeSystem/power-of-attorney",
+              "code": "H20",
+              "display": "Täielik varahooldusõigus"
+            }
+          ]
+        }
+      }
+    }
+  ]
 }
 ```
 
