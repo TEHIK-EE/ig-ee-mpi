@@ -268,7 +268,7 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
-* parameter[0].name = #legal-status
+* parameter[+].name = #legal-status
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
