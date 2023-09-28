@@ -268,6 +268,12 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[0].name = #legal-status
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 65569001 - Finding of wardship, 58626002 - Legal guardian"
+* parameter[=].type = #string
 * parameter[+].name = #nocache
 * parameter[=].use = #in
 * parameter[=].min = 0

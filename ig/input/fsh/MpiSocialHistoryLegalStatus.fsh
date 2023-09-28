@@ -35,10 +35,10 @@ Description:    "Patsiendi teovõime staatus."
 * effective[x] only Period
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 0.. MS 
+* performer 0.. MS
 * performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from EEMPILegalStatus
 * note ..1 MS
 * basedOn ..0
@@ -52,6 +52,7 @@ Description:    "Patsiendi teovõime staatus."
 * interpretation ..0
 * bodyStructure ..0
 * referenceRange ..0
+
 
 Instance: LegalStatus
 InstanceOf: EEMPISocialHistoryLegalStatus
