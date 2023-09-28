@@ -56,12 +56,23 @@ Description:    "Hooldusõigus"
 * bodyStructure ..0
 * referenceRange ..0
 
-//FIXME use contained related person and correct value
+Instance: rp
+InstanceOf: RelatedPerson
+Usage:  #inline
+* patient = Reference(Patient/pat1)
+* identifier
+  * system = "https://fhir.ee/sid/pid/est/ni"
+  * value = "48501212711"
+* name
+  * family = "Tamm"
+  * given = "Anti"
+
 Instance: PowerOfAttorney
 InstanceOf: EEMPISocialHistoryPowerOfAttorney
 Description: "Example of patient attorney"
 Usage: #example
+* contained[+] = rp
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* performer[0] = Reference(PatientIgorBossenkoWife)
+* performer[0] = Reference(rp)
 * valueCodeableConcept = EEMPIPowerOfAttorney#H10 "Täielik isikuhooldusõigus"

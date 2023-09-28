@@ -272,8 +272,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "SNOMED code for legal status"
-//FIXME add properly formatted snomed codes 365569001 and 58626002?
+* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 65569001 - Finding of wardship, 58626002 - Legal guardian"
 * parameter[=].type = #string
 * parameter[+].name = #nocache
 * parameter[=].use = #in

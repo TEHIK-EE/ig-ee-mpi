@@ -54,7 +54,6 @@ Description:    "Patsiendi teovõime staatus."
 * referenceRange ..0
 
 
-//FIXME use contained related person and correct value
 Instance: LegalStatus
 InstanceOf: EEMPISocialHistoryLegalStatus
 Description: "Example of patient legal status"

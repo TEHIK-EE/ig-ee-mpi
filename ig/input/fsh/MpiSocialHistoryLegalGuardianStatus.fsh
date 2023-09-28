@@ -20,7 +20,7 @@ Description: "Eeskostja liik"
 * ^compose.include.concept[=].display = "Legal guardian"
 * ^compose.include.concept[=].designation[+].language = #et
 * ^compose.include.concept[=].designation[=].value = "Eestkostja"
-* ^compose.include.concept[+].code = #365569001 
+* ^compose.include.concept[+].code = #365569001
 * ^compose.include.concept[=].display = "Finding of wardship"
 * ^compose.include.concept[=].designation[+].language = #et
 * ^compose.include.concept[=].designation[=].value = "Eestkostetav"
@@ -44,7 +44,7 @@ Description:    "Seadusliku eeskostja staatus"
 * performer only Reference(EEBaseOrganization or EEBasePractitionerRole or EEBaseRelatedPerson)
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from EEMPIGuardianStatus
 * value[x] ^short = "Eeskoste liik."
 * note ..1 MS
@@ -60,7 +60,7 @@ Description:    "Seadusliku eeskostja staatus"
 * bodyStructure ..0
 * referenceRange ..0
 
-Instance: anija
+Instance: kov
 InstanceOf: Organization
 Usage:  #inline
 * identifier
@@ -76,7 +76,9 @@ Usage:  #inline
 * identifier
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "48501212711"
-* name.text = "Eeskostja nimi"
+* name
+  * family = "Eeskostja perekonnanimi"
+  * given = "Eeskostja eesnimi"
 
 
 Instance: LegalGuardianStatus
@@ -84,9 +86,9 @@ InstanceOf: EEMPISocialHistoryLegalGuardianStatus
 Description: "Example of patient legal duardian"
 Usage: #example
 * contained[0] = eeskostja
-* contained[+] = anija
+* contained[+] = kov
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* performer[0] = Reference(anija)
+* performer[0] = Reference(kov)
 * performer[+] = Reference(eeskostja)
 * valueCodeableConcept = SCT#58626002 "Legal guardian"

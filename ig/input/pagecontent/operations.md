@@ -112,7 +112,7 @@ Tüüpiliselt tagastatav Observation ressurss ei sisalda **"id"** väärtust ja 
 Sotsiaalsete tunnuste operatsioonid pärivad alati andmed allikregistritest (sõltumatu andmete olemasolust vahemälus).
 
 ### Seadusliku eeskostja staatus
-Andmed päritakse [$legal-guardian](OperationDefinition-Patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja oodatud seaduslik staatus SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
+Andmed päritakse [$legal-guardian](OperationDefinition-Patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja eestkoste liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
 
 Näiteks eestkostetavate leidmine:
 ```
