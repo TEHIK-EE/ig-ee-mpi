@@ -60,12 +60,33 @@ Description:    "Seadusliku eeskostja staatus"
 * bodyStructure ..0
 * referenceRange ..0
 
+Instance: anija
+InstanceOf: Organization
+Usage:  #inline
+* identifier
+  * system = "https://fhir.ee/sid/org/est/br"
+  * value = "75018816"
+* name = "Anija Vallavalitsus"
+* active = true
+
+Instance: eeskostja
+InstanceOf: RelatedPerson
+Usage:  #inline
+* patient = Reference(Patient/pat1)
+* identifier
+  * system = "https://fhir.ee/sid/pid/est/ni"
+  * value = "48501212711"
+* name.text = "Eeskostja nimi"
+
+
 Instance: LegalGuardianStatus
 InstanceOf: EEMPISocialHistoryLegalGuardianStatus
 Description: "Example of patient legal duardian"
 Usage: #example
+* contained[0] = eeskostja
+* contained[+] = anija
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* performer[0] = Reference(Organization/Org1)
-* performer[+] = Reference(PatientIgorBossenkoWife)
+* performer[0] = Reference(anija)
+* performer[+] = Reference(eeskostja)
 * valueCodeableConcept = SCT#58626002 "Legal guardian"
