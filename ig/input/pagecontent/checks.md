@@ -10,6 +10,12 @@ Sissetulevad päringud ja andmed valideeritakse:
 - Autoriseerimisserveri vastu, tegevust saab teostada ainult kasutaja vastava rolli olemasolul
 
 ### PÜT rakenduse sisesed kontrollid
+
+#### Patsiendid
+Eesti isikikoodiga patsiendi loomine pole lubatud. `Patient` ressurss ei tohi loomisel sisalda identifikaatori süsteemiga https://fhir.ee/sid/pid/est/ni. 
+Eesti isikukoodiga patsiendi tuleb pärida alati [lookup](https://fhir.ee/ig/mpi/build/operations.html#eesti-isikukoodiga-patsiendi-otsing) operatisooniga, kus on kasutatud allikana Rahvastikuregister.
+Operatsioon tagastab `Patient` ressursi koos id-ga, mille abil saab patsiendi andmeid uuendada.
+
 #### Telefonid
 
 Eesti numeratsiooniplaan [riigiteataja.ee/akt/881042](https://www.riigiteataja.ee/akt/881042) reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
