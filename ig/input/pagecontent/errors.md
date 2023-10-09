@@ -1,38 +1,200 @@
+## Vead
+
+API tagastab vead [OperationOutcome](https://hl7.org/fhir/R5/operationoutcome.html) ressursina mille sees võib olla mitu `issue` elementi koos vigadega.
+Vead võivad olla kas ainult patsiendi registri omad või sisaldada ka peegeldatud vead teistest teenustest.
+
+Näide `OperationOutcome`-ist, mis kuvab peegeldatud vead:
+
+```json
+{
+  "resourceType": "OperationOutcome",
+  "issue": [
+    {
+      "code": "exception",
+      "details": {
+        "coding": [
+          {
+            "system": "https://mpi.tehik.ee",
+            "code": "MPI-029"
+          }
+        ],
+        "text": "Integratsiooniviga xroad-rr teenusega"
+      }
+    },
+    {
+      "code": "exception",
+      "details": {
+        "coding": [
+          {
+            "system": "https://xroad-rr.tehik.ee",
+            "code": "XRR200"
+          }
+        ],
+        "text": "X-road error 10001 from RR: Isikukoodi pikkus ei ole 11 sümbolit."
+      }
+    },
+    {
+      "code": "exception",
+      "details": {
+        "coding": [
+          {
+            "system": "https://rahvastikuregister.ee",
+            "code": "10001"
+          }
+        ],
+        "text": "Isikukoodi pikkus ei ole 11 sümbolit."
+      }
+    }
+  ]
+}
+```
+
+## Veasüsteemid
+
+| System                            | Kirjeldus                                                 |
+|-----------------------------------|-----------------------------------------------------------|
+| https://mpi.tehik.ee              | Patsiendi registri veakoodid                              |
+|                                   |                                                           |
+| https://xroad-rr.tehik.ee         | Tehiku RR x-tee mikroteenuse veakoodid                    |
+| https://xroad-ads.tehik.ee        | Tehiku ADS x-tee mikroteenuse veakoodid                   |
+| https://xroad-tor.tehik.ee        | Tehiku TÖR x-tee mikroteenuse veakoodid                   |
+| https://xroad-ska.tehik.ee        | Tehiku SKA x-tee mikroteenuse veakoodid                   |
+| https://xroad-tk.tehik.ee         | Tehiku TK x-tee mikroteenuse veakoodid                    |
+|                                   |                                                           |
+| https://rahvastikuregister.ee     | Rahvastikuregistri x-tee teenuste veakoodid               |
+| https://tootukassa.ee             | Töötukassa x-tee teenuste veakoodid                       |
+| https://sotsiaalkindlustusamet.ee | Sotsiaalkindlustusameti x-tee teenuste veakoodid          |
+| https://maaamet.ee                | Maameti ADS registri x-tee teenuste veakoodid             |
+| https://emta.ee                   | Tolli ja maksuameti TÖR registri x-tee teenuste veakoodid |
+
 ## Vigade kataloog
+Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles pidada, et mitte kõik veakoodid võivad lõppkasutajani jõuda.
 
 ### Patsiendi registri veakoodid
 
-| Error Code | Error Message                                                                                                        |
-|------------|----------------------------------------------------------------------------------------------------------------------|
-| MPI-001    | Juhtus MPI sisemine viga                                                                                             |
-| MPI-002    | Patsiendi indeksi krüpteerimise viga                                                                                 |
-| MPI-003    | Patsiendi indeksi dekrüpteerimise viga                                                                               |
-| MPI-004    | Patsiendi indeksi HMAC arvutamise viga                                                                               |
-| MPI-005    | Sekundaarne HSM võti on kohustuslik selleks, et andmeid saaks uuesti krüpteerida                                     |
-| MPI-006    | Patsiendi indeks on ebakonsistentne, on leitud duplikaate {system, value} paariga                                    |
-| MPI-007    | XML'i parsimine on ebaõnnestunud                                                                                     |
-| MPI-008    | Tundmatu telekomi süsteem: ${system}, lubatud väärtused: ${allowed}                                                  |
-| MPI-009    | Tundmatu riigi kood ${code}                                                                                          |
-| MPI-010    | Padsiendi loomine ei ole võimalik, patsient sama identifikaatoriga juba eksisteerib                                  |
-| MPI-011    | Lubamatu aadressi tüüp: ${type}, lubatud väärtused: ${allowed}                                                       |
-| MPI-012    | Lubamatu aadressi kasutus: ${use}, lubatud väärtused: ${allowed}                                                     |
-| MPI-013    | Tundmatu telekomi kasutus: ${use}, lubatud väärtused: ${allowed}                                                     |
-| MPI-014    | Kontaktisiku loomine ei ole võimalik, kontaktisik sama identifikaatoriga juba eksisteerib, FHIR ressurs: ${resource} |
-| MPI-015    | Antud otsingu parameetrid ei sobi või puuduvad                                                                       |
-| MPI-016    | Patsiendil peab olema vähemalt üks identifikaator                                                                    |
-| MPI-017    | Antud identifikaatoritega leiab mitu erinevat patsienti, salvestamine ei ole võimalik                                |
-| MPI-018    | Tundmatu patsiendi kontaktisiku liik ${code}                                                                         |
-| MPI-019    | Aadressil puudub riigi kood                                                                                          |
-| MPI-020    | Patsiendi puuete info pärimine ebaõnnestus                                                                           |
-| MPI-021    | Patsienti ei leitud                                                                                                  |
-| MPI-022    | Patsiendi isikukoodi ei leitud                                                                                       |
-| MPI-023    | FHIR profiil ${profile} ei ole lubatud                                                                               |
-| MPI-024    | FHIR profiil on puudu                                                                                                |
-| MPI-025    | Tundmatu MPI süsteem ${system}                                                                                       |
-| MPI-026    | Telekomi väärtus ${value} ei vasta validatsiooni reeglitele                                                          |
-| MPI-027    | Leitud liiga palju tulemusi, palun laiendage otsingu kriteeria                                                       |
-| MPI-028    | Päringus puudub autori isikukood (x-road-userid)                                                                     |
-| MPI-029    | Kommunikatsiooniviga Rahvastikuregistriga                                                                            |
-| MPI-030    | Kommunikatsiooniviga Sotsiaalkindlustusametiga                                                                       |
-| MPI-031    | Kommunikatsiooniviga ADS teenusega                                                                                   |
-| MPI-100    | Unknown job type ${type}                                                                                             |
+| Veakood | Veatekst                                                                                                                                                |
+|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MPI-001 | Juhtus MPI sisemine viga                                                                                                                                |
+| MPI-002 | Patsiendi indeksi krüpteerimise viga                                                                                                                    |
+| MPI-003 | Patsiendi indeksi dekrüpteerimise viga                                                                                                                  |
+| MPI-004 | Patsiendi indeksi HMAC arvutamise viga                                                                                                                  |
+| MPI-005 | Sekundaarne HSM võti on kohustuslik selleks, et andmeid saaks uuesti krüpteerida                                                                        |
+| MPI-006 | Patsiendi indeks on ebakonsistentne, on leitud duplikaate {system, value} paariga                                                                       |
+| MPI-007 | XML'i parsimine on ebaõnnestunud                                                                                                                        |
+| MPI-008 | Tundmatu telekomi süsteem: ${system}, lubatud väärtused: ${allowed}                                                                                     |
+| MPI-009 | Tundmatu riigi kood ${code}                                                                                                                             |
+| MPI-010 | Padsiendi loomine ei ole võimalik, patsient sama identifikaatoriga juba eksisteerib                                                                     |
+| MPI-011 | Lubamatu aadressi tüüp: ${type}, lubatud väärtused: ${allowed}                                                                                          |
+| MPI-012 | Lubamatu aadressi kasutus: ${use}, lubatud väärtused: ${allowed}                                                                                        |
+| MPI-013 | Tundmatu telekomi kasutus: ${use}, lubatud väärtused: ${allowed}                                                                                        |
+| MPI-015 | Antud otsingu parameetrid ei sobi või puuduvad                                                                                                          |
+| MPI-016 | Patsiendil peab olema vähemalt üks identifikaator                                                                                                       |
+| MPI-017 | Antud identifikaatoritega leiab mitu erinevat patsienti, salvestamine ei ole võimalik                                                                   |
+| MPI-018 | Tundmatu patsiendi kontaktisiku liik ${code}                                                                                                            |
+| MPI-019 | Aadressil puudub riigi kood                                                                                                                             |
+| MPI-020 | Patsiendi puuete info pärimine ebaõnnestus                                                                                                              |
+| MPI-021 | Patsienti ei leitud                                                                                                                                     |
+| MPI-022 | Patsiendi isikukoodi ei leitud                                                                                                                          |
+| MPI-023 | FHIR profiil ${profile} ei ole lubatud                                                                                                                  |
+| MPI-024 | FHIR profiil on puudu                                                                                                                                   |
+| MPI-025 | Tundmatu identifikaatori süsteem ${system}                                                                                                              |
+| MPI-026 | Telekomi väärtus ${value} ei vasta validatsiooni reeglitele                                                                                             |
+| MPI-027 | Leitud liiga palju tulemusi, palun laiendage otsingu kriteeria                                                                                          |
+| MPI-028 | Päringus puudub autori parameeter (${param})                                                                                                            |
+| MPI-029 | Integratsiooniviga xroad-rr teenusega                                                                                                                   |
+| MPI-030 | Integratsiooniviga xroad-sk teenusega                                                                                                                   |
+| MPI-031 | Integratsiooniviga xroad-ads teenusega                                                                                                                  |
+| MPI-032 | Päringus puudub päis 'x-road-issue'                                                                                                                     |
+| MPI-033 | Päringus puudub autori asutuse registri kood                                                                                                            |
+| MPI-034 | Perekonnaseisu salvestamine ei õnnestunud, patsient ja teine isik suhtes ei ole omavahel seotud                                                         |
+| MPI-035 | Target patient must be active                                                                                                                           |
+| MPI-036 | Source patient is already linked                                                                                                                        |
+| MPI-037 | Target patient is already active                                                                                                                        |
+| MPI-038 | Source and target patients are not linked directly                                                                                                      |
+| MPI-039 | Failed to notify WM about patient linkage                                                                                                               |
+| MPI-040 | Integratsiooniviga xroad-tor teenusega                                                                                                                  |
+| MPI-041 | Antud patsiendil juba eksisteerib kontaktisik sama identifikaatoriga ja seosega                                                                         |
+| MPI-042 | Patsiendil ei saa olla rohkem kui ${max} kontaktisikut                                                                                                  |
+| MPI-043 | Integratsiooniviga xroad-tk teenusega                                                                                                                   |
+| MPI-044 | Päringus puudub autori roll                                                                                                                             |
+| MPI-045 | Parameeteriga ${param} antud identifikaatori järgi ei ole patsienti leitud                                                                              |
+| MPI-046 | Multiple patients found for parameter ${param}                                                                                                          |
+| MPI-047 | legal-status parameeter on kohustuslik                                                                                                                  |
+| MPI-048 | Lubamatu legal-status parameetri väärtus                                                                                                                |
+| MPI-050 | Eesti isikukoodiga Patient ressursi pole lubatud luua POST /Patient päringuga, palun kasutage /Patient/$lookup operatsiooni Rahvastikuregistri allikaga |
+| MPI-100 | Unknown job type ${type}                                                                                                                                |
+
+### Tehiku RR x-tee mikroteenuse veakoodid
+
+| Veakood | Veatekst                                                                             |
+|---------|--------------------------------------------------------------------------------------|
+| XRR100  | System error                                                                         |
+| XRR200  | X-road error {{code}} from RR: {{text}}                                              |
+| XRR300  | Personal code missing in RR or invalid account, original RR error: {{code}} {{text}} |
+| XRR400  | Failed to exchange person contact data with RR due to error {{code}}: {{text}}       |
+
+### Tehiku ADS x-tee mikroteenuse veakoodid
+
+| Veakood    | Veatekst                                           |
+|------------|----------------------------------------------------|
+| XR_ADS-001 | Juhtus ADS sisemine viga                           |
+| XR_ADS-100 | Juhtus ADS teenenuse X-tee viga: ${code} - ${text} |
+| XR_ADS-404 | Aadressi adr-id'ga ${adrId} ei leitud ADS-ist      |
+
+### Tehiku TÖR x-tee mikroteenuse veakoodid
+
+| Veakood    | Veatekst                                           |
+|------------|----------------------------------------------------|
+| XR_TOR-001 | Juhtus TOR teenuse sisemine viga                   |
+| XR_TOR-100 | Juhtus TOR teenenuse X-tee viga: ${code} - ${text} |
+
+### Tehiku SKA x-tee mikroteenuse veakoodid
+
+| Veakood | Veatekst                                 |
+|---------|------------------------------------------|
+| XSKA100 | System error                             |
+| XSKA200 | X-road error {{code}} from SKA: {{text}} |
+
+### Tehiku TK x-tee mikroteenuse veakoodid
+
+| Veakood | Veatekst                                |
+|---------|-----------------------------------------|
+| XTK100  | System error                            |
+| XTK200  | X-road error {{code}} from TK. {{text}} |
+
+### Rahvastikuregistri x-tee teenuste veakoodid
+
+| Veakood | Veatekst                                                     |
+|---------|--------------------------------------------------------------|
+| 10175   | ISIK EI OLE ÜHESELT TUVASTATAV, TÄPSUSTAGE PÄRINGU TINGIMUSI |
+| 10027   | Isik puudub RRis.                                            |
+| 10035   | Päringu tingimustele vastab RRis rohkem kui üks isik.        |
+| 10001   | Isikukoodi pikkus ei ole 11 sümbolit.                        |
+| 10002   | Isikukoodis ei ole kõik sümbolid numbrid.                    |
+| 10003   | Isikukood algab lubamatu sümboliga.                          |
+| 10004   | Isikukoodis sisalduv sünnikuupäev on vigane.                 |
+| 10005   | Isikukoodi kontrolljärk on vale.                             |
+| 10900   | Päringutingimused on määratlemata.                           |
+| 10022   | Kohustuslikud sisendparameetrid puuduvad.                    |
+| L027    | Kontrollige isiku või kirje staatust.                        |
+| L068    | Lubamatu suhte rolli liik.                                   |
+| L069    | Lubamatu suhte staatus.                                      |
+| L077    | Suhet RR-ist ei leitud.                                      |
+
+### Tolli ja maksuameti TÖR registri x-tee teenuste veakoodid
+
+| Veakood | Veatekst                                                           |
+|---------|--------------------------------------------------------------------|
+| 50      | Viga päringu töötlemisel.                                          |
+| 51      | Päringus puuduvad sisendandmed                                     |
+| 57      | Sisendandmetes puudub päringu tüüp.                                |
+| 58      | Päringusse pole sisestatud kõiki vajaminevaid andmeid.             |
+| 59      | Päringu tüübil "P" puudub algus või lõpukuupäev.                   |
+| 60      | Päringu tüübil AM/TM puudub muutmise algus või lõpukuupäev         |
+| 61      | Päringu tüübil PM puuduvad nõutud kuupäevad.                       |
+| 63      | Päringu tüüp ei ole korrektne.                                     |
+| 68      | Sisendandmetes puudub isikukood.                                   |
+| 69      | Isikukoodi pikkus ei sobi                                          |
+| 70      | Üldine viga, andmete laadimine andmebaasist ebaõnnestus            |
+| 71      | Üldine viga, süsteemiparameetri laadimine andmebaasist ebaõnnestus |
+| 100     | Sõnumi vastus sisaldab liiga palju kirjeid.                        |

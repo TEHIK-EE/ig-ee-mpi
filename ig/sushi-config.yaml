@@ -52,15 +52,15 @@ pages:
   index.md:
     title: Sissejuhatus
   patient.md:
-    title: Patsiendid  
+    title: Patsiendid
   identifiers.md:
-    title: Identifikaatorid  
+    title: Identifikaatorid
   dev.md:
     title: Juhend arendajale
   link.md:
     title: Patsientide sidumine ja lahti sidumine
   errors.md:
-    title: Veakoodid
+    title: Vead
   operations.md:
     title: Toetavad operatsioonid
   checklist.md:
@@ -68,15 +68,15 @@ pages:
   contact.md:
     title: Contact Us
   download.md:
-    title: Download  
+    title: Download
   auth.md:
-    title: Autentimine         
+    title: Autentimine
   uc.md:
     title: Kasutusjuhud
   checks.md:
-    title: Kontrollid    
+    title: Kontrollid
   hl7v3.md:
-    title: Seos HL7 V3-ga ja CDA-ga       
+    title: Seos HL7 V3-ga ja CDA-ga
 
 #   implementation.xml:
 #   examples.xml:
@@ -106,7 +106,7 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Esileht: index.html
-  Juhendid: 
+  Juhendid:
     Patsiendid: patient.html
     Identifikaatorid: identifiers.html
     Juhend arendajale: dev.html
@@ -115,7 +115,7 @@ menu:
     Kasutusjuhud: uc.html
     Kontrollid ja terminoloogia: checks.html
     Seos HL7 V3-ga ja CDA-ga: hl7v3.html
-    Eeldused liidestujale: checklist.html    
+    Eeldused liidestujale: checklist.html
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:
