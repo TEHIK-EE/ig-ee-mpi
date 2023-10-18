@@ -272,7 +272,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 65569001 - Finding of wardship, 58626002 - Legal guardian"
+* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian (https://fhir.ee/ImplementationGuide/mpi/ValueSet-guardian-status.html)"
 * parameter[=].type = #string
 * parameter[+].name = #nocache
 * parameter[=].use = #in
