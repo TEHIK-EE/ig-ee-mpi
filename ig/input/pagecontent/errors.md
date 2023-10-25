@@ -68,6 +68,7 @@ Näide `OperationOutcome`-ist, mis kuvab peegeldatud vead:
 | https://emta.ee                   | Tolli ja maksuameti TÖR registri x-tee teenuste veakoodid |
 
 ## Vigade kataloog
+
 Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles pidada, et mitte kõik veakoodid võivad lõppkasutajani jõuda.
 
 ### Patsiendi registri veakoodid
@@ -164,22 +165,23 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 
 ### Rahvastikuregistri x-tee teenuste veakoodid
 
-| Veakood | Veatekst                                                     |
-|---------|--------------------------------------------------------------|
-| 10175   | ISIK EI OLE ÜHESELT TUVASTATAV, TÄPSUSTAGE PÄRINGU TINGIMUSI |
-| 10027   | Isik puudub RRis.                                            |
-| 10035   | Päringu tingimustele vastab RRis rohkem kui üks isik.        |
-| 10001   | Isikukoodi pikkus ei ole 11 sümbolit.                        |
-| 10002   | Isikukoodis ei ole kõik sümbolid numbrid.                    |
-| 10003   | Isikukood algab lubamatu sümboliga.                          |
-| 10004   | Isikukoodis sisalduv sünnikuupäev on vigane.                 |
-| 10005   | Isikukoodi kontrolljärk on vale.                             |
-| 10900   | Päringutingimused on määratlemata.                           |
-| 10022   | Kohustuslikud sisendparameetrid puuduvad.                    |
-| L027    | Kontrollige isiku või kirje staatust.                        |
-| L068    | Lubamatu suhte rolli liik.                                   |
-| L069    | Lubamatu suhte staatus.                                      |
-| L077    | Suhet RR-ist ei leitud.                                      |
+| Veakood | Veatekst                                                      |
+|---------|---------------------------------------------------------------|
+| 10175   | ISIK EI OLE ÜHESELT TUVASTATAV, TÄPSUSTAGE PÄRINGU TINGIMUSI  |
+| 10027   | Isik puudub RRis.                                             |
+| 10035   | Päringu tingimustele vastab RRis rohkem kui üks isik.         |
+| 10001   | Isikukoodi pikkus ei ole 11 sümbolit.                         |
+| 10002   | Isikukoodis ei ole kõik sümbolid numbrid.                     |
+| 10003   | Isikukood algab lubamatu sümboliga.                           |
+| 10004   | Isikukoodis sisalduv sünnikuupäev on vigane.                  |
+| 10005   | Isikukoodi kontrolljärk on vale.                              |
+| 10900   | Päringutingimused on määratlemata.                            |
+| 10022   | Kohustuslikud sisendparameetrid puuduvad.                     |
+| L027    | Kontrollige isiku või kirje staatust.                         |
+| L068    | Lubamatu suhte rolli liik.                                    |
+| L069    | Lubamatu suhte staatus.                                       |
+| L077    | Suhet RR-ist ei leitud.                                       |
+| V10580  | Kasutajal pole kehtivat isikukoodi RR-is või vale masinkonto. |
 
 ### Tolli ja maksuameti TÖR registri x-tee teenuste veakoodid
 
