@@ -8,6 +8,9 @@
 .settings/
 *.sublime-workspace
 
+.index.db
+.index.json
+
 # System Files
 .DS_Store
 Thumbs.db
