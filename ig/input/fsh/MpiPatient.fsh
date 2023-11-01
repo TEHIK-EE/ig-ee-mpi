@@ -9,7 +9,8 @@ Description: "Common MPI limitations on Patient resouce"
 * photo ..0
 * generalPractitioner ..0
 * managingOrganization ..0
-* link ..0
+* link ^short = "MPI ignoreerib salvestamisel 'link' elemendi. Välja 'link' saab muuta operatsioonide abil."
 * contact ..0
 * maritalStatus ..0
 * communication MS 
+

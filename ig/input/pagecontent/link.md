@@ -1,5 +1,8 @@
 Patsientide sidumiseks ja lahti sidumiseks pakub MPI [Link](OperationDefinition-patient-link.html) ja [Unlink](OperationDefinition-patient-unlink.html) operatsioonid.
 
+Sidumise ja lahtisidumise tulemused hoitakse `Patient.link` elemendis.
+Oluline arvestada faktiga, et `Patient` ressurssi salvestamisel rakendus ignoreerib `link` elemendi sisu. Välja `link` saab muuta ainult operatsioonide abil.
+
 ### Teised ressursid
 #### TIS
 TIS võimaldab liita patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.

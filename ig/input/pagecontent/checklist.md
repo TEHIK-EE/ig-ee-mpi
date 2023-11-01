@@ -8,6 +8,7 @@
   - <input type="checkbox"/> Uue patsiendi lisamine  `POST /Patient`
   - <input type="checkbox"/> Oskab otsida patsiendi identifikaatori alusel  `GET /Patient?identifier=..`
   - <input type="checkbox"/> Toetab [ADS](https://geoportaal.maaamet.ee/est/Teenused/Integreeritav-aadressiotsing-In-ADS-p504.html)-i. Oskab vastu võtta ja saata aadressi ADS kujul.  
+  - <input type="checkbox"/> Arvestab RR-i elukoha ja lisa-aadresside esitamise [reegleid](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf)
   - <input type="checkbox"/> Suudab kuvada TTO kasutajale informatsiooni põhi- ja lisaaadressite kohta.
   - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametlikku telefoninumbri, emaili ja aadressi kuju  
 - Arvestab erinevate [patsiendi liikidega](patient.html)
@@ -40,4 +41,5 @@
   - <input type="checkbox"/> Oskab määrata [profiili](http://hl7.org/fhir/profiling.html) iga muudetava ressurssi kohta  POST ja PUT tegevuste puhul.
   - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
 - Protsess  
-  - <input type="checkbox"/> MPI on integreeritud TTO kõikidesse patsiendi andmeid käsitlevate rakenduste põhivoogudesse.
+  - <input type="checkbox"/> PÜT on integreeritud TTO kõikidesse patsiendi andmeid käsitlevate rakenduste põhivoogudesse.
+  - <input type="checkbox"/> TTO tarkvara suudab töötada ka hetkedel, kui PÜT pole ligipääsetav.
