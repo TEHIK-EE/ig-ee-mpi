@@ -1,15 +1,14 @@
-import pako from 'https://cdn.jsdelivr.net/npm/pako@2.1.0/+esm'
-
 window.addEventListener('load', () => {
-  document.querySelectorAll('pre.language-plantuml').forEach((el, idx) => {
-    const codeElement = el.firstChild;
-    const umlCode = codeElement.innerText;
-    const imgUrl = composePlantUmlUrl(umlCode);
-    fetch(imgUrl).then(r => r.text()).then(svg => el.outerHTML = `<figure class="plantuml">${svg}</figure>`)
-  })
-});
+  import('https://cdn.jsdelivr.net/npm/pako@2.1.0/+esm').then(({default: pako}) => {
+    document.querySelectorAll('pre.language-plantuml').forEach((el, idx) => {
+      const codeElement = el.firstChild;
+      const umlCode = codeElement.innerText;
+      const imgUrl = composePlantUmlUrl(umlCode);
+      fetch(imgUrl).then(r => r.text()).then(svg => el.outerHTML = `<figure class="plantuml">${svg}</figure>`)
+    })
 
-function composePlantUmlUrl(umlCode) {
+
+  function composePlantUmlUrl(umlCode) {
     const server = 'https://www.plantuml.com/plantuml';
     const zippedCode = encode64(pako.deflate('@startuml' + '\n' + umlCode + '\n@enduml'));
     return `${server}/svg/~1${zippedCode}`;
@@ -65,3 +64,5 @@ function composePlantUmlUrl(umlCode) {
     return '?';
   }
   
+})
+});
