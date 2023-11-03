@@ -148,7 +148,7 @@ Päringus tuleb määrata REST päringu päises (Header-is) mitmed tunnused:
 - vastuse keha vormingu määramiseks (päis "Content-Type" väärtustega "application/json" või application/xml või "application/fhir+json" või application/fhir+xml)
 - autentimine (päis "Authorization" mille sisu kirjeldatud lehel [Autentimine](auth.html))
 - unikaalne päringu id (päis "x-road-id"). 
-- selgitada miks antud päring on tehtud (päis "x-road-issue"). Tunnust kasutatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse.
+- selgitada miks antud päring on tehtud (päis "x-road-issue"). Tunnust kasutatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. **NB!** Väärtuses ei tohi kasutada erisümboleid `"'&`.
 - loogilise transaktsiooni tunnus (päis "x-transaction-id" FIXME). Päis edastatakse alampäringute puhul teistesse süsteemidesse.
 - valiidne sõnum tuleb edastada päringu kehas. Andmekoosseis on kirjeldatud lehel [Patsiendid](patient.html)
 
