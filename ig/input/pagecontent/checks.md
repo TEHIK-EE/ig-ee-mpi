@@ -89,7 +89,7 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 #### EEBase-i kaudu kasutatavad loendid
 
 - [Administrative Gender](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-administrative-gender.html)
-- [Person Identity System](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-patient-identity.html)
+- [Patient Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-ee-patient-identifier-domain.html)
 - [Date Accuracy Indicator](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-date-accuracy-indicator.html)
 - [ADS](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-ads.html)
 - [Observation category](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-observation-category.html)
