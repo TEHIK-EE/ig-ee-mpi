@@ -2,6 +2,7 @@
 
 - <input type="checkbox"/> Oskab kasutada [FHIR terminoloogiat](https://build.fhir.org/ig/TEHIK-EE/TerminologyServices).
   - <input type="checkbox"/> Toetab kõiki [PÜTis kasutatud klassifikaatoreid ja loendeid](checks.html#kasutatav-terminoloogia).
+  - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, vastabvalt ConceptMap-ile [identity-system-to-oid](ConceptMap-identity-system-to-oid.html)
 - [Oskab](dev.html) opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`
@@ -10,7 +11,7 @@
   - <input type="checkbox"/> Toetab [ADS](https://geoportaal.maaamet.ee/est/Teenused/Integreeritav-aadressiotsing-In-ADS-p504.html)-i. Oskab vastu võtta ja saata aadressi ADS kujul.  
   - <input type="checkbox"/> Arvestab RR-i elukoha ja lisa-aadresside esitamise [reegleid](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf)
   - <input type="checkbox"/> Suudab kuvada TTO kasutajale informatsiooni [põhi- ja lisaaadressite](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-address.html) kohta.
-  - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametlikku telefoninumbri, emaili ja aadressi kuju  
+  - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametlikku telefoninumbri, emaili ja aadressi kuju
 - Arvestab erinevate [patsiendi liikidega](patient.html)
   - <input type="checkbox"/> Toetab [tuvastatud patsiendi](StructureDefinition-ee-mpi-patient-verified.html) andmekoosseisu.
   - <input type="checkbox"/> Toetab [tundmatu, anonüümse patsiendi](StructureDefinition-ee-mpi-patient-unknown.html) või mitte-elusa patsiendi (nt õhk, keskkonnaproovid, ..) andmekoosseisu (kui TTO-l on vastav raviprofiil)
