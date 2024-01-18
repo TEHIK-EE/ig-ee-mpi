@@ -11,11 +11,13 @@ Usage: #definition
 * experimental = false
 * date = "2023-05-26"
 * publisher = "TEHIK"
+* contact.name = "TEHIK"
+* contact.telecom.system = #url
+* contact.telecom.value = "https://tehik.ee"
 * description = "A mapping between the Identity System for person identification and ENHIS OID systems"
 * useContext.code = $usage-context-type#venue
 * useContext.valueCodeableConcept.text = "for NHIS usage"
-* jurisdiction = urn:iso:std:iso:3166#EE
-//* copyright = "Creative Commons 0"
+* jurisdiction = urn:iso:std:iso:3166#EE "Estonia"
 * sourceScopeUri = "https://fhir.ee/ValueSet/ee-identity-system"
 * targetScopeUri = "urn:oid:1.3.6.1.4.1.28284"
 * group.source = "https://fhir.ee/CodeSystem/ee-identity-system"
@@ -144,6 +146,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of United Arab Emirates"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.784.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/are/cz
+* group.element[=].display = "ID Card number of United Arab Emirates"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.784.3
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/arg
 * group.element[=].display = "Unspecified person identifier of Argentina"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.32
@@ -151,6 +157,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/arg/ppn
 * group.element[=].display = "Passport number of Argentina"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.32.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/arg/ni
+* group.element[=].display = "National identifier of Argentina"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.32.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/arg/dln
+* group.element[=].display = "Driver's license number of Argentina"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.32.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/arm
 * group.element[=].display = "Unspecified person identifier of Armenia"
@@ -200,6 +214,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Austria"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.40.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/aut/dln
+* group.element[=].display = "Driver's license number of Austria"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.40.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/bhs
 * group.element[=].display = "Unspecified person identifier of Bahamas"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.44
@@ -216,6 +234,14 @@ Usage: #definition
 * group.element[=].display = "Passport number of Bahrain"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.48.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bhr/ni
+* group.element[=].display = "National identifier of Bahrain"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.48.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bhr/cz
+* group.element[=].display = "ID Card number of Bahrain"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.48.3
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/bgd
 * group.element[=].display = "Unspecified person identifier of Bangladesh"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.50
@@ -223,6 +249,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/bgd/ppn
 * group.element[=].display = "Passport number of Bangladesh"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.50.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bgd/ni
+* group.element[=].display = "National identifier of Bangladesh"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.50.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bgd/cz
+* group.element[=].display = "ID Card number of Bangladesh"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.50.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/brb
 * group.element[=].display = "Unspecified person identifier of Barbados"
@@ -255,6 +289,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/bel/cz
 * group.element[=].display = "ID Card number of Belgium"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.56.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bel/dln
+* group.element[=].display = "Driver's license number of Belgium"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.56.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/blz
 * group.element[=].display = "Unspecified person identifier of Belize"
@@ -332,6 +370,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Brazil"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.76.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/bra/ni
+* group.element[=].display = "National identifier of Brazil"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.76.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/iot
 * group.element[=].display = "Unspecified person identifier of British Indian Ocean Territory"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.86
@@ -368,10 +410,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Bulgaria"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.100.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/bgr/cz
-* group.element[=].display = "ID Card number of Bulgaria"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.100.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/bfa
 * group.element[=].display = "Unspecified person identifier of Burkina Faso"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.854
@@ -403,6 +441,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/col/ppn
 * group.element[=].display = "Passport number of Colombia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.170.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/col/ni
+* group.element[=].display = "National identifier of Colombia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.170.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/col/dln
+* group.element[=].display = "Driver's license number of Colombia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.170.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/cok
 * group.element[=].display = "Unspecified person identifier of Cook Islands"
@@ -712,6 +758,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Spain"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.724.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/esp/dln
+* group.element[=].display = "Driver's license number of Spain"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.724.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ant
 * group.element[=].display = "Unspecified person identifier of Netherlands Antilles"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.530
@@ -744,6 +794,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Croatia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.191.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/hrv/dln
+* group.element[=].display = "Driver's license number of Croatia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.191.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/irl
 * group.element[=].display = "Unspecified person identifier of Ireland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.372
@@ -752,13 +806,9 @@ Usage: #definition
 * group.element[=].display = "Passport number of Ireland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.372.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/irl/ni
-* group.element[=].display = "National identifier of Ireland"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.372.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/irl/cz
-* group.element[=].display = "ID Card number of Ireland"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.372.3
+* group.element[+].code = #https://fhir.ee/sid/pid/irl/dln
+* group.element[=].display = "Driver's license number of Ireland"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.372.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/isr
 * group.element[=].display = "Unspecified person identifier of Israel"
@@ -767,6 +817,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/isr/ppn
 * group.element[=].display = "Passport number of Israel"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.376.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/isr/ni
+* group.element[=].display = "National identifier of Israel"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.376.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ind
 * group.element[=].display = "Unspecified person identifier of India"
@@ -792,6 +846,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Iraq"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.368.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/irq/cz
+* group.element[=].display = "ID Card number of Iraq"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.368.3
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/irn
 * group.element[=].display = "Unspecified person identifier of Iran"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.364
@@ -799,6 +857,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/irn/ppn
 * group.element[=].display = "Passport number of Iran"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.364.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/irn/cz
+* group.element[=].display = "ID Card number of Iran"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.364.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/irn/dln
+* group.element[=].display = "Driver's license number of Iran"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.364.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/isl
 * group.element[=].display = "Unspecified person identifier of Iceland"
@@ -811,10 +877,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/isl/ni
 * group.element[=].display = "National identifier of Iceland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.352.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/isl/cz
-* group.element[=].display = "ID Card number of Iceland"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.352.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ita
 * group.element[=].display = "Unspecified person identifier of Italy"
@@ -831,6 +893,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/ita/cz
 * group.element[=].display = "ID Card number of Italy"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.380.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/ita/dln
+* group.element[=].display = "Driver's license number of Italy"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.380.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/jpn
 * group.element[=].display = "Unspecified person identifier of Japan"
@@ -912,6 +978,14 @@ Usage: #definition
 * group.element[=].display = "Passport number of Canada"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.124.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/can/ni
+* group.element[=].display = "National identifier of Canada"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.124.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/can/dln
+* group.element[=].display = "Driver's license number of Canada"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.124.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/kaz
 * group.element[=].display = "Unspecified person identifier of Kazakhstan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.398
@@ -919,6 +993,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/kaz/ppn
 * group.element[=].display = "Passport number of Kazakhstan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.398.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/kaz/ni
+* group.element[=].display = "National identifier of Kazakhstan"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.398.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/qat
 * group.element[=].display = "Unspecified person identifier of Qatar"
@@ -1024,6 +1102,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Greece"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.300.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/grc/dln
+* group.element[=].display = "Driver's license number of Greece"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.300.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/cub
 * group.element[=].display = "Unspecified person identifier of Cuba"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.192
@@ -1040,6 +1122,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Kuwait"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.414.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/kwt/ni
+* group.element[=].display = "National identifier of Kuwait"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.414.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/cyp
 * group.element[=].display = "Unspecified person identifier of Cyprus"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.196
@@ -1051,6 +1137,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/cyp/cz
 * group.element[=].display = "ID Card number of Cyprus"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.196.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/cyp/dln
+* group.element[=].display = "Driver's license number of Cyprus"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.196.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/lao
 * group.element[=].display = "Unspecified person identifier of Lao People's Democratic Republic"
@@ -1071,10 +1161,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/ltu/ni
 * group.element[=].display = "National identifier of Lithuania"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.440.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/ltu/cz
-* group.element[=].display = "ID Card number of Lithuania"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.440.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/lso
 * group.element[=].display = "Unspecified person identifier of Lesotho"
@@ -1124,6 +1210,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Luxembourg"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.442.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/lux/dln
+* group.element[=].display = "Driver's license number of Luxembourg"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.442.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/zaf
 * group.element[=].display = "Unspecified person identifier of South Africa"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.710
@@ -1131,6 +1221,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/zaf/ppn
 * group.element[=].display = "Passport number of South Africa"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.710.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/zaf/ni
+* group.element[=].display = "National identifier of South Africa"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.710.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/sgs
 * group.element[=].display = "Unspecified person identifier of South Georgia and the South Sandwich Islands"
@@ -1151,10 +1245,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/lva/ni
 * group.element[=].display = "National identifier of Latvia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.428.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/lva/cz
-* group.element[=].display = "ID Card number of Latvia"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.428.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/esh
 * group.element[=].display = "Unspecified person identifier of Western Sahara"
@@ -1180,14 +1270,6 @@ Usage: #definition
 * group.element[=].display = "Passport number of Netherlands"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.528.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/nld/ni
-* group.element[=].display = "National identifier of Netherlands"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.528.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/nld/cz
-* group.element[=].display = "ID Card number of Netherlands"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.528.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/mkd
 * group.element[=].display = "Unspecified person identifier of Macedonia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.807
@@ -1207,6 +1289,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/mys/ppn
 * group.element[=].display = "Passport number of Malaysia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.458.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/mys/ni
+* group.element[=].display = "National identifier of Malaysia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.458.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/mwi
 * group.element[=].display = "Unspecified person identifier of Malawi"
@@ -1240,9 +1326,9 @@ Usage: #definition
 * group.element[=].display = "Passport number of Malta"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.470.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/mlt/cz
-* group.element[=].display = "ID Card number of Malta"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.470.3
+* group.element[+].code = #https://fhir.ee/sid/pid/mlt/ni
+* group.element[=].display = "National identifier of Malta"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.470.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/imn
 * group.element[=].display = "Unspecified person identifier of Isle of Man"
@@ -1307,6 +1393,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/mex/ppn
 * group.element[=].display = "Passport number of Mexico"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.484.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/mex/ni
+* group.element[=].display = "National identifier of Mexico"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.484.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/fsm
 * group.element[=].display = "Unspecified person identifier of Micronesia"
@@ -1420,6 +1510,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Nepal"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.524.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/npl/ni
+* group.element[=].display = "National identifier of Nepal"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.524.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/nic
 * group.element[=].display = "Unspecified person identifier of Nicaragua"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.558
@@ -1435,6 +1529,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/nga/ppn
 * group.element[=].display = "Passport number of Nigeria"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.566.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/nga/ni
+* group.element[=].display = "National identifier of Nigeria"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.566.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/nga/dln
+* group.element[=].display = "Driver's license number of Nigeria"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.566.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ner
 * group.element[=].display = "Unspecified person identifier of Niger"
@@ -1472,10 +1574,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Norway"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.578.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/nor/cz
-* group.element[=].display = "ID Card number of Norway"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.578.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/omn
 * group.element[=].display = "Unspecified person identifier of Oman"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.512
@@ -1499,6 +1597,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/pak/ppn
 * group.element[=].display = "Passport number of Pakistan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.586.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/pak/ni
+* group.element[=].display = "National identifier of Pakistan"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.586.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/pse
 * group.element[=].display = "Unspecified person identifier of Palestinian Territory, Occupied"
@@ -1552,10 +1654,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Poland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.616.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/pol/cz
-* group.element[=].display = "ID Card number of Poland"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.616.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/prt
 * group.element[=].display = "Unspecified person identifier of Portugal"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.620
@@ -1564,9 +1662,17 @@ Usage: #definition
 * group.element[=].display = "Passport number of Portugal"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.620.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/prt/ni
+* group.element[=].display = "National identifier of Portugal"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.620.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/prt/cz
 * group.element[=].display = "ID Card number of Portugal"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.620.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/prt/dln
+* group.element[=].display = "Driver's license number of Portugal"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.620.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/atf
 * group.element[=].display = "Unspecified person identifier of French Southern Territories"
@@ -1592,13 +1698,13 @@ Usage: #definition
 * group.element[=].display = "Passport number of France"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.250.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/fra/ni
-* group.element[=].display = "National identifier of France"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.250.2
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/fra/cz
 * group.element[=].display = "ID Card number of France"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.250.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/fra/dln
+* group.element[=].display = "Driver's license number of France"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.250.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/pri
 * group.element[=].display = "Unspecified person identifier of Puerto Rico"
@@ -1644,10 +1750,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Sweden"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/swe/cz
-* group.element[=].display = "ID Card number of Sweden"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/rou
 * group.element[=].display = "Unspecified person identifier of Romania"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.642
@@ -1659,10 +1761,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/rou/ni
 * group.element[=].display = "National identifier of Romania"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.642.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/rou/cz
-* group.element[=].display = "ID Card number of Romania"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.642.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/rwa
 * group.element[=].display = "Unspecified person identifier of Rwanda"
@@ -1732,6 +1830,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Germany"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.276.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/deu/dln
+* group.element[=].display = "Driver's license number of Germany"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.276.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/zmb
 * group.element[=].display = "Unspecified person identifier of Zambia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.894
@@ -1759,6 +1861,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/smr/ni
 * group.element[=].display = "National identifier of San Marino"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.674.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/smr/cz
+* group.element[=].display = "ID Card number of San Marino"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.674.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/smr/dln
+* group.element[=].display = "Driver's license number of San Marino"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.674.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/stp
 * group.element[=].display = "Unspecified person identifier of Sao Tome and Principe"
@@ -1820,6 +1930,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Singapore"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.702.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/sgp/ni
+* group.element[=].display = "National identifier of Singapore"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.702.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/svk
 * group.element[=].display = "Unspecified person identifier of Slovakia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703
@@ -1828,9 +1942,9 @@ Usage: #definition
 * group.element[=].display = "Passport number of Slovakia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/svk/cz
-* group.element[=].display = "ID Card number of Slovakia"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.3
+* group.element[+].code = #https://fhir.ee/sid/pid/svk/ni
+* group.element[=].display = "National identifier of Slovakia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/svn
 * group.element[=].display = "Unspecified person identifier of Slovenia"
@@ -1843,10 +1957,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/svn/ni
 * group.element[=].display = "National identifier of Slovenia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.705.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/svn/cz
-* group.element[=].display = "ID Card number of Slovenia"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.705.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/som
 * group.element[=].display = "Unspecified person identifier of Somalia"
@@ -1868,10 +1978,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Finland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.246.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/fin/cz
-* group.element[=].display = "ID Card number of Finland"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.246.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/lka
 * group.element[=].display = "Unspecified person identifier of Sri Lanka"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.144
@@ -1879,6 +1985,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/lka/ppn
 * group.element[=].display = "Passport number of Sri Lanka"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.144.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/lka/ni
+* group.element[=].display = "National identifier of Sri Lanka"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.144.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/sdn
 * group.element[=].display = "Unspecified person identifier of Sudan"
@@ -1911,6 +2021,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/gbr/ppn
 * group.element[=].display = "Passport number of United Kingdom"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.826.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/gbr/ni
+* group.element[=].display = "National identifier of United Kingdom"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.826.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/gbr/dln
+* group.element[=].display = "Driver's license number of United Kingdom"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.826.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/swz
 * group.element[=].display = "Unspecified person identifier of Swaziland"
@@ -1952,6 +2070,10 @@ Usage: #definition
 * group.element[=].display = "ID Card number of Switzerland"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.756.3
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/che/dln
+* group.element[=].display = "Driver's license number of Switzerland"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.756.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/zwe
 * group.element[=].display = "Unspecified person identifier of Zimbabwe"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.716
@@ -1959,6 +2081,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/zwe/ppn
 * group.element[=].display = "Passport number of Zimbabwe"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.716.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/zwe/ni
+* group.element[=].display = "National identifier of Zimbabwe"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.716.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/dnk
 * group.element[=].display = "Unspecified person identifier of Denmark"
@@ -1971,10 +2097,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/dnk/ni
 * group.element[=].display = "National identifier of Denmark"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.208.2
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/dnk/cz
-* group.element[=].display = "ID Card number of Denmark"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.208.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/tjk
 * group.element[=].display = "Unspecified person identifier of Tajikistan"
@@ -1992,6 +2114,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Thailand"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.764.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/tha/ni
+* group.element[=].display = "National identifier of Thailand"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.764.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/twn
 * group.element[=].display = "Unspecified person identifier of Taiwan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.158
@@ -1999,6 +2125,10 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/twn/ppn
 * group.element[=].display = "Passport number of Taiwan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.158.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/twn/ni
+* group.element[=].display = "National identifier of Taiwan"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.158.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/tza
 * group.element[=].display = "Unspecified person identifier of Tanzania, United Republic of"
@@ -2068,10 +2198,6 @@ Usage: #definition
 * group.element[=].display = "National identifier of Czech Republic"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.203.2
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/cze/cz
-* group.element[=].display = "ID Card number of Czech Republic"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.203.3
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/chl
 * group.element[=].display = "Unspecified person identifier of Chile"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.152
@@ -2079,6 +2205,18 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/chl/ppn
 * group.element[=].display = "Passport number of Chile"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.152.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/chl/ni
+* group.element[=].display = "National identifier of Chile"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.152.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/chl/cz
+* group.element[=].display = "ID Card number of Chile"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.152.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/chl/dln
+* group.element[=].display = "Driver's license number of Chile"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.152.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/tun
 * group.element[=].display = "Unspecified person identifier of Tunisia"
@@ -2152,13 +2290,13 @@ Usage: #definition
 * group.element[=].display = "Passport number of Hungary"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.348.1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/hun/ni
-* group.element[=].display = "National identifier of Hungary"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.348.2
-* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/hun/cz
 * group.element[=].display = "ID Card number of Hungary"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.348.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/hun/dln
+* group.element[=].display = "Driver's license number of Hungary"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.348.4
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ury
 * group.element[=].display = "Unspecified person identifier of Uruguay"
@@ -2175,10 +2313,6 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/uzb/ppn
 * group.element[=].display = "Passport number of Uzbekistan"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.860.1
-* group.element[=].target.relationship = #equivalent
-* group.element[+].code = #https://fhir.ee/sid/pid/uzb/ni
-* group.element[=].display = "National identifier of Uzbekistan"
-* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.860.2
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/ncl
 * group.element[=].display = "Unspecified person identifier of New Caledonia"
@@ -2236,6 +2370,10 @@ Usage: #definition
 * group.element[=].display = "Passport number of Venezuela"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.862.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/ven/ni
+* group.element[=].display = "National identifier of Venezuela"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.862.2
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/vnm
 * group.element[=].display = "Unspecified person identifier of Viet Nam"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.704
@@ -2243,6 +2381,14 @@ Usage: #definition
 * group.element[+].code = #https://fhir.ee/sid/pid/vnm/ppn
 * group.element[=].display = "Passport number of Viet Nam"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.704.1
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/vnm/ni
+* group.element[=].display = "National identifier of Viet Nam"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.704.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/vnm/cz
+* group.element[=].display = "ID Card number of Viet Nam"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.704.3
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/vir
 * group.element[=].display = "Unspecified person identifier of Virgin Islands (U.S.)"
@@ -2261,4 +2407,4 @@ Usage: #definition
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.581.1
 * group.element[=].target.relationship = #equivalent
 * group.unmapped.mode = #use-source-code
-* group.unmapped.relationship = #not-related-to
+* group.unmapped.relationship = "not-related-to"
