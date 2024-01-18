@@ -2407,4 +2407,4 @@ Usage: #definition
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.581.1
 * group.element[=].target.relationship = #equivalent
 * group.unmapped.mode = #use-source-code
-* group.unmapped.relationship = "not-related-to"
+* group.unmapped.relationship = #not-related-to
