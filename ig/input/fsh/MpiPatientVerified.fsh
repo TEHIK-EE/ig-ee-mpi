@@ -211,8 +211,8 @@ Usage: #example
   * country = "EE"
   * postalCode = "14215"
   * text = "Valukoja 10, Tallinn"
-  * extension[ads].valueCoding = https://fhir.ee/CodeSystem/ee-ads#2280361
-
+  * extension[adsAdrId].valueCoding = https://fhir.ee/CodeSystem/ads-adr-id#2280361
+  * extension[adsOid].valueCoding = https://fhir.ee/CodeSystem/ads-oid#ME03379409
 
 Instance: PatientJohnDoe
 InstanceOf: EEBasePatient
