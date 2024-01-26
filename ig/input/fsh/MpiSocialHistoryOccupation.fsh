@@ -105,6 +105,7 @@ ValueSet: EEMPIOccupationType
 Id: occupation-type
 Title:     "Occupation Type"
 Description: "Töötamise liik"
+* ^experimental = false
 * include codes from system EEMPIOccupationType
 
 /*
