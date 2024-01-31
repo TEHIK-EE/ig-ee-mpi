@@ -1,44 +1,46 @@
 CodeSystem: EEMPIEducationLevel
 Id: education-level
 Title:     "Education level"
-Description: "Patsiendi kõrgeim haridustase"
+Description: "Omandatud kõrgeim haridustase"
 * ^experimental = false
 * ^content = #complete
 * ^caseSensitive = false
-* ^hierarchyMeaning = #is-a
-* #0 "Less than primary education, pre-primary education" "Alusharidus (koolieelne haridus) või alghariduseta"
+* #A0 "Less than primary education" "Hariduseta, alusharidus"
   * ^designation[0].language = #et  
   * ^designation[=].value = "Hariduseta, alusharidus"
-* #1 "Basic education (grades 1-6 of basic school)" "Põhiharidus (põhikooli 1.-6. klass)"
-  * ^designation[0].language = #et 
-  * ^designation[=].value = "Algharidus"
-* #2 "Basic education (grades 7-9 of basic school)" "Põhiharidus (põhikooli 7.-9. klass)" 
+* #A1 "Primary education" "Algharidus, praegune põhikooli 6 klassi, põhihariduse nõudeta kutseharidus"
+  * ^designation[0].language = #et
+  * ^designation[=].value = "Algharidus, praegune põhikooli 6 klassi, põhihariduse nõudeta kutseharidus"
+* #A24 "Lower secondary general education" "Põhiharidus" 
   * ^designation[0].language = #et 
   * ^designation[=].value = "Põhiharidus"
-* #3 "Upper secondary education" "Keskharidus"
+* #A25 "Lower secondary vocational education" "Kutseharidus koos põhihariduse omandamisega ja kutseharidus põhihariduse baasil"
   * ^designation[0].language = #et 
-  * ^designation[=].value = "Üldkeskharidus"
-  * #34 "General secondary education" "Üldkeskharidus (gümnaasiumi 10.-12. klass)"
-    * ^designation[0].language = #et 
-    * ^designation[=].value = "Keskeriharidus keskhariduse baasil"  
-  * #35 "Vocational secondary education (incl. secondary special or technical education), based on basic education" "Kutsekeskharidus (sh keskeri- või tehnikumiharidus) põhihariduse baasil"
-    * ^designation[0].language = #et 
-    * ^designation[=].value = "Kutsehariduse omandamine koos põhihariduse omandamisega"
-* #4 "Vocational secondary education or vocational courses based on secondary education" "Kutsekeskharidus või kutseõpe keskhariduse baasil"
+  * ^designation[=].value = "Kutseharidus koos põhihariduse omandamisega ja kutseharidus põhihariduse baasil"
+* #A34 "Upper secondary general education" "Üldkeskharidus"
+  * ^designation[0].language = #et 
+  * ^designation[=].value = "Üldkeskharidus"  
+* #A35 "Upper secondary vocational education" "Kutsekeskharidus"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Kutsekeskharidus"
-* #5 "Vocational secondary education and a technical education based on secondary education" "Keskeri- ja tehnikumiharidus keskhariduse baasil"
-* #6 "Bachelor's or equivalent level education (professional higher education and vocational higher education, diploma courses)" "Bakalaureus või sellega võrdsustatud haridus (rakendus- ja kutsekõrgharidus, diplomiõpe)"
+* #A4 "Post-secondary non-tertiary vocational education" "Kutseharidus keskhariduse baasil"
+  * ^designation[0].language = #et 
+  * ^designation[=].value = "Kutseharidus keskhariduse baasil"
+* #A5 "Short-cycle tertiary education" "Keskeriharidus keskhariduse baasil"
+  * ^designation[0].language = #et 
+  * ^designation[=].value = "Keskeriharidus keskhariduse baasil"
+* #A6 "Bachelor's or equivalent level education level" "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"
-* #7 "Master's or equivalent level education" "Magister või sellega võrdsustatud haridus"
+* #A7 "Master's or equivalent level" "Magister või sellega võrdsustatud"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Magister või sellega võrdsustatud haridus"  
-* #8 "Doctoral or equivalent level education" "Doktor või sellega võrdsustatud haridus"
+* #A8 "Doctoral or equivalent level" "Doktor või sellega võrdsustatud"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Doktor või sellega võrdsustatud haridus"
-* #9 "Not elsewhere classified" "Mujal liigitamata"
-
+* #A9 "Not elsewhere classified" "Mujal nimetama"
+  * ^designation[0].language = #et 
+  * ^designation[=].value = "Mujal nimetama"
 
 ValueSet:    EEMPIEducationLevel
 Id:          education-level
@@ -106,5 +108,5 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "1995-06-21T00:00:00+02:00"
-* valueCodeableConcept = EEMPIEducationLevel#8
+* valueCodeableConcept = EEMPIEducationLevel#A6
 // SCT#224300008 "Received university education"
