@@ -183,7 +183,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * period 1..1 MS
 * relationship ^slicing.rules = #closed
 * relationship[person] 0..1 MS
-* relationship[person] from EEMPIPersonRelationship (required)
+* relationship[person] from EEBasePersonRelationship (required)
 * relationship[class] MS
 * relationship[class] from EEMPIPersonRelationshipClass (required)
 
