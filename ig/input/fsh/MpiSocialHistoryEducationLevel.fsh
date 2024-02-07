@@ -11,15 +11,19 @@ Description: "Omandatud kõrgeim haridustase"
 * #A1 "Primary education" "Algharidus, praegune põhikooli 6 klassi, põhihariduse nõudeta kutseharidus"
   * ^designation[0].language = #et
   * ^designation[=].value = "Algharidus, praegune põhikooli 6 klassi, põhihariduse nõudeta kutseharidus"
+  * ^designation[+].language = #et
+  * ^designation[=].value = "Algharidus"
 * #A24 "Lower secondary general education" "Põhiharidus" 
   * ^designation[0].language = #et 
   * ^designation[=].value = "Põhiharidus"
 * #A25 "Lower secondary vocational education" "Kutseharidus koos põhihariduse omandamisega ja kutseharidus põhihariduse baasil"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Kutseharidus koos põhihariduse omandamisega ja kutseharidus põhihariduse baasil"
+  * ^designation[+].language = #et
+  * ^designation[=].value = "Kutsehariduse omandamine koos põhihariduse omandamisega"
 * #A34 "Upper secondary general education" "Üldkeskharidus"
   * ^designation[0].language = #et 
-  * ^designation[=].value = "Üldkeskharidus"  
+  * ^designation[=].value = "Üldkeskharidus"
 * #A35 "Upper secondary vocational education" "Kutsekeskharidus"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Kutsekeskharidus"
@@ -34,9 +38,13 @@ Description: "Omandatud kõrgeim haridustase"
   * ^designation[=].value = "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"
 * #A7 "Master's or equivalent level" "Magister või sellega võrdsustatud"
   * ^designation[0].language = #et 
-  * ^designation[=].value = "Magister või sellega võrdsustatud haridus"  
+  * ^designation[=].value = "Magister või sellega võrdsustatud"
+  * ^designation[+].language = #et
+  * ^designation[=].value = "Magister või sellega võrdsustatud haridus"
 * #A8 "Doctoral or equivalent level" "Doktor või sellega võrdsustatud"
   * ^designation[0].language = #et 
+  * ^designation[=].value = "Doktor või sellega võrdsustatud"
+  * ^designation[+].language = #et
   * ^designation[=].value = "Doktor või sellega võrdsustatud haridus"
 * #A9 "Not elsewhere classified" "Mujal nimetama"
   * ^designation[0].language = #et 
