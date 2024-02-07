@@ -33,3 +33,32 @@ Kasutusjuhu põhised patsiendi profiilid on
 | [EEMPIPatientNewborn](StructureDefinition-ee-mpi-patient-newborn.html) | Vastsündinu patsiendi registreerimine (antud profiil realiseeritakse tulevikus) |
 | [EEMPIPatientStillborn](StructureDefinition-ee-mpi-patient-stillborn.html) | Surnultsündinu patsiendi registreerimine (antud profiil realiseeritakse tulevikus) |
 
+## Patsiendiga seotud töövood
+
+```plantuml
+scale 800 width
+
+state "Patsientide nimekiri PÜTis" as MPIlist <<choice>>
+note left of MPIlist: Patsientide nimekiri PÜTis
+state "Puudub PÜT-is" as missingMPI
+[*] -down-> MPIlist: "[[http://plantuml.com Eestimaalase otsing]].\nGET /Patient?identifier=value"
+
+MPIlist --> Patsient : "Patsient leitud.\nGET /Patient/$id"
+MPIlist --> missingMPI : "Patsient pole leitud või puudub"
+state missingMPI {
+  state "Patsiendid RR-is" as RRlist <<choice>>
+  note left of RRlist: Patsiendid RR-is
+  [*] --> RRlist: "Otsing RR-is.\nGET /Patient/$lookup?identifier=value"
+  RRlist --> Patsient: "Patsient leitud.\nGET /Patient/$id"
+}
+
+state Patsient {
+  Patsient --> Patsient: "Uuenda andmed.\nPUT /Patient/$id"
+  [*] --> RelatedPerson: "Kontaktisikute\nhaldus"
+  [*] --> MPIOperations: "Sotsiaalsed\nnäitajad"
+}
+
+Patsient --> [*] : Valmis
+missingMPI --> [*] : "Puudub MPI-s.\nKatkestame"
+RRlist --> [*]: "Puudub RR-s.\nKatkestame"
+```
