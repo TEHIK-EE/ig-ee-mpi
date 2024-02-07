@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c5d23397-d93e-43f5-81ed-ad3d8b059ade",
+		"_postman_id": "d142247c-7514-4218-b2f7-196275c395e1",
 		"name": "MPI FHIR examples",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5159090"
@@ -10,13 +10,323 @@
 			"name": "1. Patient",
 			"item": [
 				{
+					"name": "1.18 Patient address",
+					"item": [
+						{
+							"name": "1.18.1 Create patient with RR address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Should return single patient record\", () => {",
+											"    const patient = pm.response.json();",
+											"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+											"    pm.environment.set('ADDR_PATIENT_ID', patient.entry[0].resource.id);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has address with extension address-official\", () => {",
+											"    const patient = pm.response.json();",
+											"    const address = patient.entry[0].resource.address[0];",
+											"    pm.expect(address.extension[0].url).to.eql(\"http://hl7.org/fhir/StructureDefinition/address-official\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Remove address from response JSON and store as env variable\", () => {",
+											"    const bundle = pm.response.json();",
+											"    delete bundle.entry[0].resource.address;",
+											"    const jsonString = JSON.stringify(bundle.entry[0].resource);",
+											"    pm.environment.set('ADDR_PATIENT_WITHOUT_ADDRESSES_JSON', jsonString);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"ADDR_PATIENT_PERSONAL_CODE\", \"38912072255\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{ADDR_PATIENT_PERSONAL_CODE}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"$lookup"
+									],
+									"query": [
+										{
+											"key": "source",
+											"value": "https://mpi.tehik.ee",
+											"disabled": true
+										},
+										{
+											"key": "source",
+											"value": "https://rahvastikuregister.ee"
+										},
+										{
+											"key": "identifier.value",
+											"value": "{{ADDR_PATIENT_PERSONAL_CODE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.18.2 Update patient removing all addresses",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response have address with extension address-official\", () => {",
+											"    const patient = pm.response.json();",
+											"    const address = patient.address[0];",
+											"    pm.expect(address.extension[0].url).to.eql(\"http://hl7.org/fhir/StructureDefinition/address-official\");",
+											"    ",
+											"",
+											"    //Remove extension address-official",
+											"    patient.address[0].extension = patient.address[0].extension.filter(ext => ext.url !== \"http://hl7.org/fhir/StructureDefinition/address-official\");",
+											"    pm.environment.set('ADDR_PATIENT_WITH_SAME_RR_ADDRESS_JSON', JSON.stringify(patient));",
+											"",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{{ADDR_PATIENT_WITHOUT_ADDRESSES_JSON}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/Patient/{{ADDR_PATIENT_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"{{ADDR_PATIENT_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.18.3 Update patient saving same address as in RR - FAIL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Error code is MPI-049\", function () {",
+											"    pm.expect(pm.response.json().issue[0].details.coding[0].code).to.equal(\"MPI-049\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{{ADDR_PATIENT_WITH_SAME_RR_ADDRESS_JSON}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/Patient/{{ADDR_PATIENT_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"{{ADDR_PATIENT_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.18.3 Update patient saving address with old adr-id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Patient has 2 addresses\", function () {",
+											"    var addresses = pm.response.json().address;",
+											"    pm.expect(addresses).to.be.an('array').and.to.have.lengthOf(2);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response doesn't contain address with extension url equals to https://fhir.ee/StructureDefinition/ee-ads and valueCoding.code equals to old addr-id\", function () {",
+											"    pm.response.json().address.forEach(function (address) {",
+											"        if (address.extension) {",
+											"            address.extension.forEach(function (ext) {",
+											"                if (ext.url === \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\" && ext.valueCoding.code === pm.environment.get(\"ADDR_PATIENT_WITH_SAME_OLD_ADR_ID\")) {",
+											"                    throw new Error(\"Address with extension url and valueCoding.code found\");",
+											"                }",
+											"            });",
+											"        }",
+											"    });",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var patient = JSON.parse(pm.environment.get(\"ADDR_PATIENT_WITHOUT_ADDRESSES_JSON\"));",
+											"var oldAdrId = \"2865621\";",
+											"var a  = [",
+											"  {",
+											"    \"extension\": [",
+											"      {",
+											"        \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",",
+											"        \"valueCoding\": {",
+											"          \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",",
+											"          \"code\": oldAdrId",
+											"        }",
+											"      }",
+											"    ],",
+											"    \"use\": \"home\",",
+											"    \"type\": \"physical\",",
+											"    \"country\": \"EE\"",
+											"  }",
+											"];",
+											"patient.address = a;",
+											"",
+											"pm.environment.set(\"ADDR_PATIENT_WITH_SAME_OLD_ADR_ADDRESS_JSON\", JSON.stringify(patient));",
+											"pm.environment.set(\"ADDR_PATIENT_WITH_SAME_OLD_ADR_ID\", oldAdrId);",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{{ADDR_PATIENT_WITH_SAME_OLD_ADR_ADDRESS_JSON}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/Patient/{{ADDR_PATIENT_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"{{ADDR_PATIENT_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "1.1 Create patient",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+									"pm.environment.set(\"FAKE_FIN_ID\", '' + _.random(300000000000, 9000000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"fhirPatinetId: \", fhirPatinetId);",
+									"    pm.environment.set('PATIENT_FHIR_ID', fhirPatinetId);",
+									"",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -27,7 +337,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n      \"value\": \"{{FAKE_EST_ID}}\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"country\": \"US\",\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
+							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n      \"value\": \"{{FAKE_FIN_ID}}\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"country\": \"US\",\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -48,17 +358,36 @@
 				},
 				{
 					"name": "1.2 Load Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should have identifier\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.resourceType).eq('Patient');",
+									"    pm.expect(patient.identifier[0].value).eq(pm.environment.get('FAKE_FIN_ID'));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Patient/16",
+							"raw": "{{HOST}}/Patient/{{PATIENT_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Patient",
-								"16"
+								"{{PATIENT_FHIR_ID}}"
 							]
 						}
 					},
@@ -66,11 +395,34 @@
 				},
 				{
 					"name": "1.3 Search Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Should have identifier\", () => {",
+									"    const bundle = pm.response.json();",
+									"    pm.expect(bundle.entry.length).eq(1);",
+									"    const patient = bundle.entry[0].resource;",
+									"",
+									"    pm.expect(patient.resourceType).eq('Patient');",
+									"    pm.expect(patient.identifier[0].value).eq(pm.environment.get('FAKE_FIN_ID'));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C38912072255",
+							"raw": "{{HOST}}/Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Ffin%2Fni%7C{{FAKE_FIN_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -80,7 +432,7 @@
 							"query": [
 								{
 									"key": "identifier",
-									"value": "https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C38912072255"
+									"value": "https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Ffin%2Fni%7C{{FAKE_FIN_ID}}"
 								}
 							]
 						}
@@ -88,13 +440,24 @@
 					"response": []
 				},
 				{
-					"name": "1.4 Update patient",
+					"name": "1.4.1 Update patient - update",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -105,7 +468,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"8\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n      \"value\": \"281969554708\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Tamm\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
+							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"8\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n      \"value\": \"{{FAKE_FIN_ID}}\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"UpdatedFamily\",\n      \"given\": [\n        \"UpdatedName\"\n      ]\n    }\n  ],\n\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,13 +476,51 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/Patient/9615",
+							"raw": "{{HOST}}/Patient/{{PATIENT_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Patient",
-								"9615"
+								"{{PATIENT_FHIR_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.4.2 Update Patient - check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should update name\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.resourceType).eq('Patient');",
+									"    pm.expect(patient.name[0].family).eq('UpdatedFamily');",
+									"    pm.expect(patient.name[0].given[0]).eq('UpdatedName');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/{{PATIENT_FHIR_ID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"{{PATIENT_FHIR_ID}}"
 							]
 						}
 					},
@@ -127,17 +528,35 @@
 				},
 				{
 					"name": "1.5 Patient history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should have history\", () => {",
+									"    const history = pm.response.json();",
+									"    pm.expect(history.entry.length).gte(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Patient/9615/_history",
+							"raw": "{{HOST}}/Patient/{{PATIENT_FHIR_ID}}/_history",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Patient",
-								"9615",
+								"{{PATIENT_FHIR_ID}}",
 								"_history"
 							]
 						}
@@ -146,6 +565,24 @@
 				},
 				{
 					"name": "1.6 All Patient history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should have history\", () => {",
+									"    const history = pm.response.json();",
+									"    pm.expect(history.entry.length).gt(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -173,13 +610,31 @@
 					"response": []
 				},
 				{
-					"name": "1.7 Create patient, existing est-id - FAIL",
+					"name": "1.7 Create patient, existing fin-id - FAIL",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
 									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 400\", () => {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Should throw MPI-010\", () => {",
+									"    const outcome = pm.response.json();",
+									"    const code = outcome.issue[0].details.coding[0].code;",
+									"    console.log(\"Error code: \", code);",
+									"    pm.expect(code).eq('MPI-010');",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -190,7 +645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n      \"value\": \"480131157982\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
+							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n      \"value\": \"{{FAKE_FIN_ID}}\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,7 +671,24 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response body contains the expected error message\", function () {",
+									"    pm.response.json().issue.forEach(function (issue) {",
+									"        pm.expect(issue.details.text).to.equal(\"Profile reference 'https://not-existing.profile/123' has not been checked because it is unknown\");",
+									"    });",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -227,7 +699,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://not-existing.profile/123\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://hl7.ee/NamingSystem/ee-pid-id\",\n      \"value\": \"436349500105\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\",\n        \"Priit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
+							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://not-existing.profile/123\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://hl7.ee/NamingSystem/ee-pid-id\",\n      \"value\": \"436349500105\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\",\n        \"Priit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"country\": \"US\",\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -257,6 +729,34 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"fhirPatinetId: \", fhirPatinetId);",
+									"    pm.environment.set('UNKNOWN_PATIENT_FHIR_ID', fhirPatinetId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -264,7 +764,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-unk\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-unknown\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Malle Maasikas(NICKNAME)</b> male, DoB: 1973-02-10 ( id:\\u00a03456346)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td colspan=\\\"3\\\">false</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Ways to contact the Patient\\\">Contact Detail:</td><td colspan=\\\"3\\\">Valukoja 10, Tallinn(TEMP)</td></tr></table></div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/mr\",\n            \"value\": \"3456346\"\n        }\n    ],\n    \"active\": false,\n    \"name\": [\n        {\n            \"use\": \"nickname\",\n            \"text\": \"Malle Maasikas\"\n        }\n    ],\n    \"gender\": \"male\",\n    \"birthDate\": \"1973-02-10\",\n    \"_birthDate\": {\n        \"extension\": [\n            {\n                \"url\": \"https://fhir.ee/StructureDefinition/ee-date-accuracy-indicator\",\n                \"valueCoding\": {\n                    \"system\": \"https://fhir.ee/CodeSystem/ee-date-accuracy-indicator\",\n                    \"code\": \"AAA\",\n                    \"display\": \"Day, month and year are accurate\"\n                }\n            }\n        ]\n    },\n    \"address\": [\n        {\n            \"extension\": [\n                {\n                    \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n                    \"valueCoding\": {\n                        \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n                        \"code\": \"2280361\"\n                    }\n                }\n            ],\n            \"use\": \"temp\",\n            \"text\": \"Valukoja 10, Tallinn\",\n            \"country\": \"EE\"\n        }\n    ]\n}",
+							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-unk\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-unknown\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Malle Maasikas(NICKNAME)</b> male, DoB: 1973-02-10 ( id:\\u00a03456346)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td colspan=\\\"3\\\">false</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Ways to contact the Patient\\\">Contact Detail:</td><td colspan=\\\"3\\\">Valukoja 10, Tallinn(TEMP)</td></tr></table></div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/mr\",\n            \"value\": \"{{FAKE_ID}}\"\n        }\n    ],\n    \"active\": false,\n    \"name\": [\n        {\n            \"use\": \"nickname\",\n            \"text\": \"Malle Maasikas\"\n        }\n    ],\n    \"gender\": \"male\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -284,13 +784,294 @@
 					"response": []
 				},
 				{
-					"name": "1.10 Link patients",
+					"name": "1.9a Create unknown patient (with temporary MRN)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"FAKE_ID\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"fhirPatinetId: \", fhirPatinetId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Parameters\",\n    \"id\": \"example\",\n    \"parameter\": [\n        {\n            \"name\": \"source-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/9625\"\n            }\n        },\n        {\n            \"name\": \"target-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/9615\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-unk\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-unknown\"\n        ]\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/mrt\",\n            \"value\": \"{{FAKE_ID}}\"\n        }\n    ],\n    \"active\": false,\n    \"name\": [\n        {\n            \"use\": \"nickname\",\n            \"text\": \"Tundmatu mees\"\n        }\n    ],\n    \"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.10.1 Link patient - create A",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"LINK_PATIENT_A\", '' + _.random(300000000000, 9000000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    const sloc = \"https://tis.dev.tehik.ee/mpi/fhir/Patient/930271\";",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"LINK_PATIENT_A_ID: \", fhirPatinetId);",
+									"    pm.environment.set('LINK_PATIENT_A_ID', fhirPatinetId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Patient\",\n  \"meta\": {\n    \"profile\": [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n      \"value\": \"{{LINK_PATIENT_A}}\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Võsaülane\",\n      \"given\": [\n        \"Tiit\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+37253535353\",\n      \"use\": \"work\",\n      \"rank\": 1\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1974-12-25\",\n  \"_birthDate\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n      }\n    ]\n  },\n  \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n  \"address\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n            \"code\": \"111122\"\n          }\n        },\n        {\n          \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n          \"valueCoding\": {\n            \"system\": \"https://fhir.ee/sid/ehak\",\n            \"code\": \"100300\"\n          }\n        }\n      ],\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n      \"line\": [\n        \"534 Erewhon St\"\n      ],\n      \"_line\": [\n        {\n          \"extension\": [\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n              \"valueString\": \"Erewhon St\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n              \"valueString\": \"534\"\n            },\n            {\n              \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n              \"valueString\": \"110\"\n            }\n          ]\n        }\n      ],\n      \"country\": \"US\",\n      \"city\": \"PleasantVille\",\n      \"district\": \"Rainbow\",\n      \"state\": \"Vic\",\n      \"postalCode\": \"3999\",\n      \"period\": {\n        \"start\": \"1974-12-25\"\n      }\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.10.2 Link patient - create B",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"LINK_PATIENT_B_EST_CODE\", '38912072255')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('LINK_PATIENT_B_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{LINK_PATIENT_B_EST_CODE}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$lookup"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{LINK_PATIENT_B_EST_CODE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.10.3 Link patients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should have identifier\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.id).eq(pm.environment.get('LINK_PATIENT_B_ID'));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"Parameters\",\n    \"id\": \"example\",\n    \"parameter\": [\n        {\n            \"name\": \"source-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/{{LINK_PATIENT_A_ID}}\"\n            }\n        },\n        {\n            \"name\": \"target-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/{{LINK_PATIENT_B_ID}}\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient/$link",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$link"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.10.4 Link patients with identifiers - FAIL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response contains an error code\", function () {",
+									"    pm.expect(pm.response.json().issue[0].code).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"Parameters\",\n    \"id\": \"example\",\n    \"parameter\": [\n        {\n            \"name\": \"source-patient-identifier\",\n            \"valueIdentifier\": {\n                \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                \"value\": \"XXXXXXXX_SHOULD_NOT_EXIST\"\n            }\n        },\n        {\n            \"name\": \"target-patient-identifier\",\n            \"valueIdentifier\": {\n                \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                \"value\": \"38912072255\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,12 +1093,25 @@
 				},
 				{
 					"name": "1.11 Unlink patients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Parameters\",\n    \"id\": \"example\",\n    \"parameter\": [\n        {\n            \"name\": \"source-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/9615\"\n            }\n        },\n        {\n            \"name\": \"target-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/9625\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"resourceType\": \"Parameters\",\n    \"id\": \"example\",\n    \"parameter\": [\n        {\n            \"name\": \"source-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/{{LINK_PATIENT_B_ID}}\"\n            }\n        },\n        {\n            \"name\": \"target-patient\",\n            \"valueReference\": {\n                \"reference\": \"Patient/{{LINK_PATIENT_A_ID}}\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,6 +1139,17 @@
 							"script": {
 								"exec": [
 									"pm.environment.set(\"FAKE_ID\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -376,6 +1181,19 @@
 				},
 				{
 					"name": "1.13 Search Foreign Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -417,17 +1235,33 @@
 				},
 				{
 					"name": "1.14 Patient lookup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Patient/$lookup?identifier.value=38701010019&source=https://rahvastikuregister.ee",
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value=38912072255",
 							"host": [
 								"{{HOST}}"
 							],
@@ -437,10 +1271,6 @@
 							],
 							"query": [
 								{
-									"key": "identifier.value",
-									"value": "38701010019"
-								},
-								{
 									"key": "source",
 									"value": "https://mpi.tehik.ee",
 									"disabled": true
@@ -448,6 +1278,10 @@
 								{
 									"key": "source",
 									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "38912072255"
 								}
 							]
 						}
@@ -456,15 +1290,22 @@
 				},
 				{
 					"name": "1.15 Patient generate MRN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{HOST}}/Patient/$mrn",
 							"host": [
@@ -489,6 +1330,35 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"fhirPatinetId: \", fhirPatinetId);",
+									"    pm.environment.set('NEWBORN_ID', fhirPatinetId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -496,7 +1366,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-newborn\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-newborn\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Maasikas (TEMP)</b> male, DoB: 2007-12-12 ( id:\\u00a050712121111)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td>true</td><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known multipleBirth status of Patient\\\">Multiple Birth:</td><td colspan=\\\"3\\\">1</td></tr></table></div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n            \"value\": \"50712121111\"\n        }\n    ],\n    \"active\": true,\n    \"name\": [\n        {\n            \"use\": \"temp\",\n            \"family\": \"Maasikas\"\n        }\n    ],\n    \"gender\": \"male\",\n    \"birthDate\": \"2007-12-12\",\n    \"multipleBirthInteger\": 1\n}",
+							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-newborn\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-newborn\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Maasikas (TEMP)</b> male, DoB: 2007-12-12 ( id:\\u00a050712121111)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td>true</td><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known multipleBirth status of Patient\\\">Multiple Birth:</td><td colspan=\\\"3\\\">1</td></tr></table></div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n            \"value\": \"{{FAKE_ID}}\"\n        }\n    ],\n    \"active\": true,\n    \"name\": [\n        {\n            \"use\": \"temp\",\n            \"family\": \"Maasikas\"\n        }\n    ],\n    \"gender\": \"male\",\n    \"birthDate\": \"2007-12-12\",\n    \"multipleBirthInteger\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -516,6 +1386,54 @@
 					"response": []
 				},
 				{
+					"name": "1.16.1 Create newborn patient - check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response object has an id property\", function () {",
+									"    pm.expect(pm.response.json()).to.have.property('id');",
+									"});",
+									"",
+									"pm.test(\"Response object id is equal to requested id\", function () {",
+									"    pm.expect(pm.response.json().id).to.eql(pm.variables.get(\"NEWBORN_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/{{NEWBORN_ID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"{{NEWBORN_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "1.17 Create stillborn patient",
 					"event": [
 						{
@@ -526,6 +1444,34 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have patient ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirPatinetId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"fhirPatinetId: \", fhirPatinetId);",
+									"    pm.environment.set('STILLBORN_ID', fhirPatinetId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -533,7 +1479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\" : \"Patient\",\n  \"id\" : \"pat-stillborn\",\n  \"meta\" : {\n    \"profile\" : [\n      \"https://fhir.ee/StructureDefinition/ee-mpi-patient-stillborn\"\n    ]\n  },\n  \"text\" : {\n    \"status\" : \"generated\",\n    \"div\" : \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Anonymous Patient</b> female, DoB: 2007-12-12 ( id:\\u00a060712121111)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td>false</td><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known status of Patient\\\">Deceased:</td><td>2007-12-12 16:00:00+0000</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known multipleBirth status of Patient\\\">Multiple Birth:</td><td colspan=\\\"3\\\">1</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Other Ids (see the one above)\\\">Other Id:</td><td colspan=\\\"3\\\">id:\\u00a0123e4567-e89b-12d3-a456-426614174000</td></tr></table></div>\"\n  },\n  \"identifier\" : [\n    {\n      \"system\" : \"https://fhir.ee/sid/pid/est/npi\",\n      \"value\" : \"60712121111\"\n    },\n    {\n      \"system\" : \"https://fhir.ee/sid/pid/est/prn/90006399\",\n      \"value\" : \"123e4567-e89b-12d3-a456-426614174000\"\n    }\n  ],\n  \"active\" : false,\n  \"gender\" : \"female\",\n  \"birthDate\" : \"2007-12-12\",\n  \"_birthDate\" : {\n    \"extension\" : [\n      {\n        \"url\" : \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n        \"valueDateTime\" : \"2007-12-12T16:00:00.000Z\"\n      }\n    ]\n  },\n  \"deceasedDateTime\" : \"2007-12-12T16:00:00.000Z\",\n  \"multipleBirthInteger\" : 1\n}",
+							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"id\": \"pat-stillborn\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-patient-stillborn\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p style=\\\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\\\"><b>Anonymous Patient</b> female, DoB: 2007-12-12 ( id:\\u00a060712121111)</p><hr/><table class=\\\"grid\\\"><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Record is active\\\">Active:</td><td>false</td><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known status of Patient\\\">Deceased:</td><td>2007-12-12 16:00:00+0000</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Known multipleBirth status of Patient\\\">Multiple Birth:</td><td colspan=\\\"3\\\">1</td></tr><tr><td style=\\\"background-color: #f3f5da\\\" title=\\\"Other Ids (see the one above)\\\">Other Id:</td><td colspan=\\\"3\\\">id:\\u00a0123e4567-e89b-12d3-a456-426614174000</td></tr></table></div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/npi\",\n            \"value\": \"{{FAKE_ID}}\"\n        },\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/prn/90006399\",\n            \"value\": \"123e4567-e89b-12d3-a456-{{FAKE_ID}}\"\n        }\n    ],\n    \"active\": false,\n    \"gender\": \"female\",\n    \"birthDate\": \"2007-12-12\",\n    \"_birthDate\": {\n        \"extension\": [\n            {\n                \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                \"valueDateTime\": \"2007-12-12T16:00:00.000Z\"\n            }\n        ]\n    },\n    \"deceasedDateTime\": \"2007-12-12T16:00:00.000Z\",\n    \"multipleBirthInteger\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,6 +1493,54 @@
 							],
 							"path": [
 								"Patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.17.1 Create stillborn patient - check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response object has an id property\", function () {",
+									"    pm.expect(pm.response.json()).to.have.property('id');",
+									"});",
+									"",
+									"pm.test(\"Response object id is equal to requested id\", function () {",
+									"    pm.expect(pm.response.json().id).to.eql(pm.variables.get(\"STILLBORN_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/{{STILLBORN_ID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"{{STILLBORN_ID}}"
 							]
 						}
 					},
@@ -568,6 +1562,34 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/RelatedPerson\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have related person ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirRpId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"RP_FHIR_ID: \", fhirRpId);",
+									"    pm.environment.set('RP_FHIR_ID', fhirRpId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -575,7 +1597,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"RelatedPerson\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n            \"value\": \"{{FAKE_EST_ID}}\"\n        }\n    ],\n    \"active\": true,\n    \"patient\": {\n        \"reference\": \"Patient/1\"\n    },\n    \"relationship\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                    \"code\": \"NOK\"\n                }\n            ]\n        },\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"72705000\",\n                    \"display\": \"Mother (person)\"\n                }\n            ]\n        }\n    ],\n    \"name\": [\n        {\n            \"family\": \"du Marché\",\n            \"given\": [\n                \"Bénédicte\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"+37256218121\"\n        }\n    ],\n    \"period\": {\n        \"start\": \"2012\"\n    }\n}",
+							"raw": "{\n    \"resourceType\": \"RelatedPerson\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n            \"value\": \"{{FAKE_EST_ID}}\"\n        }\n    ],\n    \"active\": true,\n    \"patient\": {\n        \"reference\": \"Patient/{{PATIENT_FHIR_ID}}\"\n    },\n    \"relationship\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                    \"code\": \"CON\"\n                }\n            ]\n        },\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"72705000\",\n                    \"display\": \"Mother (person)\"\n                }\n            ]\n        }\n    ],\n    \"name\": [\n        {\n            \"family\": \"du Marché\",\n            \"given\": [\n                \"Bénédicte\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"+37256218121\"\n        }\n    ],\n    \"period\": {\n        \"start\": \"2012\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -596,17 +1618,30 @@
 				},
 				{
 					"name": "2.2 Load RelatedPerson",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/RelatedPerson/5",
+							"raw": "{{HOST}}/RelatedPerson/{{RP_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"RelatedPerson",
-								"5"
+								"{{RP_FHIR_ID}}"
 							]
 						}
 					},
@@ -623,6 +1658,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -630,7 +1676,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"RelatedPerson\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n            \"value\": \"270468793787\"\n        }\n    ],\n    \"active\": true,\n    \"patient\": {\n        \"reference\": \"Patient/1\"\n    },\n    \"relationship\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                    \"code\": \"CON\"\n                }\n            ]\n        },\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                    \"code\": \"NOK\"\n                }\n            ]\n        },\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"72705000\",\n                    \"display\": \"Mother (person)\"\n                }\n            ]\n        }\n    ],\n    \"name\": [\n        {\n            \"family\": \"du Marché\",\n            \"_family\": {\n                \"extension\": [\n                    {\n                        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                        \"valueString\": \"VV\"\n                    }\n                ]\n            },\n            \"given\": [\n                \"Bénédicte\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"+37256218121\"\n        }\n    ],\n    \"period\": {\n        \"start\": \"2012\"\n    }\n}",
+							"raw": "{\n    \"resourceType\": \"RelatedPerson\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n            \"value\": \"270468793787\"\n        }\n    ],\n    \"active\": true,\n    \"patient\": {\n        \"reference\": \"Patient/{{PATIENT_FHIR_ID}}\"\n    },\n    \"relationship\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://snomed.info/sct\",\n                    \"code\": \"72705000\",\n                    \"display\": \"Mother (person)\"\n                }\n            ]\n        }\n    ],\n    \"name\": [\n        {\n            \"family\": \"du Marché\",\n            \"_family\": {\n                \"extension\": [\n                    {\n                        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                        \"valueString\": \"VV\"\n                    }\n                ]\n            },\n            \"given\": [\n                \"Bénédicte\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"+37256218222\"\n        }\n    ],\n    \"period\": {\n        \"start\": \"2012\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -638,13 +1684,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/RelatedPerson/3",
+							"raw": "{{HOST}}/RelatedPerson/{{RP_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"RelatedPerson",
-								"3"
+								"{{RP_FHIR_ID}}"
 							]
 						}
 					},
@@ -652,11 +1698,24 @@
 				},
 				{
 					"name": "2.4 Search RelatePerson",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/RelatedPerson?patient=Patient/1",
+							"raw": "{{HOST}}/RelatedPerson?patient=Patient/{{PATIENT_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -666,7 +1725,7 @@
 							"query": [
 								{
 									"key": "patient",
-									"value": "Patient/1"
+									"value": "Patient/{{PATIENT_FHIR_ID}}"
 								}
 							]
 						}
@@ -675,17 +1734,30 @@
 				},
 				{
 					"name": "2.5 RelatedPerson history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/RelatedPerson/3/_history",
+							"raw": "{{HOST}}/RelatedPerson/{{RP_FHIR_ID}}/_history",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"RelatedPerson",
-								"3",
+								"{{RP_FHIR_ID}}",
 								"_history"
 							]
 						}
@@ -700,6 +1772,17 @@
 							"script": {
 								"exec": [
 									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 204\", () => {",
+									"    pm.response.to.have.status(204);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -718,13 +1801,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/RelatedPerson/3",
+							"raw": "{{HOST}}/RelatedPerson/{{RP_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"RelatedPerson",
-								"3"
+								"{{RP_FHIR_ID}}"
 							]
 						}
 					},
@@ -742,6 +1825,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -749,7 +1843,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"44609166050\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"Patient\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"34012184271\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"NOK\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"RelatedPerson\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n                        \"value\": \"{{FAKE_EST_ID}}\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"Patient\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"{{FAKE_EST_ID_2}}\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"CON\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"RelatedPerson\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -780,6 +1874,15 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -787,7 +1890,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"44609166050\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ee-ads\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"PUT\",\n                \"url\": \"Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C44609166050\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"34012184271\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"NOK\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"PUT\",\n                \"url\": \"RelatedPerson?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C34012184271\"\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n                        \"value\": \"44609166050\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"PUT\",\n                \"url\": \"Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Ffin%2Fni%7C44609166050\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"34012184271\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"CON\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"PUT\",\n                \"url\": \"RelatedPerson?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C34012184271\"\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -801,13 +1904,6 @@
 							],
 							"path": [
 								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -819,13 +1915,295 @@
 			"name": "3. Observation",
 			"item": [
 				{
-					"name": "3.1 Create Observation",
+					"name": "3.5 Legal guardian operation",
+					"item": [
+						{
+							"name": "3.5.1 Load patient for finding of ward",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"PAT_FIND_OF_WARD_EST_CODE\", '36502280009')"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Should return single patient record\", () => {",
+											"    const patient = pm.response.json();",
+											"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+											"    pm.environment.set('PAT_FIND_OF_WARD_ID', patient.entry[0].resource.id);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{PAT_FIND_OF_WARD_EST_CODE}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"$lookup"
+									],
+									"query": [
+										{
+											"key": "source",
+											"value": "https://rahvastikuregister.ee"
+										},
+										{
+											"key": "identifier.value",
+											"value": "{{PAT_FIND_OF_WARD_EST_CODE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3.5.2 Legal guardian operation - finding of wardship",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response contains a resource inside Bundle\", () => {",
+											"    pm.expect(pm.response.json().entry[0].resource).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/Patient/$legal-guardian?patient=Patient/{{PAT_FIND_OF_WARD_ID}}&legal-status=365569001",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"$legal-guardian"
+									],
+									"query": [
+										{
+											"key": "patient",
+											"value": "Patient/{{PAT_FIND_OF_WARD_ID}}"
+										},
+										{
+											"key": "legal-status",
+											"value": "365569001",
+											"description": "finding of wardship"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3.5.3 Load patient for legal guardian",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"PAT_LEGAL_GUARD_EST_CODE\", '52009010061')"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Should return single patient record\", () => {",
+											"    const patient = pm.response.json();",
+											"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+											"    pm.environment.set('PAT_LEGAL_GUARD_ID', patient.entry[0].resource.id);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{PAT_LEGAL_GUARD_EST_CODE}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"$lookup"
+									],
+									"query": [
+										{
+											"key": "source",
+											"value": "https://rahvastikuregister.ee"
+										},
+										{
+											"key": "identifier.value",
+											"value": "{{PAT_LEGAL_GUARD_EST_CODE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3.5.4 Legal guardian operation - legal guardian",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return 200\", () => {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response contains a resource inside Bundle\", () => {",
+											"    pm.expect(pm.response.json().entry[0].resource).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/Patient/$legal-guardian?patient=Patient/{{PAT_LEGAL_GUARD_ID}}&legal-status=58626002",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"Patient",
+										"$legal-guardian"
+									],
+									"query": [
+										{
+											"key": "patient",
+											"value": "Patient/{{PAT_LEGAL_GUARD_ID}}"
+										},
+										{
+											"key": "legal-status",
+											"value": "58626002",
+											"description": "legal guardian"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3.0 Create Observation Bundle Patient + RelatedPerson",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+									"pm.environment.set(\"FAKE_ID\", _.random(30000000000, 600000000000))",
+									"pm.environment.set(\"FAKE_EST_ID_2\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const relatedPersonRegex = () => /.*\\/RelatedPerson\\/([0-9]+)/g;",
+									"const patientRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+									"",
+									"const responseJson = pm.response.json();",
+									"if(responseJson.entry){",
+									"    responseJson.entry.forEach(entry => {",
+									"        const rp = relatedPersonRegex().exec(entry.response.location);",
+									"        const p = patientRegex().exec(entry.response.location);",
+									"        if(p){",
+									"            pm.environment.set(\"OBS_PAT_ID\", p[1])",
+									"            console.log(p[1]);",
+									"        }",
+									"        if(rp){",
+									"            pm.environment.set(\"OBS_RP_ID\", rp[1])",
+									"            console.log(rp[1]);",
+									"        } ",
+									"    });",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -836,7 +2214,72 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Observation\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/1\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/5\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"M\",\n                \"display\": \"Married\"\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n                        \"value\": \"{{FAKE_ID}}\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"Patient\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"{{FAKE_EST_ID_2}}\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"CON\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"RelatedPerson\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1 Create Observation",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"FAKE_EST_ID\", _.random(30000000000, 600000000000))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getLocationRegex = () => /.*\\/Observation\\/([0-9]+)/g;",
+									"",
+									"pm.test(\"Should return 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", () => {",
+									"  pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"Location have related person ID\", () => {",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    pm.expect(location).to.matches(getLocationRegex());",
+									"",
+									"    ",
+									"    const fhirRpId = getLocationRegex().exec(location)[1];",
+									"    console.log(\"OBS_FHIR_ID: \", fhirRpId);",
+									"    pm.environment.set('OBS_FHIR_ID', fhirRpId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"Observation\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/{{OBS_RP_ID}}\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"M\",\n                \"display\": \"Married\"\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -857,23 +2300,34 @@
 				},
 				{
 					"name": "3.2 Load Observation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains a resource with type 'Observation'\", function () {",
+									"    pm.expect(pm.response.json().resourceType).to.equal('Observation');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Observation/13",
+							"raw": "{{HOST}}/Observation/{{OBS_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Observation",
-								"13"
+								"{{OBS_FHIR_ID}}"
 							]
 						}
 					},
@@ -890,6 +2344,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -897,7 +2362,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resourceType\": \"Observation\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/1\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/5\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"D\",\n                \"display\": \"Divorced\"\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"resourceType\": \"Observation\",\n    \"id\": \"{{OBS_FHIR_ID}}\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/{{OBS_RP_ID}}\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"D\",\n                \"display\": \"Divorced\"\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -905,13 +2370,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/Observation/13",
+							"raw": "{{HOST}}/Observation/{{OBS_FHIR_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Observation",
-								"13"
+								"{{OBS_FHIR_ID}}"
 							]
 						}
 					},
@@ -919,17 +2384,34 @@
 				},
 				{
 					"name": "3.4 Search Observations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains entry with valueCodeableConcept coding code D\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var entry = jsonData.entry.find(function (item) {",
+									"        return item.resource.valueCodeableConcept.coding.some(function (coding) {",
+									"            return coding.code === \"D\";",
+									"        });",
+									"    });",
+									"    pm.expect(entry).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Observation?patient=Patient/1",
+							"raw": "{{HOST}}/Observation?patient=Patient/{{OBS_PAT_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -939,7 +2421,7 @@
 							"query": [
 								{
 									"key": "patient",
-									"value": "Patient/1"
+									"value": "Patient/{{OBS_PAT_ID}}"
 								}
 							]
 						}
@@ -947,29 +2429,67 @@
 					"response": []
 				},
 				{
-					"name": "3.5 Legal guardian operation",
+					"name": "3.6.1 Load patient for Power of attorney",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"POW_OF_ATT_EST_CODE\", '36502280009')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('POW_OF_ATT_PAT_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
-						],
+						},
 						"url": {
-							"raw": "{{HOST}}/Patient/$legal-guardian?patient=Patient/1",
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{POW_OF_ATT_EST_CODE}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"Patient",
-								"$legal-guardian"
+								"$lookup"
 							],
 							"query": [
 								{
-									"key": "patient",
-									"value": "Patient/1"
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{POW_OF_ATT_EST_CODE}}"
 								}
 							]
 						}
@@ -977,18 +2497,39 @@
 					"response": []
 				},
 				{
-					"name": "3.6 Power of attorney operation",
+					"name": "3.6.2 Power of attorney operation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response contains entry\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property(\"entry\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{HOST}}/Patient/$power-of-attorney?patient=Patient/840",
+							"raw": "{{HOST}}/Patient/$power-of-attorney?patient=Patient/{{POW_OF_ATT_PAT_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -999,7 +2540,7 @@
 							"query": [
 								{
 									"key": "patient",
-									"value": "Patient/840"
+									"value": "Patient/{{POW_OF_ATT_PAT_ID}}"
 								}
 							]
 						}
@@ -1007,18 +2548,97 @@
 					"response": []
 				},
 				{
-					"name": "3.7 Education operation",
+					"name": "3.7.1 Load patient for Education",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"EDU_EST_CODE\", '49303080864')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('EDU_PAT_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
-						],
+						},
 						"url": {
-							"raw": "{{HOST}}/Patient/$education?patient=Patient/20",
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{EDU_EST_CODE}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$lookup"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{EDU_EST_CODE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.7.2 Education operation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains entry\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property(\"entry\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/$education?patient=Patient/{{EDU_PAT_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -1029,7 +2649,7 @@
 							"query": [
 								{
 									"key": "patient",
-									"value": "Patient/20"
+									"value": "Patient/{{EDU_PAT_ID}}"
 								}
 							]
 						}
@@ -1037,18 +2657,97 @@
 					"response": []
 				},
 				{
-					"name": "3.8 Disability level operation",
+					"name": "3.8.1 Load patient for Disability",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"DIS_EST_CODE\", '38307210278')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('DIS_PAT_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-road-userid",
-								"value": "EE38912072255",
-								"type": "text"
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
-						],
+						},
 						"url": {
-							"raw": "{{HOST}}/Patient/$disability?patient=Patient/1",
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{DIS_EST_CODE}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$lookup"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{DIS_EST_CODE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.8.2 Disability level operation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains entry\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property(\"entry\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/$disability?patient=Patient/{{DIS_PAT_ID}}",
 							"host": [
 								"{{HOST}}"
 							],
@@ -1059,7 +2758,245 @@
 							"query": [
 								{
 									"key": "patient",
-									"value": "Patient/1"
+									"value": "Patient/{{DIS_PAT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.9.1 Load patient for Incapacity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"INC_EST_CODE\", '37311284711')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('INC_PAT_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{INC_EST_CODE}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$lookup"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{INC_EST_CODE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.9.2 Incapacity for work operation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains entry\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property(\"entry\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/$incapacity-for-work?patient=Patient/{{INC_PAT_ID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$incapacity-for-work"
+							],
+							"query": [
+								{
+									"key": "patient",
+									"value": "Patient/{{INC_PAT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.10.1 Load patient for Occupation",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"OCCU_EST_CODE\", '38005280013')"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Should return single patient record\", () => {",
+									"    const patient = pm.response.json();",
+									"    pm.expect(patient.entry[0].resource.id).to.not.be.empty;",
+									"    pm.environment.set('OCCU_PAT_ID', patient.entry[0].resource.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/Patient/$lookup?source=https://rahvastikuregister.ee&identifier.value={{OCCU_EST_CODE}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$lookup"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "https://rahvastikuregister.ee"
+								},
+								{
+									"key": "identifier.value",
+									"value": "{{OCCU_EST_CODE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.10.2 Occupation operation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Should return 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response contains entry\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property(\"entry\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/Patient/$occupation?patient=Patient/{{OCCU_PAT_ID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Patient",
+								"$occupation"
+							],
+							"query": [
+								{
+									"key": "nocache",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "patient",
+									"value": "Patient/{{OCCU_PAT_ID}}"
 								}
 							]
 						}
@@ -1075,17 +3012,56 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"pm.request.headers.add({key: \"X-Author-Org-Id-Oid\", value: pm.variables.get(\"AUTHOR_ORG_OID\")});",
-					"pm.request.headers.add({key: \"X-Author-Org-Id\", value: pm.variables.get(\"AUTHOR_ORG_ID\")});",
-					"pm.request.headers.add({key: \"X-Author-Id\", value: pm.variables.get(\"AUTHOR_ID\")});",
-					"pm.request.headers.add({key: \"X-Author-Id-Oid\", value: pm.variables.get(\"AUTHOR_OID\")});",
-					"pm.request.headers.add({key: \"X-Author-Role\", value: pm.variables.get(\"AUTHOR_ROLE\")});",
-					"if(pm.variables.has(\"X_ROAD_ISSUE\") && pm.variables.get(\"X_ROAD_ISSUE\") !== ''){",
-					"    pm.request.headers.add({key: \"X-Road-Issue\", value: pm.variables.get(\"X_ROAD_ISSUE\")});",
+					"// pm.request.headers.add({key: \"X-Author-Org-Id-Oid\", value: pm.variables.get(\"AUTHOR_ORG_OID\")});",
+					"// pm.request.headers.add({key: \"X-Author-Org-Id\", value: pm.variables.get(\"AUTHOR_ORG_ID\")});",
+					"// pm.request.headers.add({key: \"X-Author-Id\", value: pm.variables.get(\"AUTHOR_ID\")});",
+					"// pm.request.headers.add({key: \"X-Author-Id-Oid\", value: pm.variables.get(\"AUTHOR_OID\")});",
+					"// pm.request.headers.add({key: \"X-Author-Role\", value: pm.variables.get(\"AUTHOR_ROLE\")});",
+					"if (pm.variables.has(\"X_ROAD_ISSUE\") && pm.variables.get(\"X_ROAD_ISSUE\") !== '') {",
+					"  pm.request.headers.add({key: \"X-Road-Issue\", value: pm.variables.get(\"X_ROAD_ISSUE\")});",
 					"}",
-					"if(pm.variables.has(\"X_ROAD_CLIENT\") && pm.variables.get(\"X_ROAD_CLIENT\") !== ''){",
-					"    pm.request.headers.add({key: \"X-road-client\", value: pm.variables.get(\"X_ROAD_CLIENT\")});",
-					"}"
+					"if (pm.variables.has(\"X_ROAD_CLIENT\") && pm.variables.get(\"X_ROAD_CLIENT\") !== '') {",
+					"  pm.request.headers.add({key: \"X-road-client\", value: pm.variables.get(\"X_ROAD_CLIENT\")});",
+					"}",
+					"",
+					"const doctor = {",
+					"  \"user\": {",
+					"    \"personalCode\": \"49311056013\"",
+					"  },",
+					"  \"organization\": \"90001478\",",
+					"  \"role\": \"doctor\",",
+					"  \"application\": \"test-app\"",
+					"};",
+					"",
+					"const patient = {",
+					"      \"user\": {",
+					"        \"personalCode\": \"38301105216\"",
+					"      },",
+					"      \"organization\": \"90004527\",",
+					"      \"role\": \"patient\",",
+					"      \"application\": \"my-app\",",
+					"      \"patient\": {",
+					"        \"personalCode\": \"38301105216\"",
+					"      }",
+					"    };",
+					"",
+					"",
+					"const postRequest = {",
+					"  url: 'https://tis.dev.tehik.ee/charon/v2/token',",
+					"  method: 'POST',",
+					"  header: {",
+					"    'Content-Type': 'application/json',",
+					"  },",
+					"  body: {",
+					"    mode: 'raw',",
+					"    raw: JSON.stringify(doctor)",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(postRequest, (error, response) => {",
+					"  var token = response.json().accessToken;",
+					"  pm.request.headers.add({key: \"Authorization\", value: \"Bearer \" + token});",
+					"});"
 				]
 			}
 		},
