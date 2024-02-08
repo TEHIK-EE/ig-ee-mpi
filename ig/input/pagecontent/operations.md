@@ -9,7 +9,7 @@ Välised allikad, kust MPI andmeid pärib, ei toeta tavaliselt lehekülgede nume
 Patsientide sidumise ja lahti sidumise loogika ja operatsioonid on seletatud [leheküljel](link.html).
 
 ### Välismaalaste otsing
-Välismaalaste otsimiseks või patsientide otsimiseks ilma identifikaatorita tuleb kasutada operatsiooni [Patient/$foreigner](OperationDefinition-Patient-foreigner.html). Toetavate parameetrite hulka kuuluvad: identifikaatori väljastanud riik, eesnimi, perekonnanimi, sünnikuupäev, sugu ja kontaktandmed.
+Välismaalaste otsimiseks või patsientide otsimiseks ilma identifikaatorita tuleb kasutada operatsiooni [Patient/$foreigner](OperationDefinition-patient-foreigner.html). Toetavate parameetrite hulka kuuluvad: identifikaatori väljastanud riik, eesnimi, perekonnanimi, sünnikuupäev, sugu ja kontaktandmed.
 ```
 GET {MPI}/Patient/$foreign?family=smith&gender=male
 ```
@@ -55,7 +55,7 @@ Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssid
 
 
 ### Eesti isikukoodiga patsiendi otsing
-Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-Patient-lookup.html) operatsiooniga. 
+Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-patient-lookup.html) operatsiooniga. 
 Toetavate parameetrite hulka kuuluvad: identifikaator ja allikas, kust andmeid päritakse. 
 Hetkel toetatakse päringuna:
 - Rahvastikuregistrist (source=https://rahvastikuregister.ee)
@@ -112,7 +112,7 @@ Tüüpiliselt tagastatav Observation ressurss ei sisalda **"id"** väärtust ja 
 Sotsiaalsete tunnuste operatsioonid pärivad alati andmed allikregistritest (sõltumatu andmete olemasolust vahemälus).
 
 ### Seadusliku eeskostja staatus
-Andmed päritakse [$legal-guardian](OperationDefinition-Patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja eestkoste liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
+Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja eestkoste liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
 
 Näiteks eestkostetavate leidmine:
 ```
@@ -201,7 +201,7 @@ ning saab vastuseks Observationi:
 ```
 
 #### Power of attorney
-Andmed päritakse [$power-of-attorney](OperationDefinition-Patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
+Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
 ```
 GET {MPI}/Patient/$power-of-attorney?patient=Patient/3744
 ```
@@ -360,7 +360,7 @@ ning saab vastuseks Observationi:
 ```
 
 ### Haridus
-Andmed päritakse [$education](OperationDefinition-Patient-education.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+Andmed päritakse [$education](OperationDefinition-patient-education.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
 ```
 GET {MPI}/Patient/$education?patient=Patient/3744
 ```
