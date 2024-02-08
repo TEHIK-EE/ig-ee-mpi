@@ -55,23 +55,21 @@ flowchart TD
     D --> |Lisa uus patsient| NewPatient(Välismaalase lisamine\n<a href='uc.html#uc-02-patsient-teiese-riigi-dokumendiga'>POST /Patient</a>)
 ```
 
-Eesimaalase otsing:
+#### Eesimaalase otsing:
 
 ```plantuml
-scale 800 width
-
 state "Patsientide nimekiri PÜTis" as MPIlist <<choice>>
 note left of MPIlist: Patsientide nimekiri PÜTis
 state "Puudub PÜT-is" as missingMPI
-[*] -down-> MPIlist: "[[http://plantuml.com Eestimaalase otsing]].\nGET /Patient?identifier=value"
+[*] -down-> MPIlist: "Eestimaalase otsing.\n[[dev.html#andmete-pärimine GET /Patient?identifier=value]]"
 
-MPIlist --> Patsient : "Patsient leitud.\nGET /Patient/$id"
+MPIlist --> Patsient : "Patsient leitud.\n[[dev.html#ressurss GET /Patient/$id]]"
 MPIlist --> missingMPI : "Patsient pole leitud või puudub"
 state missingMPI {
   state "Patsiendid RR-is" as RRlist <<choice>>
   note left of RRlist: Patsiendid RR-is
-  [*] --> RRlist: "Otsing RR-is.\nGET /Patient/$lookup?identifier=value"
-  RRlist --> Patsient: "Patsient leitud.\nGET /Patient/$id"
+  [*] --> RRlist: "Otsing RR-is.\n[[operations.html#eesti-isikukoodiga-patsiendi-otsing GET /Patient/$lookup?identifier=value]]"
+  RRlist --> Patsient: "Patsient leitud.\n[[dev.html#ressurss GET /Patient/$id]]"
 }
 
 state Patsient {
@@ -83,4 +81,31 @@ state Patsient {
 Patsient --> [*] : Valmis
 missingMPI --> [*] : "Puudub MPI-s.\nKatkestame"
 RRlist --> [*]: "Puudub RR-s.\nKatkestame"
+```
+
+### Välismaalase otsing
+
+```plantuml
+state "Patsientide nimekiri PÜTis" as MPIlist <<choice>>
+state "Otsus mida teha" as MPIchoice <<choice>>
+
+MPIlist: Bundle of patients
+note left of MPIlist: Patsientide nimekiri PÜTis
+
+note right of MPIchoice: Otsustame mida teha edasi
+
+[*] -down-> MPIlist: "Välismaalase otsing.\n[[operations.html#välismaalaste-otsing GET /Patient/$foreign?params]]"
+
+MPIlist --> Patsient : "Patsient leitud.\nGET /Patient/${id}"
+MPIlist --> MPIchoice : "Patsient pole leitud või puudub"
+MPIchoice --> Patsient : "Lisa uus.\nPOST /Patient"
+
+
+state Patsient {
+  Patsient --> Patsient: "Uuenda andmed.\nPUT /Patient/${id}"
+}
+
+
+Patsient --> [*] : Valmis
+MPIchoice --> [*] : "Puudub MPI-s.\nKatkestame"
 ```
