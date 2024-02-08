@@ -33,7 +33,30 @@ Kasutusjuhu põhised patsiendi profiilid on
 | [EEMPIPatientNewborn](StructureDefinition-ee-mpi-patient-newborn.html) | Vastsündinu patsiendi registreerimine (antud profiil realiseeritakse tulevikus) |
 | [EEMPIPatientStillborn](StructureDefinition-ee-mpi-patient-stillborn.html) | Surnultsündinu patsiendi registreerimine (antud profiil realiseeritakse tulevikus) |
 
-## Patsiendiga seotud töövood
+## Patsiendi otsing
+
+Järgmine diagramm annab ülevaate vajalikest sammudest patsiendi otsinguks:
+
+```mermaid
+flowchart TD
+    A{Patsiendi\notsing} -->|Eestimaalase otsing\ntäpse isikukoodi järgi| B(GET /Patient?identifier=XXX)
+    B --> MPIList1{Nimekiri\npatsientidest}
+    MPIList1 --> |Ei ole leitud\nUus otsing| B
+    MPIList1 --> |Patsiendi otsing RR-is| RR(Otsing operatsiooni abil\nGET /Patient/$lookup?identifier=XXX)
+    RR --> RRlist{Nimekiri\npatsientidest}
+    RRlist --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
+    RRlist --> |Ei ole leitud\nUus otsing| RR
+    RRlist --> |Ei ole leitud\nUus otsing| B
+    MPIList1 --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
+
+    A --> |Välismaalase otsing\nparameetrite järgi| C(Otsing operatsiooni abil\nGET /Patient/$foreign?name=XXX)
+    C --> D{Nimekiri\npatsientidest}
+    D --> |Ei ole leitud\nUus otsing| C
+    D --> |Patsient leitud| Patient
+    D --> |Lisa uus patsient| NewPatient(Patsiendi lisamine\nPOST /Patient)
+```
+
+Eesimaalase otsing:
 
 ```plantuml
 scale 800 width
