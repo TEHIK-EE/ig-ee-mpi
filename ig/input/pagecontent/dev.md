@@ -182,14 +182,13 @@ Iga patsiendi lisamisel või muutmisel tuleb määrata vastav profiil.
 Patsiendi loomisel/muutmisel tuleb saata päring FHIR-i endpointile, näiteks arenduskeskkonnas aadressile: https://tis.dev.tehik.ee/mpi/fhir/Patient.
 Päringus tuleb määrata REST päringu päises (Header-is) mitmed tunnused:
 
-- päringu keha vormingu määramiseks (päis "Accept" väärtustega "application/json" või application/xml või "application/fhir+json" või application/fhir+xml)
-- vastuse keha vormingu määramiseks (päis "Content-Type" väärtustega "application/json" või application/xml või "application/fhir+json" või
-  application/fhir+xml)
-- autentimine (päis "Authorization" mille sisu kirjeldatud lehel [Autentimine](auth.html))
-- unikaalne päringu id (päis "x-road-id").
-- selgitada miks antud päring on tehtud (päis "x-road-issue"), teatud päringutel on kohustuslik. Tunnust kasutatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse.
-  **NB!** Väärtuses ei tohi kasutada erisümboleid `"'&`.
-- loogilise transaktsiooni tunnus (päis "x-transaction-id" FIXME). Päis edastatakse alampäringute puhul teistesse süsteemidesse.
+| Päise nimi    | Võimalikud väärtused                                                                    | Kommentaar                                                                                                                                                                      |   
+|---------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Accept        | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
+| Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
+| Authorization | Bearer <token>                                                                          | <token> saamine on kirjeldatud lehel [Autentimine](auth.html)                                                                                                                   |   
+| x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                            |    
+| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. | 
 
 Valiidne sõnum tuleb edastada päringu kehas. Andmekoosseis on kirjeldatud lehel [Patsiendid](patient.html)
 
@@ -213,6 +212,5 @@ Ressurside vastuvõtmisel MPI FHIR liides toetab ajad erinevates ajatsoonides, n
 Vaata formaati [spetsifikatsioonist](http://hl7.org/fhir/datatypes.html#dateTime).
 Kui ajatsooni offset pole määratud, näiteks _date_ tüüpi puhul, siis arvestatakse et aeg on Eesti ajatsoonis ehk `Europe/Tallinn`. FHIR vastuses olevad ajad on
 alati toodud Eesti ajatsoonis.
-
 
 ### Andmete pärimine
