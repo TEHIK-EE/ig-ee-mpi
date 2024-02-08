@@ -39,20 +39,20 @@ Järgmine diagramm annab ülevaate vajalikest sammudest patsiendi otsinguks:
 
 ```mermaid
 flowchart TD
-    A{Patsiendi\notsing} -->|Eestimaalase otsing\ntäpse isikukoodi järgi| B(GET /Patient?identifier=XXX)
+    A{Patsiendi\notsing} -->|Eestimaalase otsing\ntäpse isikukoodi järgi PÜT-is| B(<a href='dev.html#andmete-pärimine'>GET /Patient?identifier=XXX</a>)
     B --> MPIList1{Nimekiri\npatsientidest}
     MPIList1 --> |Ei ole leitud\nUus otsing| B
-    MPIList1 --> |Patsiendi otsing RR-is| RR(Otsing operatsiooni abil\nGET /Patient/$lookup?identifier=XXX)
+    MPIList1 --> |Patsiendi otsing RR-is| RR(Otsing operatsiooni abil\n<a href='operations.html#eesti-isikukoodiga-patsiendi-otsing'>GET /Patient/$lookup?identifier=XXX</a>)
     RR --> RRlist{Nimekiri\npatsientidest}
-    RRlist --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
+    RRlist --> |Patsient leitud RR-is| Patient(Patsiendi päring\n<a href='dev.html#ressurss'>GET /Patient/XXX</a>)
     RRlist --> |Ei ole leitud\nUus otsing| B
-    MPIList1 --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
+    MPIList1 --> |Patsient leitud PÜT-is| Patient
 
-    A --> |Välismaalase otsing\nparameetrite järgi| C(Otsing operatsiooni abil\nGET /Patient/$foreign?name=XXX)
+    A --> |Välismaalase otsing PÜT-is\nparameetrite järgi| C(Otsing operatsiooni abil\n<a href='operations.html#välismaalaste-otsing'>GET /Patient/$foreign?name=XXX</a>)
     C --> D{Nimekiri\npatsientidest}
     D --> |Ei ole leitud\nUus otsing| C
-    D --> |Patsient leitud| Patient
-    D --> |Lisa uus patsient| NewPatient(Patsiendi lisamine\nPOST /Patient)
+    D --> |Patsient leitud PÜT-is| Patient
+    D --> |Lisa uus patsient| NewPatient(Välismaalase lisamine\n<a href='uc.html#uc-02-patsient-teiese-riigi-dokumendiga'>POST /Patient</a>)
 ```
 
 Eesimaalase otsing:
