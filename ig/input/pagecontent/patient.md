@@ -55,7 +55,7 @@ flowchart TD
     D --> |Lisa uus patsient| NewPatient(Välismaalase lisamine\n<a href='uc.html#uc-02-patsient-teiese-riigi-dokumendiga'>POST /Patient</a>)
 ```
 
-#### Eesimaalase otsing:
+#### Eestimaalase otsing:
 
 ```plantuml
 state "Patsientide nimekiri PÜTis" as MPIlist <<choice>>
