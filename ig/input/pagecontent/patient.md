@@ -45,7 +45,6 @@ flowchart TD
     MPIList1 --> |Patsiendi otsing RR-is| RR(Otsing operatsiooni abil\nGET /Patient/$lookup?identifier=XXX)
     RR --> RRlist{Nimekiri\npatsientidest}
     RRlist --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
-    RRlist --> |Ei ole leitud\nUus otsing| RR
     RRlist --> |Ei ole leitud\nUus otsing| B
     MPIList1 --> |Patsient leitud| Patient(Patsiendi päring\nGET /Patient/XXX)
 
