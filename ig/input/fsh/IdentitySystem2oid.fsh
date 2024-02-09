@@ -2018,6 +2018,18 @@ Usage: #definition
 * group.element[=].display = "Passport number of Slovakia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.1
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/svk/ni
+* group.element[=].display = "National identifier of Slovakia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.2
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/svk/cz
+* group.element[=].display = "ID Card number of Slovakia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.3
+* group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/svk/dl
+* group.element[=].display = "Driver's license number of Slovakia"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.703.4
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/svn
 * group.element[=].display = "Unspecified person identifier of Slovenia"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.16.705
