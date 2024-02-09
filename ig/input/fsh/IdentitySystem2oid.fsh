@@ -34,6 +34,10 @@ Usage: #definition
 * group.element[=].display = "MPI issued medical record number"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.4
 * group.element[=].target.relationship = #equivalent
+* group.element[+].code = #https://fhir.ee/sid/pid/est/npi
+* group.element[=].display = "Stillborn code provided by The National Institute for Health Development"
+* group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.2.75
+* group.element[=].target.relationship = #equivalent
 * group.element[+].code = #https://fhir.ee/sid/pid/est/prn/70009770/kmt
 * group.element[=].display = "Mapping to TEHIK KMT oid"
 * group.element[=].target.code = #urn:oid:1.3.6.1.4.1.28284.6.2.4.7.1
