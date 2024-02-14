@@ -40,9 +40,11 @@ Järgmine diagramm annab ülevaate vajalikest sammudest patsiendi otsinguks:
 ```mermaid
 flowchart TD
     A[[Patsiendi\notsing]] -->|Otsing täpse\nidentifikaatori järgi PÜT-is| B(<a href='dev.html#andmete-pärimine'>GET /Patient?identifier=system1value1</a>)
-    B --> |Leitud 0 või 1 eestimaalast| RR(Rahvastiku Register)
-    RR --> |Automaatne eestimaalase\nlisamine või uuendamine RR-i info baasil| MPIList1
-    B --> |Välismaalane\nvõi tundmatu| MPIList1{Nimekiri\npatsientidest}
+    B --> |Leitud 0 eestimaalast| RR(Rahvastiku Register päring\nAutomaatne lisamine PÜT-i)
+    RR --> MPIList1
+
+    style RR stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+    B --> |Leitud vähemalt 1 eestimaalane\nvõi 0 kuni n välismaalast\nvõi tundmatut patsienti| MPIList1{Nimekiri\npatsientidest}
     MPIList1 -.-> |Ei ole leitud\nUus otsing| A
 
     
@@ -50,5 +52,6 @@ flowchart TD
     C --> MPIList1
 
     MPIList1 --> |Välismaalane ei ole leitud\nLisame uut| NewPatient(Patsiendi lisamine\n<a href='uc.html#uc-02-patsient-teiese-riigi-dokumendiga'>POST /Patient</a>)
-    MPIList1 --> |Tundmatu ei ole leitud\nLisame uut| NewPatient     
+    MPIList1 --> |Tundmatu ei ole leitud\nLisame uut| NewPatient   
+    MPIList1 --> |Surnultsündinu\nlisamine| NewPatient    
 ```
