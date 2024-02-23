@@ -47,11 +47,12 @@ Tagasiühildamiseks praeguse lahendusega (ajutiselt) toetaks ka [iso3166-1-alpha
 
 Eesti aadress on aadress mille riigikood on `EE` (Eesti).
 
-- Eesti aadressi puhul on kohustuslik `ADR-ID` ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
+- Eesti aadressi puhul on kohustuslik `ADR-ID` või `ADS-OID` väärtus ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
   kasutamise [juhiseid](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-address.html#notes) EEBase spetsifikatsioonis.
-- Kui `adr-id` ja `text` on etteantud siis salvestatakse kõik teised väljad ilma lisakontrollideta. Vaata infot väljade
-- Kui `adr-id` olemas aga `text` puudub siis text ja teised aadressi väljad laetakse ADS-ist *adr-id* järgi.
-- Kui `adr-id` puudub aga `text` on olemas proovitakse leida unikaalne vaste ADS-ist teksti järgi (otsing tehakse ainult juhul kui aadressi tekst sisaldab infot
+- Kui `adr-id` olemas aga `ads-oid` puudub siis teised aadressi väljad laetakse ADS-ist *adr-id* järgi.
+- Kui `ads-oid` olemas aga `adr-id` puudub siis teised aadressi väljad laetakse ADS-ist *ads-oid* järgi.
+  - Kui antud `ads-oid` väärtusega on seotud mitu paralleelaadressi, siis nõutakse ka `adr-id` väärtus.
+- Kui `adr-id` ja `ads-oid` puuduvad aga `text` on olemas, siis proovitakse leida unikaalne vaste ADS-ist teksti järgi (otsing tehakse ainult juhul kui aadressi tekst sisaldab infot
   vähemalt maja numbri täpsusega).
 
 ##### Välismaa aadress
