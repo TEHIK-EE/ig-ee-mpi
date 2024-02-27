@@ -13,10 +13,10 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * name ^slicing.discriminator.path = "use"
 * name ^slicing.rules = #open
 * name ^short = "Patsiendi nimed. Ametlik nimi on kohustuslik"
-* name contains official 1..1 MS 
+* name contains official 1..1 MS
 * name[official] ^short = "Ametlik nimi"
 * name[official].use = #official (exactly)
-* name[official].family 1..1 MS 
+* name[official].family 1..1 MS
 * name[official].family ^short = "Perekonnanimi"
 * name[official].given 1..1 MS
 * name[official].given ^short = "Eesnimi"
@@ -31,12 +31,12 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * address ^short = "Patsiendi aadressid. Eristatakse riigikoodi alusel. Riigikoodiks tuleb kasutada 2 kohalist ISO 3166 koodi"
 * address contains ee 0..* MS and other 0..* MS
 * address[ee] only EEMpiEstonianAddress
-* address[other] only EEMpiForeignerAddress
+* address[other] only EEMpiForeignAddress
 */
 /*
 * telecom MS
-* telecom.value 1..1 MS 
-* telecom.period MS 
+* telecom.value 1..1 MS
+* telecom.period MS
 * telecom ^slicing.discriminator.type = #pattern
 * telecom ^slicing.discriminator.path = "$this"
 * telecom ^slicing.rules = #open
@@ -71,8 +71,8 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * telecom[other].system 1..1 MS
 * telecom[other] ^short = "Muu kontakt"
 
-* birthDate MS 
-* gender MS 
+* birthDate MS
+* gender MS
 * deceased[x] MS
 */
 
@@ -115,7 +115,7 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * identifier[passport].value 1..1 MS
 * identifier[passport].value ^short = "Passinumber"
 * identifier[passport].period MS
-* identifier[passport].assigner MS 
+* identifier[passport].assigner MS
 * identifier[passport].assigner ^short = "Dokumendi väljastanud organisatsioon. Saab kasutada nii organisatsiooni lingina kui ka tekstina."
 
 * identifier contains idcard 0..* MS
@@ -126,7 +126,7 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * identifier[idcard].value 1..1 MS
 * identifier[idcard].value ^short = "ID-kaardi number"
 * identifier[idcard].period MS
-* identifier[idcard].assigner MS 
+* identifier[idcard].assigner MS
 * identifier[idcard].assigner ^short = "Dokumendi väljastanud organisatsioon. Saab kasutada nii organisatsiooni lingina kui ka tekstina."
 
 * identifier contains mr 0..1 MS
@@ -181,7 +181,7 @@ Usage: #example
   * value = "AB0421183"
   * period.end = "2023-12-28"
   * assigner.display = "Estonian Police and Board Agency"
-*/  
+*/
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/est/ppn"
   * value = "K0307337"
@@ -199,7 +199,7 @@ Usage: #example
 // * type = IdentityTypeCS#U
   * system = "urn:pin:hl7.ee:pid:u"
   * value = "90006399:xyz:123e4567-e89b-12d3-a456-426614174000"
-*/  
+*/
 * name[official]
   * use = #official
   * given = "Igor"
@@ -216,7 +216,7 @@ Usage: #example
 
 Instance: PatientJohnDoe
 InstanceOf: EEBasePatient
-Description: "Foreigner with minimal dataset."
+Description: "Foreign with minimal dataset."
 Usage: #example
 * id = "pat2"
 * identifier[0]
