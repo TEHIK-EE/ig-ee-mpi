@@ -32,7 +32,7 @@
   - <input type="checkbox"/> [patsientide loogilist sidumist ja lahtisidumist](link.html)
   - <input type="checkbox"/> [MPI identifikaatori loomist](OperationDefinition-patient-generate-mrn.html)
   - <input type="checkbox"/> ~~Tulevikus oskab genereerida surnultsündinu patsiendi identifikaatori (kui TTO-l on vastav raviprofiil)~~
-  - <input type="checkbox"/> [välismaalase otsingut](OperationDefinition-patient-foreigner.html)
+  - <input type="checkbox"/> [välismaalase otsingut](OperationDefinition-patient-foreign.html)
 - Tehnilised nõuded  
   - <input type="checkbox"/> Oskab teha [REST päringuid üle X-tee](https://blog.ria.ee/x-road-rest-tugi). 
   - <input type="checkbox"/> Omab [FHIR tuge](http://fhir.hl7.org). Oskab kasutada [RESTful API-t](http://hl7.org/fhir/documentation.html).

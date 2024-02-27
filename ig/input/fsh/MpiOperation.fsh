@@ -120,26 +120,26 @@ Usage: #definition
 
 
 
-Instance: patient-foreigner
+Instance: patient-foreign
 InstanceOf: OperationDefinition
 Usage: #definition
 * extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
 * extension[=].valueInteger = 0
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-foreigner"
+* url = "https://fhir.ee/OperationDefinition/patient-foreign"
 * version = "5.0.0"
-* name = "EEMPIPatientForeignerSearch"
-* title = "Patient Foreigner"
+* name = "EEMPIPatientForeignSearch"
+* title = "Patient Foreign"
 * status = #active
 * kind = #operation
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
-* description = "The foreigner operation perform complex search over patient resource."
+* description = "The foreign operation perform complex search over patient resource."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
-* code = #foreigner
+* affectsState = false
+* code = #foreign
 //* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
 * system = false
@@ -208,7 +208,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The lookup operation looking for patient data in the external registers."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #lookup
 //* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
@@ -254,7 +254,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The list of legal guardians specified in the Population Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #legal-guardian
 //* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
@@ -306,7 +306,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The list of power of attorneys in the Population Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #power-of-attorney
 //* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
@@ -352,7 +352,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The highest education level in the Education Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #education
 //* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
@@ -397,7 +397,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "Generate the new unique Medical Record Number may be used for unknown/anonymous patient's identification."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #mrn
 * resource = #Patient
 * system = false
@@ -425,7 +425,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The patient disability from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #disability
 * resource = #Patient
 * system = false
@@ -466,7 +466,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The observation of patient incapacity for work from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #incapacity-for-work
 * resource = #Patient
 * system = false
@@ -507,7 +507,7 @@ Usage: #definition
 * publisher = "HL7 Estonia"
 * description = "The observation of patient occupations from Employment Register (TÖR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
-* affectsState = true
+* affectsState = false
 * code = #occupation
 * resource = #Patient
 * system = false
