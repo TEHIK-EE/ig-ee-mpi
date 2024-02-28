@@ -5,6 +5,7 @@ Description: "Nimekiri riikidest mille puhul on kohustuslik lisaks isiku identif
 * ^experimental = false
 * ^content = #complete
 * ^caseSensitive = false
+* #EST "Eesti"
 * #BGR "Bulgaaria"
 * #CZE "Tšehhi"
 * #LVA "Läti"
