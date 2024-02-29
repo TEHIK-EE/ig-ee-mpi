@@ -20,12 +20,14 @@ NB! Siinkohal on oluline, et riigi valik saaks tehtud vastavalt dokumendi välja
 Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [IdentitySystem](https://build.fhir.org/ig/HL7EE/ig-ee-base/CodeSystem-ee-identity-system.html). Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). Olulisemad tüübid on:
 - NI - riiklik identifikaator / nationanal identifier
 - PPN - passi number / passport
-- CZ - Id kaart / citezenship card
-- BCT - sünnitunnistus / birth certificate.   
+- CZ - Id kaardi number / citezenship card number
+- DL - juhiloa number / driver's licence number   
 
 Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit või passinumbrit väljal **value**. Täiendavalt saab määrata dokumendinumbri lõpukuupäeva.
 
-Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number. 
+Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number.
+
+Riikidel mille dokumentidel (PPN, CZ ja DL tüübiga) eksisteerib isikukood tuleb alati lisaks dokumendi numbrile määrata isikukood (identifikaator NI tüübiga). Loetelu nendest riikidest: [national-identifier-requirement](CodeSystem-national-identifier-requirement.html)
 
 Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pass:
 ```json
@@ -33,7 +35,7 @@ Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pas
     {
       "system" : "https://fhir.ee/sid/pid/fin/ni",
       "value" : "010199-000H",
-      "display": "Soome identifikaator"  
+      "display": "Soome isikukood"  
 
     },
     {
