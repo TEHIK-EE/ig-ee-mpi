@@ -216,7 +216,7 @@ Usage: #example
 
 Instance: PatientJohnDoe
 InstanceOf: EEBasePatient
-Description: "Foreign with minimal dataset."
+Description: "Foreigner with minimal dataset."
 Usage: #example
 * id = "pat2"
 * identifier[0]
