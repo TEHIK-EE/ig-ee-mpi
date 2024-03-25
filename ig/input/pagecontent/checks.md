@@ -74,7 +74,7 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 - [Eeskostja liik](ValueSet-guardian-status.html)
 - [Patsiendi teovõime staatus](ValueSet-legal-status.html)
 - [Töötamise liik](ValueSet-occupation-type.html)
-- [Suhe patsiendiga](ValueSet-person-relationship.html)
+- [Suhe patsiendiga](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-person-relationship.html)
 - [Kontaktisiku tüüp](ValueSet-person-relationship-class.html)
 - [Hooldusõiguse liik](ValueSet-power-of-attorney.html)
 
