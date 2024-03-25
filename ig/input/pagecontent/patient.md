@@ -70,9 +70,22 @@ Liigsete andmete pärimise vältimiseks soovitame lisada otsingukomponendi sisse
 
 1) kui otsingutekst koosneb ühest sõnest ja selles esinevad numbrid, siis on tegemist identifikaatori või dokumendi numbriga. Sel juhul tuleb teostada päring täpse identifikaatori järgi.
 
+Otsing Eesti isikukoodi järgi:
 ```
 Otsingu tekst: EST | 49403136515
 FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/est/ni|49403136515
+```
+
+Otsing suvalise USA dokumendi numbri järgi:
+```
+Otsingu tekst: USA | E00007734
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/usa|E00007734
+```
+
+Otsing USA passinumbri järgi:
+```
+Otsingu tekst: USA | E00007734
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/usa/ppn|E00007734
 ```
 
 2) kui otsingutekst koosneb ainult tähtedest või sisaldab eraldajaid (koma või tühik), siis on tegemist tekstiga, mis sisaldab nime. Antud tekst võib sisaldada komponente nagu *perekonnanimi*, *eesnimi* ja *sünnikuupäev*.
@@ -95,4 +108,26 @@ FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO
 ```
 Otsingu tekst: PRT | RONALDO,, 05.02.1985
 FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO&birthdate=1985-02-05
+```
+
+3) Tundmatu või anonüümse või tuvastamata patsiendi otsing.
+
+Tundmatu, anonüümsete või tuvastamata patsientide käsitlemiseks, loend riikidest peaks sisaldama väärtust PÜT (või MPI) ja haigla lühendi. 
+
+PÜT-i poolt genereeritud identifikaator koosneb sidekripsuga ühendatud numbritest ja tähtedest ([UUID](https://www.javatpoint.com/java-uuid) vormingus)
+
+Otsing tundmatu patsiendi identifikaatori järgi:
+```
+Otsingu tekst: PÜT | 237e9877-e79b-12d4-a765-321741963000
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/est/mr|237e9877-e79b-12d4-a765-321741963000
+```
+
+TTO võib genereerida oma tundmatu numbri enda valitud vormingus. Sellise numbri saatmiseks või pärimiseks tuleb kasutada oma nimeruumi. 
+
+NB! TEHIK soovitab kasutada ainult PÜT-i poolt genereeritud tundmatu identifikaatorit.
+
+Otsing PERHi tundmatu patsiendi identifikaatori järgi:
+```
+Otsingu tekst: PERH | 1234567
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/est/prn/90006399|1234567
 ```
