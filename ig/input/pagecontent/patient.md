@@ -131,3 +131,10 @@ Otsing PERHi tundmatu patsiendi identifikaatori järgi:
 Otsingu tekst: PERH | 1234567
 FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/est/prn/90006399|1234567
 ```
+
+
+## Ärianalüüs
+
+- [Analüüsiraport](Patsientide_yldandmete_teenuse_protsessi_analyys.pdf)
+- [PÜT andmekirjeldus](PYT-andmekirjeldus_2024-04-01.pdf)
+
