@@ -17,7 +17,7 @@ Patsienti identifitseeriv kood koos vastava OID-ga moodustab TIS-s terviku ehk u
 NB! Siinkohal on oluline, et riigi valik saaks tehtud vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Ehk, kui isikul on olemas Eesti isikukood, aga rahvuselt või kodakondsuselt on ta muu riigi kodanik, siis tuleb valida ikkagi Eesti riigi tunnus isikukoodi juures.
 
 ### Välisriigi isiku kood
-Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [IdentitySystem](https://build.fhir.org/ig/HL7EE/ig-ee-base/CodeSystem-ee-identity-system.html). Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). Olulisemad tüübid on:
+Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/CodeSystem-identifier-domain.html)). Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). Olulisemad tüübid on:
 - NI - riiklik identifikaator / nationanal identifier
 - PPN - passi number / passport
 - CZ - Id kaardi number / citezenship card number

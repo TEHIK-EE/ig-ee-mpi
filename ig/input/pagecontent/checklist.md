@@ -31,7 +31,6 @@
   - <input type="checkbox"/> [eestkoste päringut](OperationDefinition-patient-power-of-attorney.html)
   - <input type="checkbox"/> [patsientide loogilist sidumist ja lahtisidumist](link.html)
   - <input type="checkbox"/> [MPI identifikaatori loomist](OperationDefinition-patient-generate-mrn.html)
-  - <input type="checkbox"/> ~~Tulevikus oskab genereerida surnultsündinu patsiendi identifikaatori (kui TTO-l on vastav raviprofiil)~~
   - <input type="checkbox"/> [välismaalase otsingut](OperationDefinition-patient-foreign.html)
 - Tehnilised nõuded  
   - <input type="checkbox"/> Oskab teha [REST päringuid üle X-tee](https://blog.ria.ee/x-road-rest-tugi). 

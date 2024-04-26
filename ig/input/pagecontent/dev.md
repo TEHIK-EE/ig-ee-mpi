@@ -1,4 +1,7 @@
 Antud juhend selgitab põhireeglid patsiendi andmete pärimiseks ja sõnumite koostamiseks.
+
+TODO: uus kollektsioon
+
 Testimiseks laadige alla Postman [kollektsiooni](MPI_FHIR_examples.postman_collection.json) näidetega ja häälestage keskkonna muutujad
 
 ```
@@ -14,8 +17,45 @@ HOST: $host/r1/ee-dev/GOV/70009770/tis/mpi
 | $org-code  | asutuse registrikood (memberCode)              |
 | $client-id | alamsüsteemi kood  (subsystemCode)             |
 
-TEHIKu partnerid saavad kasutada hostina https://10.0.13.90/r1/ee-dev/GOV/70009770/tis/mpi ja kliendiks ee-dev/GOV/70009770/tto-tis-klient aktiveeritud VPNi
-puhul.
+Testimiseks TTO peab tellima õigused X-tee teenusele GOV/70009770/tis/mpi ee-dev keskonnas.
+
+### Autentimine
+
+Autentimine on protsess, millega üks kasutaja, süsteem või muu olem saab kontrollida teise olemi väidetava identiteedi tõesust.
+Identiteeti tõestamiseks kasutaja/süsteem peab pärima tokeni universaalse TIS autentimisteenuse (Charon v2) käest x-Tee kaudu.
+
+**Token-is kodeeritud kasutaja isikukood ja nimi kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
+
+#### Tokeni pärimine
+
+Testimiseks TTO peab tellima õigused auth X-tee teenusele ee-dev keskonnas.
+
+TODO: viide dokumentatsioonile teabekeskusest
+
+#### Tokeni cache-mine
+
+Tokeni eluiga on on 5 minutit, kliendirakendus võib tokeni cache-da kuni 5 minutit ja taaskasutada erinevates päringutes.
+**NB! Token on kasutajapõhine, kliendirakendus ei tohi jagada sama tokeni mitme erineva kasutaja vahel!**
+
+#### Tokeni kasutamine
+
+Tokeni tuleb kasutatada `Authorization` päises `Bearer ` prefiksiga. Näiteks
+
+```
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
+```
+
+### Päised (HTTP headers)
+
+Igas päringus tuleb määrata REST päringu päises mitmed tunnused:
+
+| Päise nimi    | Võimalikud väärtused                                                                    | Kommentaar                                                                                                                                                                      |   
+|---------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Accept        | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
+| Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
+| Authorization | Bearer <token>                                                                          | <token> saamine on kirjeldatud järgmises peatükkis                                                                                                                              |   
+| x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                            |    
+| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. |
 
 ### Andmete pärimine
 
@@ -28,6 +68,7 @@ Patsiendi andmete pärimiseks saab esitada REST päringu mis tagastab kas üksik
 ```
 GET {MPI}/Patient/1
 Accept: application/json
+...
 ```
 
 Sõltuvalt Accept päringu väärtuses tuleb vastuseks sõnumi keha JSON või XML vormingus.
@@ -158,37 +199,32 @@ GET {MPI}/Patient/_history?_since=2023-03-31&_count=10
 #### Üldised nõuded
 
 Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi (“resourceType”) ja profiili (“meta.profile”).
-Uue kirje loomisel saab anda kaasa oma infosüsteemi sisemise identifikaatori (“meta.source”).
 
 ```json
-  "resourceType": "Patient",
+  "resourceType" : "Patient",
+"id": "1",
 "meta": {
 "profile": [
 "https://fhir.ee/StructureDefinition/ee-mpi-patient-verified"
 ],
 "source": "https://my.his.ee/Patient/92837-fdsvsd-3f4gfew-2342dwd"
-},
-"id": "1"
+}
 ```
 
 Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html)
 ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist. Tulevikus võivad
 lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html) ja [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html)
 registreerimine.
-Iga patsiendi lisamisel või muutmisel tuleb määrata vastav profiil.
+Iga patsiendi lisamisel või muutmisel tuleb määrata vastav [profiil](patient.html#eempipatient).
 
 #### Päring (request)
 
-Patsiendi loomisel/muutmisel tuleb saata päring FHIR-i endpointile, näiteks arenduskeskkonnas aadressile: https://tis.dev.tehik.ee/mpi/fhir/Patient.
-Päringus tuleb määrata REST päringu päises (Header-is) mitmed tunnused:
+Patsiendi loomisel/muutmisel tuleb saata POST/PUT päringud.
 
-| Päise nimi    | Võimalikud väärtused                                                                    | Kommentaar                                                                                                                                                                      |   
-|---------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Accept        | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
-| Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
-| Authorization | Bearer <token>                                                                          | <token> saamine on kirjeldatud lehel [Autentimine](auth.html)                                                                                                                   |   
-| x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                            |    
-| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. | 
+```
+POST {MPI}/Patient
+PUT {MPI}/Patient/3
+```
 
 Valiidne sõnum tuleb edastada päringu kehas. Andmekoosseis on kirjeldatud lehel [Patsiendid](patient.html)
 
@@ -201,16 +237,16 @@ Vastuse päis "Location" sisaldab lingi loodud ressursile.
 Location: {MPI}/fhir/Patient/3
 ```
 
-Vaikimisi loodud ressursi kehat ei tagastata. Vajadusel saate muuta vaikekäitumist määrates päises "[Prefer](http://hl7.org/fhir/http.html#ops)".
+Vastuses kehas on tagastatud salvestatud või uuendatud ressurs. **NB! vastuse keha võib olla erinev saadetud kehast ja sisaldada parandatud andmeid, millega
+arendaja peab arvestama!**
+
 Loogilise vea puhul tuleb koodiga 40X viga. Juhul kui teenus ei ole kättesaadav, tuleb 50X viga.
 Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) vormingus. Väli "code" sisaldab tüüpiliselt ühte
 loogilistest [koodidest](errors.html).
 
-#### Aeg ja ajatsoon
+### Aeg ja ajatsoon
 
 Ressurside vastuvõtmisel MPI FHIR liides toetab ajad erinevates ajatsoonides, näiteks UTC `1974-12-25T23:00:00Z` või offset'iga `1974-12-26T01:00:00+02:00`.
 Vaata formaati [spetsifikatsioonist](http://hl7.org/fhir/datatypes.html#dateTime).
 Kui ajatsooni offset pole määratud, näiteks _date_ tüüpi puhul, siis arvestatakse et aeg on Eesti ajatsoonis ehk `Europe/Tallinn`. FHIR vastuses olevad ajad on
 alati toodud Eesti ajatsoonis.
-
-### Andmete pärimine

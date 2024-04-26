@@ -44,16 +44,20 @@ Kohustlikuks elemendiks on riigikood, mis peab vastama [iso3166-1-alpha2](http:/
 Tagasiühildamiseks praeguse lahendusega (ajutiselt) toetaks ka [iso3166-1-alpha3](http://hl7.org/fhir/R5/valueset-iso3166-1-3.html) riigikood.
 
 ##### Eesti aadress
-
 Eesti aadress on aadress mille riigikood on `EE` (Eesti).
 
-- Eesti aadressi puhul on kohustuslik `ADR-ID` või `ADS-OID` väärtus ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
+MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb MPI-sse automaatselt Rahvastikuregistrist automaatselt.
+
+- Eesti aadressi puhul on kohustuslik `ADR-ID` ja `ADS-OID` väärtus ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
   kasutamise [juhiseid](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-address.html#notes) EEBase spetsifikatsioonis.
 - Kui `adr-id` olemas aga `ads-oid` puudub siis teised aadressi väljad laetakse ADS-ist *adr-id* järgi.
 - Kui `ads-oid` olemas aga `adr-id` puudub siis teised aadressi väljad laetakse ADS-ist *ads-oid* järgi.
-  - Kui antud `ads-oid` väärtusega on seotud mitu paralleelaadressi, siis nõutakse ka `adr-id` väärtus.
 - Kui `adr-id` ja `ads-oid` puuduvad aga `text` on olemas, siis proovitakse leida unikaalne vaste ADS-ist teksti järgi (otsing tehakse ainult juhul kui aadressi tekst sisaldab infot
   vähemalt maja numbri täpsusega).
+
+Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aaddress Rahvastikuregistri järgi. 
+Aadressite edastamiseks MPI-sse tuleb järgida Maa-ameti poolt koostatud [juhendi](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf). 
+Kui aadress ei vasta nõetele MPI lisab sellele [notice](https://build.fhir.org/ig/HL7EE/ig-ee-base//StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
 
 ##### Välismaa aadress
 
@@ -89,11 +93,12 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 
 #### EEBase-i kaudu kasutatavad loendid
 
-- [Administrative Gender](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-administrative-gender.html)
-- [Patient Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-ee-patient-identifier-domain.html)
-- [Date Accuracy Indicator](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-date-accuracy-indicator.html)
-- [ADS](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-ads.html)
-- [Observation category](https://build.fhir.org/ig/HL7EE/ig-ee-base//ValueSet-ee-observation-category.html)
+- [Administrative Gender](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-administrative-gender.html)
+- [Patient Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-patient-identifier-domain.html)
+- [Date Accuracy Indicator](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-date-accuracy-indicator.html)
+- [ADS ADR-ID](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-ads-adr-id.html)
+- [ADS OID](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-ads-oid.html)
+- [Observation category](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-ee-observation-category.html)
 
 #### Kasutatav FHIR terminoogia
 
