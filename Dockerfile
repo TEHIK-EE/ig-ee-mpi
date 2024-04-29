@@ -2,7 +2,6 @@ FROM docker.kodality.com/fsh-builder:latest as builder
 
 WORKDIR /fsh
 COPY ig ./
-RUN sushi .
 RUN ./_updatePublisher.sh -y
 RUN ./_genonce.sh
 
