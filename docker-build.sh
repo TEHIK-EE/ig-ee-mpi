@@ -5,4 +5,4 @@ if [ ! -f "$this/ig/input-cache/publisher.jar" ]; then
     cd $this/ig && $this/ig/_updatePublisher.sh -y
 fi
 docker run --rm -it -v $this/ig:/workdir -v ~/.fhir:/root/.fhir \
-  docker.kodality.com/fsh-builder /bin/bash -c "cd /workdir && sushi . && ./_genonce.sh $1"
+  docker.kodality.com/fsh-builder /bin/bash -c "cd /workdir && ./_genonce.sh $1"

@@ -1,23 +1,22 @@
 Antud juhend selgitab põhireeglid patsiendi andmete pärimiseks ja sõnumite koostamiseks.
 
-TODO: uus kollektsioon
-
-Testimiseks laadige alla Postman [kollektsiooni](MPI_FHIR_examples.postman_collection.json) näidetega ja häälestage keskkonna muutujad
+Testimiseks laadige alla Postman [kollektsiooni](MPI%20X-Road.postman_collection.json) näidetega ja häälestage keskkonna muutujad
 
 ```
 X_ROAD_CLIENT: $env/$class/$org-code/$client-id
-HOST: $host/r1/ee-dev/GOV/70009770/tis/mpi
+MPI_FHIR: $host/r1/$env/GOV/70009770/tis/mpi
+AUTH_URL: $host/r1/$env/GOV/70009770/tis/auth
 ```
 
 | Parameeter | Teie X-tee alamsüsteemi seadistus              |
 |------------|------------------------------------------------|
 | $env       | x-tee keskkond, näiteks ee-dev (xRoadInstance) |
-| $host      | turvaserveri aadress                           |
-| $class     | alamsüsteemi klass (memberClass)               |
-| $org-code  | asutuse registrikood (memberCode)              |
-| $client-id | alamsüsteemi kood  (subsystemCode)             |
+| $host      | TTO turvaserveri aadress                       |
+| $class     | TTO alamsüsteemi klass (memberClass)           |
+| $org-code  | TTO asutuse registrikood (memberCode)          |
+| $client-id | TTO alamsüsteemi kood  (subsystemCode)         |
 
-Testimiseks TTO peab tellima õigused X-tee teenusele GOV/70009770/tis/mpi ee-dev keskonnas.
+Kollektsiooni proovimiseks TTO peab tellima õigused X-tee teenustele GOV/70009770/tis/mpi ja GOV/70009770/tis/auth ee-dev keskkonnas.
 
 ### Autentimine
 
@@ -27,14 +26,38 @@ Identiteeti tõestamiseks kasutaja/süsteem peab pärima tokeni universaalse TIS
 **Token-is kodeeritud kasutaja isikukood ja nimi kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
 
 #### Tokeni pärimine
+Postman kollektsioonis 1. Auth -> 1.1 Get token
 
-Testimiseks TTO peab tellima õigused auth X-tee teenusele ee-dev keskonnas.
+
+POST päring `{{AUTH_URL}}/token` järgmise "application/json" sisuga
+```json
+{
+    "user": {
+        "personalCode": "49909090014"
+    },
+    "organization": "70009770",
+    "role": "doctor",
+    "application": "tto-tis-client-application"
+}
+```
+Kus tuleb määrata kasutja roll, isikukood ja asutuse kood. Antud kombinatsioon kontrollitakse ee-test TAM registri vastu. 
+Rakenduse nimi peab kajastama kasutatud TTO tarkvara, suvaline tekst ilma tühikudeta.
+
+Vastus:
+
+```json
+{
+    "accessToken": "eyJhbGciOiJSUz...",
+    "expiresIn": 300,
+    "tokenType": "Bearer"
+}
+```
 
 TODO: viide dokumentatsioonile teabekeskusest
 
 #### Tokeni cache-mine
 
-Tokeni eluiga on on 5 minutit, kliendirakendus võib tokeni cache-da kuni 5 minutit ja taaskasutada erinevates päringutes.
+Tokeni eluiga on on N sekundit (token päringu vastuses väli expiresIn), kliendirakendus võib tokeni cache-da kuni N sekundit ja taaskasutada erinevates päringutes.
 **NB! Token on kasutajapõhine, kliendirakendus ei tohi jagada sama tokeni mitme erineva kasutaja vahel!**
 
 #### Tokeni kasutamine
