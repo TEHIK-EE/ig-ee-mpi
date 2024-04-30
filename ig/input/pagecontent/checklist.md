@@ -1,9 +1,19 @@
 ## Checklist MPI-ga liidestuva tarkvara jaoks
 
+- Tehnilised nõuded
+  - <input type="checkbox"/> Vajalikud ligipääsud on X-teel MPI teenustele [tellitud](dev.html#ligipääsud)
+  - <input type="checkbox"/> Oskab teha [REST päringuid üle X-tee](https://blog.ria.ee/x-road-rest-tugi).
+  - <input type="checkbox"/> Oskab küsida autoriseerimist tõendavat [juurdepääsutõendit](dev.html#autoriseerimine)
+  - <input type="checkbox"/> Omab [FHIR tuge](http://fhir.hl7.org). Oskab kasutada [RESTful API-t](http://hl7.org/fhir/documentation.html).
+    - <input type="checkbox"/> Oskab kuvada kasutajale [vead](errors.html), mida tagastab MPI [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) elemendist.
+    - <input type="checkbox"/> Oskab koostada [Search](http://hl7.org/fhir/search.html) päringut, millele tagastakse kogum ressurssidest [Bundle](http://hl7.org/fhir/bundle.html).
+    - <input type="checkbox"/> Oskab koostada komplekssõnumit, mis koosneb mitmest ressursist [Bundle](http://hl7.org/fhir/bundle.html).
+  - <input type="checkbox"/> Oskab määrata [profiili](http://hl7.org/fhir/profiling.html) iga muudetava ressurssi kohta  POST ja PUT tegevuste puhul.
+  - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
 - <input type="checkbox"/> Oskab kasutada [FHIR terminoloogiat](https://build.fhir.org/ig/TEHIK-EE/TerminologyServices).
   - <input type="checkbox"/> Toetab kõiki [PÜTis kasutatud klassifikaatoreid ja loendeid](checks.html#kasutatav-terminoloogia).
   - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, vastabvalt ConceptMap-ile [identity-system-to-oid](ConceptMap-identity-system-to-oid.html)
-- [Oskab](dev.html) opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
+- [Oskab](dev.html#andmete-pärimine) opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`
   - <input type="checkbox"/> Uue patsiendi lisamine  `POST /Patient`
@@ -32,14 +42,7 @@
   - <input type="checkbox"/> [patsientide loogilist sidumist ja lahtisidumist](link.html)
   - <input type="checkbox"/> [MPI identifikaatori loomist](OperationDefinition-patient-generate-mrn.html)
   - <input type="checkbox"/> [välismaalase otsingut](OperationDefinition-patient-foreign.html)
-- Tehnilised nõuded  
-  - <input type="checkbox"/> Oskab teha [REST päringuid üle X-tee](https://blog.ria.ee/x-road-rest-tugi). 
-  - <input type="checkbox"/> Omab [FHIR tuge](http://fhir.hl7.org). Oskab kasutada [RESTful API-t](http://hl7.org/fhir/documentation.html).
-    - <input type="checkbox"/> Oskab kuvada kasutajale [vead](errors.html), mida tagastab MPI [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) elemendist.
-    - <input type="checkbox"/> Oskab koostada [Search](http://hl7.org/fhir/search.html) päringut, millele tagastakse kogum ressurssidest [Bundle](http://hl7.org/fhir/bundle.html).
-    - <input type="checkbox"/> Oskab koostada komplekssõnumit, mis koosneb mitmest ressursist [Bundle](http://hl7.org/fhir/bundle.html).
-  - <input type="checkbox"/> Oskab määrata [profiili](http://hl7.org/fhir/profiling.html) iga muudetava ressurssi kohta  POST ja PUT tegevuste puhul.
-  - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
+
 - Protsess  
   - <input type="checkbox"/> PÜT on integreeritud TTO kõikidesse patsiendi andmeid käsitlevate rakenduste põhivoogudesse.
   - <input type="checkbox"/> TTO tarkvara suudab töötada ka hetkedel, kui PÜT pole ligipääsetav.

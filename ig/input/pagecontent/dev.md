@@ -16,40 +16,44 @@ AUTH_URL: $host/r1/$env/GOV/70009770/tis/auth
 | $org-code  | TTO asutuse registrikood (memberCode)          |
 | $client-id | TTO alamsüsteemi kood  (subsystemCode)         |
 
+### Ligipääsud
+
 Kollektsiooni proovimiseks TTO peab tellima õigused X-tee teenustele GOV/70009770/tis/mpi ja GOV/70009770/tis/auth ee-dev keskkonnas.
 
-### Autentimine
+### Autoriseerimine
 
-Autentimine on protsess, millega üks kasutaja, süsteem või muu olem saab kontrollida teise olemi väidetava identiteedi tõesust.
-Identiteeti tõestamiseks kasutaja/süsteem peab pärima tokeni universaalse TIS autentimisteenuse (Charon v2) käest x-Tee kaudu.
+Autoriseerimine on protsess, mille käigus kasutaja saab õigusi/privileege teatud ressursidele. 
+Autoriseerimise käigus valideeritakse kasutaja väidetav roll ning kuuluvus asutusele, mille alt tehakse päringuid.
 
 **Token-is kodeeritud kasutaja isikukood ja nimi kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
 
 #### Tokeni pärimine
+
 Postman kollektsioonis 1. Auth -> 1.1 Get token
 
-
 POST päring `{{AUTH_URL}}/token` järgmise "application/json" sisuga
+
 ```json
 {
-    "user": {
-        "personalCode": "49909090014"
-    },
-    "organization": "70009770",
-    "role": "doctor",
-    "application": "tto-tis-client-application"
+  "user": {
+    "personalCode": "49909090014"
+  },
+  "organization": "70009770",
+  "role": "doctor",
+  "application": "tto-tis-client-application"
 }
 ```
-Kus tuleb määrata kasutja roll, isikukood ja asutuse kood. Antud kombinatsioon kontrollitakse ee-test TAM registri vastu. 
+
+Päringu kehas tuleb määrata kasutja roll, isikukood ja asutuse kood. Antud kombinatsioon valideeritakse TAM registri vastu.
 Rakenduse nimi peab kajastama kasutatud TTO tarkvara, suvaline tekst ilma tühikudeta.
 
 Vastus:
 
 ```json
 {
-    "accessToken": "eyJhbGciOiJSUz...",
-    "expiresIn": 300,
-    "tokenType": "Bearer"
+  "accessToken": "eyJhbGciOiJSUz...",
+  "expiresIn": 300,
+  "tokenType": "Bearer"
 }
 ```
 
@@ -57,7 +61,8 @@ TODO: viide dokumentatsioonile teabekeskusest
 
 #### Tokeni cache-mine
 
-Tokeni eluiga on on N sekundit (token päringu vastuses väli expiresIn), kliendirakendus võib tokeni cache-da kuni N sekundit ja taaskasutada erinevates päringutes.
+Tokeni eluiga on on N sekundit (token päringu vastuses väli expiresIn), kliendirakendus võib tokeni cache-da kuni N sekundit ja taaskasutada erinevates
+päringutes.
 **NB! Token on kasutajapõhine, kliendirakendus ei tohi jagada sama tokeni mitme erineva kasutaja vahel!**
 
 #### Tokeni kasutamine
@@ -72,13 +77,14 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
 
 Igas päringus tuleb määrata REST päringu päises mitmed tunnused:
 
-| Päise nimi    | Võimalikud väärtused                                                                    | Kommentaar                                                                                                                                                                      |   
-|---------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Accept        | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
-| Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                 |   
-| Authorization | Bearer <token>                                                                          | <token> saamine on kirjeldatud järgmises peatükkis                                                                                                                              |   
-| x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                            |    
-| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. |
+| Päise nimi    | Võimalikud väärtused                                                                    | Kommentaar                                                                                                                                                                           |   
+|---------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Accept        | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                      |   
+| Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                      |   
+| Authorization | Bearer <token>                                                                          | Auth teenuse poolt saadud token                                                                                                                                                      |   
+| x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                                 |    
+| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. <br/>Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. |
+| x-road-client | $env/$class/$org-code/$client-id                                                        | X-tee rest kliendi määrav identifikaator, vt https://www.x-tee.ee/docs/live/xroad/pr-rest_x-road_message_protocol_for_rest.html#43-use-of-http-headers                               |
 
 ### Andmete pärimine
 
