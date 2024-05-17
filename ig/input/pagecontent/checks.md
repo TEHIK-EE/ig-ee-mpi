@@ -50,14 +50,17 @@ MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb
 
 - Eesti aadressi puhul on kohustuslik `ADR-ID` ja `ADS-OID` väärtus ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
   kasutamise [juhiseid](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-address.html#notes) EEBase spetsifikatsioonis.
-- Kui `adr-id` olemas aga `ads-oid` puudub siis teised aadressi väljad laetakse ADS-ist *adr-id* järgi.
-- Kui `ads-oid` olemas aga `adr-id` puudub siis teised aadressi väljad laetakse ADS-ist *ads-oid* järgi.
-- Kui `adr-id` ja `ads-oid` puuduvad aga `text` on olemas, siis proovitakse leida unikaalne vaste ADS-ist teksti järgi (otsing tehakse ainult juhul kui aadressi tekst sisaldab infot
-  vähemalt maja numbri täpsusega).
+- Kui `ADR-ID` olemas aga `ADS-OID` puudub siis teised aadressi väljad laetakse ADS-ist *ADR-ID* järgi.
+- Kui `ADS-OID` olemas aga `ADR-ID` puudub siis teised aadressi väljad laetakse ADS-ist *ADS-OID* järgi.
+- Kui `ADR-ID` ja `ADS-OID` puuduvad aga `text` on olemas, siis proovitakse leida unikaalne vaste ADS-ist teksti järgi.
 
-Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aaddress Rahvastikuregistri järgi. 
+###### Kvaliteedinõuded
+
+Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aaddress Rahvastikuregistri järgi.
 Aadressite edastamiseks MPI-sse tuleb järgida Maa-ameti poolt koostatud [juhendi](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf). 
-Kui aadress ei vasta nõetele MPI lisab sellele [notice](https://build.fhir.org/ig/HL7EE/ig-ee-base//StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
+Kui aadress ei vasta nõuetele MPI lisab sellele [notice](https://build.fhir.org/ig/HL7EE/ig-ee-base//StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
+
+**Kui lisa-aadress vastab kvaliteedinõuetele, siis saadetakse see automaatselt Rahvastikuregistrisse.**
 
 ##### Välismaa aadress
 

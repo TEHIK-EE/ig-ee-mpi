@@ -129,24 +129,20 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-053    | Aadress ADS-OID-ga ${ads-oid} ei ole leitud ADS-ist                                                                                                     |
 | MPI-054    | Aadress ADS-OID-ga ${ads-oid} ja ADR-ID-ga ${adr-id} ei ole leitud ADS-ist                                                                              |
 | MPI-055    | Antud aadressi ADS-OID-ga ${ads-oid} leiab mitu paralleelaadressit, oodatud ka ADR-ID väärtus                                                           |
-| MPI-056    | Antud teksti (${text}) järgi pole võimalik otsida aadressi ADS registrist: puudub maja number                                                           |
 | MPI-057    | Antud teksti (${text}) järgi pole võimalik otsida aadressi ADS registrist                                                                               |
 | MPI-058    | Antud teksti (${text}) järgi pole leitud ühtegi aadressi ADS registrist                                                                                 |
 | MPI-059    | Antud teksti (${text}) järgi pole võimalik leida unkaalne aadress ADS registrist                                                                        |
 | MPI-060    | Päringus puudub päis 'x-road-userid'                                                                                                                    |
 | MPI-061    | Päringus puudub päis 'x-road-id'                                                                                                                        |
 | MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}\|${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                                |
-| MPI-080    | Antud ADR-ID väärtusega ${adr-id} leiab mitu aadressi objekti erineva otstarbega, palume määrata ka ADS_OID                                             |
-| MPI-081    | Antud ADS_OID väärtusega ${ads-oid} on seotud mitu hooneosa, palume kasutada konkreetse hooneosaga aadressi ADR-ID ja (või) ADS_OID                     |
-| MPI-082    | Aadressil ADR-ID väärtusega ${adr-id} puudub tase 6 või 7                                                                                               |
+| MPI-081    | Aadressiobjektiga on seotud mitu hooneosa                                                                                                               |                                                                                                             |
+| MPI-082    | Aadressil puudub tase 6 või 7                                                                                                                           |
 | MPI-083    | Aadressil ADS_OID väärtusega ${ads-oid} puudub tase 6 või 7                                                                                             |
-| MPI-084    | Antud ADR-ID väärtusega ${adr-id} on seotud mitu hooneosa, palume kasutada konkreetse hooneosaga aadressi ADR-ID ja (või) ADS_OID                       |
-| MPI-085    | Antud aadressiga '${text}' leiab mitu aadressi objekti erineva otstarbega, palume määrata lisaks ADR-ID ja (või) ADS_OID                                |
-| MPI-086    | Aadressi objektil ADS_OID väärtusega ${ads-oid} puudub UN tunnus                                                                                        |
-| MPI-087    | Aadress ADR-ID väärtusega ${adr-id} on tehniline                                                                                                        |
-| MPI-088    | MR tüübiga aadressi objektid pole lubatud                                                                                                               |
-| MPI-089    | ME tüübiga aadressi objektid pole lubatud                                                                                                               |
+| MPI-086    | Aadressiobjektil puudub UN tunnus                                                                                                                       |
+| MPI-087    | Aadress on tehniline                                                                                                                                    |
+| MPI-088    | MR tüübiga aadressiobjekti kasutamine ei ole soovitatav                                                                                                 |
 | MPI-100    | Unknown job type ${type}                                                                                                                                |
+| MPI-400    | FHIR serveri üldine viga                                                                                                                                |
 
 ### Tehiku RR x-tee mikroteenuse veakoodid
 
