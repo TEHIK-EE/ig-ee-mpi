@@ -174,7 +174,7 @@ Usage: #example
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "37302102711"
 * identifier[+]
-  * system = "https://fhir.ee/sid/pid/uzb/ni"
+  * system = "https://fhir.ee/sid/pid/fin/ni"
   * value = "31002736540023"
 /* identifier[+]
   * system = "https://fhir.ee/sid/pid/est/cz"
