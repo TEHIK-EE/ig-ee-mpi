@@ -116,7 +116,7 @@ Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.h
 
 Näiteks eestkostetavate leidmine:
 ```
-GET {MPI}/Patient/$legal-guardian?patient=Patient/572&legal-status=365569001
+GET {MPI}/Patient/$legal-guardian?patient=Patient/168&legal-status=365569001
 ```
 ning saab vastuseks Observationi:
 ```json
@@ -135,11 +135,22 @@ ning saab vastuseks Observationi:
         "contained": [
           {
             "resourceType": "RelatedPerson",
-            "id": "82b67ea1-fc05-44aa-8cbe-af272bbf0a0f",
+            "id": "a8725be4-e78d-427a-883f-d540b97bae55",
             "identifier": [
               {
                 "system": "https://fhir.ee/sid/pid/est/ni",
                 "value": "52009010061"
+              }
+            ],
+            "relationship": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
+                    "code": "DEPEN",
+                    "display": "Dependent"
+                  }
+                ]
               }
             ],
             "name": [
@@ -174,15 +185,15 @@ ning saab vastuseks Observationi:
           ]
         },
         "subject": {
-          "reference": "Patient/572"
+          "reference": "Patient/168"
         },
         "effectivePeriod": {
           "start": "2020-09-28T00:00:00+03:00"
         },
-        "issued": "2023-09-28T11:01:51.608+03:00",
+        "issued": "2024-06-11T15:25:10.148+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#82b67ea1-fc05-44aa-8cbe-af272bbf0a0f"
+            "reference": "RelatedPerson/#a8725be4-e78d-427a-883f-d540b97bae55"
           }
         ],
         "valueCodeableConcept": {
