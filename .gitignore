@@ -17,3 +17,8 @@ Thumbs.db
 
 #fsh build
 out-fsh
+/fsh-generated
+/input-cache
+/output
+/temp
+/template
