@@ -147,9 +147,9 @@ Usage: #definition
 * instance = false
 * parameter[0].name = #identifier-country
 * parameter[=].use = #in
-* parameter[=].min = 0
+* parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Identifikaatori väljaandja riigi 3 kohaline kood ISO standardi järgi. Ei ole kohustuslik."
+* parameter[=].documentation = "Identifikaatori väljaandja riigi 3 kohaline kood ISO standardi järgi. Kohustuslik."
 * parameter[=].type = #string
 * parameter[+].name = #birthdate
 * parameter[=].use = #in
@@ -159,9 +159,9 @@ Usage: #definition
 * parameter[=].type = #date
 * parameter[+].name = #gender
 * parameter[=].use = #in
-* parameter[=].min = 0
+* parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patient gender."
+* parameter[=].documentation = "Patient gender. Kohustuslik."
 * parameter[=].type = #string
 * parameter[+].name = #given
 * parameter[=].use = #in
