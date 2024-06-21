@@ -21,7 +21,7 @@ jobs:
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           docker.kodality.com/fsh-builder \
-          /bin/bash -c "cd /workspace && ./_genonce.sh"
+          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh"
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
