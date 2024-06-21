@@ -1,0 +1,33 @@
+name: Build and Upload Artifact
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build using custom Docker image
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:/workspace \
+          docker.kodality.com/fsh-builder \
+          /bin/bash -c "cd /workspace/ig && ./_genonce.sh"
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: ig/output
