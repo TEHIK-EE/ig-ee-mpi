@@ -18,7 +18,7 @@ jobs:
 
     - name: Build IG with docker builder
       run: |
-        docker run --rm \
+        docker run --platform linux/amd64 --rm \
           -v ${{ github.workspace }}:/workspace \
           docker.kodality.com/fsh-builder \
           /bin/bash -c "cd /workspace && ./_genonce.sh"
