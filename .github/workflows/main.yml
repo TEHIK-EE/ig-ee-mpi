@@ -1,0 +1,44 @@
+name: Build and Upload Artifact
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build IG with docker builder
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:/workspace \
+          docker.kodality.com/fsh-builder \
+          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh"
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: output/
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write 
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
