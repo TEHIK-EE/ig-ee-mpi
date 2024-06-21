@@ -22,9 +22,10 @@ jobs:
           -v ${{ github.workspace }}:/workspace \
           docker.kodality.com/fsh-builder \
           /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh"
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        name: build-artifact
         path: output/
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
