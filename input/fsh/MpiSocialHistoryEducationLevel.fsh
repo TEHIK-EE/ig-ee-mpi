@@ -46,9 +46,9 @@ Description: "Omandatud kõrgeim haridustase"
   * ^designation[=].value = "Doktor või sellega võrdsustatud"
   * ^designation[+].language = #et
   * ^designation[=].value = "Doktor või sellega võrdsustatud haridus"
-* #A9 "Not elsewhere classified" "Mujal nimetama"
+* #A9 "Not elsewhere classified" "Mujal nimetamata"
   * ^designation[0].language = #et 
-  * ^designation[=].value = "Mujal nimetama"
+  * ^designation[=].value = "Mujal nimetamata"
 
 ValueSet:    EEMPIEducationLevel
 Id:          education-level
