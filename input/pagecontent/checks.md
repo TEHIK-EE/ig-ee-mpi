@@ -71,6 +71,10 @@ Välismaa aadressi puhul on kohustuslik ainult riigi kood ja tekst. Välismaa aa
 
 Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg.
 
+#### Kontaktisikud
+
+Patsiendil saab olla kuni 3 kehtivat kontaktisikut (RelatedPerson ressurssi CON suhetüübiga), limiidi ületades tuleb MPI-042 koodiga viga.
+
 ### Kasutatav terminoloogia
 
 #### PÜT-is kasutatavad loendid
