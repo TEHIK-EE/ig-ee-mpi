@@ -18,7 +18,7 @@ Id:          patsiendi-teovoime-staatus
 Title:       "Patsiendi teovõime staatus"
 Description: "Patsiendi teovõime staatus."
 * ^experimental = false
-* include codes from system EEMPILegalStatus
+* include codes from system PatsiendiTeovoimeStaatus
 
 
 Profile:        PatsiendiTeovoimeStaatus
