@@ -1,6 +1,6 @@
-CodeSystem: EEMPIEducationLevel
-Id: education-level
-Title:     "Education level"
+CodeSystem: OmandatudKorgeimHaridus
+Id: omandatud-korgeim-haridus
+Title:     "Omandatud kõrgeim haridus"
 Description: "Omandatud kõrgeim haridustase"
 * ^experimental = false
 * ^content = #complete
@@ -50,12 +50,12 @@ Description: "Omandatud kõrgeim haridustase"
   * ^designation[0].language = #et 
   * ^designation[=].value = "Mujal nimetamata"
 
-ValueSet:    EEMPIEducationLevel
-Id:          education-level
-Title:       "Education Level"
+ValueSet:    OmandatudKorgeimHaridus
+Id:          omandatud-korgeim-haridus
+Title:       "Omandatud kõrgeim haridus"
 Description: "Patsiendi kõrgeim haridustase"
 * ^experimental = false
-* include codes from system EEMPIEducationLevel
+* include codes from system OmandatudKorgeimHaridus
 // SCT where concept descendent-of #365460000 "Finding of education received in the past"
 
 
@@ -96,7 +96,7 @@ Description:    "Haridustase"
 * performer 0..0 MS
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from EEMPIEducationLevel
+* valueCodeableConcept from OmandatudKorgeimHaridus
 * valueCodeableConcept ^short = "Haridustase."
 * basedOn ..0
 * partOf ..0
@@ -116,5 +116,5 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "1995-06-21T00:00:00+02:00"
-* valueCodeableConcept = EEMPIEducationLevel#A6
+* valueCodeableConcept = OmandatudKorgeimHaridus#A6
 // SCT#224300008 "Received university education"
