@@ -1,4 +1,4 @@
-CodeSystem: EEMPIPuudeRaskusaste
+CodeSystem: PuudeRaskusaste
 Id: puude-raskusaste
 Title:     "Puude raskusaste"
 Description: "Puude raskusaste"
@@ -16,12 +16,12 @@ Description: "Puude raskusaste"
   * ^designation[=].value = "SYGAV_PUUE"
 
 
-ValueSet: EEMPIPuudeRaskusaste
+ValueSet: PuudeRaskusaste
 Id: puude-raskusaste
 Title:     "Puude raskusaste"
 Description: "Puude raskusaste"
 * ^experimental = false
-* include codes from system EEMPIPuudeRaskusaste
+* include codes from system PuudeRaskusaste
 /*
 * ^compose.include.system = SCT
 
@@ -67,7 +67,7 @@ Description:    "Puude raskusaste"
 * performer ^short = "Asutus ja/või isik, kes määras puude."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from EEMPIPuudeRaskusaste
+* valueCodeableConcept from PuudeRaskusaste
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -87,4 +87,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
-* valueCodeableConcept = EEMPIPuudeRaskusaste#keskmine "Keskmine puue"
+* valueCodeableConcept = PuudeRaskusaste#keskmine "Keskmine puue"
