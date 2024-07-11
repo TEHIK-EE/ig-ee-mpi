@@ -1,16 +1,16 @@
 /*
-CodeSystem: GuardianStatus
-Id:         guardian-status
-Title:     "Guardian Status"
-Description: "Eeskostja liik"
+CodeSystem: Eestkosteliik
+Id:         eestkoste-liik
+Title:     "Eestkoste liik"
+Description: "Eestkoste liik"
 * SNOMED#58626002 "Legal guardian"
 * SNOMED#365569001 "Finding of wardship"
 */
 
-ValueSet: EEMPIGuardianStatus
-Id:         guardian-status
-Title:     "Guardian Status"
-Description: "Eeskostja liik"
+ValueSet: Eestkosteliik
+Id:         eestkoste-liik
+Title:     "Eestkoste liik"
+Description: "Eestkoste liik"
 * ^experimental = false
 * ^copyright = "This value set includes content from SNOMED CT, which is copyright © 2002+ International Health Terminology Standards Development Organisation (IHTSDO), and distributed by agreement between IHTSDO and HL7. Implementer use of SNOMED CT is not covered by this agreement"
 //* include codes from system GuardianStatus
@@ -45,7 +45,7 @@ Description:    "Seadusliku eeskostja staatus"
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from EEMPIGuardianStatus
+* valueCodeableConcept from Eestkosteliik
 * value[x] ^short = "Eeskoste liik."
 * note ..1 MS
 * basedOn ..0
