@@ -1,7 +1,8 @@
-CodeSystem: EEMPIIncapacityForWorkCategory
-Id: incapacity-for-work-category
-Title:     "Category of Incapacity For Work"
-Description: "Töövõimetuse määr"
+Töövõime liik - Id: toovoime-liik - ToovoimeLiik
+CodeSystem: ToovoimeLiik
+Id: toovoime-liik
+Title:     "Töövõime liik"
+Description: "Töövõime liik"
 * ^experimental = false
 * ^content = #complete
 * ^caseSensitive = false
@@ -16,10 +17,10 @@ Description: "Töövõimetuse määr"
   * ^designation[=].value = "Töövõime ei ole vähenenud"
 
 
-ValueSet: EEMPIIncapacityForWorkCategory
-Id: incapacity-for-work-category
-Title:     "Category of Incapacity For Work"
-Description: "Töövõimetuse määr"
+ValueSet: ToovoimeLiik
+Id: toovoime-liik
+Title:     "Töövõime liik"
+Description: "Töövõime liik"
 * ^experimental = false
 * include codes from system EEMPIIncapacityForWorkCategory
 
@@ -27,7 +28,7 @@ Profile:        EEMPISocialHistoryIncapacityForWork
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-incapacity-for-work
 Title:          "EE MPI SocialHistory Incapacity For Work"
-Description:    "Töövõimetuse määr"
+Description:    "Töövõime liik"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -42,7 +43,7 @@ Description:    "Töövõimetuse määr"
 * performer ^short = "Asutus ja/või isik, kes määras puude."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from EEMPIIncapacityForWorkCategory
+* valueCodeableConcept from ToovoimeLiik
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -62,4 +63,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
-* valueCodeableConcept = EEMPIIncapacityForWorkCategory#puudub "Puuduv töövõime"
+* valueCodeableConcept = ToovoimeLiik#puudub "Puuduv töövõime"
