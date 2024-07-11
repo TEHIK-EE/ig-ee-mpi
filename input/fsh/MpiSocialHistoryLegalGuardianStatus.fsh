@@ -1,5 +1,5 @@
 /*
-CodeSystem: Eestkosteliik
+CodeSystem: EestkosteLiik
 Id:         eestkoste-liik
 Title:     "Eestkoste liik"
 Description: "Eestkoste liik"
@@ -7,7 +7,7 @@ Description: "Eestkoste liik"
 * SNOMED#365569001 "Finding of wardship"
 */
 
-ValueSet: Eestkosteliik
+ValueSet: EestkosteLiik
 Id:         eestkoste-liik
 Title:     "Eestkoste liik"
 Description: "Eestkoste liik"
@@ -45,7 +45,7 @@ Description:    "Seadusliku eeskostja staatus"
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from Eestkosteliik
+* valueCodeableConcept from EestkosteLiik
 * value[x] ^short = "Eeskoste liik."
 * note ..1 MS
 * basedOn ..0
