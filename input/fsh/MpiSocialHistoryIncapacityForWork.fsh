@@ -1,4 +1,3 @@
-Töövõime liik - Id: toovoime-liik - ToovoimeLiik
 CodeSystem: ToovoimeLiik
 Id: toovoime-liik
 Title:     "Töövõime liik"
