@@ -8,12 +8,12 @@ Description: "Ametite klassifikaator"
 * include codes from system SCT where concept descendent-of #14679004 "Occupation"
 */
 
-CodeSystem: EEMPIOccupationType
-Id: occupation-type
-Title: "Type of employment"
+CodeSystem: TootamiseLiik
+Id: tootamise-liik
+Title: "Töötamise liik"
 * ^extension.url = "http://hl7.org/fhir/tools/StructureDefinition/web-source"
 * ^extension.valueUrl = "https://termx.kodality.dev/fhir/CodeSystem/tootamise-liik"
-* ^url = "https://fhir.ee/CodeSystem/occupation-type"
+* ^url = "https://fhir.ee/CodeSystem/tootamise-liik"
 * ^version = "1.0.0"
 * ^versionAlgorithmString = "semver"
 * ^status = #draft
@@ -100,13 +100,12 @@ Title: "Type of employment"
 * #802 ^designation.use.code = #display
 * #802 ^designation.value = "Meretööleping, töötaja reisilaeval"
 
-
-ValueSet: EEMPIOccupationType
-Id: occupation-type
-Title:     "Occupation Type"
+ValueSet: TootamiseLiik
+Id: tootamise-liik
+Title:     "Töötamise liik"
 Description: "Töötamise liik"
 * ^experimental = false
-* include codes from system EEMPIOccupationType
+* include codes from system TootamiseLiik
 
 /*
 ValueSet: EEMPIJobType
@@ -180,7 +179,7 @@ Description:    "Töötamine"
 * component[rate] ^short = "Lepinguline töökoormus."
 * component[type].code = SCT#224361009 "Type of job"
 * component[type].value[x] only CodeableConcept
-* component[type].valueCodeableConcept from EEMPIOccupationType
+* component[type].valueCodeableConcept from TootamiseLiik
 * component[type].valueCodeableConcept ^short = "Töötamise liik."
 //* component[status].code = SCT#224362002 "Employment status"
 //* component[status].value[x] only CodeableConcept
@@ -200,4 +199,4 @@ Usage: #example
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
 * component[job].valueCodeableConcept = EEBaseOccupation#22122501 "Pediaater"
-* component[type].valueCodeableConcept = EEMPIOccupationType#501 "Vabatahtlik töö"
+* component[type].valueCodeableConcept = TootamiseLiik#501 "Vabatahtlik töö"
