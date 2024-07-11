@@ -21,7 +21,7 @@ Id: toovoime-liik
 Title:     "Töövõime liik"
 Description: "Töövõime liik"
 * ^experimental = false
-* include codes from system EEMPIIncapacityForWorkCategory
+* include codes from system ToovoimeLiik
 
 Profile:        EEMPISocialHistoryIncapacityForWork
 Parent:         EEBaseObservation
