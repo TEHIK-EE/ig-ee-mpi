@@ -1,6 +1,6 @@
-CodeSystem: EEMPIDisabilityLevel
-Id: disability-level
-Title:     "Disability level"
+CodeSystem: EEMPIPuudeRaskusaste
+Id: puude-raskusaste
+Title:     "Puude raskusaste"
 Description: "Puude raskusaste"
 * ^experimental = false
 * ^content = #complete
@@ -16,12 +16,12 @@ Description: "Puude raskusaste"
   * ^designation[=].value = "SYGAV_PUUE"
 
 
-ValueSet: EEMPIDisabilityLevel
-Id: disability-level
-Title:     "Disability level"
+ValueSet: EEMPIPuudeRaskusaste
+Id: puude-raskusaste
+Title:     "Puude raskusaste"
 Description: "Puude raskusaste"
 * ^experimental = false
-* include codes from system EEMPIDisabilityLevel
+* include codes from system EEMPIPuudeRaskusaste
 /*
 * ^compose.include.system = SCT
 
@@ -67,7 +67,7 @@ Description:    "Puude raskusaste"
 * performer ^short = "Asutus ja/või isik, kes määras puude."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept 
-* valueCodeableConcept from EEMPIDisabilityLevel
+* valueCodeableConcept from EEMPIPuudeRaskusaste
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -87,4 +87,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
-* valueCodeableConcept = EEMPIDisabilityLevel#keskmine "Keskmine puue"
+* valueCodeableConcept = EEMPIPuudeRaskusaste#keskmine "Keskmine puue"
