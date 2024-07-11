@@ -21,7 +21,7 @@ Description: "Patsiendi teovõime staatus."
 * include codes from system PatsiendiTeovoimeStaatus
 
 
-Profile:        PatsiendiTeovoimeStaatus
+Profile:        EEMPISocialHistoryLegalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-status
 Title:          "EE MPI SocialHistory Legal Status"
