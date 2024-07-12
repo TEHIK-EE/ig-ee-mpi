@@ -1,9 +1,9 @@
 Alias: v3-RoleClass = http://terminology.hl7.org/CodeSystem/v3-RoleClass 
 
-ValueSet: EEMPIPersonRelationshipClass
-Id: person-relationship-class
-Title: "Person Relationship Class"
-Description: "Person relationship class"
+ValueSet: IsikuSeosPatsiendiga
+Id: isiku-seos-patsiendiga
+Title: "Isiku seos patsiendiga"
+Description: "Isiku seos patsiendiga"
 * ^experimental = false
 * ^compose.include.system = v3-RoleClass
 * ^compose.include.concept[+].code = #CON
@@ -185,7 +185,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * relationship[person] 0..1 MS
 * relationship[person] from EEBasePersonRelationship (required)
 * relationship[class] MS
-* relationship[class] from EEMPIPersonRelationshipClass (required)
+* relationship[class] from IsikuSeosPatsiendiga (required)
 
 
 Instance: PatientIgorBossenkoSon
@@ -212,7 +212,7 @@ Usage: #example
 * patient = Reference(Patient/pat1)
 * name.text = "Wife of Igor"
 * relationship[person] = SCT#127848009 "Spouse"
-* relationship[class] = v3-RoleClass#CON "Contact"
+* relationship[class] = IsikuSeosPatsiendiga#CON "Contact"
 * active = true
 * period.start = "1995-06-22"
 
