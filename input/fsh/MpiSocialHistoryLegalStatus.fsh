@@ -1,6 +1,6 @@
-CodeSystem:  PatsiendiTeovoimeStaatus
-Id:          patsiendi-teovoime-staatus
-Title:       "Patsiendi teovõime staatus"
+CodeSystem:  TeovoimeStaatus
+Id:          teovoime-staatus
+Title:       "Teovõime staatus"
 Description: "The legal status that applies to the patient. The legal status indicates the basis on which the patient is staying in a healthcare organization. This can be either voluntary or involuntary, however the legal status is always determined by a judge. A patient can also receive healthcare based on a forensic status."
 * ^experimental = false
 * ^content = #complete
@@ -13,12 +13,12 @@ Description: "The legal status that applies to the patient. The legal status ind
   * ^designation[0].language = #et
   * ^designation[=].value = "Piiratud valimisõigusega"
 
-ValueSet:    PatsiendiTeovoimeStaatus
-Id:          patsiendi-teovoime-staatus
-Title:       "Patsiendi teovõime staatus"
-Description: "Patsiendi teovõime staatus."
+ValueSet:    TeovoimeStaatus
+Id:          teovoime-staatus
+Title:       "Teovõime staatus"
+Description: "Teovõime staatus."
 * ^experimental = false
-* include codes from system PatsiendiTeovoimeStaatus
+* include codes from system TeovoimeStaatus
 
 
 Profile:        EEMPISocialHistoryLegalStatus
@@ -39,7 +39,7 @@ Description:    "Patsiendi teovõime staatus."
 * performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from PatsiendiTeovoimeStaatus
+* valueCodeableConcept from TeovoimeStaatus
 * note ..1 MS
 * basedOn ..0
 * partOf ..0
@@ -61,4 +61,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer[0] = Reference(PatientIgorBossenkoWife)
-* valueCodeableConcept = PatsiendiTeovoimeStaatus#T0 "Teovõimeline"
+* valueCodeableConcept = TeovoimeStaatus#T0 "Teovõimeline"
