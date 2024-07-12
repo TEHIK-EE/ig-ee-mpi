@@ -105,7 +105,7 @@ Id: tootamise-liik
 Title:     "Töötamise liik"
 Description: "Töötamise liik"
 * ^experimental = false
-* include codes from system EEMPIOccupationType
+* include codes from system TootamiseLiik
 
 /*
 ValueSet: EEMPIJobType
