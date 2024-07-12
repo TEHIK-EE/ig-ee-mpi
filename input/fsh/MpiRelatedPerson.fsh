@@ -85,7 +85,7 @@ Usage: #definition
 * group.element[=].target.relationship = #source-is-narrower-than-target
 * group.element[+].code = #13
 * group.element[=].display = "elukaaslane"
-* group.element[=].target.code = #444210007
+* group.element[=].target.code = #394921008
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #14
 * group.element[=].display = "naaber"
@@ -147,8 +147,8 @@ Usage: #definition
 * group.element[=].display = "Spouse"
 * group.element[=].target.code = #1
 * group.element[=].target.relationship = #equivalent
-* group.element[+].code = #444210007
-* group.element[=].display = "Cohabitee in relationship with subject"
+* group.element[+].code = #394921008
+* group.element[=].display = "Cohabitee"
 * group.element[=].target.code = #13
 * group.element[=].target.relationship = #equivalent
 * group.element[+].code = #394863008
