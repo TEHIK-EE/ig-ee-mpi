@@ -7,7 +7,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-link"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-link"
 * version = "5.0.0"
 * name = "EEMPIPatientLink"
 * title = "Patient Link"
@@ -67,7 +67,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-unlink"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-unlink"
 * version = "5.0.0"
 * name = "EEMPIPatientUnlink"
 * title = "Patient Unlink"
@@ -127,7 +127,7 @@ Usage: #definition
 * extension[=].valueInteger = 0
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-foreign"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-foreign"
 * version = "5.0.0"
 * name = "EEMPIPatientForeignSearch"
 * title = "Patient Foreign"
@@ -197,7 +197,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-lookup"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-lookup"
 * version = "5.0.0"
 * name = "EEMPIPatientLookup"
 * title = "Patient Lookup"
@@ -243,7 +243,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-legal-guardian"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-legal-guardian"
 * version = "5.0.0"
 * name = "EEMPIPatientLegalGuardianStatus"
 * title = "Patient Legal Guardians"
@@ -295,7 +295,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-power-of-attorney"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-power-of-attorney"
 * version = "5.0.0"
 * name = "EEMPIPatientPowerOfAttorneyStatus"
 * title = "Patient power of attorneys"
@@ -341,7 +341,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-education"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-education"
 * version = "5.0.0"
 * name = "EEMPIPatientEducationStatus"
 * title = "Patient Education"
@@ -386,7 +386,7 @@ Usage: #definition
 * extension[=].valueInteger = 1
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
 * extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/OperationDefinition/patient-generate-mrn"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-generate-mrn"
 * version = "5.0.0"
 * name = "EEMPIPatientGenerateMRN"
 * title = "Generate Medical Record Number"
@@ -414,7 +414,7 @@ Usage: #definition
 Instance: patient-disability
 InstanceOf: OperationDefinition
 Usage: #definition
-* url = "https://fhir.ee/OperationDefinition/patient-disability"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-disability"
 * version = "5.0.0"
 * name = "EEMPIPatientDisability"
 * title = "Patient Disability"
@@ -455,7 +455,7 @@ Usage: #definition
 Instance: patient-incapacity-for-work
 InstanceOf: OperationDefinition
 Usage: #definition
-* url = "https://fhir.ee/OperationDefinition/patient-incapacity-for-work"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-incapacity-for-work"
 * version = "5.0.0"
 * name = "EEMPIPatientIncapacityForWork"
 * title = "Patient incapacity for work"
@@ -496,7 +496,7 @@ Usage: #definition
 Instance: patient-occupation
 InstanceOf: OperationDefinition
 Usage: #definition
-* url = "https://fhir.ee/OperationDefinition/patient-occupation"
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-occupation"
 * version = "5.0.0"
 * name = "EEMPIPatientOccupation"
 * title = "Patient occupation"

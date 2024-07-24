@@ -1,7 +1,7 @@
 Käesolev juhend kirjeldab isikute identifitseerimise dokumenteerimise korda Eesti isikukoodiga, välisriigi isiku koodiga ning tundmatute ja surnult sündinute andmete edastamisel tervise infosüsteemi MPI teenusesse. Lisaks on selgitatud dubleerivate patsientide koodide sidumise lahendust.
 
 ### Identity system
-Detailne info identifitseerimissüsteemi kohta on leitav [EEBase](https://build.fhir.org/ig/HL7EE/ig-ee-base/) juurutusjuhendis.
+Detailne info identifitseerimissüsteemi kohta on leitav [EEBase](https://fhir.ee/ig/ee-base/current/) juurutusjuhendis.
 
 ### Eesti isikukood
 11-kohaline Eesti isikukood, mida kasutada patsiendi tuvastamiseks lahtris „isikukood“.
@@ -17,7 +17,7 @@ Patsienti identifitseeriv kood koos vastava OID-ga moodustab TIS-s terviku ehk u
 NB! Siinkohal on oluline, et riigi valik saaks tehtud vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Ehk, kui isikul on olemas Eesti isikukood, aga rahvuselt või kodakondsuselt on ta muu riigi kodanik, siis tuleb valida ikkagi Eesti riigi tunnus isikukoodi juures.
 
 ### Välisriigi isiku kood
-Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/CodeSystem-identifier-domain.html)). Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). Olulisemad tüübid on:
+Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Identifier Domain](https://fhir.ee/ig/terminology/current/site/CodeSystem-identifier-domain.html)). Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). Olulisemad tüübid on:
 - NI - riiklik identifikaator / nationanal identifier
 - PPN - passi number / passport
 - CZ - Id kaardi number / citezenship card number
@@ -27,7 +27,7 @@ Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit v�
 
 Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number.
 
-Riikidel mille dokumentidel (PPN, CZ ja DL tüübiga) eksisteerib isikukood tuleb alati lisaks dokumendi numbrile määrata isikukood (identifikaator NI tüübiga). Loetelu nendest riikidest: [national-identifier-requirement](CodeSystem-national-identifier-requirement.html)
+Riikidel mille dokumentidel (PPN, CZ ja DL tüübiga) eksisteerib isikukood tuleb alati lisaks dokumendi numbrile määrata isikukood (identifikaator NI tüübiga). Loetelu nendest riikidest: [national-identifier-requirement](https://fhir.ee/ig/terminology/current/site/CodeSystem-national-identifier-requirement.html)
 
 Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pass:
 ```json

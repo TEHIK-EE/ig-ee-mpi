@@ -77,15 +77,15 @@ Liigsete andmete pärimise vältimiseks soovitame lisada otsingukomponendi sisse
 täiendava filtri.
 
 - Lihtsama implementatatsiooni puhul selleks võiks olla valik riikidest, PÜT tundmatu patsiendi identifikaatorist ja oma asutuse patsiendi identifikaatorist.
-- Keerulisem lahendus peaks arvestama [Patient Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-patient-identifier-domain.html) loendiga
-  ja [Identifier Domain](https://build.fhir.org/ig/HL7EE/ig-ee-base/CodeSystem-identifier-domain.html) koodisüsteemi ülesehitusega. Iga loendi kuuluv mõiste
+- Keerulisem lahendus peaks arvestama [Patient Identifier Domain](https://fhir.ee/ig/terminology/current/site/ValueSet-patient-identifier-domain.html) loendiga
+  ja [Identifier Domain](https://fhir.ee/ig/terminology/current/site/CodeSystem-identifier-domain.html) koodisüsteemi ülesehitusega. Iga loendi kuuluv mõiste
   omab tunnust `country` (riik), ning kõik kasutamiseks lubatud mõisted (`notSelectable`=false) omavad `idtype` (identifitseerimise viis). Iga riigiga on seotud
   erinev arv identifitseerimisviise. Näiteks on Saksamaalt pärit patsiente lubatud identifitseerida ainult passinumbri põhjal, kuid Soome patsiente saab
   identifitseerida isikliku identifikaatori, passinumbri ja ID-kaardi numbri alusel. Arendajal on vabadus kasutada kas hierarhiat või kahte valikut (riik ja
   identifitseerimisviis) või oma lahendust, oluline on, et päring PÜT-ile tehakse koos identifitseerimissüsteemiga (nt Soome
   isikukoodiga `https://fhir.ee/sid/pid/fin/ni`).
 
-> PS. Oluline on meeles pidada, et on olemas [riigid](CodeSystem-national-identifier-requirement.html), kus kõik dokumendid sisaldavad riiklikku isiklikku
+> PS. Oluline on meeles pidada, et on olemas [riigid](https://fhir.ee/ig/terminology/current/site/CodeSystem-national-identifier-requirement.html), kus kõik dokumendid sisaldavad riiklikku isiklikku
 > identifikaatorit. Vastava riigi patsiendi lisamisel on riikliku personaalse identifikaatori kasutamine kohustuslik.”
 
 Allpool on kirjeldatud erinevad otsingukomponendi päringud:

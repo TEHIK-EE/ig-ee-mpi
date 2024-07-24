@@ -51,7 +51,7 @@ Usage: #example
   * text = "Malle Maasikas"
 * gender = #male
 * birthDate = "1973-02-10"
-  * extension[accuracyIndicator].valueCoding = EEBaseDateAccuracyIndicator#AAA "Day, month and year are accurate"
+  * extension[accuracyIndicator].valueCoding = EEDateAccuracyIndicator#AAA "Day, month and year are accurate"
 * address
   * use = #temp
   * country = "EE"

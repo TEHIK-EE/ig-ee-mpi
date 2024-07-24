@@ -12,7 +12,7 @@
   - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
 - <input type="checkbox"/> Oskab kasutada [FHIR terminoloogiat](https://build.fhir.org/ig/TEHIK-EE/TerminologyServices).
   - <input type="checkbox"/> Toetab kõiki [PÜTis kasutatud klassifikaatoreid ja loendeid](checks.html#kasutatav-terminoloogia).
-  - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, vastabvalt ConceptMap-ile [identity-system-to-oid](ConceptMap-identity-system-to-oid.html)
+  - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, vastabvalt ConceptMap-ile [identity-system-to-oid](https://fhir.ee/ig/terminology/current/site/ConceptMap-identity-system-to-oid.html)
 - [Oskab](dev.html#andmete-pärimine) opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`
@@ -20,7 +20,7 @@
   - <input type="checkbox"/> Oskab otsida patsiendi identifikaatori alusel  `GET /Patient?identifier=..`
   - <input type="checkbox"/> Toetab [ADS](https://geoportaal.maaamet.ee/est/Teenused/Integreeritav-aadressiotsing-In-ADS-p504.html)-i. Oskab vastu võtta ja saata aadressi ADS kujul.  
   - <input type="checkbox"/> Arvestab RR-i elukoha ja lisa-aadresside esitamise [reegleid](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf)
-  - <input type="checkbox"/> Suudab kuvada TTO kasutajale informatsiooni [põhi- ja lisaaadressite](https://build.fhir.org/ig/HL7EE/ig-ee-base/StructureDefinition-ee-address.html) kohta.
+  - <input type="checkbox"/> Suudab kuvada TTO kasutajale informatsiooni [põhi- ja lisaaadressite](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address.html) kohta.
   - <input type="checkbox"/> Arvestab [PÜT sisemiste kontrollidega](checks.html#püt-rakenduse-sisesed-kontrollid),  s.h. toetab ametlikku telefoninumbri, emaili ja aadressi kuju
 - Arvestab erinevate [patsiendi liikidega](patient.html)
   - <input type="checkbox"/> Toetab [tuvastatud patsiendi](StructureDefinition-ee-mpi-patient-verified.html) andmekoosseisu.
@@ -31,7 +31,7 @@
 - Oskab opereerida [RelatedPerson](http://hl7.org/fhir/relatedperson.html) ressursiga  
   - <input type="checkbox"/> Toetab [seotud isiku](StructureDefinition-ee-mpi-related-person.html) andmekoosseisu `GET/PUT/POST/DELETE /RelatedPerson`
   - <input type="checkbox"/> Toetab seotud isikute otsingut `GET /RelatedPerson?patient=value`
-  - <input type="checkbox"/> Toetab mitut seosetüüpi mitmest kodeerimissüsteemist - [kontaktisiku tüüp](ValueSet-person-relationship-class.html) ja [suhe patsiendiga](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-person-relationship.html).
+  - <input type="checkbox"/> Toetab mitut seosetüüpi mitmest kodeerimissüsteemist - [kontaktisiku tüüp](https://fhir.ee/ig/terminology/current/site/ValueSet-person-relationship-class.html) ja [suhe patsiendiga](https://fhir.ee/ig/terminology/current/site/ValueSet-isiku-seos-patsiendiga.html).
 - Oskab kasutada [MPI operatsioone](operations.html), s.h.
   - <input type="checkbox"/> [töövõimetuse päringut](OperationDefinition-patient-incapacity-for-work.html)
   - <input type="checkbox"/> [puude päringut](OperationDefinition-patient-disability.html)
