@@ -25,7 +25,7 @@ publisher:
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
-  ee.fhir.terminology: 0.2.1  # dev - local computer
+  ee.fhir.terminology: 0.2.2  # dev - local computer
   ee.fhir.base: 1.1.1  # dev - local computer
 #  hl7.fhir.uv.extensions: current
 
