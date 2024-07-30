@@ -9,7 +9,7 @@ name: EEMPI
 title: Patsiendi üldandmete teenus / Master Patient Index
 # description: Example Implementation Guide for getting started with SUSHI
 status: active # draft | active | retired | unknown
-version: 1.1.0
+version: 1.1.1
 fhirVersion: 5.0.0 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2023+
 releaseLabel: trial-use #ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
@@ -25,8 +25,8 @@ publisher:
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
-  ee.fhir.terminology: 0.2.0  # dev - local computer
-  ee.fhir.base: 1.1.0  # dev - local computer
+  ee.fhir.terminology: 0.2.1  # dev - local computer
+  ee.fhir.base: 1.1.1  # dev - local computer
 #  hl7.fhir.uv.extensions: current
 
 
