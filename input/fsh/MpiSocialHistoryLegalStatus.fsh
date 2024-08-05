@@ -37,5 +37,4 @@ Description: "Example of patient legal status"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* performer[0] = Reference(PatientIgorBossenkoWife)
 * valueCodeableConcept = TeovoimeStaatus#T0 "Teovõimeline"
