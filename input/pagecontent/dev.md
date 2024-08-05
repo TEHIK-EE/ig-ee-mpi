@@ -234,7 +234,7 @@ Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi
 "id": "1",
 "meta": {
 "profile": [
-"https://fhir.ee/StructureDefinition/ee-mpi-patient-verified"
+"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 ],
 "source": "https://my.his.ee/Patient/92837-fdsvsd-3f4gfew-2342dwd"
 }

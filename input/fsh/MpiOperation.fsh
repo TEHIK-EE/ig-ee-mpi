@@ -272,7 +272,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian (https://fhir.ee/ImplementationGuide/mpi/ValueSet-guardian-status.html)"
+* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian"
 * parameter[=].type = #string
 * parameter[+].name = #nocache
 * parameter[=].use = #in
@@ -534,3 +534,42 @@ Usage: #definition
 * parameter[=].type = #Bundle
 
 
+Instance: patient-legal-status
+InstanceOf: OperationDefinition
+Usage: #definition
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-legal-status"
+* version = "5.0.0"
+* name = "EEMPIPatientLegalStatus"
+* title = "Patient legal status"
+* status = #active
+* kind = #operation
+* experimental = false
+* date = "2023-03-26T15:21:02+11:00"
+* publisher = "HL7 Estonia"
+* description = "The observation of patient legal status from Population Register (RR)."
+* jurisdiction = $m49.htm#Estonia "Estonia"
+* affectsState = false
+* code = #lega-status
+* resource = #Patient
+* system = false
+* type = true
+* instance = false
+* parameter[0].name = #patient
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "A direct resource reference to the patient resource."
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
+* parameter[=].type = #boolean
+* parameter[+].name = #return
+* parameter[=].use = #out
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].type = #Bundle

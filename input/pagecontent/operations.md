@@ -11,45 +11,54 @@ Patsientide sidumise ja lahti sidumise loogika ja operatsioonid on seletatud [le
 ### Välismaalaste otsing
 Välismaalaste otsimiseks või patsientide otsimiseks ilma identifikaatorita tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html). Toetavate parameetrite hulka kuuluvad: identifikaatori väljastanud riik, eesnimi, perekonnanimi, sünnikuupäev, sugu ja kontaktandmed.
 ```
-GET {MPI}/Patient/$foreign?family=smith&gender=male
+GET {MPI}/Patient/$foreign?gender=male&birthdate=1979-12-25&family=Graham&given=Gene&identifier_country=UZB
 ```
 Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssidest (ilma metainformatsioonita):
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Patient",
-                "id": "1027",
-                "meta": {
-                    "profile": [
-                        "https://hl7.ee/fhir/StructureDefinition/EEMPI-Patient-Verified"
-                    ]
-                },
-                "active": true,
-                "name": [
-                    {
-                        "family": "SMITH",
-                        "given": [
-                            "JAI"
-                        ]
-                    }
-                ],
-                "gender": "male",
-                "birthDate": "1930-02-20",
-                "_birthDate": {
-                    "extension": [
-                        {
-                            "url": "http://hl7.org/fhir/StructureDefinition/patient-birthTime",
-                            "valueDateTime": "1930-02-20T00:00:00+00:00"
-                        }
-                    ]
-                }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "895",
+        "meta": {
+          "lastUpdated": "2024-08-05T08:41:32.120+03:00",
+          "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.ee/sid/pid/uzb/ppn",
+            "value": "113354925133"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Graham",
+            "given": [
+              "Gene"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+1234567",
+            "period": {
+              "start": "2024-08-05T08:41:32+03:00"
             }
-        }
-    ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1979-12-25"
+      }
+    }
+  ]
 }
 ```
 
@@ -67,42 +76,95 @@ GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&
 
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Patient",
-                "id": "3744",
-                "meta": {
-                    "profile": [
-                        "https://hl7.ee/fhir/StructureDefinition/EEMPI-Patient-Verified"
-                    ]
-                },
-                "text": {
-                    "status": "generated",
-                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">CARL <b>PEREA </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>52007010062</td></tr><tr><td>Date of birth</td><td><span>01 July 2020</span></td></tr></tbody></table></div>"
-                },
-                "identifier": [
-                    {
-                        "system": "https://fhir.ee/sid/pid/est/ni",
-                        "value": "52007010062"
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "family": "PEREA",
-                        "given": [
-                            "CARL"
-                        ]
-                    }
-                ],
-                "gender": "male",
-                "birthDate": "2020-07-01"
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "899",
+        "meta": {
+          "lastUpdated": "2024-08-05T08:44:24.072+03:00",
+          "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.ee/sid/pid/est/ni",
+            "value": "52007010062"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "PEREA",
+            "given": [
+              "CARL"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "2020-07-01",
+        "address": [
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/address-official",
+                "valueBoolean": true
+              },
+              {
+                "url": "https://fhir.ee/StructureDefinition/ee-ads-adr-id",
+                "valueCoding": {
+                  "system": "https://fhir.ee/CodeSystem/ads-adr-id",
+                  "code": "2187800"
+                }
+              },
+              {
+                "url": "https://fhir.ee/StructureDefinition/ee-ads-oid",
+                "valueCoding": {
+                  "system": "https://fhir.ee/CodeSystem/ads-oid",
+                  "code": "ER01392274"
+                }
+              }
+            ],
+            "use": "home",
+            "type": "physical",
+            "text": "Harju maakond, Tallinn, Lasnamäe linnaosa, Virbi tn 2-99",
+            "line": [
+              "Virbi tn 2 - 99"
+            ],
+            "_line": [
+              {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+                    "valueString": "Virbi tn"
+                  },
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+                    "valueString": "2"
+                  },
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator",
+                    "valueString": "99"
+                  }
+                ]
+              }
+            ],
+            "city": "Tallinn",
+            "state": "Harju maakond",
+            "postalCode": "13629",
+            "country": "EE",
+            "period": {
+              "start": "2024-01-12T00:00:00+02:00"
             }
-        }
-    ]
+          }
+        ]
+      }
+    }
+  ]
 }
 ```
 
@@ -129,7 +191,7 @@ ning saab vastuseks Observationi:
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-legal-guardian-status"
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-guardian-status"
           ]
         },
         "contained": [
@@ -211,12 +273,12 @@ ning saab vastuseks Observationi:
 }
 ```
 
-#### Power of attorney
+#### Hooldusõiguste pärimine
 Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
 ```
 GET {MPI}/Patient/$power-of-attorney?patient=Patient/3744
 ```
-ning saab vastuseks Observationi:
+ning saab vastuseks on mitu Observation ressursi:
 ```json
 {
   "resourceType": "Bundle",
@@ -227,7 +289,7 @@ ning saab vastuseks Observationi:
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
           ]
         },
         "contained": [
@@ -299,7 +361,7 @@ ning saab vastuseks Observationi:
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://fhir.ee/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
           ]
         },
         "contained": [
@@ -430,9 +492,128 @@ ning saab vastuseks Observationi
 ```
 
 ### Puude määr
-Operatsioon tagastab [Disability](StructureDefinition-ee-mpi-socialhistory-disability.html) objekti.
+Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+```
+GET {MPI}/Patient/$disability?patient=Patient/7073
+```
+ning saab vastuseks on [Disability](StructureDefinition-ee-mpi-socialhistory-disability.html) Observationi
 
+```json
+{
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "meta": {
+                    "profile": [
+                        "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-disability"
+                    ]
+                },
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                "code": "social-history",
+                                "display": "Social history"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "95377-8",
+                            "display": "Disability type"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/7073"
+                },
+                "effectivePeriod": {
+                    "start": "2024-02-29T00:00:00+02:00",
+                    "end": "2027-02-27T00:00:00+02:00"
+                },
+                "issued": "2024-08-05T09:02:37.395+03:00",
+                "valueCodeableConcept": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.ee/CodeSystem/puude-raskusaste",
+                            "code": "sygav",
+                            "display": "Sügav puue"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
 
+### Teovõime
+Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+```
+GET {MPI}/Patient/$legal-status?patient=Patient/874
+```
+ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-legal-status.html) Observationi
+
+```json
+{
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "meta": {
+                    "profile": [
+                        "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-status"
+                    ]
+                },
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                "code": "social-history",
+                                "display": "Social history"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "8625004",
+                            "display": "Legal status"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/874"
+                },
+                "issued": "2024-08-02T13:12:35.344+03:00",
+                "valueCodeableConcept": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.ee/CodeSystem/teovoime-staatus",
+                            "code": "T3",
+                            "display": "Piiratud teovõimega valimisõigusega"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
 ## Tööprintsiip
 ### Vahemälu (cache)
 MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast värskendab andmed vahemälus.
