@@ -57,7 +57,8 @@ Vastus:
 }
 ```
 
-TODO: viide dokumentatsioonile teabekeskusest
+**Detailne juhend on leitav [teabekeskusest](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenus).**
+
 
 #### Tokeni cache-mine
 
@@ -72,6 +73,10 @@ Tokeni tuleb kasutatada `Authorization` päises `Bearer ` prefiksiga. Näiteks
 ```
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
 ```
+
+#### API otspunkti õigused
+Iga FHIR API otspunkt kontrollib õigusi, mis on rollipõhised. Rollide kohta saab lugeda [siin](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenuse-kasutajate-rollid).
+Õiguste maatriks asub [siin](permissions.html).
 
 ### Päised (HTTP headers)
 
