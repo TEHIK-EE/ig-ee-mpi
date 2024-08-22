@@ -278,6 +278,43 @@ Loogilise vea puhul tuleb koodiga 40X viga. Juhul kui teenus ei ole kättesaadav
 Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) vormingus. Väli "code" sisaldab tüüpiliselt ühte
 loogilistest [koodidest](errors.html).
 
+#### Vastuse väljade piiramine
+
+Vastuse väljade piiramiseks tuleb kasutada `_elements` [parameetri](https://hl7.org/fhir/search.html#elements).
+Väärtuseks tuleb panna komaga eraldatud väljade nimed, mida soovitakse kätte saada.
+
+Näidis päring:
+```
+GET /Patient/123?_elements=name.family,gender
+```
+Tagastab soovitud välajad ning alati ka kohustuslikud väljad nagu `id` ja `meta`:
+```json
+{
+    "resourceType": "Patient",
+    "id": "53552",
+    "meta": {
+        "lastUpdated": "2024-08-21T17:18:32.526+03:00",
+        "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+        ],
+        "tag": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "code": "SUBSETTED",
+                "display": "Resource encoded in summary mode"
+            }
+        ]
+    },
+    "name": [
+        {
+            "family": "Võsaülane"
+        }
+    ],
+    "gender": "male"
+}
+```
+
+
 ### Aeg ja ajatsoon
 
 Ressurside vastuvõtmisel MPI FHIR liides toetab ajad erinevates ajatsoonides, näiteks UTC `1974-12-25T23:00:00Z` või offset'iga `1974-12-26T01:00:00+02:00`.
