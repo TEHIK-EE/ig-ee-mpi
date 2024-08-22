@@ -167,13 +167,13 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "*"
-* parameter[=].documentation = "Patient given name. Eesnimi. Otsing sõna alguse järgi, ei ole tõstetundlik."
+* parameter[=].documentation = "Patient given name. Eesnimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
 * parameter[=].type = #string
 * parameter[+].name = #family
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patient family name. Perekonna nimi. Otsing sõna alguse järgi, ei ole tõstetundlik."
+* parameter[=].documentation = "Patient family name. Perekonna nimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
 * parameter[=].type = #string
 * parameter[+].name = #telecom
 * parameter[=].use = #in
