@@ -614,6 +614,73 @@ ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-le
     ]
 }
 ```
+
+### Töövõime
+Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+```
+GET {MPI}/Patient/$incapacity-for-work?patient=Patient/7076
+```
+ning saab vastuseks on [IncapacityForWork](StructureDefinition-ee-mpi-socialhistory-incapacity-for-work.html) Observationi
+
+Operatsioon leiab alati hetkel kehtiva otsuse.
+
+```json
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-incapacity-for-work"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "301707001",
+              "display": "Ability to perform occupation and employment activities"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/7076"
+        },
+        "effectivePeriod": {
+          "start": "2024-04-03T00:00:00+03:00",
+          "end": "2027-04-02T00:00:00+03:00"
+        },
+        "issued": "2024-08-26T11:24:19.725+03:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://fhir.ee/CodeSystem/toovoime-liik",
+              "code": "puudub",
+              "display": "Puuduv töövõime"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
 ## Tööprintsiip
 ### Vahemälu (cache)
 MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast värskendab andmed vahemälus.

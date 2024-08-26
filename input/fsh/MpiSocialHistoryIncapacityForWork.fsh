@@ -12,11 +12,9 @@ Description:    "Töövõime liik"
 * effective[x] only Period
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 0..1 MS
-* performer only Reference(EEBaseOrganization or EEBasePractitionerRole)
-* performer ^short = "Asutus ja/või isik, kes määras puude."
+* performer ..0
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from ToovoimeLiik
 * basedOn ..0
 * partOf ..0
@@ -35,6 +33,5 @@ InstanceOf: EEMPISocialHistoryIncapacityForWork
 Description: "Example of patient incapacity for work"
 Usage: #example
 * subject = Reference(Patient/pat1)
-* effectivePeriod.start = "2021-11-23"
-* performer = Reference(Organization/Org1)
+* effectivePeriod.start = "2024-04-03T00:00:00+03:00"
 * valueCodeableConcept = ToovoimeLiik#puudub "Puuduv töövõime"
