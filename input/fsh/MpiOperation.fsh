@@ -549,7 +549,7 @@ Usage: #definition
 * description = "The observation of patient legal status from Population Register (RR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
-* code = #lega-status
+* code = #legal-status
 * resource = #Patient
 * system = false
 * type = true
