@@ -276,9 +276,9 @@ ning saab vastuseks Observationi:
 #### Hooldusõiguste pärimine
 Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
 ```
-GET {MPI}/Patient/$power-of-attorney?patient=Patient/3744
+GET {MPI}/Patient/$power-of-attorney?patient=Patient/263595
 ```
-ning saab vastuseks on mitu Observation ressursi:
+ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu hooldusõiguise liiki):
 ```json
 {
   "resourceType": "Bundle",
@@ -295,18 +295,29 @@ ning saab vastuseks on mitu Observation ressursi:
         "contained": [
           {
             "resourceType": "RelatedPerson",
-            "id": "6fb272a7-fb03-480d-baa8-343c3b0d3083",
+            "id": "c504918e-dcd2-4b11-942b-69792f980498",
             "identifier": [
               {
                 "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "46905292713"
+                "value": "47907040020"
+              }
+            ],
+            "relationship": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "72705000",
+                    "display": "Mother"
+                  }
+                ]
               }
             ],
             "name": [
               {
-                "family": "KOVVALVII",
+                "family": "KULD",
                 "given": [
-                  "URVE"
+                  "MILVI"
                 ]
               }
             ]
@@ -334,21 +345,21 @@ ning saab vastuseks on mitu Observation ressursi:
           ]
         },
         "subject": {
-          "reference": "Patient/357"
+          "reference": "Patient/263595"
         },
         "effectivePeriod": {
-          "start": "2010-07-01T00:00:00+03:00"
+          "start": "2020-09-01T00:00:00+03:00"
         },
-        "issued": "2023-09-28T11:09:55.591+03:00",
+        "issued": "2024-10-18T13:46:04.851+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#6fb272a7-fb03-480d-baa8-343c3b0d3083"
+            "reference": "RelatedPerson/#c504918e-dcd2-4b11-942b-69792f980498"
           }
         ],
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "https://fhir.ee/CodeSystem/power-of-attorney",
+              "system": "https://fhir.ee/CodeSystem/hooldusoiguse-liik",
               "code": "H10",
               "display": "Täielik isikuhooldusõigus"
             }
@@ -367,18 +378,29 @@ ning saab vastuseks on mitu Observation ressursi:
         "contained": [
           {
             "resourceType": "RelatedPerson",
-            "id": "e835651a-3587-4e6c-a4d7-06df450143e9",
+            "id": "a804e3f1-e0ab-4f39-ab5e-c97a03b26028",
             "identifier": [
               {
                 "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "46905292713"
+                "value": "47907040020"
+              }
+            ],
+            "relationship": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "72705000",
+                    "display": "Mother"
+                  }
+                ]
               }
             ],
             "name": [
               {
-                "family": "KOVVALVII",
+                "family": "KULD",
                 "given": [
-                  "URVE"
+                  "MILVI"
                 ]
               }
             ]
@@ -406,21 +428,21 @@ ning saab vastuseks on mitu Observation ressursi:
           ]
         },
         "subject": {
-          "reference": "Patient/357"
+          "reference": "Patient/263595"
         },
         "effectivePeriod": {
-          "start": "2010-07-01T00:00:00+03:00"
+          "start": "2020-09-01T00:00:00+03:00"
         },
-        "issued": "2023-09-28T11:09:55.592+03:00",
+        "issued": "2024-10-18T13:46:04.851+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#e835651a-3587-4e6c-a4d7-06df450143e9"
+            "reference": "RelatedPerson/#a804e3f1-e0ab-4f39-ab5e-c97a03b26028"
           }
         ],
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "https://fhir.ee/CodeSystem/power-of-attorney",
+              "system": "https://fhir.ee/CodeSystem/hooldusoiguse-liik",
               "code": "H20",
               "display": "Täielik varahooldusõigus"
             }

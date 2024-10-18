@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryPowerOfAttorney
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-power-of-attorney
 Title:          "EE MPI SocialHistory Power Of Attorney"
-Description:    "Hooldusõigus"
+Description:    "Kehtiv hooldusõigus patsiendi suhtes"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -12,9 +12,9 @@ Description:    "Hooldusõigus"
 * effective[x] only Period
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 1.. MS
-* performer only Reference(EEBaseRelatedPerson)
-* performer ^short = "Isik(ud), kellel on hooldusõigus."
+* performer 1..1 MS
+* performer only Reference(EEBaseRelatedPerson or EEBaseOrganization)
+* performer ^short = "Isik või asutus (näiteks KOV), kellel on hooldusõigus patsiendi suhtes"
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * valueCodeableConcept from HooldusoiguseLiik
@@ -38,10 +38,15 @@ Usage:  #inline
 * patient = Reference(Patient/pat1)
 * identifier
   * system = "https://fhir.ee/sid/pid/est/ni"
-  * value = "48501212711"
+  * value = "48501212710"
 * name
   * family = "Tamm"
-  * given = "Anti"
+  * given = "Annika"
+* relationship
+  * coding
+    * system = "http://snomed.info/sct"
+    * code = #72705000
+    * display = "Mother"
 
 Instance: PowerOfAttorney
 InstanceOf: EEMPISocialHistoryPowerOfAttorney
