@@ -84,7 +84,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-007    | XML'i parsimine on ebaõnnestunud                                                                                                                        |
 | MPI-008    | Tundmatu telekomi süsteem: ${system}, lubatud väärtused: ${allowed}                                                                                     |
 | MPI-009    | Tundmatu riigi kood ${code}                                                                                                                             |
-| MPI-010    | Patsiendi loomine ei ole võimalik, patsient sama identifikaatoriga juba eksisteerib                                                                     |
+| MPI-010    | Padsiendi loomine ei ole võimalik, patsient sama identifikaatoriga juba eksisteerib                                                                     |
 | MPI-011    | Lubamatu aadressi tüüp: ${type}, lubatud väärtused: ${allowed}                                                                                          |
 | MPI-012    | Lubamatu aadressi kasutus: ${use}, lubatud väärtused: ${allowed}                                                                                        |
 | MPI-013    | Tundmatu telekomi kasutus: ${use}, lubatud väärtused: ${allowed}                                                                                        |
@@ -96,36 +96,36 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-020    | Patsiendi puuete info pärimine ebaõnnestus                                                                                                              |
 | MPI-021    | Patsienti ei leitud                                                                                                                                     |
 | MPI-022    | Patsiendi isikukoodi ei leitud                                                                                                                          |
-| MPI-023    | FHIR profiil ${profile} ei ole lubatud                                                                                                                  |
+| MPI-023    | FHIR profiil ${profile} pole lubatud või toetatud                                                                                                       |
 | MPI-024    | FHIR profiil on puudu                                                                                                                                   |
 | MPI-025    | Tundmatu identifikaatori süsteem ${system}                                                                                                              |
-| MPI-025.01 | Identifikaatori süsteem ${system} ei vasta reeglitele. Peaks alustama 'urn:oid', 'https:' või 'http:' prefiksist                                        |
+| MPI-025-01 | Identifikaatori süsteem ${system} ei vasta reeglitele. Peab algama 'urn:oid', 'https:' või 'http:' prefiksiga                                           |
 | MPI-026    | Telekomi väärtus ${value} ei vasta validatsiooni reeglitele                                                                                             |
 | MPI-027    | Leitud liiga palju tulemusi, palun laiendage otsingu kriteeria                                                                                          |
-| MPI-028    | Päringus puudub autori parameeter (${param})                                                                                                            |
-| MPI-029    | Integratsiooniviga xroad-rr teenusega                                                                                                                   |
-| MPI-030    | Integratsiooniviga xroad-sk teenusega                                                                                                                   |
-| MPI-031    | Integratsiooniviga xroad-ads teenusega                                                                                                                  |
+| MPI-028    | Päringus puudub autori isikukood (x-road-userid)                                                                                                        |
+| MPI-029    | Kommunikatsiooniviga Rahvastikuregistriga                                                                                                               |
+| MPI-031    | Kommunikatsiooniviga ADS teenusega                                                                                                                      |
 | MPI-032    | Päringus puudub päis 'x-road-issue'                                                                                                                     |
 | MPI-033    | Päringus puudub autori asutuse registri kood                                                                                                            |
 | MPI-034    | Perekonnaseisu salvestamine ei õnnestunud, patsient ja teine isik suhtes ei ole omavahel seotud                                                         |
-| MPI-035    | Target patient must be active                                                                                                                           |
-| MPI-036    | Source patient is already linked                                                                                                                        |
-| MPI-037    | Target patient is already active                                                                                                                        |
-| MPI-038    | Source and target patients are not linked directly                                                                                                      |
-| MPI-039    | Failed to notify WM about patient linkage                                                                                                               |
+| MPI-035    | Patsientide sidumine ebaõnnestus: primaarse patsiendi kirje staatus peab olema aktiivne                                                                 |
+| MPI-036    | Patsientide sidumine ebaõnnestus: sekundaarne patsiend on juba teise patsiendiga seotud                                                                 |
+| MPI-037    | Patsientide lahti sidumine ebaõnnestus: sekundaarne patsient on juba aktiivne                                                                           |
+| MPI-038    | Patsientide lahti sidumine ebaõnnestus: antud patsiendid pole seotud                                                                                    |
+| MPI-039    | Ei saanud teavitada WM teenust patsientide sidumise kohta                                                                                               |
 | MPI-040    | Integratsiooniviga xroad-tor teenusega                                                                                                                  |
 | MPI-041    | Antud patsiendil juba eksisteerib kontaktisik sama identifikaatoriga ja seosega                                                                         |
 | MPI-042    | Patsiendil ei saa olla rohkem kui ${max} kontaktisikut                                                                                                  |
 | MPI-043    | Integratsiooniviga xroad-tk teenusega                                                                                                                   |
 | MPI-044    | Päringus puudub autori roll                                                                                                                             |
 | MPI-045    | Parameeteriga ${param} antud identifikaatori järgi ei ole patsienti leitud                                                                              |
-| MPI-046    | Multiple patients found for parameter ${param}                                                                                                          |
+| MPI-046    | Mitu patsiendi kirjet on leitud parameetriga ${param}                                                                                                   |
 | MPI-047    | legal-status parameeter on kohustuslik                                                                                                                  |
 | MPI-048    | Lubamatu legal-status parameetri väärtus                                                                                                                |
 | MPI-049    | Patsiendil juba eksisteerib aadress: ${addressText}                                                                                                     |
 | MPI-050    | Eesti isikukoodiga Patient ressursi pole lubatud luua POST /Patient päringuga, palun kasutage /Patient/$lookup operatsiooni Rahvastikuregistri allikaga |
 | MPI-051    | Aadress ADR-ID-ga ${adr-id} ei ole leitud ADS-ist                                                                                                       |
+| MPI-052    | Ligipääs soovitud andmetele pole antud patsiendile lubatud                                                                                              |
 | MPI-053    | Aadress ADS-OID-ga ${ads-oid} ei ole leitud ADS-ist                                                                                                     |
 | MPI-054    | Aadress ADS-OID-ga ${ads-oid} ja ADR-ID-ga ${adr-id} ei ole leitud ADS-ist                                                                              |
 | MPI-055    | Antud aadressi ADS-OID-ga ${ads-oid} leiab mitu paralleelaadressit, oodatud ka ADR-ID väärtus                                                           |
@@ -134,15 +134,30 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-059    | Antud teksti (${text}) järgi pole võimalik leida unkaalne aadress ADS registrist                                                                        |
 | MPI-060    | Päringus puudub päis 'x-road-userid'                                                                                                                    |
 | MPI-061    | Päringus puudub päis 'x-road-id'                                                                                                                        |
-| MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}\|${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                                |
-| MPI-081    | Aadressiobjektiga on seotud mitu hooneosa                                                                                                               |                                                                                                             |
+| MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}&#124;${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                            |
+| MPI-071    | Eesti isikukoodiga patsiendil ei saa muuta: surmakuupäeva, sünnikuupäeva, soo, nime                                                                     |
+| MPI-072    | Patient ressurss id-ga ${id} ei leitud                                                                                                                  |
+| MPI-073    | RelatedPerson ressurss id-ga ${id} ei leitud                                                                                                            |
+| MPI-074    | Observation ressurss id-ga ${id} ei leitud                                                                                                              |
+| MPI-075    | Otsingu parameetril '${param}' on lubatud ainult üks väärtus                                                                                            |
+| MPI-076    | 'birthdate' parameetril on vale ajaformaat, lubatud formaat: YYYY-MM-DD                                                                                 |
+| MPI-077    | Tundmatu 'source' väärtus                                                                                                                               |
+| MPI-078    | Puudub kohustuslik '${param}' parameeter                                                                                                                |
+| MPI-079    | Ajalookirjet ei leitud                                                                                                                                  |
+| MPI-081    | Aadressiobjektiga on seotud mitu hooneosa                                                                                                               |
 | MPI-082    | Aadressil puudub tase 6 või 7                                                                                                                           |
-| MPI-083    | Aadressil ADS_OID väärtusega ${ads-oid} puudub tase 6 või 7                                                                                             |
 | MPI-086    | Aadressiobjektil puudub UN tunnus                                                                                                                       |
 | MPI-087    | Aadress on tehniline                                                                                                                                    |
 | MPI-088    | MR tüübiga aadressiobjekti kasutamine ei ole soovitatav                                                                                                 |
-| MPI-100    | Unknown job type ${type}                                                                                                                                |
+| MPI-089    | Antud isikukoodiga isik puudub RR-is                                                                                                                    |
+| MPI-090    | Antud isikukood ei ole korrektne                                                                                                                        |
+| MPI-091    | Päringu autori isikukoodiga isik puudub RR-is                                                                                                           |
+| MPI-092    | Teovõime koodisüsteemi tundmatu kood: ${code}                                                                                                           |
+| MPI-093    | Tundmatud keelte kodisüsteem ${codeSystem}                                                                                                              |
+| MPI-094    | Tundmatu sugu ${code}                                                                                                                                   |
+| MPI-100    | Tundmatu taustatöö tüüp ${type}                                                                                                                         |
 | MPI-400    | FHIR serveri üldine viga                                                                                                                                |
+| MPI-403    | ${interaction} pole lubatud                                                                                                                             |
 
 ### Tehiku RR x-tee mikroteenuse veakoodid
 
