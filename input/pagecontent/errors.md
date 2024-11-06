@@ -102,12 +102,12 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-025-01 | Identifikaatori süsteem ${system} ei vasta reeglitele. Peab algama 'urn:oid', 'https:' või 'http:' prefiksiga                                           |
 | MPI-026    | Telekomi väärtus ${value} ei vasta validatsiooni reeglitele                                                                                             |
 | MPI-027    | Leiti liiga palju tulemusi, palun kitsendage otsingu kriteeriumeid                                                                                      |
-| MPI-028    | Päringus puudub autori isikukood (x-road-userid)                                                                                                        |
+| MPI-028    | Päringus puudub autori identifikaator (${param})                                                                                                        |
 | MPI-029    | Kommunikatsiooniviga Rahvastikuregistriga                                                                                                               |
 | MPI-031    | Kommunikatsiooniviga ADS teenusega                                                                                                                      |
 | MPI-032    | Päringus puudub päis 'x-road-issue'                                                                                                                     |
 | MPI-033    | Päringus puudub autori asutuse registrikood                                                                                                             |
-| MPI-034    | Perekonnaseisu salvestamine ei õnnestunud, patsient ja teine isik suhtes ei ole omavahel seotud                                                         |
+| MPI-034    | Perekonnaseisu salvestamine ebaõnnestus, sest puudub seos patsiendi ja teise isiku vahel                                                                |
 | MPI-035    | Patsientide sidumine ebaõnnestus: primaarse patsiendi kirje staatus peab olema aktiivne                                                                 |
 | MPI-036    | Patsientide sidumine ebaõnnestus: sekundaarne patsient on juba teise patsiendiga seotud                                                                 |
 | MPI-037    | Patsientide lahti sidumine ebaõnnestus: sekundaarne patsient on juba aktiivne                                                                           |
@@ -134,6 +134,8 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-059    | Antud teksti (${text}) järgi pole võimalik leida unkaalne aadress ADS registrist                                                                        |
 | MPI-060    | Päringus puudub päis 'x-road-userid'                                                                                                                    |
 | MPI-061    | Päringus puudub päis 'x-road-id'                                                                                                                        |
+| MPI-062    | Päringu päised 'x-road-id' ja 'x-author-id' on erineva isikukoodiga                                                                                     |
+| MPI-063    | Päringu autor ei tohi olla anonüümne (isikukoodiga ${impersonal_code})                                                                                  |
 | MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}&#124;${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                            |
 | MPI-071    | Eesti isikukoodiga patsiendil ei saa muuta: surmakuupäeva, sünnikuupäeva, sugu, nime                                                                    |
 | MPI-072    | Patient ressurss id-ga ${id} ei leitud                                                                                                                  |
@@ -157,7 +159,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-094    | Tundmatu sugu ${code}                                                                                                                                   |
 | MPI-100    | Tundmatu taustatöö tüüp ${type}                                                                                                                         |
 | MPI-400    | FHIR serveri üldine viga                                                                                                                                |
-| MPI-403    | ${interaction} pole lubatud                                                                                                                             ||
+| MPI-403    | ${interaction} pole lubatud                                                                                                                             |
 
 ### Tehiku RR x-tee mikroteenuse veakoodid
 
