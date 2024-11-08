@@ -19,6 +19,7 @@ Description:    "Kehtiv hooldusõigus patsiendi suhtes"
 * value[x] only CodeableConcept
 * valueCodeableConcept from HooldusoiguseLiik
 * value[x] ^short = "Hooldusõiguse liik."
+* encounter ..0
 * note ..1 MS
 * basedOn ..0
 * partOf ..0

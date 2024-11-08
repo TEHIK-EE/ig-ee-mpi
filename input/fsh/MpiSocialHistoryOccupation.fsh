@@ -15,7 +15,7 @@ Description:    "Töötamine"
 * code.coding ^slicing.rules = #open
 * code.coding contains
     loinc 1..1 MS and
-    snomed 1..1 MS 
+    snomed 1..1 MS
 * code.coding[loinc].system 1..
 * code.coding[loinc].system = "http://loinc.org" (exactly)
 * code.coding[loinc].code 1..
@@ -33,6 +33,7 @@ Description:    "Töötamine"
 * performer 0..1 MS
 * performer only Reference(EEBaseOrganization)
 * performer ^short = "Tööandja asutus."
+* encounter ..0
 * value[x] ..0
 * basedOn ..0
 * partOf ..0
@@ -49,7 +50,7 @@ Description:    "Töötamine"
 * component ^slicing.discriminator.path = "code"
 * component ^slicing.rules = #open
 * component ^slicing.description = "Slice based on the component.code pattern"
-* component contains job 1..1 MS and type 0..1 and rate 0..1 // and status 0..1 MS 
+* component contains job 1..1 MS and type 0..1 and rate 0..1 // and status 0..1 MS
 * component[job].code = SCT#160922003 "Job details"
 * component[job].value[x] only CodeableConcept
 * component[job].valueCodeableConcept from EEOccupation
@@ -74,7 +75,7 @@ Instance: Occupation
 InstanceOf: EEMPISocialHistoryOccupation
 Description: "Example of patient occupation"
 Usage: #example
-* code 
+* code
   * coding[loinc] = LN#11341-5
   * coding[snomed] = SCT#184104002
 * subject = Reference(Patient/pat1)
