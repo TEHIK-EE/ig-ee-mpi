@@ -304,7 +304,7 @@ Usage: #definition
 * experimental = false
 * date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
-* description = "The list of power of attorneys in the Population Register."
+* description = "The list of power of attorneys in the Population Register. Data returned only for a minor. When an adult is given in patient parameter, then only patient's children and dependents under age of 18 are returned."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #power-of-attorney
@@ -320,6 +320,12 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #guardian-only
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "Whether operation should return only guardians: mother, father or legal guardian. By default *false*."
+* parameter[=].type = #boolean
 * parameter[+].name = #nocache
 * parameter[=].use = #in
 * parameter[=].min = 0
