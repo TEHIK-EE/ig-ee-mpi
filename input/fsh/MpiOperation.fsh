@@ -14,7 +14,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The link operation is used to link two patient resources. One of the two patients is identified as the source and one as the target. The link with type 'replaces' created from source to destination patient, the another link with type 'replaced-byä created from destination to source patient. As result of linking the destination patient is deactivated."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -74,7 +73,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The unlink operation is used to unlink two patient resources. One of the two patients is identified as the source and one as the target. The links between the source and destination Patients will be removed. Destination resource will be reactivated."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -134,7 +132,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The foreign operation perform complex search over patient resource."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -204,7 +201,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The lookup operation looking for patient data in the external registers."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -250,7 +246,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The list of legal guardians specified in the Population Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -302,7 +297,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The list of power of attorneys in the Population Register. Data returned only for a minor. When an adult is given in patient parameter, then only patient's children and dependents under age of 18 are returned."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -354,7 +348,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The highest education level in the Education Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -399,7 +392,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "Generate the new unique Medical Record Number may be used for unknown/anonymous patient's identification."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -427,7 +419,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The patient disability from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -468,7 +459,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The observation of patient incapacity for work from Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -509,7 +499,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The observation of patient occupations from Employment Register (TÖR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
@@ -550,7 +539,6 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* date = "2023-03-26T15:21:02+11:00"
 * publisher = "HL7 Estonia"
 * description = "The observation of patient legal status from Population Register (RR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
