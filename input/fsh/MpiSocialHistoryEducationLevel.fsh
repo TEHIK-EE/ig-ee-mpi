@@ -13,7 +13,7 @@ Description:    "Haridustase"
 * code.coding ^slicing.rules = #open
 * code.coding contains
     loinc 1..1 MS and
-    snomed 1..1 MS 
+    snomed 1..1 MS
 * code.coding[loinc].system 1..
 * code.coding[loinc].system = "http://loinc.org" (exactly)
 * code.coding[loinc].code 1..
@@ -34,9 +34,10 @@ Description:    "Haridustase"
 * subject only Reference(EEBasePatient)
 * performer 0..0 MS
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from OmandatudKorgeimHaridus
 * valueCodeableConcept ^short = "Haridustase."
+* encounter ..0
 * basedOn ..0
 * partOf ..0
 * component ..0

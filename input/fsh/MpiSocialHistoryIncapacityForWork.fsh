@@ -16,6 +16,7 @@ Description:    "Töövõime liik"
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * valueCodeableConcept from ToovoimeLiik
+* encounter ..0
 * basedOn ..0
 * partOf ..0
 * component ..0

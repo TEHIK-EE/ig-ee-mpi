@@ -18,13 +18,12 @@ Description:    "Abielu või suhte liik."
 * issued ^short = "Ajahetk, millal antud fakt fikseeriti"
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 0.. MS
-* performer only Reference(EEBaseRelatedPerson)
-* performer ^short = "Teine isik suhtes."
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from MaritalStatusVS
 * valueCodeableConcept ^short = "Suhte liik."
+* encounter ..0
+* performer ..0
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -44,5 +43,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * category = OBSCAT#social-history "Social history"
 * issued = "1995-06-21T00:00:00+02:00"
-* performer[+] = Reference(PatientIgorBossenkoWife)
 * valueCodeableConcept = MaritalStatusCS#M "Married"

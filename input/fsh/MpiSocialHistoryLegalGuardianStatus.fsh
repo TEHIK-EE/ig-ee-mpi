@@ -13,7 +13,7 @@ Description:    "Seadusliku eeskostja staatus"
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
 * performer 1.. MS
-* performer only Reference(EEBaseOrganization or EEBasePractitionerRole or EEBaseRelatedPerson)
+* performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
