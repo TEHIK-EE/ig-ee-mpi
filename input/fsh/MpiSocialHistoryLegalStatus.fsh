@@ -18,6 +18,7 @@ Description:    "Patsiendi teovõime staatus."
 * value[x] only CodeableConcept
 * valueCodeableConcept from TeovoimeStaatus
 * note ..1 MS
+* encounter ..0
 * basedOn ..0
 * partOf ..0
 * component ..0

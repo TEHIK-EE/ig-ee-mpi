@@ -12,12 +12,11 @@ Description:    "Puude raskusaste"
 * effective[x] only Period
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
-* performer 0..1 MS
-* performer only Reference(EEBaseOrganization or EEBasePractitionerRole)
-* performer ^short = "Asutus ja/või isik, kes määras puude."
 * value[x] 1..1 MS
-* value[x] only CodeableConcept 
+* value[x] only CodeableConcept
 * valueCodeableConcept from PuudeRaskusaste
+* performer ..0
+* encounter ..0
 * basedOn ..0
 * partOf ..0
 * component ..0
@@ -36,5 +35,4 @@ Description: "Example of patient disability"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* performer = Reference(Organization/Org1)
 * valueCodeableConcept = PuudeRaskusaste#keskmine "Keskmine puue"
