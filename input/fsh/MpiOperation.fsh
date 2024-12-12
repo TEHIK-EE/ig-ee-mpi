@@ -318,7 +318,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Whether operation should return only guardians: mother, father or legal guardian. By default *false*."
+* parameter[=].documentation = "Whether operation should return only guardians: mother, father or legal guardian. By default *false*. Supported only for minors (under age of 18)."
 * parameter[=].type = #boolean
 * parameter[+].name = #nocache
 * parameter[=].use = #in
