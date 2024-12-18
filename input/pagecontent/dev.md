@@ -265,10 +265,10 @@ Valiidne sõnum tuleb edastada päringu kehas. Andmekoosseis on kirjeldatud lehe
 #### Vastus (response)
 
 Eduka vastuse korral tagastab FHIR server HTTP koodi 20X. Näiteks uue patsiendi loomisel tagastatakse HTTP-kood = "201 Created".
-Vastuse päis "Location" sisaldab lingi loodud ressursile.
+Vastuse päis "Location" sisaldab lingi loodud ressursile ja versioonile. Ressursi loomisel versioon on alati 1, uuendamisel versiooni suurendatakse 1 võrra.
 
 ```
-Location: {MPI}/fhir/Patient/3
+Location: {MPI}/fhir/Patient/3/_history/1
 ```
 
 Vastuses kehas on tagastatud salvestatud või uuendatud ressurs. **NB! vastuse keha võib olla erinev saadetud kehast ja sisaldada parandatud andmeid, millega

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cdd023f2-370a-4a1c-b261-9516f3fc8582",
+		"_postman_id": "59f3dd0b-32ee-4cad-9a0d-9bb16baa60bd",
 		"name": "MPI X-Road",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5159090"
@@ -2073,7 +2073,7 @@
 					"name": "4.7 Marital status",
 					"item": [
 						{
-							"name": "4.7.1 Create Observation Bundle Patient + RelatedPerson",
+							"name": "4.7.1 Create Observation Patient",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2090,28 +2090,25 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Should return 200\", () => {",
-											"    pm.response.to.have.status(200);",
+											"const getLocationRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+											"",
+											"pm.test(\"Should return 201\", () => {",
+											"    pm.response.to.have.status(201);",
 											"});",
 											"",
-											"const relatedPersonRegex = () => /.*\\/RelatedPerson\\/([0-9]+)/g;",
-											"const patientRegex = () => /.*\\/Patient\\/([0-9]+)/g;",
+											"pm.test(\"Location header is present\", () => {",
+											"  pm.response.to.have.header(\"Location\");",
+											"});",
 											"",
-											"const responseJson = pm.response.json();",
-											"if(responseJson.entry){",
-											"    responseJson.entry.forEach(entry => {",
-											"        const rp = relatedPersonRegex().exec(entry.response.location);",
-											"        const p = patientRegex().exec(entry.response.location);",
-											"        if(p){",
-											"            pm.collectionVariables.set(\"OBS_PAT_ID\", p[1])",
-											"            console.log(p[1]);",
-											"        }",
-											"        if(rp){",
-											"            pm.collectionVariables.set(\"OBS_RP_ID\", rp[1])",
-											"            console.log(rp[1]);",
-											"        } ",
-											"    });",
-											"}"
+											"pm.test(\"Location have related person ID\", () => {",
+											"    const location = pm.response.headers.get(\"Location\");",
+											"    pm.expect(location).to.matches(getLocationRegex());",
+											"",
+											"    ",
+											"    const fhirRpId = getLocationRegex().exec(location)[1];",
+											"    pm.collectionVariables.set('OBS_PAT_ID', fhirRpId);",
+											"});",
+											""
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -2129,7 +2126,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"bundle-transaction\",\n    \"meta\": {\n        \"lastUpdated\": \"2014-08-18T01:43:30Z\"\n    },\n    \"type\": \"transaction\",\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:le_patiente\",\n            \"resource\": {\n                \"resourceType\": \"Patient\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n                        \"value\": \"{{FAKE_ID}}\"\n                    }\n                ],\n                \"active\": true,\n                \"name\": [\n                    {\n                        \"use\": \"official\",\n                        \"family\": \"Võsaülane\",\n                        \"given\": [\n                            \"Tiit\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37253535353\",\n                        \"use\": \"work\",\n                        \"rank\": 1\n                    }\n                ],\n                \"gender\": \"male\",\n                \"birthDate\": \"1974-12-25\",\n                \"_birthDate\": {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                            \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n                        }\n                    ]\n                },\n                \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n                \"address\": [\n                    {\n                        \"extension\": [\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n                                    \"code\": \"111122\"\n                                }\n                            },\n                            {\n                                \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                                \"valueCoding\": {\n                                    \"system\": \"https://fhir.ee/sid/ehak\",\n                                    \"code\": \"100300\"\n                                }\n                            }\n                        ],\n                        \"country\": \"US\",\n                        \"use\": \"home\",\n                        \"type\": \"both\",\n                        \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n                        \"line\": [\n                            \"534 Erewhon St\"\n                        ],\n                        \"_line\": [\n                            {\n                                \"extension\": [\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                                        \"valueString\": \"Erewhon St\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                                        \"valueString\": \"534\"\n                                    },\n                                    {\n                                        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                                        \"valueString\": \"110\"\n                                    }\n                                ]\n                            }\n                        ],\n                        \"city\": \"PleasantVille\",\n                        \"district\": \"Rainbow\",\n                        \"state\": \"Vic\",\n                        \"postalCode\": \"3999\",\n                        \"period\": {\n                            \"start\": \"1974-12-25\"\n                        }\n                    }\n                ]\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"Patient\"\n            }\n        },\n        {\n            \"resource\": {\n                \"resourceType\": \"RelatedPerson\",\n                \"meta\": {\n                    \"profile\": [\n                        \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-related-person\"\n                    ]\n                },\n                \"text\": {\n                    \"status\": \"generated\",\n                    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n                },\n                \"identifier\": [\n                    {\n                        \"system\": \"https://fhir.ee/sid/pid/est/ni\",\n                        \"value\": \"{{FAKE_EST_ID_2}}\"\n                    }\n                ],\n                \"active\": true,\n                \"patient\": {\n                    \"reference\": \"urn:le_patiente\"\n                },\n                \"relationship\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleClass\",\n                                \"code\": \"CON\"\n                            }\n                        ]\n                    },\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://snomed.info/sct\",\n                                \"code\": \"72705000\",\n                                \"display\": \"Mother (person)\"\n                            }\n                        ]\n                    }\n                ],\n                \"name\": [\n                    {\n                        \"family\": \"du Marché\",\n                        \"_family\": {\n                            \"extension\": [\n                                {\n                                    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-own-prefix\",\n                                    \"valueString\": \"VV\"\n                                }\n                            ]\n                        },\n                        \"given\": [\n                            \"Bénédicte\"\n                        ]\n                    }\n                ],\n                \"telecom\": [\n                    {\n                        \"system\": \"phone\",\n                        \"value\": \"+37256218121\"\n                    }\n                ],\n                \"period\": {\n                    \"start\": \"2012\"\n                }\n            },\n            \"request\": {\n                \"method\": \"POST\",\n                \"url\": \"RelatedPerson\"\n            }\n        }\n    ]\n}",
+									"raw": "{\n    \"resourceType\": \"Patient\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified\"\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">text</div>\"\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://fhir.ee/sid/pid/fin/ni\",\n            \"value\": \"{{FAKE_ID}}\"\n        }\n    ],\n    \"active\": true,\n    \"name\": [\n        {\n            \"use\": \"official\",\n            \"family\": \"Võsaülane\",\n            \"given\": [\n                \"Tiit\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"+37253535353\",\n            \"use\": \"work\",\n            \"rank\": 1\n        }\n    ],\n    \"gender\": \"male\",\n    \"birthDate\": \"1974-12-25\",\n    \"_birthDate\": {\n        \"extension\": [\n            {\n                \"url\": \"http://hl7.org/fhir/StructureDefinition/patient-birthTime\",\n                \"valueDateTime\": \"1974-12-25T14:35:45-05:00\"\n            }\n        ]\n    },\n    \"deceasedDateTime\": \"2003-12-25T14:35:45-05:00\",\n    \"address\": [\n        {\n            \"extension\": [\n                {\n                    \"url\": \"https://fhir.ee/StructureDefinition/ee-ads-adr-id\",\n                    \"valueCoding\": {\n                        \"system\": \"https://fhir.ee/CodeSystem/ads-adr-id\",\n                        \"code\": \"111122\"\n                    }\n                },\n                {\n                    \"url\": \"https://fhir.ee/StructureDefinition/ee-ehak\",\n                    \"valueCoding\": {\n                        \"system\": \"https://fhir.ee/sid/ehak\",\n                        \"code\": \"100300\"\n                    }\n                }\n            ],\n            \"country\": \"US\",\n            \"use\": \"home\",\n            \"type\": \"both\",\n            \"text\": \"534 Erewhon St PeasantVille, Rainbow, Vic  3999\",\n            \"line\": [\n                \"534 Erewhon St\"\n            ],\n            \"_line\": [\n                {\n                    \"extension\": [\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName\",\n                            \"valueString\": \"Erewhon St\"\n                        },\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber\",\n                            \"valueString\": \"534\"\n                        },\n                        {\n                            \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator\",\n                            \"valueString\": \"110\"\n                        }\n                    ]\n                }\n            ],\n            \"city\": \"PleasantVille\",\n            \"district\": \"Rainbow\",\n            \"state\": \"Vic\",\n            \"postalCode\": \"3999\",\n            \"period\": {\n                \"start\": \"1974-12-25\"\n            }\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2137,9 +2134,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{MPI_FHIR}}",
+									"raw": "{{MPI_FHIR}}/Patient",
 									"host": [
 										"{{MPI_FHIR}}"
+									],
+									"path": [
+										"Patient"
 									]
 								}
 							},
@@ -2199,7 +2199,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"resourceType\": \"Observation\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/{{OBS_RP_ID}}\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"M\",\n                \"display\": \"Married\"\n            }\n        ]\n    }\n}",
+									"raw": "{\n    \"resourceType\": \"Observation\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"M\",\n                \"display\": \"Married\"\n            }\n        ]\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2302,7 +2302,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"resourceType\": \"Observation\",\n    \"id\": \"{{OBS_FHIR_ID}}\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"performer\": [\n        {\n            \"reference\": \"RelatedPerson/{{OBS_RP_ID}}\"\n        }\n    ],\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"D\",\n                \"display\": \"Divorced\"\n            }\n        ]\n    }\n}",
+									"raw": "{\n    \"resourceType\": \"Observation\",\n    \"id\": \"{{OBS_FHIR_ID}}\",\n    \"status\": \"final\",\n    \"meta\": {\n        \"profile\": [\n            \"https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-marital-status\"\n        ]\n    },\n    \"category\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                    \"code\": \"social-history\",\n                    \"display\": \"Social history\"\n                }\n            ]\n        }\n    ],\n    \"code\": {\n        \"coding\": [\n            {\n                \"system\": \"http://snomed.info/sct\",\n                \"code\": \"125680007\",\n                \"display\": \"Marital status\"\n            }\n        ]\n    },\n    \"subject\": {\n        \"reference\": \"Patient/{{OBS_PAT_ID}}\"\n    },\n    \"issued\": \"2013-04-03T15:30:10+01:00\",\n    \"valueCodeableConcept\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",\n                \"code\": \"D\",\n                \"display\": \"Divorced\"\n            }\n        ]\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2506,13 +2506,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{MPI_FHIR}}/Patient/$legal_status?patient=Patient/{{LS_PAT_ID}}",
+									"raw": "{{MPI_FHIR}}/Patient/$legal-status?patient=Patient/{{LS_PAT_ID}}",
 									"host": [
 										"{{MPI_FHIR}}"
 									],
 									"path": [
 										"Patient",
-										"$legal_status"
+										"$legal-status"
 									],
 									"query": [
 										{
