@@ -1,4 +1,4 @@
-Alias: v3-RoleClass = http://terminology.hl7.org/CodeSystem/v3-RoleClass 
+Alias: v3-RoleClass = http://terminology.hl7.org/CodeSystem/v3-RoleClass
 
 Profile: MPIRelatedPerson
 Parent: EEBaseRelatedPerson
@@ -11,11 +11,10 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * name 0..1 MS
 * name ^short = "Kontaktisiku nimi."
 * telecom ^short = "Kontaktisiku kontaktandmed."
-* address MS
+* address ..0
 * photo ..0
-* address ^short = "Kontaktisiku aadress."
 * identifier ^short = "Kontaktisiku identifikaatorid."
-* communication	MS 
+* communication	..0
 * period 1..1 MS
 * relationship ^slicing.rules = #closed
 * relationship[person] 0..1 MS
