@@ -50,7 +50,7 @@ Description:    "Töötamine"
 * component ^slicing.discriminator.path = "code"
 * component ^slicing.rules = #open
 * component ^slicing.description = "Slice based on the component.code pattern"
-* component contains job 1..1 MS and type 0..1 and rate 0..1 // and status 0..1 MS
+* component contains job 1..1 MS and rate 0..1
 * component[job].code = SCT#160922003 "Job details"
 * component[job].value[x] only CodeableConcept
 * component[job].valueCodeableConcept from EEOccupation
@@ -60,16 +60,6 @@ Description:    "Töötamine"
 * component[rate].valueQuantity = UCUM#/1 "per work rate"
 * component[rate].valueQuantity ^short = "Töökoormus (0..1]."
 * component[rate] ^short = "Lepinguline töökoormus."
-* component[type].code = SCT#224361009 "Type of job"
-* component[type].value[x] only CodeableConcept
-* component[type].valueCodeableConcept from TootamiseLiik
-* component[type].valueCodeableConcept ^short = "Töötamise liik."
-//* component[status].code = SCT#224362002 "Employment status"
-//* component[status].value[x] only CodeableConcept
-//* component[status].valueCodeableConcept from $EmploymentStatus
-//* component[status].valueCodeableConcept ^short = "Tööhõive staatus."
-
-
 
 Instance: Occupation
 InstanceOf: EEMPISocialHistoryOccupation
@@ -82,4 +72,3 @@ Usage: #example
 * effectivePeriod.start = "2021-11-23"
 * performer = Reference(Organization/Org1)
 * component[job].valueCodeableConcept = EEOccupation#22122501 "Pediaater"
-* component[type].valueCodeableConcept = TootamiseLiik#501 "Vabatahtlik töö"
