@@ -22,7 +22,7 @@ Kollektsiooni proovimiseks TTO peab tellima õigused X-tee teenustele GOV/700097
 
 ### Autoriseerimine
 
-Autoriseerimine on protsess, mille käigus kasutaja saab õigusi/privileege teatud ressursidele. 
+Autoriseerimine on protsess, mille käigus kasutaja saab õigusi/privileege teatud ressursidele.
 Autoriseerimise käigus valideeritakse kasutaja väidetav roll ning kuuluvus asutusele, mille alt tehakse päringuid.
 
 **Token-is kodeeritud kasutaja isikukood ja nimi kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
@@ -59,7 +59,6 @@ Vastus:
 
 **Detailne juhend on leitav [teabekeskusest](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenus).**
 
-
 #### Tokeni cache-mine
 
 Tokeni eluiga on on N sekundit (token päringu vastuses väli expiresIn), kliendirakendus võib tokeni cache-da kuni N sekundit ja taaskasutada erinevates
@@ -75,7 +74,9 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
 ```
 
 #### API otspunkti õigused
-Iga FHIR API otspunkt kontrollib õigusi, mis on rollipõhised. Rollide kohta saab lugeda [siin](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenuse-kasutajate-rollid).
+
+Iga FHIR API otspunkt kontrollib õigusi, mis on rollipõhised. Rollide kohta saab
+lugeda [siin](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenuse-kasutajate-rollid).
 Õiguste maatriks asub [siin](permissions.html).
 
 ### Päised (HTTP headers)
@@ -140,6 +141,27 @@ Näide sektsiooni andmetest minimaalse andmekoosseisuga:
 
 #### Otsing
 
+Otsing teostatkse päringuga:
+
+```
+GET {MPI}/Patient?{params}
+```
+
+kus _{params}_ on otsingu parameetrite nimekiri koos väärtustega.
+
+#### Toetatud otsinguparameetrid
+
+| Parameeter | Kirjeldus                                                                                   | Väärtustatud näidis                                     |   
+|------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| _id        | Ressursi id                                                                                 | _id=1234 või id=1234,5678                               |
+| _count     | Mitu tulemust tagastada lehel, vaikimisi 20. Ülemine piir on 100                            | _count=10                                               |
+| _page      | Lehe number mida tagastada                                                                  | _page=1                                                 |
+| identifier | Patsiendi identifikaator kujul "system\|value", eraldaja sümbol peab olema URL encode-itud. | identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234 |
+| birthdate  | Sünnikuupäev (lubatud ainult eri õigusega)                                                  | birthdate=1974-12-25                                    |
+| active     | Patsiendi kirje olek (vaikimisi true)                                                       | active=false                                            |
+
+#### Otsingu vastus
+
 Patsiendi otsingu tulemusena tagastatakse [Bundle](https://www.hl7.org/fhir/bundle.html) (või teiste sõnadega "ümbrik"), mis võib sisaldada mitu ressurssi (
 0..n). Järgnevas näites teostatakse otsing Eesti isikukoodi _37412251234_ järgi:
 
@@ -147,14 +169,16 @@ Patsiendi otsingu tulemusena tagastatakse [Bundle](https://www.hl7.org/fhir/bund
 GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni|37412251234
 ```
 
-Enne saatmist peavad kõik erisümbolid olema encode-itud:
+Enne saatmist peab olema URL encode-itud vähemalt identifikaatori eraldaja sümbol "|":
 
 ```
-GET {MPI}/Patient?identifier=https%3A%2F%2Ffhir.ee%2Fsid%2Fpid%2Fest%2Fni%7C37412251234
+GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234
 ```
 
-Vastusena tuleb (searchset) Bundle mis tagastab metainformatsiooni päringu kohta ja kollektsiooni kahest ressursist (kust eemaldatud patsiendi ressursi sisuline
-osa):
+Vastusena tuleb (searchset) Bundle mis tagastab meta informatsiooni päringu kohta (total, link) ja kollektsiooni (entry) ressursidest.
+
+- **total** näitab mitu ressursi on kättesaadav antud otsigu kriteeriaga.
+- **link** paging-u jaoks olulised viited, näiteks esimene leht, viimane, järgmine (next), kui olemas.
 
 ```json
 {
@@ -196,9 +220,10 @@ osa):
 }                            
 ```
 
-#### Otsing identifikaatori järgi
+Terve andmekomplekti töötlemisel tuleb alati jälgida **next** linki olemasolu ja kasutada **_page** parameetri järgmiste lehtede laadimiseks.
 
-MPI toetab otsinguid [identifikaatori](identifiers.html) järgi.
+
+Loe rohkem otsingu kohta [FHIR dokumentatsioonist](https://hl7.org/fhir/search.html).
 
 ### Operatsioonid
 
@@ -284,36 +309,38 @@ Vastuse väljade piiramiseks tuleb kasutada `_elements` [parameetri](https://hl7
 Väärtuseks tuleb panna komaga eraldatud väljade nimed, mida soovitakse kätte saada.
 
 Näidis päring:
+
 ```
 GET /Patient/123?_elements=name.family,gender
 ```
+
 Tagastab soovitud välajad ning alati ka kohustuslikud väljad nagu `id` ja `meta`:
+
 ```json
 {
-    "resourceType": "Patient",
-    "id": "53552",
-    "meta": {
-        "lastUpdated": "2024-08-21T17:18:32.526+03:00",
-        "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-        ],
-        "tag": [
-            {
-                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
-                "code": "SUBSETTED",
-                "display": "Resource encoded in summary mode"
-            }
-        ]
-    },
-    "name": [
-        {
-            "family": "Võsaülane"
-        }
+  "resourceType": "Patient",
+  "id": "53552",
+  "meta": {
+    "lastUpdated": "2024-08-21T17:18:32.526+03:00",
+    "profile": [
+      "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
     ],
-    "gender": "male"
+    "tag": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+        "code": "SUBSETTED",
+        "display": "Resource encoded in summary mode"
+      }
+    ]
+  },
+  "name": [
+    {
+      "family": "Võsaülane"
+    }
+  ],
+  "gender": "male"
 }
 ```
-
 
 ### Aeg ja ajatsoon
 
