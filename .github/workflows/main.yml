@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -18,10 +18,12 @@ jobs:
 
     - name: Build IG with docker builder
       run: |
+        version=$(grep '^version:' ${{ github.workspace }}/sushi-config.yaml | awk '{print $2}')
+        echo "building version $version"
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           docker.kodality.com/fsh-builder \
-          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh"
+          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
@@ -30,7 +32,7 @@ jobs:
     needs: build
 
     permissions:
-      pages: write 
+      pages: write
       id-token: write
 
     environment:
