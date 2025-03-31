@@ -31,7 +31,7 @@ Autoriseerimise käigus valideeritakse kasutaja väidetav roll ning kuuluvus asu
 
 Postman kollektsioonis 1. Auth -> 1.1 Get token
 
-POST päring `{{AUTH_URL}}/token` järgmise "application/json" sisuga
+POST päring `{{AUTH_URL}}/v2/token` järgmise "application/json" sisuga
 
 ```json
 {

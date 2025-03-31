@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "59f3dd0b-32ee-4cad-9a0d-9bb16baa60bd",
+		"_postman_id": "bddd37d9-6d5e-4fc4-b706-35f436a9b325",
 		"name": "MPI X-Road",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5159090"
@@ -46,11 +46,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{AUTH_URL}}/token",
+							"raw": "{{AUTH_URL}}/v2/token",
 							"host": [
 								"{{AUTH_URL}}"
 							],
 							"path": [
+								"v2",
 								"token"
 							]
 						}
