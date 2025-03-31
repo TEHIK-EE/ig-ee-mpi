@@ -23,7 +23,7 @@ jobs:
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
           docker.kodality.com/fsh-builder \
-          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
+          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y -f && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
