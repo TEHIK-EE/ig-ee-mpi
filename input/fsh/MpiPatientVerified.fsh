@@ -59,6 +59,19 @@ Usage: #example
   * text = "Valukoja 10, Tallinn"
   * extension[adsAdrId].valueCoding = https://fhir.ee/CodeSystem/ads-adr-id#2280361
   * extension[adsOid].valueCoding = https://fhir.ee/CodeSystem/ads-oid#ME03379409
+* communication[0]
+  * language.coding[0]
+    * system = "urn:ietf:bcp:47"
+    * code = #en-US
+    * display = "English (United States)"
+  * preferred = false
+
+* communication[1]
+  * language.coding[0]
+    * system = "urn:ietf:bcp:47"
+    * code = #et
+    * display = "Eesti"
+  * preferred = true
 
 Instance: PatientJohnDoe
 InstanceOf: EEBasePatient

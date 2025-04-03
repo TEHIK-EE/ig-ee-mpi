@@ -75,27 +75,74 @@ Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaota
 
 Patsiendil saab olla kuni 3 kehtivat kontaktisikut (RelatedPerson ressurssi CON suhetüübiga), limiidi ületades tuleb MPI-042 koodiga viga.
 
+### Suhtluskeeled
+
+Patsiendil võib olla mitu suhtluskeelt. Suhtluskeele määramiseks tuleb kasutada rahvusvahelist standardit [IETF BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag). 
+Keele koodisüsteemiks tuleb kasutada [urn:ietf:bcp:47](https://terminology.hl7.org/6.2.0/CodeSystem-v3-ietf3066.html). Keelte eestikeelsed nimetused on võimalik kätte saada Tehiku
+loendist [Keeled](https://teabekeskus.tehik.ee/et/loendid/keeled).
+
+Näidis:
+
+```json
+{
+  "resourceType": "Patient",
+  "id": "123",
+  "meta": {
+    "profile": [
+      "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+    ]
+  },
+  ...
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "urn:ietf:bcp:47",
+            "code": "en-US",
+            "display": "English (United States)"
+          }
+        ]
+      },
+      "preferred": false
+    },
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "urn:ietf:bcp:47",
+            "code": "et",
+            "display": "Eesti"
+          }
+        ]
+      },
+      "preferred": true
+    }
+  ]
+}
+```
+
+_display_ väli ei ole kohustuslik, seda täidetakse koodi järgi pärimisel automaatselt.
+
 ### Kasutatav terminoloogia
 
 #### PÜT-is kasutatavad loendid
 
-- [Eeskoste liik](https://fhir.ee/ig/terminology/current/site/ValueSet-eestkoste-liik.html)
-- [Hooldusõiguse liik](https://fhir.ee/ig/terminology/current/site/ValueSet-hooldusoiguse-liik.html)
+- [Eeskoste liik](https://teabekeskus.tehik.ee/et/loendid/eestkoste-liik)
+- [Hooldusõiguse liik](https://teabekeskus.tehik.ee/et/loendid/hooldusoiguse-liik)
 - [Isiku seos patsiendiga](https://fhir.ee/ig/terminology/current/site/ValueSet-isiku-seos-patsiendiga.html)
-- [Omandatud kõrgeim haridus](https://fhir.ee/ig/terminology/current/site/ValueSet-omandatud-korgeim-haridus.html)
-- [Puude raskusaste](https://fhir.ee/ig/terminology/current/site/ValueSet-puude-raskusaste.html)
-- [Teovõime staatus](https://fhir.ee/ig/terminology/current/site/ValueSet-teovoime-staatus.html)
-- [Töötamise liik](https://fhir.ee/ig/terminology/current/site/ValueSet-tootamise-liik.html)
-- [Töövõime liik](https://fhir.ee/ig/terminology/current/site/ValueSet-toovoime-liik.html)
+- [Omandatud kõrgeim haridus](https://teabekeskus.tehik.ee/et/loendid/omandatud-korgeim-haridus)
+- [Puude raskusaste](https://teabekeskus.tehik.ee/et/loendid/puude-raskusaste)
+- [Teovõime staatus](https://teabekeskus.tehik.ee/et/loendid/teovoime-staatus)
+- [Töövõime liik](https://teabekeskus.tehik.ee/et/loendid/toovoime-liik)
 
 #### PÜT-is kasutatavad klassifikaatorid
 
-- [Hooldusõiguse liik](https://fhir.ee/ig/terminology/current/site/CodeSystem-hooldusoiguse-liik.html)
-- [Omandatud kõrgeim haridus](https://fhir.ee/ig/terminology/current/site/CodeSystem-omandatud-korgeim-haridus.html)
-- [Puude raskusaste](https://fhir.ee/ig/terminology/current/site/CodeSystem-puude-raskusaste.html)
-- [Teovõime staatus](https://fhir.ee/ig/terminology/current/site/CodeSystem-teovoime-staatus.html)
-- [Töötamise liik](https://fhir.ee/ig/terminology/current/site/CodeSystem-tootamise-liik.html)
-- [Töövõime liik](https://fhir.ee/ig/terminology/current/site/CodeSystem-toovoime-liik.html)
+- [Hooldusõiguse liik](https://akk.tehik.ee/classifier/resources/code-systems/hooldusoiguse-liik/summary)
+- [Omandatud kõrgeim haridus](https://akk.tehik.ee/classifier/resources/code-systems/omandatud-korgeim-haridus/summary)
+- [Puude raskusaste](https://akk.tehik.ee/classifier/resources/code-systems/puude-raskusaste/summary)
+- [Teovõime staatus](https://akk.tehik.ee/classifier/resources/code-systems/teovoime-staatus/summary)
+- [Töövõime liik](https://akk.tehik.ee/classifier/resources/code-systems/toovoime-liik/summary)
 
 #### EEBase-i kaudu kasutatavad loendid
 
