@@ -381,20 +381,12 @@ Usage: #definition
 Instance: patient-generate-mrn
 InstanceOf: OperationDefinition
 Usage: #definition
-* extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
-* extension[=].valueInteger = 1
-* extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
-* extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/mpi/OperationDefinition/patient-generate-mrn"
-* version = "5.0.0"
 * name = "EEMPIPatientGenerateMRN"
 * title = "Generate Medical Record Number"
 * status = #active
 * kind = #operation
 * experimental = false
-* publisher = "HL7 Estonia"
 * description = "Generate the new unique Medical Record Number may be used for unknown/anonymous patient's identification."
-* jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #mrn
 * resource = #Patient

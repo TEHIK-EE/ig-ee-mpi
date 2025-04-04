@@ -66,7 +66,7 @@ Tundmatu isiku esitamise näide1:
   "identifier" : [
     {
       "system" : "https://fhir.ee/sid/pid/est/mr",
-      "value" : "00003352345"
+      "value" : "2DNJ86DF"
     }
   ]
 ```
@@ -74,6 +74,8 @@ Tundmatu isiku esitamise näide1:
 TTO saab kasutada ka enda poolt genereeritud identifikaatorit kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. 
 URL TTO identifikaatori jaoks peab olema kujul **https://fhir.ee/sid/pid/est/prn/$BRcode**, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. 
 Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendiidentifikaatorid siis koodide mitte kattuvus peab olema lahendatud asutusesiseselt.
+Lubatud TTO identifikaatori süsteemid on loetletud koodisüsteemis [Identifier Domain](https://fhir.ee/ig/terminology/current/site/CodeSystem-identifier-domain.html). 
+Puuduva TTO identifikaatori süsteemi lisamiseks palume pöörduda Tehiku it-abisse, saates soovitud asutuse nimetus ning registrikood.
 
 Tundmatu isiku esitamise näide2:
 ```json
