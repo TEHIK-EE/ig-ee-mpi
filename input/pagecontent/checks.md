@@ -18,13 +18,15 @@ Eesti isikukoodiga patsiendi tuleb pärida alati [lookup](operations.html#eesti-
 Operatsioon tagastab `Patient` ressursi koos id-ga, mille abil saab patsiendi andmeid uuendada.
 
 #### Telecom väärtused
+
 - `Patient.telecom` on piiramatu massiv, mis võib sisaldada isiku kontaktandmed: tel. numbrid ja e-mailid.
-- `Patient.telecom[x].system` on kohustuslik, lubatud väärtused: phone | email
-- `Patient.telecom[x].use` ei ole kohustuslik, lubatud väärtused: home | work | temp | old | mobile 
+- `Patient.telecom[x].system` on kohustuslik, lubatud väärtused: phone \| email
+- `Patient.telecom[x].use` ei ole kohustuslik, lubatud väärtused: home \| work \| temp \| old \| mobile 
 - `Patient.telecom[x].rank` ei ole kohustuslik. 
 
 Näide:
 ```json
+    ...
     "telecom": [
         {
             "system": "phone",
@@ -39,6 +41,7 @@ Näide:
             "rank": 2
         }
     ],
+  ...
 ```
 
 
