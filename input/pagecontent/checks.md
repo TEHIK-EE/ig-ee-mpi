@@ -17,7 +17,32 @@ Eesti isikikoodiga patsiendi loomine pole lubatud. `Patient` ressurss ei tohi lo
 Eesti isikukoodiga patsiendi tuleb pärida alati [lookup](operations.html#eesti-isikukoodiga-patsiendi-otsing) operatisooniga, kus on kasutatud allikana Rahvastikuregister.
 Operatsioon tagastab `Patient` ressursi koos id-ga, mille abil saab patsiendi andmeid uuendada.
 
-#### Telefonid
+#### Telecom väärtused
+- `Patient.telecom` on piiramatu massiv, mis võib sisaldada isiku kontaktandmed: tel. numbrid ja e-mailid.
+- `Patient.telecom[x].system` on kohustuslik, lubatud väärtused: phone | email
+- `Patient.telecom[x].use` ei ole kohustuslik, lubatud väärtused: home | work | temp | old | mobile 
+- `Patient.telecom[x].rank` ei ole kohustuslik. 
+
+Näide:
+```json
+    "telecom": [
+        {
+            "system": "phone",
+            "value": "+37253535353",
+            "use": "home",
+            "rank": 1
+        },
+        {
+            "system": "email",
+            "value": "abc@def.gg",
+            "use": "work",
+            "rank": 2
+        }
+    ],
+```
+
+
+##### Telefonid
 
 Eesti numeratsiooniplaan [riigiteataja.ee/akt/881042](https://www.riigiteataja.ee/akt/881042) reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
 
@@ -30,7 +55,7 @@ Eesti numeratsiooniplaan [riigiteataja.ee/akt/881042](https://www.riigiteataja.e
 Telefoninumbrid salvestatkse registri alati riigi koodiga kujul +XXXYYYYYY ilma tühikudeta ja sulgudeta. Juhul kui PÜT-i jõuab valiidne Eesti number ilma
 riigikoodita siis riigikood lisatakse telefoninumbrile automaatselt.
 
-#### Emailid
+##### Emailid
 
 Emaili valideeritakse regexi valemi järgi:
 `^(?=.{1,64}@)[A-Za-z0-9_+-]+(\.[A-Za-z0-9_+-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$`.
