@@ -170,7 +170,7 @@ Patsiendi otsingu tulemusena tagastatakse [Bundle](https://www.hl7.org/fhir/bund
 GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni|37412251234
 ```
 
-Enne saatmist peab olema URL encode-itud vähemalt identifikaatori eraldaja sümbol "|":
+Enne saatmist peab olema URL encode-itud vähemalt identifikaatori eraldaja sümbol "\|":
 
 ```
 GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234
