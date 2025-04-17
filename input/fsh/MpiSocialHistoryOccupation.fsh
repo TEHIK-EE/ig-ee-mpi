@@ -52,7 +52,7 @@ Description:    "Töötamine"
 * component ^slicing.discriminator.path = "code"
 * component ^slicing.rules = #open
 * component ^slicing.description = "Slice based on the component.code pattern"
-* component contains job 1..1 MS and rate 0..1
+* component contains job 0..1 MS and rate 0..1
 * component[job].code = SCT#160922003 "Job details"
 * component[job].value[x] 1..1
 * component[job].value[x] only CodeableConcept
@@ -84,7 +84,7 @@ Usage: #example
   * coding[snomed] = SCT#184104002
 * subject = Reference(Patient/pat1)
 * performer = Reference(EmployerOrg)
-* component[job].valueCodeableConcept = EEOccupation#11079281 "Pediaater"
+* component[job].valueCodeableConcept = EEOccupation#22122501 "Pediaater"
 * component[rate].valueQuantity = 0.75 '1'
 * contained[employer] = EmployerOrg
 
