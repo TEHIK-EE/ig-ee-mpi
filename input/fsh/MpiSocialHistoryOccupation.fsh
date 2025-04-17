@@ -47,7 +47,7 @@ Description:    "Töötamine"
 * implicitRules ..0
 * modifierExtension ..0
 * dataAbsentReason ..0
-* component 1..2
+* component 0..2
 * component ^slicing.discriminator.type = #pattern
 * component ^slicing.discriminator.path = "code"
 * component ^slicing.rules = #open
@@ -66,6 +66,7 @@ Description:    "Töötamine"
 * component[rate].valueQuantity ^short = "Töökoormus (0..1]."
 * component[rate] ^short = "Lepinguline töökoormus."
 
+* contained 1..1
 * contained ^slicing.discriminator[0].type = #type
 * contained ^slicing.discriminator[0].path = "$this"
 * contained ^slicing.ordered = false
