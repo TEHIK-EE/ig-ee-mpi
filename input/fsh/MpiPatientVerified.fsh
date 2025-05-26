@@ -34,18 +34,11 @@ Usage: #example
   * period.end = "2023-12-28"
   * assigner.display = "Estonian Police and Board Agency"
 * identifier[+]
-//  * type = IdentityTypeCS#MR
   * system = "https://fhir.ee/sid/pid/est/mr"
   * value = "82746127612"
 * identifier[+]
-//  * type = IdentityTypeCS#PRN
   * system = "https://fhir.ee/sid/pid/est/prn/90006399"
   * value = "123e4567-e89b-12d3-a456-426614174000"
-/* identifier[+]
-// * type = IdentityTypeCS#U
-  * system = "urn:pin:hl7.ee:pid:u"
-  * value = "90006399:xyz:123e4567-e89b-12d3-a456-426614174000"
-*/
 * name[official]
   * use = #official
   * given = "Igor"
