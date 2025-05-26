@@ -22,7 +22,7 @@ jobs:
         echo "building version $version"
         docker run --rm \
           -v ${{ github.workspace }}:/workspace \
-          docker.kodality.com/fsh-builder \
+          hl7fhir/ig-publisher-base:latest \
           /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y -f && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
