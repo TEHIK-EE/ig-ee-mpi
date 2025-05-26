@@ -11,4 +11,4 @@ if [ ! -f "$this/input-cache/publisher.jar" ]; then
     cd $this && $this/_updatePublisher.sh -f -y
 fi
 docker run --rm -it -v $this:/workdir -v ~/.fhir:/root/.fhir \
-  hl7fhir/ig-publisher-base:latest /bin/bash -c "cd /workdir && ./_genonce.sh $1"
+  docker.kodality.com/fsh-builder /bin/bash -c "cd /workdir && ./_genonce.sh $1"
