@@ -62,6 +62,8 @@ flowchart TD
 ```
 
 ### Otsingu komponent
+> ⚠️ **NB:** Tegemist on otsingu realiseerimise näidisega.
+
 
 Paljudes tarkvarades on kasutusel patsiendi otsing ühe otsingu väljaga (Google stiilis). Et vältida liigsete andmete pärimist, kuna PÜT lisab kõik leitud
 patsiendid auditlogisse, soovitame ühtlustada ühe väljaga otsingut vastavalt allpoolt toodud kirjeldusele.
@@ -115,26 +117,26 @@ FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/usa/ppn|E00007734
 ```
 
 2) kui otsingutekst koosneb ainult tähtedest või sisaldab eraldajaid (koma või tühik), siis on tegemist tekstiga, mis sisaldab nime. Antud tekst võib sisaldada
-   komponente nagu *perekonnanimi*, *eesnimi* ja *sünnikuupäev*.
+   komponente nagu *perekonnanimi*, *eesnimi* ja *sünnikuupäev* (kõik toetatud otsinguparameetrid on toodud [siin](operations.html#välismaalaste-otsing)) 
 
 ```
 Otsingu tekst: PRT | RONALDO, CRISTIANU, 05.02.1985
-FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO&given=CRISTIANU&birthdate=1985-02-05
+FHIR päring: GET /Patient/$foreign?identifier_country=PRT&family=RONALDO&given=CRISTIANU&birthdate=1985-02-05
 ```
 
 ```
 Otsingu tekst: PRT | RONALDO, CRISTIANU
-FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO&given=CRISTIANU
+FHIR päring: GET /Patient/$foreign?identifier_country=PRT&family=RONALDO&given=CRISTIANU
 ```
 
 ```
 Otsingu tekst: PRT | RONALDO
-FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO
+FHIR päring: GET /Patient/$foreign?identifier_country=PRT&family=RONALDO
 ```
 
 ```
 Otsingu tekst: PRT | RONALDO,, 05.02.1985
-FHIR päring: GET /Patient$foreign?country=PRT&family=RONALDO&birthdate=1985-02-05
+FHIR päring: GET /Patient/$foreign?identifier_country=PRT&family=RONALDO&birthdate=1985-02-05
 ```
 
 3) Tundmatu või anonüümse või tuvastamata patsiendi otsing.

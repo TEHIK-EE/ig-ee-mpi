@@ -1,19 +1,38 @@
 FHIR operatsioon on eritegevus, mida ei ole võimalik või väga raske väljendada standardse FHIR süntaksi kaudu.
 Tegevuse realiseerimine operatsioonina võib olla tingitud teise osapoole (nt xTee andmekogu) käideldavuse tõttu või erilise ligipääsu reeglite tõttu.
 
-Välised allikad, kust MPI andmeid pärib, ei toeta tavaliselt lehekülgede numeratsiooni päringu parameetrina. Seetõttu tagastavad enamus MPI operatsioonidest andmed "collection" tüübi Bundle-ina, mis ei sisalda informatsiooni ridade arvu ega lehekülgede kohta. 
-
+Välised allikad, kust MPI andmeid pärib, ei toeta tavaliselt lehekülgede numeratsiooni päringu parameetrina. Seetõttu tagastavad enamus MPI operatsioonidest
+andmed "collection" tüübi Bundle-ina, mis ei sisalda informatsiooni ridade arvu ega lehekülgede kohta.
 
 ## Patsient
+
 ### Patsientide sidumine ja lahti sidumine
+
 Patsientide sidumise ja lahti sidumise loogika ja operatsioonid on seletatud [leheküljel](link.html).
 
 ### Välismaalaste otsing
-Välismaalaste otsimiseks või patsientide otsimiseks ilma identifikaatorita tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html). Toetavate parameetrite hulka kuuluvad: identifikaatori väljastanud riik, eesnimi, perekonnanimi, sünnikuupäev, sugu ja kontaktandmed.
+
+Välismaalaste otsimiseks kui identifikaator ei ole teada tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html).
+
+#### Toetatud otsinguparameetrid
+
+| Parameeter         | Kohustuslik | Kirjeldus                                                               | Väärtustatud näidis    |   
+|--------------------|-------------|-------------------------------------------------------------------------|------------------------|
+| gender             | jah         | Sugu. Toetatud väärtused: male,female,unknown                           | gender=male            |
+| birthdate          | ei          | Sünnikuupäev                                                            | birthdate=1974-12-25   |
+| family             | ei          | Perekonnanimi                                                           | family=Graham          |
+| given              | ei          | Eesnimi                                                                 | given=Gene             |
+| identifier_country | jah         | Identifikaatori riigi kood (3 tähega)                                   | identifier_country=UZB |
+| telecom            | ei          | Patsiendi telefoni number või e-mail (parameetri on vaja URL-encode-da) | telecom=some@email.ee  |
+
+#### Päringu näidis
+
 ```
-GET {MPI}/Patient/$foreign?gender=male&birthdate=1979-12-25&family=Graham&given=Gene&identifier_country=UZB
+GET {MPI}/Patient/$foreign?gender=male&birthdate=1979-12-25&family=Graham&given=Gene&identifier_country=UZB&telecom=%2B1234567
 ```
+
 Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssidest (ilma metainformatsioonita):
+
 ```json
 {
   "resourceType": "Bundle",
@@ -62,11 +81,12 @@ Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssid
 }
 ```
 
-
 ### Eesti isikukoodiga patsiendi otsing
-Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-patient-lookup.html) operatsiooniga. 
-Toetavate parameetrite hulka kuuluvad: identifikaator ja allikas, kust andmeid päritakse. 
+
+Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-patient-lookup.html) operatsiooniga.
+Toetavate parameetrite hulka kuuluvad: identifikaator ja allikas, kust andmeid päritakse.
 Hetkel toetatakse päringuna:
+
 - Rahvastikuregistrist (source=https://rahvastikuregister.ee)
 - MPI Patsiendiregistrist (source=https://mpi.tehik.ee)
 
@@ -169,18 +189,24 @@ GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&
 ```
 
 ## Sotsiaalsed tunnused
+
 Sotsiaalsed tunnused päritakse xTee teenuste kaudu ja tagastatakse Observation ressurssidena.
 Tüüpiliselt tagastatav Observation ressurss ei sisalda **"id"** väärtust ja peegeldab hetkeseisu situatsiooni.
 Sotsiaalsete tunnuste operatsioonid pärivad alati andmed allikregistritest (sõltumatu andmete olemasolust vahemälus).
 
 ### Seadusliku eeskostja staatus
-Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja eestkoste liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
+
+Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - viide patsiendile ja eestkoste
+liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
 
 Näiteks eestkostetavate leidmine:
+
 ```
 GET {MPI}/Patient/$legal-guardian?patient=Patient/168&legal-status=365569001
 ```
+
 ning saab vastuseks Observationi:
+
 ```json
 {
   "resourceType": "Bundle",
@@ -274,11 +300,15 @@ ning saab vastuseks Observationi:
 ```
 
 #### Hooldusõiguste pärimine
+
 Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
+
 ```
 GET {MPI}/Patient/$power-of-attorney?patient=Patient/263595
 ```
+
 ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu hooldusõiguise liiki):
+
 ```json
 {
   "resourceType": "Bundle",
@@ -455,193 +485,206 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
 ```
 
 ### Haridus
+
 Andmed päritakse [$education](OperationDefinition-patient-education.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+
 ```
 GET {MPI}/Patient/$education?patient=Patient/3744
 ```
+
 ning saab vastuseks Observationi
+
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://tehik.ee/StructureDefinition/ee-mpi-social-history-education-level"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social History"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "82589-3",
-                            "display": "Highest level of education"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/3744"
-                },
-                "issued": "2023-04-27T13:11:56.188+00:00",
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://mpi.tehik.ee/rr/education-level",
-                            "code": "Hariduseta, alusharidus",
-                            "display": "Hariduseta, alusharidus"
-                        }
-                    ]
-                }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://tehik.ee/StructureDefinition/ee-mpi-social-history-education-level"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "82589-3",
+              "display": "Highest level of education"
             }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/3744"
+        },
+        "issued": "2023-04-27T13:11:56.188+00:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://mpi.tehik.ee/rr/education-level",
+              "code": "Hariduseta, alusharidus",
+              "display": "Hariduseta, alusharidus"
+            }
+          ]
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
 ### Puude määr
+
 Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+
 ```
 GET {MPI}/Patient/$disability?patient=Patient/7073
 ```
+
 ning saab vastuseks on [Disability](StructureDefinition-ee-mpi-socialhistory-disability.html) Observationi
 
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-disability"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social history"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://loinc.org",
-                            "code": "95377-8",
-                            "display": "Disability type"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/7073"
-                },
-                "effectivePeriod": {
-                    "start": "2024-02-29T00:00:00+02:00",
-                    "end": "2027-02-27T00:00:00+02:00"
-                },
-                "issued": "2024-08-05T09:02:37.395+03:00",
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://fhir.ee/CodeSystem/puude-raskusaste",
-                            "code": "sygav",
-                            "display": "Sügav puue"
-                        }
-                    ]
-                }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-disability"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "95377-8",
+              "display": "Disability type"
             }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/7073"
+        },
+        "effectivePeriod": {
+          "start": "2024-02-29T00:00:00+02:00",
+          "end": "2027-02-27T00:00:00+02:00"
+        },
+        "issued": "2024-08-05T09:02:37.395+03:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://fhir.ee/CodeSystem/puude-raskusaste",
+              "code": "sygav",
+              "display": "Sügav puue"
+            }
+          ]
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
 ### Teovõime
+
 Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+
 ```
 GET {MPI}/Patient/$legal-status?patient=Patient/874
 ```
+
 ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-legal-status.html) Observationi
 
 ```json
 {
-    "resourceType": "Bundle",
-    "type": "collection",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Observation",
-                "meta": {
-                    "profile": [
-                        "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-status"
-                    ]
-                },
-                "status": "final",
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "social-history",
-                                "display": "Social history"
-                            }
-                        ]
-                    }
-                ],
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "8625004",
-                            "display": "Legal status"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/874"
-                },
-                "issued": "2024-08-02T13:12:35.344+03:00",
-                "valueCodeableConcept": {
-                    "coding": [
-                        {
-                            "system": "https://fhir.ee/CodeSystem/teovoime-staatus",
-                            "code": "T3",
-                            "display": "Piiratud teovõimega valimisõigusega"
-                        }
-                    ]
-                }
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-status"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "8625004",
+              "display": "Legal status"
             }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/874"
+        },
+        "issued": "2024-08-02T13:12:35.344+03:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://fhir.ee/CodeSystem/teovoime-staatus",
+              "code": "T3",
+              "display": "Piiratud teovõimega valimisõigusega"
+            }
+          ]
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
 ### Töövõime
+
 Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga, mis saab ühe parameetri - viide patsiendile:
+
 ```
 GET {MPI}/Patient/$incapacity-for-work?patient=Patient/7076
 ```
+
 ning saab vastuseks on [IncapacityForWork](StructureDefinition-ee-mpi-socialhistory-incapacity-for-work.html) Observationi
 
 Operatsioon leiab alati hetkel kehtiva otsuse.
@@ -704,8 +747,14 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
 ```
 
 ## Tööprintsiip
+
 ### Vahemälu (cache)
-MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast värskendab andmed vahemälus.
+
+MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri
+eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast
+värskendab andmed vahemälus.
 
 ### Vahemälust pärimine
-Iga operatsioon mis toetab vahemälu sisaldab parameetri *nocache*. *nocache* parameetri vaikimisi väärtuseks on *false*, s.t. vaikimisi andmed võetakse vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks tuleb määrata *true*. 
+
+Iga operatsioon mis toetab vahemälu sisaldab parameetri *nocache*. *nocache* parameetri vaikimisi väärtuseks on *false*, s.t. vaikimisi andmed võetakse
+vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks tuleb määrata *true*. 
