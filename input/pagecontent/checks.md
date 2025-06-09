@@ -21,7 +21,7 @@ Operatsioon tagastab `Patient` ressursi koos id-ga, mille abil saab patsiendi an
 
 - `Patient.telecom` on piiramatu massiv, mis võib sisaldada isiku kontaktandmed: tel. numbrid ja e-mailid.
 - `Patient.telecom[x].system` on kohustuslik, lubatud väärtused: phone \| email
-- `Patient.telecom[x].use` ei ole kohustuslik, lubatud väärtused: home \| work \| temp \| old \| mobile 
+- `Patient.telecom[x].use` ei ole kohustuslik
 - `Patient.telecom[x].rank` ei ole kohustuslik. 
 
 Näide:
