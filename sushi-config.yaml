@@ -68,6 +68,8 @@ pages:
     title: Checklist
   contact.md:
     title: Contact Us
+  download.xml:
+    title: Download
   uc.md:
     title: Kasutusjuhud
   checks.md:
