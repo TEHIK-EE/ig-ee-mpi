@@ -41,7 +41,7 @@ Description: "Common MPI limitations on Patient resource"
 
 Invariant: phone-regex
 Description: "Telefoninumber peab olema korrektses Eesti vormingus (lauatelefon, mobiil või rahvusvaheline number)"
-Expression: "value.matches('^(?:(32|33|35|38|39|6[0-9]|7[1-9]|88)([0-9]{5})|5[0-9]([0-9]{5,6})|\\\\+[1-9][0-9]{1,14})$')"
+Expression: "value.matches('(^\\\\+(?!372)[1-9]\\\\d{1,14}$)|(^(\\\\+372|00372)?5(\\\\d{6,7})$)|(^(\\\\+372|00372)?(32|33|35|38|39|6[0-9]|7[1-9]|88)(\\\\d{5})$)')"
 Severity: #error
 
 Invariant: email-regex
