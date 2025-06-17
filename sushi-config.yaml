@@ -76,6 +76,8 @@ pages:
     title: Kontrollid
   hl7v3.md:
     title: Seos HL7 V3-ga ja CDA-ga
+  search.xml:
+    title: Otsing
 
 #   implementation.xml:
 #   examples.xml:
