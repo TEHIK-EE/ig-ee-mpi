@@ -1,5 +1,5 @@
 <div xmlns="http://www.w3.org/1999/xhtml">
   <p/>
-  <iframe id="gcse" width="100%" height="1000" style="border: none;"/>
+  <div id="gcse-box"/>
   <p/>
 </div>
