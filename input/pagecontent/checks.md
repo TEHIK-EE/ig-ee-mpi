@@ -85,7 +85,7 @@ MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb
 ###### Kvaliteedinõuded
 
 Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aaddress Rahvastikuregistri järgi.
-Aadressite edastamiseks MPI-sse tuleb järgida Maa-ameti poolt koostatud [juhendi](https://geoportaal.maaamet.ee/docs/aadress/RR_elukohtade-ja-lisaaadresside-valiku-juhend.pdf). 
+Aadressite edastamiseks MPI-sse tuleb järgida Maa-ameti poolt koostatud [juhendi](https://geoportaal.maaamet.ee/docs/aadress/elukoha_ja_lisaaadressi_valiku_juhend.pdf). 
 Kui aadress ei vasta nõuetele MPI lisab sellele [notice](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
 
 **Kui lisa-aadress vastab kvaliteedinõuetele, siis saadetakse see automaatselt Rahvastikuregistrisse.**
