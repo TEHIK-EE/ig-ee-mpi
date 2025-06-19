@@ -31,7 +31,7 @@
 - Oskab opereerida [RelatedPerson](http://hl7.org/fhir/relatedperson.html) ressursiga  
   - <input type="checkbox"/> Toetab [seotud isiku](StructureDefinition-ee-mpi-related-person.html) andmekoosseisu `GET/PUT/POST/DELETE /RelatedPerson`
   - <input type="checkbox"/> Toetab seotud isikute otsingut `GET /RelatedPerson?patient=value`
-  - <input type="checkbox"/> Toetab mitut seosetüüpi mitmest kodeerimissüsteemist - [kontaktisiku tüüp](https://fhir.ee/ig/terminology/current/site/ValueSet-person-relationship-class.html) ja [suhe patsiendiga](https://fhir.ee/ig/terminology/current/site/ValueSet-isiku-seos-patsiendiga.html).
+  - <input type="checkbox"/> Toetab mitut seosetüüpi mitmest kodeerimissüsteemist - [kontaktisiku seos patsiendiga](https://akk.tehik.ee/classifier/resources/value-sets/isiku-seos-patsiendiga/summary) ja [kontaktisiku liik](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-kontaktisikute-liigid/summary).
 - Oskab kasutada [MPI operatsioone](operations.html), s.h.
   - <input type="checkbox"/> [töövõimetuse päringut](OperationDefinition-patient-incapacity-for-work.html)
   - <input type="checkbox"/> [puude päringut](OperationDefinition-patient-disability.html)

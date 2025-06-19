@@ -15,7 +15,7 @@ Description: "Common MPI limitations on Patient resource"
 * communication MS
 * communication ^short = "Suhtluskeeled"
 * communication.language ^binding.additional.purpose = #preferred
-* communication.language ^binding.additional.valueSet = "https://fhir.ee/ValueSet/keeled"
+* communication.language ^binding.additional.valueSet = $langs-VS
 
 * telecom MS
 * telecom.value 1..1 MS
@@ -29,7 +29,7 @@ Description: "Common MPI limitations on Patient resource"
 * telecom[phone].system 1..1 MS
 * telecom[phone].use 0..1 MS
 * telecom[phone].rank 0..1 MS
-* telecom[phone] ^short = "Telefon"
+* telecom[phone] ^short = "Telefoni number"
 * telecom[phone].value obeys phone-regex
 
 * telecom[email].system = #email

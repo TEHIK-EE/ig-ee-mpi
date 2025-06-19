@@ -1,4 +1,4 @@
-Alias: v3-RoleClass = http://terminology.hl7.org/CodeSystem/v3-RoleClass
+
 
 Profile: MPIRelatedPerson
 Parent: EEBaseRelatedPerson
@@ -7,7 +7,7 @@ Title: "EE MPI Related Person"
 Description: "Patsient ja tema kontakt- ja seotud isikud."
 * active 1..1 MS
 * relationship 1..* MS
-* relationship ^short = "Seosetüübid - kontaktisiku roll ja isiklik seos (sugulane, tuttav, ..)."
+* relationship ^short = "Seosetüübid - kontaktisiku liik ja isiklik seos (sugulane, tuttav, ..)."
 * name 0..1 MS
 * name ^short = "Kontaktisiku nimi."
 * telecom ^short = "Kontaktisiku kontaktandmed."
@@ -18,9 +18,11 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * period 1..1 MS
 * relationship ^slicing.rules = #closed
 * relationship[person] 0..1 MS
-* relationship[person] from EEPersonRelationship (required)
+* relationship[person] ^short = "Kontaktisiku liik"
+* relationship[person] from $relationship-type-VS (required)
+* relationship[class] ^short = "Kontaktisiku seos patsiendiga"
 * relationship[class] MS
-* relationship[class] from IsikuSeosPatsiendiga (required)
+* relationship[class] from $relationship-relation-VS (required)
 
 
 Instance: PatientIgorBossenkoSon
@@ -34,8 +36,6 @@ Usage: #example
   * value = "39510212711"
 * name.text = "Son of Igor"
 * relationship[person] = SCT#67822003 "Child"
-//example of not allowed value
-//* relationship[class] = v3-RoleClass#NOK "Next of kin"
 * active = true
 * period.start = "1995-10-21"
 
@@ -47,7 +47,7 @@ Usage: #example
 * patient = Reference(Patient/pat1)
 * name.text = "Wife of Igor"
 * relationship[person] = SCT#127848009 "Spouse"
-* relationship[class] = v3-RoleClass#CON "Contact"
+* relationship[class] = $v3-RoleClass#CON "Contact"
 * active = true
 * period.start = "1995-06-22"
 

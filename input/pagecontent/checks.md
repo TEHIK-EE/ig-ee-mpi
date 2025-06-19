@@ -158,7 +158,7 @@ _display_ väli ei ole kohustuslik, seda täidetakse koodi järgi pärimisel aut
 
 - [Eeskoste liik](https://teabekeskus.tehik.ee/et/loendid/eestkoste-liik)
 - [Hooldusõiguse liik](https://teabekeskus.tehik.ee/et/loendid/hooldusoiguse-liik)
-- [Isiku seos patsiendiga](https://fhir.ee/ig/terminology/current/site/ValueSet-isiku-seos-patsiendiga.html)
+- [Isiku seos patsiendiga](https://akk.tehik.ee/classifier/resources/value-sets/isiku-seos-patsiendiga/summary)
 - [Omandatud kõrgeim haridus](https://teabekeskus.tehik.ee/et/loendid/omandatud-korgeim-haridus)
 - [Puude raskusaste](https://teabekeskus.tehik.ee/et/loendid/puude-raskusaste)
 - [Teovõime staatus](https://teabekeskus.tehik.ee/et/loendid/teovoime-staatus)
