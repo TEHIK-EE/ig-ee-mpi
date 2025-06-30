@@ -22,17 +22,10 @@ Usage: #example
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/fin/ni"
   * value = "31002736540023"
-/* identifier[+]
-  * system = "https://fhir.ee/sid/pid/est/cz"
-  * value = "AB0421183"
-  * period.end = "2023-12-28"
-  * assigner.display = "Estonian Police and Board Agency"
-*/
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/est/ppn"
   * value = "K0307337"
   * period.end = "2023-12-28"
-  * assigner.display = "Estonian Police and Board Agency"
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/est/mr"
   * value = "82746127612"

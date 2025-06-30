@@ -138,7 +138,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-063    | Päringu autor ei tohi olla anonüümne (isikukoodiga ${impersonal_code})                                                                                   |
 | MPI-064    | 'guardian-only' parameeter on lubatud ainult alaealise patsientide puhul. Täiskasvanu eestkostja leidmiseks tuleb kasutada $legal-guardian operatsiooni! |
 | MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}&#124;${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                             |
-| MPI-071    | Eesti isikukoodiga patsiendil ei saa muuta: surmakuupäeva, sünnikuupäeva, sugu, nime                                                                     |
+| MPI-071    | Eesti isikukoodiga patsiendil ei saa muuta: surmakuupäeva, sünnikuupäeva, sugu, nime, olekut                                                             |
 | MPI-072    | Patient ressurss id-ga ${id} ei leitud                                                                                                                   |
 | MPI-073    | RelatedPerson ressurss id-ga ${id} ei leitud                                                                                                             |
 | MPI-074    | Observation ressurss id-ga ${id} ei leitud                                                                                                               |
