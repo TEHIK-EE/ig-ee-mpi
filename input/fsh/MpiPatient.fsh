@@ -9,13 +9,15 @@ Description: "Common MPI limitations on Patient resource"
 * photo ..0
 * generalPractitioner ..0
 * managingOrganization ..0
-* link ^short = "MPI ignoreerib salvestamisel 'link' elemendi. Välja 'link' saab muuta operatsioonide abil."
+* link ^short = "Seos teise patsiendi kirjega. Ignoreeritakse salvestamisel, saab muuta ainult $link operatsiooni abil."
 * contact ..0
 * maritalStatus ..0
 * communication MS
 * communication ^short = "Suhtluskeeled"
 * communication.language ^binding.additional.purpose = #preferred
 * communication.language ^binding.additional.valueSet = $langs-VS
+
+* active ^short = "Määrab kas patsiendi kirje on aktiivne ja kasutusel. Eesti isikukoodiga patsiendi puhul väärtuse muutus ei ole lubatud. Surnud ja seotud patsiendi korral on alati 'false'."
 
 * telecom MS
 * telecom.value 1..1 MS

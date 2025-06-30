@@ -158,7 +158,7 @@ kus _{params}_ on otsingu parameetrite nimekiri koos väärtustega.
 | _page                    | Lehe number mida tagastada                                                                                                                    | _page=1                                                 |
 | identifier               | Patsiendi identifikaator kujul "system\|value", eraldaja sümbol peab olema URL encode-itud.                                                   | identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234 |
 | birthdate                | Sünnikuupäev (lubatud ainult eri õigusega)                                                                                                    | birthdate=1974-12-25                                    |
-| active                   | Patsiendi kirje olek (vaikimisi true)                                                                                                         | active=false                                            |
+| active                   | Patsiendi kirje olek                                                                                                                          | active=false                                            |
 | external-system-presence | Patsiendi olemasolu välises infosüsteemis. Hetkel on lubatud ainult https://rahvastikuregister.ee väärtus. Ei saa kasutada üksikparameetrina. | external-system-presence=https://rahvastikuregister.ee  |
 
 #### Otsingu vastus
@@ -226,15 +226,19 @@ Terve andmekomplekti töötlemisel tuleb alati jälgida **next** linki olemasolu
 Loe rohkem otsingu kohta [FHIR dokumentatsioonist](https://hl7.org/fhir/search.html).
 
 #### Otsing identifikaatori järgi
+
 Eesti isikukoodi (**https://fhir.ee/sid/pid/est/ni** süsteemiga) järgi otsides vastusena tuleb alati üks ressurss (Bundle ühe ressursiga).
 
-Välismaalase (ja tundmatu) identifikaatori järgi otsides tuleb arvestada, et tulemus võib sisaldada mitu ressursi, 
+Välismaalase (ja tundmatu) identifikaatori järgi otsides tuleb arvestada, et tulemus võib sisaldada mitu ressursi,
 kui otsingu tehtakse **ebatäpse süsteemi järgi**:
-- Täpsed patsiendi identifikaatorite süsteemid on toodud [selles loendis](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html)
-- Kõik riiklikud identifikaatorite süsteemid (ebatäpsed) on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html) tasmega 2.
 
-Näiteks otsing `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori järgi võib tagastada isikuid kellel on Soome isikukood numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ni|xxx-123`) 
-aga ka isikuid kellel on Soome pass numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ppn|xxx-123`). 
+- Täpsed patsiendi identifikaatorite süsteemid on toodud [selles loendis](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html)
+- Kõik riiklikud identifikaatorite süsteemid (ebatäpsed) on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
+  tasmega 2.
+
+Näiteks otsing `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori järgi võib tagastada isikuid kellel on Soome isikukood numbriga xxx-123 (
+`https://fhir.ee/sid/pid/fin/ni|xxx-123`)
+aga ka isikuid kellel on Soome pass numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ppn|xxx-123`).
 
 ### Operatsioonid
 
@@ -272,19 +276,21 @@ Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi
 
 ```json
 ...
-  "resourceType" : "Patient",
-  "id": "1",
-  "meta": {
-    "profile": [
-      "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-    ],
-    "source": "https://my.his.ee/Patient/92837-fdsvsd-3f4gfew-2342dwd"
-  }
+"resourceType" : "Patient",
+"id": "1",
+"meta": {
+"profile": [
+"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+],
+"source": "https://my.his.ee/Patient/92837-fdsvsd-3f4gfew-2342dwd"
+}
 ...
 ```
 
-Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html) ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist. 
-Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html) ja [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) registreerimine.
+Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html)
+ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist.
+Tulevikus võivad lisanduda [vastsündinu-](StructureDefinition-ee-mpi-patient-newborn.html)
+ja [surnultsündinu-](StructureDefinition-ee-mpi-patient-stillborn.html) registreerimine.
 Iga patsiendi lisamisel või muutmisel tuleb määrata vastav [profiil](patient.html#eempipatient).
 
 #### Päring (request)
@@ -315,9 +321,11 @@ Vead tagastatakse [OperationOutcome](http://hl7.org/fhir/operationoutcome.html) 
 loogilistest [koodidest](errors.html).
 
 #### Identifikaatorite lisamine
+
 - Olemasolevale patsiendile saab lisada uusi identifikaatoreid, kuid olemasolevaid identifikaatoreid ei tohi eemaldada.
 - Kui lisatav identifikaator on juba teisele patsiendile määratud, siis andmete muutmisel (PUT päringu korral) tuleb veateade koodiga `MPI-017`.
-- Kui teil on kindlus et lisatav identifikaator siiski kuulub uuendatavale patsiendile ja tegemist on sama isikuga, siis tuleb kaks Patient ressursi omavahel siduda [link operatsiooniga](link.html).
+- Kui teil on kindlus et lisatav identifikaator siiski kuulub uuendatavale patsiendile ja tegemist on sama isikuga, siis tuleb kaks Patient ressursi omavahel
+  siduda [link operatsiooniga](link.html).
 
 #### Vastuse väljade piiramine
 
