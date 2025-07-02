@@ -230,7 +230,7 @@ Loe rohkem otsingu kohta [FHIR dokumentatsioonist](https://hl7.org/fhir/search.h
 Eesti isikukoodi (**https://fhir.ee/sid/pid/est/ni** süsteemiga) alusel otsides tagastatakse alati üks ressurss (Bundle, mis sisaldab ühte ressurssi).
 
 Kui otsite välisriigi (või tundmatu) identifikaatori alusel, tuleb arvestada, et tulemus võib sisaldada mitut ressurssi,
-kui otsing tehakse **riikliku identifikaatori süsteemiga või mitte-hierarhiliselt lõppsüsteemiga**.
+kui otsing tehakse **riikliku identifikaatori süsteemiga või hierarhiliselt mitte-lõppsüsteemiga**.
 
 - Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid leiate [sellest loendist](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html).
 - Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
