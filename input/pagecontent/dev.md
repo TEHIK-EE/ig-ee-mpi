@@ -227,18 +227,18 @@ Loe rohkem otsingu kohta [FHIR dokumentatsioonist](https://hl7.org/fhir/search.h
 
 #### Otsing identifikaatori järgi
 
-Eesti isikukoodi (**https://fhir.ee/sid/pid/est/ni** süsteemiga) järgi otsides vastusena tuleb alati üks ressurss (Bundle ühe ressursiga).
+Eesti isikukoodi (**https://fhir.ee/sid/pid/est/ni** süsteemiga) alusel otsides tagastatakse alati üks ressurss (Bundle, mis sisaldab ühte ressurssi).
 
-Välismaalase (ja tundmatu) identifikaatori järgi otsides tuleb arvestada, et tulemus võib sisaldada mitu ressursi,
-kui otsingu tehtakse **ebatäpse süsteemi järgi**:
+Kui otsite välisriigi (või tundmatu) identifikaatori alusel, tuleb arvestada, et tulemus võib sisaldada mitut ressurssi,
+kui otsing tehakse **riikliku identifikaatori süsteemiga või mitte-hierarhiliselt lõppsüsteemiga**.
 
-- Täpsed patsiendi identifikaatorite süsteemid on toodud [selles loendis](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html)
-- Kõik riiklikud identifikaatorite süsteemid (ebatäpsed) on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
-  tasmega 2.
+- Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid leiate [sellest loendist](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html).
+- Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
+  hierarhia tasemega 2.
 
-Näiteks otsing `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori järgi võib tagastada isikuid kellel on Soome isikukood numbriga xxx-123 (
-`https://fhir.ee/sid/pid/fin/ni|xxx-123`)
-aga ka isikuid kellel on Soome pass numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ppn|xxx-123`).
+Näiteks kui otsite `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori alusel, võite saada tulemuseks isikuid, kellel on Soome isikukood numbriga xxx-123 (
+`https://fhir.ee/sid/pid/fin/ni|xxx-123`), aga ka neid, kellel on Soome pass numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ppn|xxx-123`).
+Kui otsite ilma riigikoodita, näiteks `https://fhir.ee/sid/pid|xxx-123`, tagastatakse kõik patsiendid, kellel on identifikaatoriks `xxx-123`.
 
 ### Operatsioonid
 
@@ -279,10 +279,9 @@ Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi
 "resourceType" : "Patient",
 "id": "1",
 "meta": {
-"profile": [
-"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-],
-"source": "https://my.his.ee/Patient/92837-fdsvsd-3f4gfew-2342dwd"
+  "profile": [
+    "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+  ]
 }
 ...
 ```
