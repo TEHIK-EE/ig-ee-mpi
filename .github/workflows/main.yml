@@ -16,15 +16,37 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Build IG with docker builder
+    - name: Update the image to the latest publisher
+      uses: docker://hl7fhir/ig-publisher-base:latest
+      with:
+        # Get the latest publisher - don't run the batch script but run the line directly
+        args: curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o ./input-cache/publisher.jar --create-dirs
+
+
+    - name: Create package cache folder
+      uses: docker://hl7fhir/ig-publisher-base:latest
+      with:
+        entrypoint: /bin/sh
+        args: -c "mkdir -p ./fhir-package-cache && chown 1001:127 ./fhir-package-cache"
+
+
+    - name: Run the IG publisher
+      uses: docker://hl7fhir/ig-publisher-base:latest
+      with:
+        entrypoint: /bin/sh
+        args: -c "mkdir -p /var/lib/.fhir && chown $(id -u):$(id -g) /var/lib/.fhir"
+
+    - name: Set MPI_VERS variable
       run: |
-        version=$(grep '^version:' ${{ github.workspace }}/sushi-config.yaml | awk '{print $2}')
-        echo "building version $version"
-        docker pull hl7fhir/ig-publisher-base:latest
-        docker run --rm \
-          -v ${{ github.workspace }}:/workdir \
-          hl7fhir/ig-publisher-base:latest \
-          /bin/bash -c "cd /workdir && ./_updatePublisher.sh -y -f && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
+          version=$(grep '^version:' ${{ github.workspace }}/sushi-config.yaml | awk '{print $2}')
+          echo "MPI_VERS=$version" >> $GITHUB_ENV
+
+    - name: Run the IG publisher
+      uses: docker://hl7fhir/ig-publisher-base:latest
+      with:
+        # Run the publisher - don't run the batch script but run the line directly
+        args:  java -Xmx6g -jar ./input-cache/publisher.jar publisher -ig . -package-cache-folder ./fhir-package-cache https://fhir.ee/packages/mpi/${{ env.MPI_VERS }}/site
+
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
