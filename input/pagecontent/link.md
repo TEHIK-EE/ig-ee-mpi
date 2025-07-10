@@ -1,7 +1,7 @@
 ### Patsientide sidumine
 Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 
-### Reeglid ja piirangud
+#### Reeglid ja piirangud
 - "target" on primaarne patsient, kes jääb peale sidumist aktiivseks.
 - "source" on sekundaarne patsient, kes muutub mitteaktiivseks.
 - Sidumine sekundaarne patsient peab olema aktiivne.
@@ -16,7 +16,7 @@ Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 ### Patsientide lahti sidumine
 Tehakse [$unlink operatsiooniga](OperationDefinition-patient-unlink.html)
 
-### Reeglid ja piirangud
+#### Reeglid ja piirangud
 - Lahti sidumisel patsiendid peavad olema seotud (`Patient.link` element on täidetud).
 - "target" patsient on mitteaktiivne ressurss, mis muutub aktiivseks peale lahti sidumist.
 - Peale lahti sidumist on eemaldatakse lingid (`Patient.link`) kahe patsiendi vahel.
