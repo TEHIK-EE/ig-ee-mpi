@@ -96,8 +96,9 @@ Välismaa aadress on aadress mille riigiks ei ole `EE` (Eesti).
 Välismaa aadressi puhul on kohustuslik ainult riigi kood ja tekst. Välismaa aadressi puhul teisi kontrolle ei teostata.
 
 #### Identifikaatorid
-
-Identifikaatorite eemaldamine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg.
+- Identifikaatorite eemaldamine ja muutmine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg (`Identifier.period`).
+- Identifikaatorite lisamine on lubatud (v.a Eesti isikukoodiga identifikaator).
+- Eesit isikukoodi identifikaatori muutmine (s.h `Identifier` väljad) ei ole lubatud.
 
 #### Kontaktisikud
 

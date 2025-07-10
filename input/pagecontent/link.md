@@ -1,15 +1,27 @@
-Patsientide sidumiseks ja lahti sidumiseks pakub MPI [Link](OperationDefinition-patient-link.html) ja [Unlink](OperationDefinition-patient-unlink.html) operatsioonid.
+### Patsientide sidumine
+Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 
-Sidumise ja lahtisidumise tulemused hoitakse `Patient.link` elemendis.
-Oluline arvestada faktiga, et `Patient` ressurssi salvestamisel rakendus ignoreerib `link` elemendi sisu. Välja `link` saab muuta ainult operatsioonide abil.
+### Reeglid ja piirangud
+- "target" on primaarne patsient, kes jääb peale sidumist aktiivseks.
+- "source" on sekundaarne patsient, kes muutub mitteaktiivseks.
+- Sidumine sekundaarne patsient peab olema aktiivne.
+- Eesti isikukoodiga patsient peab olema alati primaarne patsient.
+- Kahte eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahavastikuregistri kaudu automaatselt.
+- Kui sidumisel on mõlemal patsiendil sama süsteemiga identifikaatorid (näiteks mõlemal on soome isikukood), siis sekundaarse patsiendi identifikaatorile pannakse lõppkuupäev (ka eesti isikukoodi puhul).
+- Sidumise tulemused hoitakse `Patient.link` elemendis.
+- `Patient` ressurssi salvestamisel rakendus ignoreerib `link` elemendi sisu. Välja `link` saab muuta ainult operatsioonide abil.
+- Saab siduda mitu sekundaarset patsienti ühe primaarse patsiendiga (sel juhul tekib mitu `Patient.link` elementi primaarse patsiendil).
 
-### Teised ressursid
-#### TIS
-TIS võimaldab liita patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.
 
+### Patsientide lahti sidumine
+Tehakse [$unlink operatsiooniga](OperationDefinition-patient-unlink.html)
 
+### Reeglid ja piirangud
+- Lahti sidumisel patsiendid peavad olema seotud (`Patient.link` element on täidetud).
+- "target" patsient on mitteaktiivne ressurss, mis muutub aktiivseks peale lahti sidumist.
+- Peale lahti sidumist on eemaldatakse lingid (`Patient.link`) kahe patsiendi vahel.
 
-### Linkide kasutamine FHIR serveris
+### Linkide kasutamine teises FHIR serveris (visioon)
 Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii:
 ```
 [fhir-server-base]/Observation?patient=123
@@ -176,3 +188,7 @@ Selle tulemusena lingid kahe patsiendi vahel kustutatakse ning lähte (source) p
 ### Liitmine (Merge) 
 Kuigi FHIR API-s esineb patsiendi ühendamise operatsioon *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html), mis liidab kahe patsiendi andmed jäädavalt (liidetav kaotatakse ära).
 MPI ei paku antud operatsiooni patsientide liitmiseks, kuna ta ei ole tagasipööratav.
+
+### Teised ressursid
+#### TIS
+TIS võimaldab siduda patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.
