@@ -24,7 +24,7 @@ jobs:
         docker run --rm \
           -v ${{ github.workspace }}:/workdir \
           hl7fhir/ig-publisher-base:latest \
-          /bin/bash -c "cd /workdir && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
+          /bin/bash -c "cd /workdir && ./_updatePublisher.sh -y -f && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
