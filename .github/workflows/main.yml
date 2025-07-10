@@ -20,10 +20,11 @@ jobs:
       run: |
         version=$(grep '^version:' ${{ github.workspace }}/sushi-config.yaml | awk '{print $2}')
         echo "building version $version"
-        docker run --rm \
-          -v ${{ github.workspace }}:/workspace \
-          docker.kodality.com/fsh-builder \
-          /bin/bash -c "cd /workspace && ./_updatePublisher.sh -y -f && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
+        docker pull hl7fhir/ig-publisher-base:latest
+        docker run --rm -it \
+          -v ${{ github.workspace }}:/workdir \
+          hl7fhir/ig-publisher-base:latest \
+          /bin/bash -c "cd /workdir && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
