@@ -21,7 +21,7 @@ jobs:
         version=$(grep '^version:' ${{ github.workspace }}/sushi-config.yaml | awk '{print $2}')
         echo "building version $version"
         docker pull hl7fhir/ig-publisher-base:latest
-        docker run --rm -it \
+        docker run --rm \
           -v ${{ github.workspace }}:/workdir \
           hl7fhir/ig-publisher-base:latest \
           /bin/bash -c "cd /workdir && ./_genonce.sh -publish https://fhir.ee/packages/mpi/$version/site"
