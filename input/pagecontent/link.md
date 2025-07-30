@@ -2,9 +2,8 @@
 Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 
 #### Reeglid ja piirangud
-- "target" on primaarne patsient, kes jääb peale sidumist aktiivseks.
+- "target" on primaarne patsient, kes peab olema aktiivne ja jääb peale sidumist aktiivseks.
 - "source" on sekundaarne patsient, kes muutub mitteaktiivseks.
-- Sidumine sekundaarne patsient peab olema aktiivne.
 - Eesti isikukoodiga patsient peab olema alati primaarne patsient.
 - Kahte eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahavastikuregistri kaudu automaatselt.
 - Kui sidumisel on mõlemal patsiendil sama süsteemiga identifikaatorid (näiteks mõlemal on soome isikukood), siis sekundaarse patsiendi identifikaatorile pannakse lõppkuupäev (ka eesti isikukoodi puhul).
