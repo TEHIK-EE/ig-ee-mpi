@@ -8,6 +8,8 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * name 1..* MS
 * name[official] 1.. MS
 * name[official] ^short = "Ametlik nimi"
+* gender 1..1
+* gender ^short = "Sugu"
 
 
 Instance: PatientIgorBossenko
