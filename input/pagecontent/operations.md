@@ -18,7 +18,7 @@ Välismaalaste otsimiseks kui identifikaator ei ole teada tuleb kasutada operats
 
 | Parameeter         | Kohustuslik | Kirjeldus                                                               | Väärtustatud näidis    |   
 |--------------------|-------------|-------------------------------------------------------------------------|------------------------|
-| gender             | jah         | Sugu. Toetatud väärtused: male,female,unknown                           | gender=male            |
+| gender             | ei          | Sugu. Toetatud väärtused: male,female,unknown                           | gender=male            |
 | birthdate          | ei          | Sünnikuupäev                                                            | birthdate=1974-12-25   |
 | family             | ei          | Perekonnanimi                                                           | family=Graham          |
 | given              | ei          | Eesnimi                                                                 | given=Gene             |

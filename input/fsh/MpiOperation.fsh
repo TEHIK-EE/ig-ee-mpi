@@ -152,25 +152,25 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patient birthdate in form yyyy-mm-dd."
+* parameter[=].documentation = "Patsiendi sünnikuupäev yyyy-mm-dd formaadis."
 * parameter[=].type = #date
 * parameter[+].name = #gender
 * parameter[=].use = #in
-* parameter[=].min = 1
+* parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patient gender. Kohustuslik."
+* parameter[=].documentation = "Patsiendi sugu."
 * parameter[=].type = #string
 * parameter[+].name = #given
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "*"
-* parameter[=].documentation = "Patient given name. Eesnimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
+* parameter[=].documentation = "Eesnimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
 * parameter[=].type = #string
 * parameter[+].name = #family
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patient family name. Perekonna nimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
+* parameter[=].documentation = "Perekonna nimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
 * parameter[=].type = #string
 * parameter[+].name = #telecom
 * parameter[=].use = #in
