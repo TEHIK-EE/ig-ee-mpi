@@ -121,23 +121,14 @@ Usage: #definition
 Instance: patient-foreign
 InstanceOf: OperationDefinition
 Usage: #definition
-* extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
-* extension[=].valueInteger = 0
-* extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
-* extension[=].valueCode = #trial-use
-* url = "https://fhir.ee/mpi/OperationDefinition/patient-foreign"
-* version = "5.0.0"
 * name = "EEMPIPatientForeignSearch"
 * title = "Patient Foreign"
 * status = #active
 * kind = #operation
 * experimental = false
-* publisher = "HL7 Estonia"
-* description = "The foreign operation perform complex search over patient resource."
-* jurisdiction = $m49.htm#Estonia "Estonia"
+* description = "The foreign operation perform complex search over non-estonian patient resources."
 * affectsState = false
 * code = #foreign
-//* comment = "There must be exactly 1 source patient, which may  be identified by either the source-patient or source-patient-identifier parameters. Similarly, there must be exactly 1 target patient, identified by either the target-patient or target-patient-identifier parameters. In both cases, either a reference to the patient or a list of identifiers that can be used to identify the patient may be provided, but not both.\r\rThe result-patient.id must be the same as the target patient reference (if the patient reference is provided as an input parameter).\r\rIf a client needs the server to create a new patient merged from the 2 patient resources, the client should create a new patient record and then call the merge operation to merge each source patient resource into the newly created patient resource.\r\rA server may decide to delete the source record, but this is not defined by the standard merge operation, and if this occurs then the target patient's link property will remain unchanged.\r"
 * resource = #Patient
 * system = false
 * type = true
@@ -146,42 +137,48 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Identifikaatori väljaandja riigi 3 kohaline kood ISO standardi järgi. Kohustuslik."
+* parameter[=].documentation = "Three-letter country code of the identifier issuer according to the ISO standard."
 * parameter[=].type = #string
+
 * parameter[+].name = #birthdate
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patsiendi sünnikuupäev yyyy-mm-dd formaadis."
+* parameter[=].documentation = "Patient's date of birth in yyyy-mm-dd format."
 * parameter[=].type = #date
+
 * parameter[+].name = #gender
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Patsiendi sugu."
+* parameter[=].documentation = "Patient's gender."
 * parameter[=].type = #string
+
 * parameter[+].name = #given
 * parameter[=].use = #in
 * parameter[=].min = 0
-* parameter[=].max = "*"
-* parameter[=].documentation = "Eesnimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
+* parameter[=].max = "1"
+* parameter[=].documentation = "Given name. Search supports similarity, allows up to 2 typos, case-insensitive. Comma-separated values are allowed."
 * parameter[=].type = #string
+
 * parameter[+].name = #family
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Perekonna nimi. Otsing sarnasuse toega, võimaldab kuni 2 kirjaveat, ei ole tõstetundlik."
+* parameter[=].documentation = "Family name. Search supports similarity, allows up to 2 typos, case-insensitive. Comma-separated values are allowed."
 * parameter[=].type = #string
+
 * parameter[+].name = #telecom
 * parameter[=].use = #in
 * parameter[=].min = 0
-* parameter[=].max = "*"
-* parameter[=].documentation = "Telekom'i väärtus, e-mail või tel. number."
-* parameter[=].type = #ContactPoint
+* parameter[=].max = "1"
+* parameter[=].documentation = "Telecom value, e-mail or phone number. Case-insensitive. Comma-separated values are allowed."
+* parameter[=].type = #string
+
 * parameter[+].name = #return
 * parameter[=].use = #out
-* parameter[=].min = 0
-* parameter[=].max = "*"
+* parameter[=].min = 1
+* parameter[=].max = "1"
 * parameter[=].documentation = "Returns Bundle (with type collection) with Patient instances."
 * parameter[=].type = #Bundle
 

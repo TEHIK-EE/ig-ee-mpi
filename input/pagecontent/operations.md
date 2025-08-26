@@ -16,14 +16,14 @@ Välismaalaste otsimiseks kui identifikaator ei ole teada tuleb kasutada operats
 
 #### Toetatud otsinguparameetrid
 
-| Parameeter         | Kohustuslik | Kirjeldus                                                               | Väärtustatud näidis    |   
-|--------------------|-------------|-------------------------------------------------------------------------|------------------------|
-| gender             | ei          | Sugu. Toetatud väärtused: male,female,unknown                           | gender=male            |
-| birthdate          | ei          | Sünnikuupäev                                                            | birthdate=1974-12-25   |
-| family             | ei          | Perekonnanimi                                                           | family=Graham          |
-| given              | ei          | Eesnimi                                                                 | given=Gene             |
-| identifier_country | jah         | Identifikaatori riigi kood (3 tähega)                                   | identifier_country=UZB |
-| telecom            | ei          | Patsiendi telefoni number või e-mail (parameetri on vaja URL-encode-da) | telecom=some@email.ee  |
+| Parameeter         | Kohustuslik | Kirjeldus                                                                                   | Väärtustatud näidis    |   
+|--------------------|-------------|---------------------------------------------------------------------------------------------|------------------------|
+| gender             | ei          | Sugu. Toetatud väärtused: male,female,unknown.                                              | gender=male            |
+| birthdate          | ei          | Sünnikuupäev.                                                                               | birthdate=1974-12-25   |
+| family             | ei          | Perekonnanimi, pole tõstetundlik.                                                           | family=Graham          |
+| given              | ei          | Eesnimi, pole tõstetundlik.                                                                 | given=Gene             |
+| identifier_country | jah         | Patsiendi identifikaatori riigi ISO kood (3 tähega).                                        | identifier_country=UZB |
+| telecom            | ei          | Patsiendi telefoni number või e-mail (parameetri on vaja URL-encode-da), pole tõstetundlik. | telecom=some@email.ee  |
 
 #### Päringu näidis
 
