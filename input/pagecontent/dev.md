@@ -151,15 +151,16 @@ kus _{params}_ on otsingu parameetrite nimekiri koos väärtustega.
 
 #### Toetatud otsinguparameetrid
 
-| Parameeter               | Kirjeldus                                                                                                                                     | Väärtustatud näidis                                     |   
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| _id                      | Ressursi id                                                                                                                                   | _id=1234 või id=1234,5678                               |
-| _count                   | Mitu tulemust tagastada lehel, vaikimisi 20. Ülemine piir on 100                                                                              | _count=10                                               |
-| _page                    | Lehe number mida tagastada                                                                                                                    | _page=1                                                 |
-| identifier               | Patsiendi identifikaator kujul "system\|value", eraldaja sümbol peab olema URL encode-itud.                                                   | identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234 |
-| birthdate                | Sünnikuupäev (lubatud ainult eri õigusega)                                                                                                    | birthdate=1974-12-25                                    |
-| active                   | Patsiendi kirje olek                                                                                                                          | active=false                                            |
-| external-system-presence | Patsiendi olemasolu välises infosüsteemis. Hetkel on lubatud ainult https://rahvastikuregister.ee väärtus. Ei saa kasutada üksikparameetrina. | external-system-presence=https://rahvastikuregister.ee  |
+| Parameeter               | Kirjeldus                                                                                                                                                      | Väärtustatud näidis                                                    |   
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| _id                      | Ressursi id.                                                                                                                                                   | _id=1234 või id=1234,5678                                              |
+| _count                   | Mitu tulemust tagastada lehel, vaikimisi 20. Ülemine piir on 100.                                                                                              | _count=10                                                              |
+| _page                    | Lehe number mida tagastada.                                                                                                                                    | _page=1                                                                |
+| identifier               | Patsiendi identifikaator kujul "system\|value", eraldaja sümbol peab olema URL encode-itud.                                                                    | identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234                |
+| birthdate                | Sünnikuupäev (lubatud ainult eri õigusega). Toetatud komparaatorid: eq, ne, gt, ge, lt, le, sa, eb. Lubatud kasutada mitu parameetrit korraga (AND loogikaga). | birthdate=1974-12-25 või birthdate=gt1974-12-25&birthdate=le1975-12-25 |
+| deceased                 | Kas patsient on surnud.                                                                                                                                        | deceased=true                                                          |
+| active                   | Patsiendi kirje olek.                                                                                                                                          | active=false                                                           |
+| external-system-presence | Patsiendi olemasolu välises infosüsteemis. Hetkel on lubatud ainult https://rahvastikuregister.ee väärtus. Ei saa kasutada üksikparameetrina.                  | external-system-presence=https://rahvastikuregister.ee                 |
 
 #### Otsingu vastus
 
@@ -232,7 +233,8 @@ Eesti isikukoodi (**https://fhir.ee/sid/pid/est/ni** süsteemiga) alusel otsides
 Kui otsite välisriigi (või tundmatu) identifikaatori alusel, tuleb arvestada, et tulemus võib sisaldada mitut ressurssi,
 kui otsing tehakse **riikliku identifikaatori süsteemiga või hierarhiliselt mitte-lõppsüsteemiga**.
 
-- Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid leiate [sellest loendist](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html).
+- Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid
+  leiate [sellest loendist](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html).
 - Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
   hierarhia tasemega 2.
 
@@ -279,9 +281,9 @@ Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi
 "resourceType" : "Patient",
 "id": "1",
 "meta": {
-  "profile": [
-    "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-  ]
+"profile": [
+"https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+]
 }
 ...
 ```
