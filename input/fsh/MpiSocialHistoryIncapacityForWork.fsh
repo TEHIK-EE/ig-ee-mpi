@@ -15,7 +15,7 @@ Description:    "Töövõime liik"
 * performer ..0
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from ToovoimeLiik
+* valueCodeableConcept from $work-ability-type
 * encounter ..0
 * basedOn ..0
 * partOf ..0
@@ -35,4 +35,4 @@ Description: "Example of patient incapacity for work"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2024-04-03T00:00:00+03:00"
-* valueCodeableConcept = ToovoimeLiik#puudub "Puuduv töövõime"
+* valueCodeableConcept = $work-ability-type-VS#puudub "Puuduv töövõime"

@@ -22,7 +22,7 @@ Ehk, kui isikul on olemas Eesti isikukood, aga rahvuselt või kodakondsuselt on 
 
 ### Välisriigi isiku kood
 Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, 
-kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Identifier Domain](https://fhir.ee/ig/terminology/current/site/CodeSystem-identifier-domain.html)). 
+kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)). 
 Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). 
 
 Olulisemad tüübid on:
@@ -36,8 +36,7 @@ Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit v�
 Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
 Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number.
 
-Riikidel mille dokumentidel (PPN, CZ ja DL tüübiga) eksisteerib isikukood tuleb alati lisaks dokumendi numbrile määrata isikukood (identifikaator NI tüübiga). 
-Loetelu nendest riikidest: [national-identifier-requirement](https://fhir.ee/ig/terminology/current/site/CodeSystem-national-identifier-requirement.html)
+Riikidel, mille dokumentidel (PPN, CZ ja DL tüüpi) eksisteerib ka isikukood (NI tüüpi süsteem), tuleb alati see määrata.
 
 Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pass:
 ```json
@@ -74,7 +73,7 @@ Tundmatu isiku esitamise näide1:
 TTO saab kasutada ka enda poolt genereeritud identifikaatorit kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. 
 URL TTO identifikaatori jaoks peab olema kujul **https://fhir.ee/sid/pid/est/prn/$BRcode**, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. 
 Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendiidentifikaatorid siis koodide mitte kattuvus peab olema lahendatud asutusesiseselt.
-Lubatud TTO identifikaatori süsteemid on loetletud koodisüsteemis [Identifier Domain](https://fhir.ee/ig/terminology/current/site/CodeSystem-identifier-domain.html). 
+Lubatud TTO identifikaatori süsteemid on loetletud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary). 
 Puuduva TTO identifikaatori süsteemi lisamiseks palume pöörduda Tehiku it-abisse, saates soovitud asutuse nimetus ning registrikood.
 
 Tundmatu isiku esitamise näide2:

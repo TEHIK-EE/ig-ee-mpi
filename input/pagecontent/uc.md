@@ -36,7 +36,7 @@ Näide patsiendist Eesti isikukoodiga:
 Juhul kui vastuvõtule tuleb patsient kes suudab tuvastada ennast teise riigi dokumendiga siis tuleb:
 - tuleb eelistada välisriigi isiku identifikaatori (a la isikukoodi);
 - dokumentidest tuleb eelistada passi;
-- kui passi pole siis tuleb veenduda, et antud dokument on toetatud dokumentide hulgas (vaata loendi [Person Identity System](https://build.fhir.org/ig/HL7EE/ig-ee-base/ValueSet-ee-patient-identity.html));
+- kui passi pole siis tuleb veenduda, et antud dokument on toetatud dokumentide hulgas (vaata loendi [Patsiendi identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-identifikaatorite-domeen/summary));
 - tuleb kasutada dokumendi numbri ja vastava identifitseerimissüsteemi patsiendi identifitseerimiseks.
 
 Näide patsiendist Saksamaa passiga:

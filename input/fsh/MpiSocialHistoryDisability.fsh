@@ -14,7 +14,7 @@ Description:    "Puude raskusaste"
 * subject only Reference(EEBasePatient)
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from PuudeRaskusaste
+* valueCodeableConcept from $disability-level-VS
 * performer ..0
 * encounter ..0
 * basedOn ..0
@@ -35,4 +35,4 @@ Description: "Example of patient disability"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* valueCodeableConcept = PuudeRaskusaste#keskmine "Keskmine puue"
+* valueCodeableConcept = $disability-level#KESKMINE_PUUE "Keskmine puue"

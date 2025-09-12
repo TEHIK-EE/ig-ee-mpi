@@ -45,7 +45,7 @@ jobs:
       uses: docker://hl7fhir/ig-publisher-base:latest
       with:
         # Run the publisher - don't run the batch script but run the line directly
-        args:  java -Xmx6g -jar ./input-cache/publisher.jar publisher -ig . -package-cache-folder ./fhir-package-cache https://fhir.ee/packages/mpi/${{ env.MPI_VERS }}/site
+        args:  java -Xmx6g -jar ./input-cache/publisher.jar publisher -ig . -package-cache-folder ./fhir-package-cache -publish https://fhir.ee/packages/mpi/${{ env.MPI_VERS }}/site
 
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3

@@ -14,3 +14,21 @@ Alias: $relationship-type-VS = https://fhir.ee/ValueSet/patsiendi-kontaktisikute
 Alias: $relationship-relation-VS = https://fhir.ee/ValueSet/isiku-seos-patsiendiga
 
 Alias: $langs-VS = https://fhir.ee/ValueSet/keeled
+
+Alias: $legal-status = https://fhir.ee/CodeSystem/teovoime-staatus
+Alias: $legal-status-VS = https://fhir.ee/ValueSet/teovoime-staatus
+
+Alias: $disability-level = https://fhir.ee/CodeSystem/puude-raskusaste
+Alias: $disability-level-VS = https://fhir.ee/ValueSet/puude-raskusaste
+
+Alias: $education-level = https://fhir.ee/CodeSystem/omandatud-korgeim-haridus
+Alias: $education-level-VS = https://fhir.ee/ValueSet/omandatud-korgeim-haridus
+
+Alias: $work-ability-type = https://fhir.ee/CodeSystem/toovoime-liik
+Alias: $work-ability-type-VS = https://fhir.ee/ValueSet/toovoime-liik
+
+Alias: $legal-guardian-status-VS = https://fhir.ee/ValueSet/eestkoste-liik
+
+Alias: $power-of-attorney-type = https://fhir.ee/CodeSystem/hooldusoiguse-liik
+Alias: $power-of-attorney-type-VS = https://fhir.ee/ValueSet/hooldusoiguse-liik
+

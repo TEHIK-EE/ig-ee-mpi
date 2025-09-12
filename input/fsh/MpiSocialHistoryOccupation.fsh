@@ -85,7 +85,7 @@ Usage: #example
   * coding[snomed] = SCT#184104002
 * subject = Reference(Patient/pat1)
 * performer = Reference(EmployerOrg)
-* component[job].valueCodeableConcept = OCCUP_CS#22122501 "Pediaater"
+* component[job].valueCodeableConcept = OCCUP_CS#22122501 "Paediatrician"
 * component[rate].valueQuantity = 0.75 '1'
 * contained[employer] = EmployerOrg
 

@@ -234,8 +234,8 @@ Kui otsite välisriigi (või tundmatu) identifikaatori alusel, tuleb arvestada, 
 kui otsing tehakse **riikliku identifikaatori süsteemiga või hierarhiliselt mitte-lõppsüsteemiga**.
 
 - Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid
-  leiate [sellest loendist](https://ig.hl7.fhir.ee/ig-ee-terminology/ValueSet-patient-identifier-domain.html).
-- Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://ig.hl7.fhir.ee/ig-ee-terminology/CodeSystem-identifier-domain.html)
+  leiate [sellest loendist](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-identifikaatorite-domeen/summary).
+- Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)
   hierarhia tasemega 2.
 
 Näiteks kui otsite `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori alusel, võite saada tulemuseks isikuid, kellel on Soome isikukood numbriga xxx-123 (

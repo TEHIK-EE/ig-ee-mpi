@@ -17,7 +17,7 @@ Description:    "Kehtiv hooldusõigus patsiendi suhtes"
 * performer ^short = "Isik või asutus (näiteks KOV), kellel on hooldusõigus patsiendi suhtes"
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from HooldusoiguseLiik
+* valueCodeableConcept from $power-of-attorney-type-VS
 * value[x] ^short = "Hooldusõiguse liik."
 * encounter ..0
 * note ..1 MS
@@ -57,4 +57,4 @@ Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
 * performer[0] = Reference(rp)
-* valueCodeableConcept = HooldusoiguseLiik#H10 "Täielik isikuhooldusõigus"
+* valueCodeableConcept = $power-of-attorney-type#H10 "Täielik isikuhooldusõigus"

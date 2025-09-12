@@ -35,7 +35,7 @@ Description:    "Haridustase"
 * performer 0..0 MS
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from OmandatudKorgeimHaridus
+* valueCodeableConcept from $education-level-VS
 * valueCodeableConcept ^short = "Haridustase."
 * encounter ..0
 * basedOn ..0
@@ -56,5 +56,4 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "1995-06-21T00:00:00+02:00"
-* valueCodeableConcept = OmandatudKorgeimHaridus#A6
-// SCT#224300008 "Received university education"
+* valueCodeableConcept = $education-level#A6

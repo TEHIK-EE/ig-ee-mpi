@@ -17,7 +17,7 @@ Description:    "Seadusliku eeskostja staatus"
 * performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from EestkosteLiik
+* valueCodeableConcept from $legal-guardian-status-VS
 * value[x] ^short = "Eeskoste liik."
 * note ..1 MS
 * basedOn ..0

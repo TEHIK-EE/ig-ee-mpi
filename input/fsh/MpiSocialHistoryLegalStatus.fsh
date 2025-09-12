@@ -16,7 +16,7 @@ Description:    "Patsiendi teovõime staatus."
 * performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from TeovoimeStaatus
+* valueCodeableConcept from $legal-status-VS
 * note ..1 MS
 * encounter ..0
 * basedOn ..0
@@ -38,4 +38,4 @@ Description: "Example of patient legal status"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* valueCodeableConcept = TeovoimeStaatus#T0 "Teovõimeline"
+* valueCodeableConcept = $legal-status#T0 "Teovõimeline"
