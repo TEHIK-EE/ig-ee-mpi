@@ -15,6 +15,8 @@ Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
   - Sekundaarsetel patsientidel tekib üks `link` väli `replaced-by` tüübiga.
 - "target" patsiendil ei tohi olla `link` välja `replaced-by` tüübiga.
   - Tuleb võtta `replaced-by` patsient ja kasutada selle "target" patsiendina.
+- `replaces` tüübiga loetletud ka kõik transitiivselt seotud patsiendid.
+  - Näiteks kui tehakse sidumised A -> B, C -> D ja B -> D, siis patsiendid A, B ja C on patsiendi D `link` väljal `replaces` tüübiga loetletud.
 
 
 ### Patsientide lahti sidumine
