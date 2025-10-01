@@ -5,7 +5,6 @@ Title: "EE MPI Patient Newborn"
 Description: "Profiil vastsündinu andmete kirjeldamiseks"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
-* active = true (exactly)
 * name contains temp 0..1 MS
 * name 1..1
 * name[temp] ^short = "Ajutine nimi"
@@ -15,9 +14,9 @@ Description: "Profiil vastsündinu andmete kirjeldamiseks"
 * name[temp].given ^short = "Vastsündinu eesnimi võib puududa"
 * identifier ^short = "Vastsündinu identifikaator"
 * telecom ..0
-* birthDate 1.. 
+* birthDate 1..
 * address ..0
-* multipleBirth[x] 1..1 MS 
+* multipleBirth[x] 1..1 MS
 * multipleBirth[x] only integer
 * multipleBirth[x] ^short = "Sünnijärjekord"
 * communication ..0
@@ -31,7 +30,7 @@ Usage: #example
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "50712121111"
-* active = true 
+* active = true
 * gender = #male
 * name[temp]
   * use = #temp

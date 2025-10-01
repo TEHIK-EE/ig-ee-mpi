@@ -1,15 +1,3 @@
-/*
-ValueSet: EEMPIPatientIdentityUnknown
-Id: ee-patient-identity-unknown
-Title: "Unknown Patient Identity Systems"
-Description: "Identity system acceptable for unknown patient identification"
-* ^experimental = false
-//* ^compose.include.system = EEBaseIdentitySystem
-//* ^compose.include.concept[+].code = #https://fhir.ee/sid/pid/est/mr
-* EEBaseIdentitySystem#https://fhir.ee/sid/pid/est/mr
-* include codes from system EEBaseIdentitySystem where concept descendent-of "https://fhir.ee/sid/pid/est/prn" and status = "A"
-*/
-
 Invariant:  mpi-pid-1
 Description: "Only MPI MR number and internal codes are allowed."
 Expression: "system.startsWith('https://fhir.ee/sid/pid/est/mr') or system.startsWith('https://fhir.ee/sid/pid/est/prn')"
@@ -22,14 +10,12 @@ Title: "EE MPI Patient Unknown"
 Description: "Kasutamiseks EMO-s, kiirabis, anonüümsete patsientide ning keskkonnaproovide puhul"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
-* active = false (exactly)
 * name ..1
 * name[nickname] 1..1
 * name[nickname].use ^short = "Tundmatu patsiendi tunnus"
 * name[nickname].text ^short = "Tundmatu patsiendi hüüdnimi"
 * name[official] 0..0
 * identifier ..1
-//* identifier.system from EEMPIPatientIdentityUnknown (required)
 * identifier obeys mpi-pid-1
 * identifier ^short = "Tundmatu identifikaator"
 * gender 1..
@@ -45,7 +31,7 @@ Usage: #example
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/mr"
   * value = "3456346"
-* active = false
+* active = true
 * name[nickname]
   * use = #nickname
   * text = "Malle Maasikas"

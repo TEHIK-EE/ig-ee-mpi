@@ -11,6 +11,7 @@ Description: "Common MPI limitations on Patient resource"
 * managingOrganization ..0
 * link ^short = "Seos teise patsiendi kirjega. Ignoreeritakse salvestamisel, saab muuta ainult $link operatsiooni abil."
 * contact ..0
+//* gender from $administrative-gender-VS (required)
 
 * identifier.period MS
 * identifier.period ^short = "Identifikaatori kehtivuse periood. Kui puudub, siis on identifikaator kehtiv."
@@ -22,7 +23,7 @@ Description: "Common MPI limitations on Patient resource"
 * communication.language ^binding.additional.purpose = #preferred
 * communication.language ^binding.additional.valueSet = $langs-VS
 
-* active ^short = "Patsiendi kirje olek, määrab kas kirje on aktiivne ja kasutusel. Eesti isikukoodiga patsiendi puhul väärtuse muutus ei ole lubatud. Surnud ja seotud patsientide korral on alati 'false'."
+* active ^short = "Patsiendi kirje olek, määrab kas kirje on kehtiv või eksklikult sisestatud. Eesti isikukoodiga patsiendi puhul väärtuse muutus ei ole lubatud."
 
 * telecom MS
 * telecom.value 1..1 MS

@@ -2,14 +2,19 @@
 Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 
 #### Reeglid ja piirangud
-- "target" on primaarne patsient, kes peab olema aktiivne ja jääb peale sidumist aktiivseks.
-- "source" on sekundaarne patsient, kes muutub mitteaktiivseks.
-- Eesti isikukoodiga patsient peab olema alati primaarne patsient.
-- Kahte eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahavastikuregistri kaudu automaatselt.
-- Kui sidumisel on mõlemal patsiendil sama süsteemiga identifikaatorid (näiteks mõlemal on soome isikukood), siis sekundaarse patsiendi identifikaatorile pannakse lõppkuupäev (ka eesti isikukoodi puhul).
-- Sidumise tulemused hoitakse `Patient.link` elemendis.
-- `Patient` ressurssi salvestamisel rakendus ignoreerib `link` elemendi sisu. Välja `link` saab muuta ainult operatsioonide abil.
-- Saab siduda mitu sekundaarset patsienti ühe primaarse patsiendiga (sel juhul tekib mitu `Patient.link` elementi primaarse patsiendil).
+- "target" on primaarne patsient, kes ei tohi olla surnud ega tundmatu.
+- "source" on sekundaarne patsient.
+- Eesti isikukoodiga patsient peab alati olema primaarne patsient.
+  - Kahte Eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahvastikuregistri kaudu automaatselt.
+- Kui sidumisel on mõlemal patsiendil sama süsteemiga identifikaatorid (näiteks mõlemal on Soome isikukood), siis sekundaarse patsiendi identifikaatorile pannakse lõppkuupäev (ka Eesti isikukoodi puhul).
+- Sidumise tulemused hoitakse `Patient.link` väljas.
+  - `Patient` ressursi salvestamisel rakendus ignoreerib `link` välja sisu. 
+  - `link` välja saab muuta ainult operatsioonide abil.
+- Saab siduda mitu sekundaarset patsienti ühe primaarse patsiendiga:
+  - Primaarsel patsiendil tekib mitu `link` välja `replaces` tüübiga.
+  - Sekundaarsetel patsientidel tekib üks `link` väli `replaced-by` tüübiga.
+- "target" patsiendil ei tohi olla `link` välja `replaced-by` tüübiga.
+  - Tuleb võtta `replaced-by` patsient ja kasutada selle "target" patsiendina.
 
 
 ### Patsientide lahti sidumine
@@ -17,7 +22,6 @@ Tehakse [$unlink operatsiooniga](OperationDefinition-patient-unlink.html)
 
 #### Reeglid ja piirangud
 - Lahti sidumisel patsiendid peavad olema seotud (`Patient.link` element on täidetud).
-- "target" patsient on mitteaktiivne ressurss, mis muutub aktiivseks peale lahti sidumist.
 - Peale lahti sidumist on eemaldatakse lingid (`Patient.link`) kahe patsiendi vahel.
 
 ### Linkide kasutamine teises FHIR serveris (visioon)
@@ -73,7 +77,7 @@ POST [mpi]/Patient/$link
       }      
     },
     {
-      "name": "destination-patient",
+      "name": "target-patient",
       "valueReference": {
           "reference": "Patient/789"
       }
@@ -82,13 +86,12 @@ POST [mpi]/Patient/$link
 }
 ```
 
-Esimene patsient muutub mitteaktiivseks ja tal tekib link teisele patsiendile koos tunnusega, et ta on asendatud:
+Esimesel patsiendil tekib link teisele patsiendile koos tunnusega, et ta on asendatud:
 ```
 GET [fhir-server-base]/Patient/123
 [some headers]
 {
   "id": "123",
-  "active": false,
   ...
   "link": [
     {
@@ -173,7 +176,7 @@ POST [mpi]/Patient/$unlink
       }      
     },
     {
-      "name": "destination-patient",
+      "name": "target-patient",
       "valueReference": {
           "reference": "Patient/789"
       }      
@@ -181,7 +184,7 @@ POST [mpi]/Patient/$unlink
   ]
 }
 ```
-Selle tulemusena lingid kahe patsiendi vahel kustutatakse ning lähte (source) patsient (123) muutub uuesti aktiivseks. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789 puhul.
+Selle tulemusena lingid kahe patsiendi vahel kustutatakse. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789 puhul.
 
 
 ### Liitmine (Merge) 

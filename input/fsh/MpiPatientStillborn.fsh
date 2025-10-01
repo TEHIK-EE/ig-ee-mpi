@@ -21,7 +21,6 @@ Title: "EE MPI Patient Stillborn"
 Description: "Profiil surnult sündinu andmete kirjeldamiseks"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
-* active = false (exactly)
 * name ^short = "Surnult sündinu nimi võib puududa"
 * name ..1
 * name contains temp 0..1 MS
@@ -35,11 +34,11 @@ Description: "Profiil surnult sündinu andmete kirjeldamiseks"
 * obeys mpi-pid-2
 * telecom ..0
 * birthDate 1.. MS
-* deceased[x] 1..1 MS 
+* deceased[x] 1..1 MS
 * deceased[x] only dateTime
 * deceased[x] ^short = "Patsiendi surmaaeg"
 * address ..0
-* multipleBirth[x] 1..1 MS 
+* multipleBirth[x] 1..1 MS
 * multipleBirth[x] only integer
 * multipleBirth[x] ^short = "Sünnijärjekord"
 * communication ..0
@@ -52,11 +51,11 @@ Usage: #example
 * id = "pat-stillborn"
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/npi"
-  * value = "60712121111" 
+  * value = "60712121111"
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/est/prn/90006399"
-  * value = "123e4567-e89b-12d3-a456-426614174000" 
-* active = false 
+  * value = "123e4567-e89b-12d3-a456-426614174000"
+* active = true
 * gender = #female
 * birthDate = "2007-12-12"
 * birthDate.extension[birthTime].valueDateTime = "2007-12-12T16:00:00.000Z"
