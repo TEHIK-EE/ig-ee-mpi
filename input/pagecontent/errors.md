@@ -109,7 +109,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-032    | Päringus puudub päis 'x-road-issue'                                                                                                                     |
 | MPI-033    | Päringus puudub autori asutuse registrikood                                                                                                             |
 | MPI-034    | Perekonnaseisu salvestamine ebaõnnestus, sest puudub seos patsiendi ja teise isiku vahel                                                                |
-| MPI-035    | Patsientide sidumine ebaõnnestus: primaarse patsient peab olema elus ja verifitseeritud                                                                 |
+| MPI-035    | Patsientide sidumine ebaõnnestus: primaarse patsient ei tohi olla tundmatu                                                                              |
 | MPI-036    | Patsientide sidumine ebaõnnestus: sekundaarne patsient on juba teise patsiendiga seotud                                                                 |
 | MPI-038    | Patsientide lahti sidumine ebaõnnestus: antud patsiendid pole seotud                                                                                    |
 | MPI-039    | Ei saanud teavitada WM teenust  patsientide sidumise kohta                                                                                              |
