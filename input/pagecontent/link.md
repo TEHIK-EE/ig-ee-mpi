@@ -2,7 +2,7 @@
 Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
 
 #### Reeglid ja piirangud
-- "target" on primaarne patsient, kes ei tohi olla surnud ega tundmatu.
+- "target" on primaarne patsient, kes ei tohi olla surnud ega seotud teise primaarse patsiendiga.
 - "source" on sekundaarne patsient.
 - Eesti isikukoodiga patsient peab alati olema primaarne patsient.
   - Kahte Eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahvastikuregistri kaudu automaatselt.
