@@ -47,7 +47,7 @@ Usage: #example
 * patient = Reference(Patient/pat1)
 * name.text = "Wife of Igor"
 * relationship[person] = SCT#127848009 "Spouse"
-* relationship[class] = $olemi-seos#CON "Kontakt" //$v3-RoleClass#CON "Contact"
+* relationship[class] = $v3-RoleClass#CON "Kontakt"
 * active = true
 * period.start = "1995-06-22"
 
