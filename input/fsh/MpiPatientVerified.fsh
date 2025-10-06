@@ -12,7 +12,7 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 
 
 
-Instance: PatientIgorBossenko
+Instance: PatientIndrekBambus
 InstanceOf: EEMPIPatientVerified
 Description: "Patsient erinevate identifikaatoritega"
 Usage: #example
@@ -36,8 +36,8 @@ Usage: #example
   * value = "123e4567-e89b-12d3-a456-426614174000"
 * name[official]
   * use = #official
-  * given = "Igor"
-  * family = "Bossenko"
+  * given = "Indrek"
+  * family = "Bambus"
 * gender = #male
 * birthDate = "1973-02-10"
 * address[0]
