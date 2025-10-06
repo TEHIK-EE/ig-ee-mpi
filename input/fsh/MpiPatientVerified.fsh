@@ -38,7 +38,7 @@ Usage: #example
   * use = #official
   * given = "Igor"
   * family = "Bossenko"
-* gender = #male
+* gender = $administrative-gender#mees // = #male
 * birthDate = "1973-02-10"
 * address[0]
   * use = #work
