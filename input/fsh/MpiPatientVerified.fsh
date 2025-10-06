@@ -9,6 +9,7 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * name[official] 1.. MS
 * name[official] ^short = "Ametlik nimi"
 * gender ^short = "Sugu"
+* communication.language from $langs-VS // see rida lisatud
 
 
 
