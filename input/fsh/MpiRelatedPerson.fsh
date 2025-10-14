@@ -25,7 +25,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 * relationship[class] from $relationship-relation-VS (required)
 
 
-Instance: PatientIgorBossenkoSon
+Instance: PatientIndrekBambusSon
 InstanceOf: MPIRelatedPerson
 Description: "Example of patient son"
 Usage: #example
@@ -34,18 +34,18 @@ Usage: #example
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "39510212711"
-* name.text = "Son of Igor"
+* name.text = "Son of Indrek"
 * relationship[person] = SCT#67822003 "Child"
 * active = true
 * period.start = "1995-10-21"
 
-Instance: PatientIgorBossenkoWife
+Instance: PatientIndrekBambusWife
 InstanceOf: MPIRelatedPerson
 Description: "Example of patient wife and emergency contact"
 Usage: #example
 * id = "relpat12"
 * patient = Reference(Patient/pat1)
-* name.text = "Wife of Igor"
+* name.text = "Wife of Indrek"
 * relationship[person] = SCT#127848009 "Spouse"
 * relationship[class] = $v3-RoleClass#CON "Contact"
 * active = true

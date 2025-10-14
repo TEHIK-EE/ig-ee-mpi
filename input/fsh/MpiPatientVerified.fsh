@@ -9,9 +9,11 @@ Description: "Retseptsioonis identifitseeritud MPI Patsient."
 * name[official] 1.. MS
 * name[official] ^short = "Ametlik nimi"
 * gender ^short = "Sugu"
+* communication.language from $langs-VS // see rida lisatud
 
 
-Instance: PatientIgorBossenko
+
+Instance: PatientIndrekBambus
 InstanceOf: EEMPIPatientVerified
 Description: "Patsient erinevate identifikaatoritega"
 Usage: #example
@@ -34,8 +36,8 @@ Usage: #example
   * value = "123e4567-e89b-12d3-a456-426614174000"
 * name[official]
   * use = #official
-  * given = "Igor"
-  * family = "Bossenko"
+  * given = "Indrek"
+  * family = "Bambus"
 * gender = #male
 * birthDate = "1973-02-10"
 * address[0]
@@ -43,8 +45,8 @@ Usage: #example
   * country = "EE"
   * postalCode = "14215"
   * text = "Valukoja 10, Tallinn"
-  * extension[adsAdrId].valueCoding = https://fhir.ee/base/CodeSystem/ads-adr-id#2280361
-  * extension[adsOid].valueCoding = https://fhir.ee/base/CodeSystem/ads-oid#ME03379409
+  * extension[adsAdrId].valueCoding = https://fhir.ee/base/CodeSystem/ads-adr-id#2280361 //lisatud base
+  * extension[adsOid].valueCoding = https://fhir.ee/base/CodeSystem/ads-oid#ME03379409 // lisatud base
 * communication[0]
   * language.coding[0]
     * system = "urn:ietf:bcp:47"
@@ -54,7 +56,7 @@ Usage: #example
 
 * communication[1]
   * language.coding[0]
-    * system = "urn:ietf:bcp:47"
+    * system = "https://fhir.ee/CodeSystem/keeled" //"urn:ietf:bcp:47"
     * code = #et
     * display = "Eesti"
   * preferred = true

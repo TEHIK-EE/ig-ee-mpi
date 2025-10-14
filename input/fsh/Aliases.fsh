@@ -33,4 +33,5 @@ Alias: $power-of-attorney-type = https://fhir.ee/CodeSystem/hooldusoiguse-liik
 Alias: $power-of-attorney-type-VS = https://fhir.ee/ValueSet/hooldusoiguse-liik
 
 Alias: $administrative-gender-VS = https://fhir.ee/ValueSet/administratiivne-sugu
+Alias: $administrative-gender = https://fhir.ee/CodeSystem/administratiivne-sugu
 
