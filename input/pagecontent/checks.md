@@ -164,6 +164,8 @@ _display_ väli ei ole kohustuslik, seda täidetakse koodi järgi pärimisel aut
 - [Puude raskusaste](https://teabekeskus.tehik.ee/et/loendid/puude-raskusaste)
 - [Teovõime staatus](https://teabekeskus.tehik.ee/et/loendid/teovoime-staatus)
 - [Töövõime liik](https://teabekeskus.tehik.ee/et/loendid/toovoime-liik)
+- [Administratiivne sugu](https://teabekeskus.tehik.ee/et/loendid/administratiivne-sugu)
+- [Patsiendi identifikaatorite domeen](https://teabekeskus.tehik.ee/et/loendid/patsiendi-identifikaatorite-domeen)
 
 #### PÜT-is kasutatavad klassifikaatorid
 
@@ -175,12 +177,9 @@ _display_ väli ei ole kohustuslik, seda täidetakse koodi järgi pärimisel aut
 
 #### EEBase-i kaudu kasutatavad loendid
 
-- [Administrative Gender](https://fhir.ee/ig/terminology/current/site/ValueSet-administrative-gender.html)
-- [Patient Identifier Domain](https://fhir.ee/ig/terminology/current/site/ValueSet-patient-identifier-domain.html)
-- [Date Accuracy Indicator](https://fhir.ee/ig/terminology/current/site/ValueSet-date-accuracy-indicator.html)
-- [ADS ADR-ID](https://fhir.ee/ig/terminology/current/site/ValueSet-ads-adr-id.html)
-- [ADS OID](https://fhir.ee/ig/terminology/current/site/ValueSet-ads-oid.html)
-- [Observation category](https://fhir.ee/ig/terminology/current/site/ValueSet-observation-category.html)
+- [Date Accuracy Indicator](https://ig.hl7.fhir.ee/ig-ee-base/ValueSet-date-accuracy-indicator.html)
+- [ADS ADR-ID](https://ig.hl7.fhir.ee/ig-ee-base/ValueSet-ads-adr-id.html)
+- [ADS OID](https://ig.hl7.fhir.ee/ig-ee-base/StructureDefinition-ee-ads-oid.html)
 
 #### Kasutatav FHIR terminoogia
 

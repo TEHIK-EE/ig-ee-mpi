@@ -135,16 +135,16 @@ GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&
                 "valueBoolean": true
               },
               {
-                "url": "https://fhir.ee/StructureDefinition/ee-ads-adr-id",
+                "url": "https://fhir.ee/base/StructureDefinition/ee-ads-adr-id",
                 "valueCoding": {
-                  "system": "https://fhir.ee/CodeSystem/ads-adr-id",
+                  "system": "https://fhir.ee/base/CodeSystem/ads-adr-id",
                   "code": "2187800"
                 }
               },
               {
-                "url": "https://fhir.ee/StructureDefinition/ee-ads-oid",
+                "url": "https://fhir.ee/base/StructureDefinition/ee-ads-oid",
                 "valueCoding": {
-                  "system": "https://fhir.ee/CodeSystem/ads-oid",
+                  "system": "https://fhir.ee/base/CodeSystem/ads-oid",
                   "code": "ER01392274"
                 }
               }

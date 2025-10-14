@@ -55,7 +55,6 @@ Usage: #example
 * identifier[+]
   * system = "https://fhir.ee/sid/pid/est/prn/90006399"
   * value = "123e4567-e89b-12d3-a456-426614174000"
-* active = true
 * gender = #female
 * birthDate = "2007-12-12"
 * birthDate.extension[birthTime].valueDateTime = "2007-12-12T16:00:00.000Z"

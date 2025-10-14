@@ -77,12 +77,12 @@ Vastavustabel TIS sugu ja PÜT AdministrativeGender väärtuste vahel:
 |  | other |
 
 #### Identifikaatorid
-V3/CDA sõnumites on kasutatud OID põhiseid identifikaatoreid. PÜT-i FHIR liides toetab ainult URI põhist [identifikaatorite süsteeme](https://fhir.ee/ig/terminology/current/site/ValueSet-identifier-domain.html). Tagasiühildavuse jaoks PÜT võimaldab *pärida* admed (NB! ainult pärida) kasutades OID-i koos prefiksiga `urn:oid:`, näiteks:
+V3/CDA sõnumites on kasutatud OID põhiseid identifikaatoreid. PÜT-i FHIR liides toetab ainult URI põhist [identifikaatorite süsteeme](https://teabekeskus.tehik.ee/et/loendid/identifikaatorite-domeen). Tagasiühildavuse jaoks PÜT võimaldab *pärida* admed (NB! ainult pärida) kasutades OID-i koos prefiksiga `urn:oid:`, näiteks:
 
 ```
 /Patient?identifier=urn:oid:1.3.6.1.4.1.28284.6.2.2.1%7C48905059995
 ```
-Seoste kirjeldamiseks TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on loodud vastavustabel [ConceptMap-identity-system-to-oid](https://fhir.ee/ig/terminology/current/site/ConceptMap-identity-system-to-oid.html).
+Seosed TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on toodud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary) (oid property viitab TIS-is kasutatud OID-ile).
 
 Näide: CDA dokument salvestatud TIS-i kasutades XML-is id elementi
 ```xml

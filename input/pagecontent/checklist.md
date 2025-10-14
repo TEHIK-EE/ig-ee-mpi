@@ -12,7 +12,7 @@
   - <input type="checkbox"/> Oskab kasutada [operatsioone](http://hl7.org/fhir/operations.html).
 - <input type="checkbox"/> Oskab kasutada [FHIR terminoloogiat](https://build.fhir.org/ig/TEHIK-EE/TerminologyServices).
   - <input type="checkbox"/> Toetab kõiki [PÜTis kasutatud klassifikaatoreid ja loendeid](checks.html#kasutatav-terminoloogia).
-  - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, vastabvalt ConceptMap-ile [identity-system-to-oid](https://fhir.ee/ig/terminology/current/site/ConceptMap-identity-system-to-oid.html)
+  - <input type="checkbox"/> Oskab koverteerida OID<->URL identifikaatorite süsteemid, kasutades [identifikaatorite-domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary) koodisüsteemi (oid on antud property-ga)
 - [Oskab](dev.html#andmete-pärimine) opereerida [Patient](http://hl7.org/fhir/patient.html) ressursiga  
   - <input type="checkbox"/> Get Patient.id järgi  `GET /Patient/{id}`
   - <input type="checkbox"/> Kindla patsiendi andmete muutmine  `PUT /Patient/{id}`

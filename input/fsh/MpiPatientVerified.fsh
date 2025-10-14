@@ -16,7 +16,6 @@ InstanceOf: EEMPIPatientVerified
 Description: "Patsient erinevate identifikaatoritega"
 Usage: #example
 * id = "pat1"
-* active = true
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "37302102711"
@@ -44,8 +43,8 @@ Usage: #example
   * country = "EE"
   * postalCode = "14215"
   * text = "Valukoja 10, Tallinn"
-  * extension[adsAdrId].valueCoding = https://fhir.ee/CodeSystem/ads-adr-id#2280361
-  * extension[adsOid].valueCoding = https://fhir.ee/CodeSystem/ads-oid#ME03379409
+  * extension[adsAdrId].valueCoding = https://fhir.ee/base/CodeSystem/ads-adr-id#2280361
+  * extension[adsOid].valueCoding = https://fhir.ee/base/CodeSystem/ads-oid#ME03379409
 * communication[0]
   * language.coding[0]
     * system = "urn:ietf:bcp:47"
@@ -68,7 +67,6 @@ Usage: #example
 * identifier[0]
   * system = "https://fhir.ee/sid/pid/usa/ppn"
   * value = "N857623628"
-* active = true
 * name[0]
   * use = #usual
   * given = "John"
