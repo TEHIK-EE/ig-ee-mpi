@@ -111,6 +111,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-034    | Perekonnaseisu salvestamine ebaõnnestus, sest puudub seos patsiendi ja teise isiku vahel                                                                |
 | MPI-035    | Patsientide sidumine ebaõnnestus: primaarse patsient ei tohi olla tundmatu                                                                              |
 | MPI-036    | Patsientide sidumine ebaõnnestus: sekundaarne patsient on juba teise patsiendiga seotud                                                                 |
+| MPI-037    | Sorteerimisparameeter '${param}' pole lubatud                                                                                                           |
 | MPI-038    | Patsientide lahti sidumine ebaõnnestus: antud patsiendid pole seotud                                                                                    |
 | MPI-039    | Ei saanud teavitada WM teenust  patsientide sidumise kohta                                                                                              |
 | MPI-040    | Integratsiooniviga xroad-tor teenusega                                                                                                                  |
