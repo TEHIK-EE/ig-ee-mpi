@@ -23,7 +23,7 @@ Description: "Common MPI limitations on Patient resource"
 * communication.language ^binding.additional.purpose = #preferred
 * communication.language ^binding.additional.valueSet = $langs-VS
 
-* active ^short = "Patsiendi kirje olek, määrab kas kirje on kehtiv või eksklikult sisestatud. Eesti isikukoodiga patsiendi puhul väärtuse muutus ei ole lubatud."
+* active ^short = "Patsiendi kirje olek, määrab kas kirje on kehtiv või eksklikult sisestatud. Eesti isikukoodiga patsiendi puhul väärtuse muutus ei ole lubatud. Vaikimisi on true (aktiivne)."
 
 * telecom MS
 * telecom.value 1..1 MS
