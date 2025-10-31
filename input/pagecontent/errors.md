@@ -141,7 +141,7 @@ Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles 
 | MPI-064    | 'guardian-only' parameeter on lubatud ainult alaealise patsiendi puhul. Täiskasvanu eestkostja leidmiseks tuleb kasutada $legal-guardian operatsiooni!  |
 | MPI-065    | Patsientide sidumine ebaõnnestus: sekundaarne patsient (source) ei saa olla eesti isikukoodiga                                                          |
 | MPI-066    | Päringu autori isikukood ${personalCode} ei ole korrektne                                                                                               |
-| MPI-070    | Dokumendi numbriga identifikaatorile ${id-system}\|${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                                |
+| MPI-070    | Välismaa identifikaatorile ${id-system}\|${id-value} on kohustulik määrata ka isikukood süsteemiga ${required}                                          |
 | MPI-071    | Eesti isikukoodiga patsiendil ei saa muuta: surmakuupäeva, sünnikuupäeva, sugu, nime, aktiivolekut, isikukoodi                                          |
 | MPI-072    | Patient ressurss id-ga ${id} ei leitud                                                                                                                  |
 | MPI-073    | RelatedPerson ressurss id-ga ${id} ei leitud                                                                                                            |

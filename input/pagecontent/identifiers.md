@@ -36,7 +36,9 @@ Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit v�
 Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
 Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number.
 
-Riikidel, mille dokumentidel (PPN, CZ ja DL tüüpi) eksisteerib ka isikukood (NI tüüpi süsteem), tuleb alati see määrata.
+Riikidel, mille identifitseeritavatel dokumentidel eksisteerib ka isikukood (NI tüüp), tuleb alati see määrata.
+Loetelu identifikaatori prefiksitest mille puhul on kohustulik määrata ka riigi isikukood: 
+[Isikukoodi kohustuslikkus identifitseerimisel](https://akk.tehik.ee/classifier/resources/value-sets/isikukoodi-kohustuslikkus-identifitseerimisel/summary)
 
 Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pass:
 ```json
