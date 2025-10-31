@@ -11,7 +11,7 @@ Description: "Common MPI limitations on Patient resource"
 * managingOrganization ..0
 * link ^short = "Seos teise patsiendi kirjega. Ignoreeritakse salvestamisel, saab muuta ainult $link operatsiooni abil."
 * contact ..0
-//* gender from $administrative-gender-VS (required)
+* gender from $administrative-gender-VS (required)
 
 * identifier.period MS
 * identifier.period ^short = "Identifikaatori kehtivuse periood. Kui puudub, siis on identifikaator kehtiv."
