@@ -281,7 +281,7 @@ ning saab vastuseks Observationi:
         "issued": "2024-06-11T15:25:10.148+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#a8725be4-e78d-427a-883f-d540b97bae55"
+            "reference": "#a8725be4-e78d-427a-883f-d540b97bae55"
           }
         ],
         "valueCodeableConcept": {
@@ -383,7 +383,7 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
         "issued": "2024-10-18T13:46:04.851+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#c504918e-dcd2-4b11-942b-69792f980498"
+            "reference": "#c504918e-dcd2-4b11-942b-69792f980498"
           }
         ],
         "valueCodeableConcept": {
@@ -466,7 +466,7 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
         "issued": "2024-10-18T13:46:04.851+03:00",
         "performer": [
           {
-            "reference": "RelatedPerson/#a804e3f1-e0ab-4f39-ab5e-c97a03b26028"
+            "reference": "#a804e3f1-e0ab-4f39-ab5e-c97a03b26028"
           }
         ],
         "valueCodeableConcept": {
