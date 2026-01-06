@@ -546,3 +546,61 @@ Usage: #definition
 * parameter[=].max = "1"
 * parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
 * parameter[=].type = #Bundle
+
+
+Instance: patient-legal-relationship
+InstanceOf: OperationDefinition
+Usage: #definition
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-legal-relationship"
+* name = "EEMPIPatientLegalRelationship"
+* title = "Patient legal relationships"
+* status = #active
+* kind = #operation
+* experimental = false
+* publisher = "HL7 Estonia"
+* description = "Operations that returns a list of patient legal relationships based on data from Population Register (RR). Returns patient's legal relationships and power of attorneys where applicable."
+* jurisdiction = $m49.htm#Estonia "Estonia"
+* affectsState = false
+* code = #legal-relationship
+* resource = #Patient
+* system = false
+* type = true
+* instance = false
+* parameter[0].name = #patient
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "A direct resource reference to the patient resource."
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+
+* parameter[+].name = #relationship-type
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "*"
+* parameter[=].documentation = "Relationship type. If missing, then all relationship types are returned."
+* parameter[=].type = #code
+//* parameter[=].binding.strength = #required
+//* parameter[=].binding.valueSet = $fixme
+
+* parameter[+].name = #power-of-attorney-type
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "*"
+* parameter[=].documentation = "Power of attorney type. If missing, then all power of attorney types from RR are returned."
+* parameter[=].type = #code
+* parameter[=].binding.strength = #required
+* parameter[=].binding.valueSet = $power-of-attorney-type-VS
+
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
+* parameter[=].type = #boolean
+* parameter[+].name = #return
+* parameter[=].use = #out
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances of [EEMPISocialHistoryLegalRelationship](StructureDefinition-ee-mpi-socialhistory-legal-relationship.html) profile."
+* parameter[=].type = #Bundle

@@ -45,8 +45,8 @@ Usage: #example
   * country = "EE"
   * postalCode = "14215"
   * text = "Valukoja 10, Tallinn"
-  * extension[adsAdrId].valueCoding = https://fhir.ee/base/CodeSystem/ads-adr-id#2280361 //lisatud base
-  * extension[adsOid].valueCoding = https://fhir.ee/base/CodeSystem/ads-oid#ME03379409 // lisatud base
+  * extension[adsAdrId].valueCoding = https://fhir.ee/base/CodeSystem/ads-adr-id#2280361
+  * extension[adsOid].valueCoding = https://fhir.ee/base/CodeSystem/ads-oid#ME03379409
 * communication[0]
   * language.coding[0]
     * system = "urn:ietf:bcp:47"
@@ -56,9 +56,9 @@ Usage: #example
 
 * communication[1]
   * language.coding[0]
-    * system = "https://fhir.ee/CodeSystem/keeled" //"urn:ietf:bcp:47"
+    * system = "urn:ietf:bcp:47"
     * code = #et
-    * display = "Eesti"
+//    * display = "Eesti"
   * preferred = true
 
 Instance: PatientJohnDoe

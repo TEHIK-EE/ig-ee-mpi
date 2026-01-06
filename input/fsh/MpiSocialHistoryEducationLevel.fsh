@@ -36,7 +36,7 @@ Description:    "Haridustase"
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * valueCodeableConcept from $education-level-VS
-* valueCodeableConcept ^short = "Haridustase."
+* valueCodeableConcept ^short = "Haridustase"
 * encounter ..0
 * basedOn ..0
 * partOf ..0
@@ -56,4 +56,4 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "1995-06-21T00:00:00+02:00"
-* valueCodeableConcept = $education-level#A6
+* valueCodeableConcept = $education-level#6 "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"

@@ -1,6 +1,4 @@
-
-
-Profile: MPIRelatedPerson
+Profile: EEMPIRelatedPerson
 Parent: EEBaseRelatedPerson
 Id: ee-mpi-related-person
 Title: "EE MPI Related Person"
@@ -26,7 +24,7 @@ Description: "Patsient ja tema kontakt- ja seotud isikud."
 
 
 Instance: PatientIndrekBambusSon
-InstanceOf: MPIRelatedPerson
+InstanceOf: EEMPIRelatedPerson
 Description: "Example of patient son"
 Usage: #example
 * id = "relpat11"
@@ -40,7 +38,7 @@ Usage: #example
 * period.start = "1995-10-21"
 
 Instance: PatientIndrekBambusWife
-InstanceOf: MPIRelatedPerson
+InstanceOf: EEMPIRelatedPerson
 Description: "Example of patient wife and emergency contact"
 Usage: #example
 * id = "relpat12"
