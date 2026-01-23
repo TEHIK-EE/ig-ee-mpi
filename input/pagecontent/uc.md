@@ -54,7 +54,6 @@ Näide patsiendist Saksamaa passiga:
             "value": "C01X00T47"
         }
     ],
-    "active": false,
     "name": [
         {
             "use": "official",
@@ -107,7 +106,6 @@ Ning näide tundmatu patsiendi registreemisest:
             "value": "5adcc2ca-f231-445c-a7e5-76eb11625e68"
         }
     ],
-    "active": false,
     "name": [
         {
             "use": "nickname",

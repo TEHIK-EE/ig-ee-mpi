@@ -119,7 +119,7 @@ GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&
         "name": [
           {
             "use": "official",
-            "family": "PEREA",
+            "family": "KIVI",
             "given": [
               "CARL"
             ]
@@ -243,7 +243,7 @@ ning saab vastuseks Observationi:
             ],
             "name": [
               {
-                "family": "PEREA",
+                "family": "KIVI",
                 "given": [
                   "ALBERT"
                 ]
@@ -301,10 +301,14 @@ ning saab vastuseks Observationi:
 
 #### Hooldusõiguste pärimine
 
-Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga, mis saab ühte parameetri - viidet patsiendile.
+Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga.
+
+Parameetrid:
+- patient - viide patsiendile
+- guardian-only - kas tagastada ainult eestkostetavad (true). Saab määrata ainult alaealistele patsientidele. Vaikimisi väärtus on false.
 
 ```
-GET {MPI}/Patient/$power-of-attorney?patient=Patient/263595
+GET {MPI}/Patient/$power-of-attorney?patient=Patient/70505&guardian-only=false
 ```
 
 ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu hooldusõiguise liiki):
@@ -325,29 +329,32 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
         "contained": [
           {
             "resourceType": "RelatedPerson",
-            "id": "c504918e-dcd2-4b11-942b-69792f980498",
+            "id": "b5c7e30f-16c2-4d16-91a1-28d8778e8ad5",
             "identifier": [
               {
                 "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "47907040020"
+                "value": "52009010061"
               }
             ],
+            "patient": {
+              "reference": "Patient/7050"
+            },
             "relationship": [
               {
                 "coding": [
                   {
-                    "system": "http://snomed.info/sct",
-                    "code": "72705000",
-                    "display": "Mother"
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
+                    "code": "DEPEN",
+                    "display": "Eestkostetav"
                   }
                 ]
               }
             ],
             "name": [
               {
-                "family": "KULD",
+                "family": "KIVI",
                 "given": [
-                  "MILVI"
+                  "ALBERT"
                 ]
               }
             ]
@@ -375,15 +382,15 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
           ]
         },
         "subject": {
-          "reference": "Patient/263595"
+          "reference": "Patient/7050"
         },
         "effectivePeriod": {
-          "start": "2020-09-01T00:00:00+03:00"
+          "start": "2020-09-28T00:00:00+03:00"
         },
-        "issued": "2024-10-18T13:46:04.851+03:00",
+        "issued": "2026-01-23T10:05:30.926+02:00",
         "performer": [
           {
-            "reference": "#c504918e-dcd2-4b11-942b-69792f980498"
+            "reference": "#b5c7e30f-16c2-4d16-91a1-28d8778e8ad5"
           }
         ],
         "valueCodeableConcept": {
@@ -408,29 +415,32 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
         "contained": [
           {
             "resourceType": "RelatedPerson",
-            "id": "a804e3f1-e0ab-4f39-ab5e-c97a03b26028",
+            "id": "0c9772a4-fcaa-47e2-a606-670a2f3addf1",
             "identifier": [
               {
                 "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "47907040020"
+                "value": "52009010061"
               }
             ],
+            "patient": {
+              "reference": "Patient/7050"
+            },
             "relationship": [
               {
                 "coding": [
                   {
-                    "system": "http://snomed.info/sct",
-                    "code": "72705000",
-                    "display": "Mother"
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
+                    "code": "DEPEN",
+                    "display": "Eestkostetav"
                   }
                 ]
               }
             ],
             "name": [
               {
-                "family": "KULD",
+                "family": "KIVI",
                 "given": [
-                  "MILVI"
+                  "ALBERT"
                 ]
               }
             ]
@@ -458,15 +468,15 @@ ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu h
           ]
         },
         "subject": {
-          "reference": "Patient/263595"
+          "reference": "Patient/7050"
         },
         "effectivePeriod": {
-          "start": "2020-09-01T00:00:00+03:00"
+          "start": "2020-09-28T00:00:00+03:00"
         },
-        "issued": "2024-10-18T13:46:04.851+03:00",
+        "issued": "2026-01-23T10:05:30.927+02:00",
         "performer": [
           {
-            "reference": "#a804e3f1-e0ab-4f39-ab5e-c97a03b26028"
+            "reference": "#0c9772a4-fcaa-47e2-a606-670a2f3addf1"
           }
         ],
         "valueCodeableConcept": {
@@ -503,8 +513,9 @@ ning saab vastuseks Observationi
       "resource": {
         "resourceType": "Observation",
         "meta": {
+          "versionId": "1",
           "profile": [
-            "https://tehik.ee/StructureDefinition/ee-mpi-social-history-education-level"
+            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-education-level"
           ]
         },
         "status": "final",
@@ -514,7 +525,7 @@ ning saab vastuseks Observationi
               {
                 "system": "http://terminology.hl7.org/CodeSystem/observation-category",
                 "code": "social-history",
-                "display": "Social History"
+                "display": "Social history"
               }
             ]
           }
@@ -529,14 +540,14 @@ ning saab vastuseks Observationi
           ]
         },
         "subject": {
-          "reference": "Patient/3744"
+          "reference": "Patient/6744"
         },
-        "issued": "2023-04-27T13:11:56.188+00:00",
+        "issued": "2026-01-23T10:02:48.849+02:00",
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "https://mpi.tehik.ee/rr/education-level",
-              "code": "Hariduseta, alusharidus",
+              "system": "https://fhir.ee/CodeSystem/omandatud-korgeim-haridus",
+              "code": "0",
               "display": "Hariduseta, alusharidus"
             }
           ]
@@ -566,6 +577,7 @@ ning saab vastuseks on [Disability](StructureDefinition-ee-mpi-socialhistory-dis
       "resource": {
         "resourceType": "Observation",
         "meta": {
+          "versionId": "1",
           "profile": [
             "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-disability"
           ]
@@ -598,13 +610,13 @@ ning saab vastuseks on [Disability](StructureDefinition-ee-mpi-socialhistory-dis
           "start": "2024-02-29T00:00:00+02:00",
           "end": "2027-02-27T00:00:00+02:00"
         },
-        "issued": "2024-08-05T09:02:37.395+03:00",
+        "issued": "2026-01-23T10:03:48.782+02:00",
         "valueCodeableConcept": {
           "coding": [
             {
               "system": "https://fhir.ee/CodeSystem/puude-raskusaste",
-              "code": "sygav",
-              "display": "Sügav puue"
+              "code": "SYGAV_PUUE",
+              "display": "sügav puue"
             }
           ]
         }
@@ -633,6 +645,7 @@ ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-le
       "resource": {
         "resourceType": "Observation",
         "meta": {
+          "versionId": "1",
           "profile": [
             "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-status"
           ]
@@ -659,15 +672,15 @@ ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-le
           ]
         },
         "subject": {
-          "reference": "Patient/874"
+          "reference": "Patient/14459"
         },
-        "issued": "2024-08-02T13:12:35.344+03:00",
+        "issued": "2026-01-23T10:04:24.472+02:00",
         "valueCodeableConcept": {
           "coding": [
             {
               "system": "https://fhir.ee/CodeSystem/teovoime-staatus",
-              "code": "T3",
-              "display": "Piiratud teovõimega valimisõigusega"
+              "code": "T2",
+              "display": "Teovõimetu"
             }
           ]
         }
@@ -698,6 +711,7 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
       "resource": {
         "resourceType": "Observation",
         "meta": {
+          "versionId": "1",
           "profile": [
             "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-incapacity-for-work"
           ]
@@ -724,18 +738,18 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
           ]
         },
         "subject": {
-          "reference": "Patient/7076"
+          "reference": "Patient/6230"
         },
         "effectivePeriod": {
-          "start": "2024-04-03T00:00:00+03:00",
-          "end": "2027-04-02T00:00:00+03:00"
+          "start": "2020-09-14T00:00:00+03:00",
+          "end": "2023-09-13T00:00:00+03:00"
         },
-        "issued": "2024-08-26T11:24:19.725+03:00",
+        "issued": "2026-01-23T10:04:54.715+02:00",
         "valueCodeableConcept": {
           "coding": [
             {
               "system": "https://fhir.ee/CodeSystem/toovoime-liik",
-              "code": "puudub",
+              "code": "Puudub",
               "display": "Puuduv töövõime"
             }
           ]
