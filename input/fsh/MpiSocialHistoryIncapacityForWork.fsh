@@ -7,7 +7,7 @@ Description:    "Töövõime liik"
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#301707001 "Ability to perform occupation and employment activities" (exactly)
+* code = $SCT#301707001 "Ability to perform occupation and employment activities" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period
 * subject 1..1 MS

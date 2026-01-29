@@ -7,7 +7,7 @@ Description:    "Patsiendi teovõime staatus."
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#8625004 "Legal status" (exactly)
+* code = $SCT#8625004 "Legal status" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period
 * subject 1..1 MS

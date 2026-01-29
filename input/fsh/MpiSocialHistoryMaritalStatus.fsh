@@ -10,7 +10,7 @@ Description:    "Abielu või suhte liik."
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#125680007 "Marital status" (exactly)
+* code = $SCT#125680007 "Marital status" (exactly)
 * effective[x] 0..1 MS
 * effective[x] only Period
 * effective[x] ^short = "Suhete periood"

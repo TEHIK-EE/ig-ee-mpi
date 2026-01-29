@@ -7,7 +7,7 @@ Description:    "Kehtiv hooldusõigus patsiendi suhtes"
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#186063005 "Power of attorney observable" (exactly)
+* code = $SCT#186063005 "Power of attorney observable" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period
 * subject 1..1 MS

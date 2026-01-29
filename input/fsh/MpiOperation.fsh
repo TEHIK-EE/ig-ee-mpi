@@ -362,7 +362,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with [EEMPISocialHistoryEducationLevel](StructureDefinition-ee-mpi-socialhistory-education-level.html) Observation instances."
 * parameter[=].type = #Bundle
 
 Instance: patient-generate-mrn

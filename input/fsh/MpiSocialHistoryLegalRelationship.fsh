@@ -31,13 +31,13 @@ Description:    "Kehtiv ametlik suhe patsiendiga ja isiku hooldusõigus (Rahvast
 * contained[relatedPerson].relationship[person] 0..1
 * contained[relatedPerson].relationship[person] ^short = "Muu isiku seos SNOMED CT baasil"
 //* contained[relatedPerson].relationship[person] from $relationship-relation-VS (required)
-* contained[relatedPerson].relationship[person].coding.system = SCT (exactly)
+* contained[relatedPerson].relationship[person].coding.system = $SCT (exactly)
 
 * category 1..1
 * category.coding 1..1
 * category.coding[obscat] 1..1
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#48176007 "Social context"
+* code = $SCT#48176007 "Social context"
 * effective[x] ..0
 * subject 1..1 MS
 * subject only Reference(EEMPIPatientVerified)

@@ -53,12 +53,12 @@ Description:    "Töötamine"
 * component ^slicing.rules = #open
 * component ^slicing.description = "Slice based on the component.code pattern"
 * component contains job 0..1 MS and rate 0..1
-* component[job].code = SCT#160922003 "Job details"
+* component[job].code = $SCT#160922003 "Job details"
 * component[job].value[x] 1..1
 * component[job].value[x] only CodeableConcept
 * component[job].valueCodeableConcept from OCCUP_VS
 * component[job].valueCodeableConcept ^short = "Tööamet."
-* component[rate].code = SCT#224374003 "Regularity of work"
+* component[rate].code = $SCT#224374003 "Regularity of work"
 * component[rate].value[x] 1..1
 * component[rate].value[x] only Quantity
 * component[rate].value[x].unit = UCUM#1
@@ -82,7 +82,7 @@ InstanceOf: EEMPISocialHistoryOccupation
 Description: "Example of patient occupation"
 Usage: #example
 * code
-  * coding[snomed] = SCT#184104002
+  * coding[snomed] = $SCT#184104002
 * subject = Reference(Patient/pat1)
 * performer = Reference(EmployerOrg)
 * component[job].valueCodeableConcept = OCCUP_CS#22122501 "Paediatrician"

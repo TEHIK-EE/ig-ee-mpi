@@ -7,7 +7,7 @@ Description:    "Seadusliku eeskostja staatus"
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = SCT#1193838006 "Legal guardian status" (exactly)
+* code = $SCT#1193838006 "Legal guardian status" (exactly)
 * effective[x] 1..1 MS
 * effective[x] only Period
 * subject 1..1 MS
@@ -63,4 +63,4 @@ Usage: #example
 * effectivePeriod.start = "2021-11-23"
 * performer[0] = Reference(kov)
 * performer[+] = Reference(eeskostja)
-* valueCodeableConcept = SCT#58626002 "Legal guardian"
+* valueCodeableConcept = $SCT#58626002 "Legal guardian"

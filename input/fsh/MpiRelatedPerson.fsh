@@ -33,7 +33,7 @@ Usage: #example
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "39510212711"
 * name.text = "Son of Indrek"
-* relationship[person] = SCT#67822003 "Child"
+* relationship[person] = $SCT#67822003 "Child"
 * active = true
 * period.start = "1995-10-21"
 
@@ -44,7 +44,7 @@ Usage: #example
 * id = "relpat12"
 * patient = Reference(Patient/pat1)
 * name.text = "Wife of Indrek"
-* relationship[person] = SCT#127848009 "Spouse"
+* relationship[person] = $SCT#127848009 "Spouse"
 * relationship[class] = $v3-RoleClass#CON "Contact"
 * active = true
 * period.start = "1995-06-22"
