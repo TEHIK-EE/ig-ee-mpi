@@ -11,43 +11,34 @@ Description:    "Kehtiv ametlik suhe patsiendiga ja isiku hooldusõigus (Rahvast
 * contained ^slicing.rules = #open
 * contained contains relatedPerson 1..1
 * contained[relatedPerson] only RelatedPerson
+* contained[relatedPerson] ^short = "Isik, kellega patsiendil on kehtiv ametlik suhe"
 * contained[relatedPerson].implicitRules ..0
 * contained[relatedPerson].contained ..0
 * contained[relatedPerson].modifierExtension ..0
 * contained[relatedPerson].active ..0
-* contained[relatedPerson] ^short = "Isik, kellega patsiendil on kehtiv ametlik suhe"
+
 * contained[relatedPerson].relationship 1..1
 * contained[relatedPerson].relationship ^short = "Suhetüüp patsiendi ja seotud isiku vahel"
-* contained[relatedPerson].relationship ^slicing.discriminator.type = #value
-* contained[relatedPerson].relationship ^slicing.discriminator.path = "coding.system"
-* contained[relatedPerson].relationship ^slicing.rules = #open
-* contained[relatedPerson].relationship contains
-    class 0..1 and
-    person 0..1
-* contained[relatedPerson].relationship[class] 0..1
-* contained[relatedPerson].relationship[class] ^short = "Eestkoste seos roleClass baasil"
-* contained[relatedPerson].relationship[class] from $relationship-relation-VS
-* contained[relatedPerson].relationship[class].coding.system = $v3-RoleClass (exactly)
-* contained[relatedPerson].relationship[person] 0..1
-* contained[relatedPerson].relationship[person] ^short = "Muu isiku seos SNOMED CT baasil"
-//* contained[relatedPerson].relationship[person] from $relationship-relation-VS (required)
-* contained[relatedPerson].relationship[person].coding.system = $SCT (exactly)
+* contained[relatedPerson].relationship from $legal-relationship-type-VS (required)
 
 * category 1..1
 * category.coding 1..1
 * category.coding[obscat] 1..1
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = $SCT#48176007 "Social context"
-* effective[x] ..0
-* subject 1..1 MS
+
+* code = $SCT#125676002 "Person"
+
+* subject 1..1
 * subject only Reference(EEMPIPatientVerified)
-* performer 1..1 MS
+* performer 1..1
 * performer only Reference(EEBaseRelatedPerson)
 * performer ^short = "Viide contained RelatedPerson ressursile"
-* value[x] 0..1 MS
+* value[x] 0..1
 * value[x] only CodeableConcept
-* valueCodeableConcept from $power-of-attorney-type-VS
+* valueCodeableConcept from $custody-type-VS
 * value[x] ^short = "Hooldusõiguse liik patsiendi ja seotud isiku vahel (kui on olemas)"
+
+* effective[x] ..0
 * encounter ..0
 * note ..0
 * basedOn ..0
@@ -77,7 +68,7 @@ Usage:  #inline
   * given = "Annika"
 * relationship
   * coding
-    * system = "http://snomed.info/sct"
+    * system = $SCT
     * code = #72705000
     * display = "Mother"
 
@@ -89,7 +80,7 @@ Usage: #example
 * contained[+] = LegalRelationshipRelatedPerson1
 * subject = Reference(Patient/pat1)
 * performer[0] = Reference(LegalRelationshipRelatedPerson1)
-* valueCodeableConcept = $power-of-attorney-type#H10 "Täielik isikuhooldusõigus"
+* valueCodeableConcept = $custody-type#H10 "Täielik isikuhooldusõigus"
 
 Instance: LegalRelationshipRelatedPerson2
 InstanceOf: RelatedPerson
@@ -103,7 +94,7 @@ Usage:  #inline
   * given = "Annika"
 * relationship
   * coding
-    * system = "http://terminology.hl7.org/CodeSystem/v3-RoleClass"
+    * system = $v3-RoleClass
     * code = #GUARD
     * display = "guardian"
 

@@ -304,6 +304,7 @@ ning saab vastuseks Observationi:
 Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga.
 
 Parameetrid:
+
 - patient - viide patsiendile
 - guardian-only - kas tagastada ainult eestkostetavad (true). Saab määrata ainult alaealistele patsientidele. Vaikimisi väärtus on false.
 
@@ -759,6 +760,11 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
   ]
 }
 ```
+
+### Suhted ja hooldusõigused
+
+Operatsioon [$legal-relationship](OperationDefinition-patient-legal-relationship.html) võimaldab pärida patsiendi seaduslikke kehtivaid suhteid teiste isikutega ja
+hooldusõigusi nende vahel. Andmed tulevad Rahvastikuregistrist.
 
 ## Tööprintsiip
 

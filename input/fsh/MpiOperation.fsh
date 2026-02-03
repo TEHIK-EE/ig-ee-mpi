@@ -558,7 +558,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "Operations that returns a list of patient legal relationships based on data from Population Register (RR). Returns patient's legal relationships and power of attorneys where applicable."
+* description = "Operations that returns a list of valid (at the moment of the request) patient legal relationships based on data from Population Register (RR). Returns also custody types where applicable."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #legal-relationship
@@ -578,19 +578,19 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "*"
-* parameter[=].documentation = "Relationship type. If missing, then all relationship types are returned."
+* parameter[=].documentation = "Relationship type. If missing, then all relationship types from bound ValueSet are queried."
 * parameter[=].type = #code
-//* parameter[=].binding.strength = #required
-//* parameter[=].binding.valueSet = $fixme
+* parameter[=].binding.strength = #required
+* parameter[=].binding.valueSet = $legal-relationship-type-VS
 
-* parameter[+].name = #power-of-attorney-type
+* parameter[+].name = #custody-type
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "*"
-* parameter[=].documentation = "Power of attorney type. If missing, then all power of attorney types from RR are returned."
+* parameter[=].documentation = "Custody type. If missing, then only personal custody types ('H10', 'H11', 'H12') from bound ValueSet are queried."
 * parameter[=].type = #code
 * parameter[=].binding.strength = #required
-* parameter[=].binding.valueSet = $power-of-attorney-type-VS
+* parameter[=].binding.valueSet = $custody-type-VS
 
 * parameter[+].name = #nocache
 * parameter[=].use = #in
@@ -602,5 +602,5 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances of [EEMPISocialHistoryLegalRelationship](StructureDefinition-ee-mpi-socialhistory-legal-relationship.html) profile."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances of [EEMPISocialHistoryLegalRelationship](StructureDefinition-ee-mpi-socialhistory-legal-relationship.html) profile. If multiple custody types are found between two persons, then multiple Observation instances for the same patient relationship are returned."
 * parameter[=].type = #Bundle
