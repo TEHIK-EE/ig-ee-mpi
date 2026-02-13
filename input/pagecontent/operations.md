@@ -782,25 +782,4 @@ vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks
 ### Surmateave lisamine
 
 Operatsioonid [$legal-status](OperationDefinition-patient-legal-status.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$education](OperationDefinition-patient-education.html), [$disability](OperationDefinition-patient-disability.html) lisavad vastusesse [OperationOutcomei](OperationOutcome-DeceasedWarning.html), juhul kui patsient on surnud.
-```json
-{
-            "resource": {
-                "resourceType": "OperationOutcome",
-                "issue": [
-                    {
-                        "severity": "warning",
-                        "code": "informational",
-                        "details": {
-                            "coding": [
-                                {
-                                    "system": "https://mpi.tehik.ee",
-                                    "code": "MPI-101"
-                                }
-                            ],
-                            "text": "Patsient on surnud"
-                        }
-                    }
-                ]
-            }
-        }
-```
+{% fragment OperationOutcome/DeceasedWarning JSON %}
