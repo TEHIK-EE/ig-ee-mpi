@@ -362,7 +362,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with [EEMPISocialHistoryEducationLevel](StructureDefinition-ee-mpi-socialhistory-education-level.html) Observation instances."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with [EEMPISocialHistoryEducationLevel](StructureDefinition-ee-mpi-socialhistory-education-level.html) Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 Instance: patient-generate-mrn
@@ -424,7 +424,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
@@ -464,7 +464,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
@@ -544,7 +544,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
