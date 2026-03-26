@@ -2,23 +2,23 @@ Profile: EEMPIRelatedPerson
 Parent: EEBaseRelatedPerson
 Id: ee-mpi-related-person
 Title: "EE MPI Related Person"
-Description: "Patsient ja tema kontakt- ja seotud isikud."
+Description: "The patient and their contact and related persons."
 * active 1..1 MS
 * relationship 1..* MS
-* relationship ^short = "Seosetüübid - kontaktisiku liik ja isiklik seos (sugulane, tuttav, ..)."
+* relationship ^short = "Relationship types (contact type and personal relationship)."
 * name 0..1 MS
-* name ^short = "Kontaktisiku nimi."
-* telecom ^short = "Kontaktisiku kontaktandmed."
+* name ^short = "Contact person name."
+* telecom ^short = "Contact details of the contact person."
 * address ..0
 * photo ..0
-* identifier ^short = "Kontaktisiku identifikaatorid."
+* identifier ^short = "Contact person identifiers."
 * communication	..0
 * period 1..1 MS
 * relationship ^slicing.rules = #closed
 * relationship[person] 0..1 MS
-* relationship[person] ^short = "Kontaktisiku liik"
+* relationship[person] ^short = "Contact person type"
 * relationship[person] from $relationship-type-VS (required)
-* relationship[class] ^short = "Kontaktisiku seos patsiendiga"
+* relationship[class] ^short = "Contact person's relationship to the patient"
 * relationship[class] MS
 * relationship[class] from $relationship-relation-VS (required)
 

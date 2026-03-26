@@ -2,20 +2,20 @@ Profile: EEMPIPatientVerified
 Parent: EEMPIPatient
 Id: ee-mpi-patient-verified
 Title: "EE MPI Patient Verified"
-Description: "Retseptsioonis identifitseeritud MPI Patsient."
+Description: "MPI Patient identified upon admission."
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name 1..* MS
 * name[official] 1.. MS
-* name[official] ^short = "Ametlik nimi"
-* gender ^short = "Sugu"
+* name[official] ^short = "Official name"
+* gender ^short = "Sex"
 * communication.language from $langs-VS // see rida lisatud
 
 
 
 Instance: PatientIndrekBambus
 InstanceOf: EEMPIPatientVerified
-Description: "Patsient erinevate identifikaatoritega"
+Description: "Patient with different identifiers"
 Usage: #example
 * id = "pat1"
 * identifier[0]

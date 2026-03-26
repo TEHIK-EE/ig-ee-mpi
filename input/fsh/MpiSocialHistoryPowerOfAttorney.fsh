@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryPowerOfAttorney
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-power-of-attorney
 Title:          "EE MPI SocialHistory Power Of Attorney"
-Description:    "Kehtiv hooldusõigus patsiendi suhtes"
+Description:    "Current custody of the patient"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -14,11 +14,11 @@ Description:    "Kehtiv hooldusõigus patsiendi suhtes"
 * subject only Reference(EEBasePatient)
 * performer 1..1 MS
 * performer only Reference(EEBaseRelatedPerson or EEBaseOrganization)
-* performer ^short = "Isik või asutus (näiteks KOV), kellel on hooldusõigus patsiendi suhtes"
+* performer ^short = "A person or institution (such as a local government) that has custody of the patient"
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * valueCodeableConcept from $custody-type-VS
-* value[x] ^short = "Hooldusõiguse liik."
+* value[x] ^short = "Type of custody."
 * encounter ..0
 * note ..1 MS
 * basedOn ..0

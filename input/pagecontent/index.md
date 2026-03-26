@@ -1,14 +1,19 @@
+Patsiendi üldandmete teenus PÜT (_ing k MPI ehk Master Patient Index_) on keskne teenus, 
+mille raames patsiendi kohta käivad üldandmed (sh haridustase, eestkoste, hooldusõigus, töövõimekao, puudeinfo jne) on 
+kättesaadavad kõik ühest kohast. Erinevates registrites olevaid andmeid ei pea patsiendilt küsima vaid need liiguvad 
+automaatselt PÜT-i. PÜT teenus tagab tervishoiuteenuse osutajate jaoks kvaliteetsema andmetöötluse ning aja kokkuhoiu 
+patsiendi üldandmete otsimise ja sisestamise arvelt.
 
-### Sissejuhatus 
+Käesoleval saidil kirjeldatakse PÜT rakendamisega seotud juurutusjuhendit. PÜT kasutab interaktsiooniprotokollina [FHIR
+standardit](http://fhir.hl7.org).
 
-Patsiendi üldandmete teenus PÜT (ing k MPI ehk master patient index) on keskne teenus mille raames patsiendi kohta käivad üldandmed 
-(sh haridustase, eestkoste, hooldusõigus, töövõimekao ja puude info jne) on kättesaadavad kõik ühest kohast. Erinevates registrites olevaid andmeid ei pea patsiendilt küsima vaid need liiguvad automaatselt PÜT-i. PÜT teenus tagab tervishoiuteenuse osutajate jaoks kvaliteetsema andmetöötluse ning aja kokkuhoiu patsiendi üldandmete otsimise ja sisetsamise arvelt. 
+Kasutame juurutusjuhendis teenuse kirjeldamiseks termineid "PÜT - patsiendi üldandmete teenus" ja "MPI - Master Patient Index", kuid peame nende all silmas
+sisuliselt sama teenust.
 
-Käesoleval saidil kirjeldatakse PÜT rakendamisega seotud juurutusjuhendit. PÜT kasutab interaktsiooniprotokollina [FHIR 
-standardit](http://fhir.hl7.org). 
 
-PÜT juurutusjuhend määratleb toetatud profiilide komplekti ja pakub iga profiili jaoks vähemalt ühe näite.
-FHIR profiili saab iseloomustada kui ühe fakti sisustusreeglistiku ning juurutusjuhendi kui kogumi sisustusreeglitest ja loenditest.
+PÜT juurutusjuhend määratleb toetatud profiilide komplekti ja pakub iga profiili jaoks vähemalt ühe näidet.
+FHIR profiili saab iseloomustada kui ühe fakti sisustusreeglistiku ning juurutusjuhendit kui kogumit 
+sisustusreeglitest ja loenditest.
 
 Patsiendi identifikaatorite käsitlust kirjeldab [Identifikaatorid](identifiers.html).
 Patsiendi liike kirjeldab [patsiendi andmete koosseis](patient.html).

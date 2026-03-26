@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryIncapacityForWork
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-incapacity-for-work
 Title:          "EE MPI SocialHistory Incapacity For Work"
-Description:    "Töövõime liik"
+Description:    "Type of work capacity"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -31,7 +31,7 @@ Description:    "Töövõime liik"
 
 Instance: IncapacityForWork
 InstanceOf: EEMPISocialHistoryIncapacityForWork
-Description: "Example of patient incapacity for work"
+Description: "Example of patient's incapacity for work"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2024-04-03T00:00:00+03:00"

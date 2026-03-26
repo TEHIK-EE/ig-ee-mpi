@@ -2,7 +2,7 @@ Antud lehekülg käsitleb HL7 FHIR ja HL7 V3/CDA (edaspidi V3) standardite kasut
 FHIR PÜT ja V3 TIS vahel on mitmed erinevused: sõnumstruktuur, loendid, äriloogika.
 
 ### V3
-V3 ja CDA on vanem HL7 standard mis kasutatakse TIS-is alates 2008-st aastast.
+V3 ja CDA on vanem HL7 standard, mida kasutatakse TIS-is alates 2008-st aastast.
 Patsiendi andmed esinevad praktiliselt igas V3 sõnumis ja CDA dokumendis tüüpiliselt `patientRole` elemendis. Viide viimasele dokumendile töödeldud salvestatakse Patiendiindeksis. Küsides päringuga patsiendiandmed (näiteks aegkriitilisemad andmed) TIS tagastab patsiendiandmed viimasest töödeldud sõnumist või dokumendist. 
 
 ```xml
@@ -27,9 +27,9 @@ Patsiendi andmed esinevad praktiliselt igas V3 sõnumis ja CDA dokumendis tüüp
 
 
 ### FHIR
-FHIR on uusim HL7 standard mis võetakse kasutusele upTISe raames.  
+FHIR on uusim HL7 standard, mis võetakse kasutusele upTISe raames.  
 Patsiendi andmed saadetakse `/Patient` endpointi kaudu.
-PÜT tsentraliseerib patsiendi üldandmed hoidmist ühes registris.
+PÜT tsentraliseerib patsiendi üldandmete hoidmist ühes registris.
 
 ```json
 {
@@ -63,11 +63,11 @@ PÜT tsentraliseerib patsiendi üldandmed hoidmist ühes registris.
 ```
 
 ### Loendid
-PÜT-i puhul tuleb lähtuda loendist mida kirjutab ette FHIR spetsifikatsioon ja/või EEBase ja EEMPI profiilid.
-Näiteks, sugu kodeerimiseks kasutatakse loend [AdministrativeGender](http://hl7.org/fhir/R5/valueset-administrative-gender.html).
-Selleks et toetada mõlemad vormingud tarkvara arendajad peavad toetama nii vana kui uut loendit.
+PÜT-i puhul tuleb lähtuda loendist, mida kirjutab ette FHIR spetsifikatsioon ja/või EEBase ja EEMPI profiilid.
+Näiteks, soo kodeerimiseks kasutatakse loendit [AdministrativeGender](http://hl7.org/fhir/R5/valueset-administrative-gender.html).
+Selleks et toetada mõlemaid vorminguid peavad tarkvara arendajad toetama nii vana kui uut loendit.
 
-Vastavustabel TIS sugu ja PÜT AdministrativeGender väärtuste vahel:
+Vastavustabel TIS soo ja PÜT AdministrativeGender väärtuste vahel:
 
 | Sugu (TIS) | AdministrativeGender (PÜT) |
 |:----------|:--------------|
@@ -77,12 +77,12 @@ Vastavustabel TIS sugu ja PÜT AdministrativeGender väärtuste vahel:
 |  | other |
 
 #### Identifikaatorid
-V3/CDA sõnumites on kasutatud OID põhiseid identifikaatoreid. PÜT-i FHIR liides toetab ainult URI põhist [identifikaatorite süsteeme](https://teabekeskus.tehik.ee/et/loendid/identifikaatorite-domeen). Tagasiühildavuse jaoks PÜT võimaldab *pärida* admed (NB! ainult pärida) kasutades OID-i koos prefiksiga `urn:oid:`, näiteks:
+V3/CDA sõnumites on kasutatud OID põhiseid identifikaatoreid. PÜT-i FHIR liides toetab ainult URI põhist [identifikaatorite süsteeme](https://teabekeskus.tehik.ee/et/loendid/identifikaatorite-domeen). Tagasiühildavuse jaoks PÜT võimaldab *pärida* andmed (NB! ainult pärida) kasutades OID-i koos prefiksiga `urn:oid:`, näiteks:
 
 ```
 /Patient?identifier=urn:oid:1.3.6.1.4.1.28284.6.2.2.1%7C48905059995
 ```
-Seosed TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on toodud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary) (oid property viitab TIS-is kasutatud OID-ile).
+Seosed TIS ja upTIS (PÜT) identifikaatorite süsteemide vahel on välja toodud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary) (oid property viitab TIS-is kasutatud OID-ile).
 
 Näide: CDA dokument salvestatud TIS-i kasutades XML-is id elementi
 ```xml
@@ -119,8 +119,8 @@ Kasutatavad teenused:
 - Viidaregister
 - RabbitMQ sõnumite broker
 
-Lahenduse disain võimaldab etappiviisilist üleminekut uuele süsteemile. 
-Juhul kui TTO opereerib V3/CDA sõnumitega siis patsiendi andmed sünkroniseeritakse PÜT-i. Juhul kui TTO kasutab PÜT-i siis info patsiendi kohta on kättesaadav Patsiendiindeksi kaudu.
+Lahenduse disain võimaldab etapilist üleminekut uuele süsteemile. 
+Juhul kui TTO opereerib V3/CDA sõnumitega, siis patsiendi andmed sünkroniseeritakse PÜT-i. Juhul kui TTO kasutab PÜT-i siis info patsiendi kohta on kättesaadav Patsiendiindeksi kaudu.
 
 ### Korduma kipuvad küsimused (KKK)
 - Mis muutub V3 ja CDA koostamisel?

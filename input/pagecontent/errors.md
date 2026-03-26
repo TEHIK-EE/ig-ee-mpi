@@ -1,7 +1,7 @@
 ## Vead
 
-API tagastab vead [OperationOutcome](https://hl7.org/fhir/R5/operationoutcome.html) ressursina mille sees võib olla mitu `issue` elementi koos vigadega.
-Vead võivad olla kas ainult patsiendi registri omad või sisaldada ka peegeldatud vead teistest teenustest.
+API tagastab vead [OperationOutcome](https://hl7.org/fhir/R5/operationoutcome.html) ressursina, mille sees võib olla mitu `issue` elementi koos vigadega.
+Vead võivad olla kas ainult patsiendi registri omad või sisaldada ka peegeldatud vigu teistest teenustest.
 
 Näide `OperationOutcome`-ist, mis kuvab peegeldatud vead:
 
@@ -69,7 +69,7 @@ Näide `OperationOutcome`-ist, mis kuvab peegeldatud vead:
 
 ## Vigade kataloog
 
-Allpool on toodud veakoodid tektsidega erinevatest süsteemides. Oluline meeles pidada, et mitte kõik veakoodid võivad lõppkasutajani jõuda.
+Allpool on toodud veakoodid tekstidega erinevatest süsteemidest. Oluline meeles pidada, et mitte kõik veakoodid võivad jõyda lõppkasutajani.
 
 ### Patsiendi registri veakoodid
 

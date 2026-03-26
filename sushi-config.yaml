@@ -49,21 +49,23 @@ pages:
   index.md:
     title: Sissejuhatus
   patient.md:
-    title: Patsiendid
+    title: Patsiendi profiilid
   identifiers.md:
-    title: Identifikaatorid
+    title: Patsiendi identifikaatorid
+  patientsearch.md:
+    title: Patsiendi otsing
   dev.md:
-    title: Juhend arendajale
+    title: Juhend alustamiseks
   permissions.md:
     title: Õigused API otspunktidele
   link.md:
     title: Patsientide sidumine ja lahti sidumine
+  operations.md:
+    title: Toetatud operatsioonid
   errors.md:
     title: Vead
-  operations.md:
-    title: Toetavad operatsioonid
   checklist.md:
-    title: Checklist
+    title: Eeldused liidestumiseks
   contact.md:
     title: Contact Us
   download.xml:
@@ -106,16 +108,18 @@ pages:
 menu:
   Esileht: index.html
   Juhendid:
-    Patsiendid: patient.html
-    Identifikaatorid: identifiers.html
-    Juhend arendajale: dev.html
-    Õigused API otspunktidele: permissions.html
+    Patsiendi profiilid: patient.html
+    Patsiendi identifikaatorid: identifiers.html
+    Patsiendi otsing: patientsearch.html
+    Toetatud operatsioonid: operations.html
     Patsientide sidumine ja lahti sidumine: link.html
-    Operatsioonid: operations.html
+    Õigused API otspunktidele: permissions.html
+    Vead: errors.html
     Kasutusjuhud: uc.html
     Kontrollid ja terminoloogia: checks.html
     Seos HL7 V3-ga ja CDA-ga: hl7v3.html
-    Eeldused liidestujale: checklist.html
+    Juhend alustamiseks: dev.html
+    Eeldused liidestumiseks: checklist.html
   Artefaktid: artifacts.html
   Sisukord: toc.html
   Muu:

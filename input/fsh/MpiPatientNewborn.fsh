@@ -2,23 +2,23 @@ Profile: EEMPIPatientNewborn
 Parent: EEMPIPatient
 Id: ee-mpi-patient-newborn
 Title: "EE MPI Patient Newborn"
-Description: "Profiil vastsündinu andmete kirjeldamiseks"
+Description: "Profile for describing newborn data"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name contains temp 0..1 MS
 * name 1..1
-* name[temp] ^short = "Ajutine nimi"
+* name[temp] ^short = "Temporary name"
 * name[temp].use = #temp (exactly)
 * name[temp].family 1..1 MS
 * name[temp].given 0..1 MS
-* name[temp].given ^short = "Vastsündinu eesnimi võib puududa"
-* identifier ^short = "Vastsündinu identifikaator"
+* name[temp].given ^short = "The newborn's first name may be missing."
+* identifier ^short = "Newborn identifier"
 * telecom ..0
 * birthDate 1..
 * address ..0
 * multipleBirth[x] 1..1 MS
 * multipleBirth[x] only integer
-* multipleBirth[x] ^short = "Sünnijärjekord"
+* multipleBirth[x] ^short = "Birth order"
 * communication ..0
 
 

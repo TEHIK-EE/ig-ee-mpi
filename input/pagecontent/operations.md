@@ -1,732 +1,128 @@
-FHIR operatsioon on eritegevus, mida ei ole võimalik või väga raske väljendada standardse FHIR süntaksi kaudu.
-Tegevuse realiseerimine operatsioonina võib olla tingitud teise osapoole (nt xTee andmekogu) käideldavuse tõttu või erilise ligipääsu reeglite tõttu.
+FHIR operatsioon on eritegevus, mida ei ole võimalik või on keeruline väljendada standardse FHIR süntaksi abil.
+Tegevuse realiseerimine operatsioonina võib tuleneda teise osapoole (nt X-tee andmekogu) käideldavusest või eripärastest ligipääsupiirangutest.
 
-Välised allikad, kust MPI andmeid pärib, ei toeta tavaliselt lehekülgede numeratsiooni päringu parameetrina. Seetõttu tagastavad enamus MPI operatsioonidest
-andmed "collection" tüübi Bundle-ina, mis ei sisalda informatsiooni ridade arvu ega lehekülgede kohta.
+Välised allikad, kust MPI andmeid pärib, ei toeta tavaliselt päringu parameetrina lehekülgede numeratsiooni.
+Seetõttu tagastab enamik MPI operatsioone andmed collection-tüüpi Bundle’ina, mis ei sisalda teavet ridade koguarvu ega lehekülgede kohta.
 
-## Patsient
+### Vahemälu (cache) ja sealt pärimine
 
-### Patsientide sidumine ja lahti sidumine
+MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri
+eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast
+värskendab andmed vahemälus.
 
-Patsientide sidumise ja lahti sidumise loogika ja operatsioonid on seletatud [leheküljel](link.html).
+Iga operatsioon, mis toetab vahemälu, sisaldab parameetri *nocache*. *nocache* parameetri vaikimisi väärtuseks on *false*, s.t. vaikimisi andmed võetakse
+vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks tuleb määrata *true*.
+
+### Eesti isikukoodiga patsiendi otsing
+
+Andmeid erinevatest infosüsteemidest saab pärida operatsiooniga [Patient/$lookup](OperationDefinition-patient-lookup.html).
+Toetatud parameetrite hulka kuuluvad identifikaator ning allikas, kust andmeid päritakse.
+Hetkel on toetatud järgmised päringud:
+
+- Rahvastikuregistrist (source=https://rahvastikuregister.ee)
+- MPI Patsiendiregistrist (source=https://mpi.tehik.ee)
+
+### Patsiendi identifikaatorid operatsioonides
+
+Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$education](OperationDefinition-patient-education.html), [$legal-guardian](OperationDefinition-patient-legal-guardian.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$patient-legal-relationship](OperationDefinition-patient-legal-relationship.html), [$legal-status](OperationDefinition-patient-legal-status.html), [$occupation](OperationDefinition-patient-occupation.html) ja [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) võimaldavad pärida järgmiste patsiendi identifikaatoritega:
+
+- Viide patsiendile ```Patient/1234```
+
+- Eesti isikukood süsteemiga ```patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944```
+
+- Eesti isikukood süsteemita ```patient.identifier=37408074944```
+
+- Eesti isikukood kooloniga ```patient:identifier=https://fhir.ee/sid/pid/est/ni|37408074944```
+
+- Eesti isikukood kooloniga ja süsteemita ```patient:identifier=37408074944```
+
+
 
 ### Välismaalaste otsing
 
-Välismaalaste otsimiseks kui identifikaator ei ole teada tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html).
+Välismaalaste otsimiseks juhul, kui identifikaator ei ole teada, tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html).
 
-#### Toetatud otsinguparameetrid
+##### Toetatud otsinguparameetrid
 
 | Parameeter         | Kohustuslik | Kirjeldus                                                                                   | Väärtustatud näidis    |   
 |--------------------|-------------|---------------------------------------------------------------------------------------------|------------------------|
 | gender             | ei          | Sugu. Toetatud väärtused: male,female,unknown.                                              | gender=male            |
 | birthdate          | ei          | Sünnikuupäev.                                                                               | birthdate=1974-12-25   |
-| family             | ei          | Perekonnanimi, pole tõstetundlik.                                                           | family=Graham          |
-| given              | ei          | Eesnimi, pole tõstetundlik.                                                                 | given=Gene             |
+| family             | ei          | Perekonnanimi, pole tõstutundlik.                                                           | family=Graham          |
+| given              | ei          | Eesnimi, pole tõstutundlik.                                                                 | given=Gene             |
 | identifier_country | jah         | Patsiendi identifikaatori riigi ISO kood (3 tähega).                                        | identifier_country=UZB |
-| telecom            | ei          | Patsiendi telefoni number või e-mail (parameetri on vaja URL-encode-da), pole tõstetundlik. | telecom=some@email.ee  |
+| telecom            | ei          | Patsiendi telefoni number või e-mail (parameeter on vaja URL-encode-da), pole tõstutundlik. | telecom=some@email.ee  |
 
-#### Päringu näidis
 
-```
-GET {MPI}/Patient/$foreign?gender=male&birthdate=1979-12-25&family=Graham&given=Gene&identifier_country=UZB&telecom=%2B1234567
-```
 
-Vastusena tuleb (collection) Bundle mis tagastab kollektsiooni leitud ressurssidest (ilma metainformatsioonita):
+### Patsientide sidumine ja lahti sidumine
+Patsientide sidumiseks kasutada [$link operatsiooni](OperationDefinition-patient-link.html). 
 
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Patient",
-        "id": "895",
-        "meta": {
-          "lastUpdated": "2024-08-05T08:41:32.120+03:00",
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://fhir.ee/sid/pid/uzb/ppn",
-            "value": "113354925133"
-          }
-        ],
-        "active": true,
-        "name": [
-          {
-            "use": "official",
-            "family": "Graham",
-            "given": [
-              "Gene"
-            ]
-          }
-        ],
-        "telecom": [
-          {
-            "system": "phone",
-            "value": "+1234567",
-            "period": {
-              "start": "2024-08-05T08:41:32+03:00"
-            }
-          }
-        ],
-        "gender": "male",
-        "birthDate": "1979-12-25"
-      }
-    }
-  ]
-}
-```
+Patsientide lahti sidumiseks kasutada [$unlink operatsiooni](OperationDefinition-patient-unlink.html). 
 
-### Eesti isikukoodiga patsiendi otsing
+Mõlema operatsiooni kasutamise reeglid ja piirangud on kirjeldatud [siin](link.html). 
 
-Andmed erinevatest infosüsteemidest saab pärida [Patient/$lookup](OperationDefinition-patient-lookup.html) operatsiooniga.
-Toetavate parameetrite hulka kuuluvad: identifikaator ja allikas, kust andmeid päritakse.
-Hetkel toetatakse päringuna:
+### Sotsiaalsed tunnused
 
-- Rahvastikuregistrist (source=https://rahvastikuregister.ee)
-- MPI Patsiendiregistrist (source=https://mpi.tehik.ee)
-
-```
-GET {MPI}/Patient/$lookup?identifier=https://fhir.ee/sid/pid/est/ni|52007010062&source=https://rahvastikuregister.ee
-```
-
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Patient",
-        "id": "899",
-        "meta": {
-          "lastUpdated": "2024-08-05T08:44:24.072+03:00",
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://fhir.ee/sid/pid/est/ni",
-            "value": "52007010062"
-          }
-        ],
-        "active": true,
-        "name": [
-          {
-            "use": "official",
-            "family": "KIVI",
-            "given": [
-              "CARL"
-            ]
-          }
-        ],
-        "gender": "male",
-        "birthDate": "2020-07-01",
-        "address": [
-          {
-            "extension": [
-              {
-                "url": "http://hl7.org/fhir/StructureDefinition/address-official",
-                "valueBoolean": true
-              },
-              {
-                "url": "https://fhir.ee/base/StructureDefinition/ee-ads-adr-id",
-                "valueCoding": {
-                  "system": "https://fhir.ee/base/CodeSystem/ads-adr-id",
-                  "code": "2187800"
-                }
-              },
-              {
-                "url": "https://fhir.ee/base/StructureDefinition/ee-ads-oid",
-                "valueCoding": {
-                  "system": "https://fhir.ee/base/CodeSystem/ads-oid",
-                  "code": "ER01392274"
-                }
-              }
-            ],
-            "use": "home",
-            "type": "physical",
-            "text": "Harju maakond, Tallinn, Lasnamäe linnaosa, Virbi tn 2-99",
-            "line": [
-              "Virbi tn 2 - 99"
-            ],
-            "_line": [
-              {
-                "extension": [
-                  {
-                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
-                    "valueString": "Virbi tn"
-                  },
-                  {
-                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
-                    "valueString": "2"
-                  },
-                  {
-                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-additionalLocator",
-                    "valueString": "99"
-                  }
-                ]
-              }
-            ],
-            "city": "Tallinn",
-            "state": "Harju maakond",
-            "postalCode": "13629",
-            "country": "EE",
-            "period": {
-              "start": "2024-01-12T00:00:00+02:00"
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
-```
-
-## Sotsiaalsed tunnused
-
-Sotsiaalsed tunnused päritakse xTee teenuste kaudu ja tagastatakse Observation ressurssidena.
-Tüüpiliselt tagastatav Observation ressurss ei sisalda **"id"** väärtust ja peegeldab hetkeseisu situatsiooni.
-Sotsiaalsete tunnuste operatsioonid pärivad alati andmed allikregistritest (sõltumatu andmete olemasolust vahemälus).
+Sotsiaalsed tunnused päritakse X-tee teenuste kaudu ja tagastatakse Observation ressurssidena.
+Tüüpiliselt ei sisalda tagastatav Observation ressurss id väärtust ning peegeldab päringus **hetkeolukorda**.
+Sotsiaalsete tunnuste operatsioonid pärivad andmed alati allikregistritest, sõltumata nende olemasolust vahemälus.
 
 ### Seadusliku eeskostja staatus
 
-Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga, mis saab kaks parameetrit - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes) ja eestkoste
-liik SNOMED järgi(eestkostja - 58626002, eestkostetav - 365569001):
+Rahvastikuregistris nimetatud seaduslike eestkostjate nimekiri. Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga. 
 
-Näiteks eestkostetavate leidmine:
+### Suhted ja hooldusõigused
 
-```
-GET {MPI}/Patient/$legal-guardian?patient=Patient/168&legal-status=365569001
+Operatsioon [$legal-relationship](OperationDefinition-patient-legal-relationship.html) võimaldab pärida patsiendi seaduslikke kehtivaid suhteid teiste isikutega ja
+hooldusõigusi nende vahel. Andmed tulevad Rahvastikuregistrist.
 
-GET {MPI}/Patient/$legal-guardian?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944&legal-status=365569001
 
-GET {MPI}/Patient/$legal-guardian?patient.identifier=37408074944&legal-status=365569001
-```
-
-ning saab vastuseks Observationi:
-
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-guardian-status"
-          ]
-        },
-        "contained": [
-          {
-            "resourceType": "RelatedPerson",
-            "id": "a8725be4-e78d-427a-883f-d540b97bae55",
-            "identifier": [
-              {
-                "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "52009010061"
-              }
-            ],
-            "relationship": [
-              {
-                "coding": [
-                  {
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
-                    "code": "DEPEN",
-                    "display": "Dependent"
-                  }
-                ]
-              }
-            ],
-            "name": [
-              {
-                "family": "KIVI",
-                "given": [
-                  "ALBERT"
-                ]
-              }
-            ]
-          }
-        ],
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "58626002",
-              "display": "Legal guardian status"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/168"
-        },
-        "effectivePeriod": {
-          "start": "2020-09-28T00:00:00+03:00"
-        },
-        "issued": "2024-06-11T15:25:10.148+03:00",
-        "performer": [
-          {
-            "reference": "#a8725be4-e78d-427a-883f-d540b97bae55"
-          }
-        ],
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "365569001",
-              "display": "Finding of wardship"
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
-
-#### Hooldusõiguste pärimine
+### Hooldusõiguste pärimine
 
 Andmed päritakse [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) operatsiooniga.
+**Andmed tagastatakse ainult alaealise kohta.** Kui patsiendi parameetris on märgitud täiskasvanu, tagastatakse ainult patsiendi lapsed ja alla 18-aastased ülalpeetavad.
 
-Parameetrid:
-
-- patient - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes)
-- guardian-only - kas tagastada ainult eestkostetavad (true). Saab määrata ainult alaealistele patsientidele. Vaikimisi väärtus on false.
-
-```
-GET {MPI}/Patient/$power-of-attorney?patient=Patient/70505&guardian-only=false
-
-GET {MPI}/Patient/$power-of-attorney?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944&guardian-only=false
-
-GET {MPI}/Patient/$power-of-attorney?patient.identifier=37408074944&guardian-only=false
-```
-
-ning saab vastuseks on mitu Observation ressursi (samal isikul võib olla mitu hooldusõiguise liiki):
-
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
-          ]
-        },
-        "contained": [
-          {
-            "resourceType": "RelatedPerson",
-            "id": "b5c7e30f-16c2-4d16-91a1-28d8778e8ad5",
-            "identifier": [
-              {
-                "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "52009010061"
-              }
-            ],
-            "patient": {
-              "reference": "Patient/7050"
-            },
-            "relationship": [
-              {
-                "coding": [
-                  {
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
-                    "code": "DEPEN",
-                    "display": "Eestkostetav"
-                  }
-                ]
-              }
-            ],
-            "name": [
-              {
-                "family": "KIVI",
-                "given": [
-                  "ALBERT"
-                ]
-              }
-            ]
-          }
-        ],
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "186063005",
-              "display": "Power of attorney"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/7050"
-        },
-        "effectivePeriod": {
-          "start": "2020-09-28T00:00:00+03:00"
-        },
-        "issued": "2026-01-23T10:05:30.926+02:00",
-        "performer": [
-          {
-            "reference": "#b5c7e30f-16c2-4d16-91a1-28d8778e8ad5"
-          }
-        ],
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "https://fhir.ee/CodeSystem/hooldusoiguse-liik",
-              "code": "H10",
-              "display": "Täielik isikuhooldusõigus"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-power-of-attorney"
-          ]
-        },
-        "contained": [
-          {
-            "resourceType": "RelatedPerson",
-            "id": "0c9772a4-fcaa-47e2-a606-670a2f3addf1",
-            "identifier": [
-              {
-                "system": "https://fhir.ee/sid/pid/est/ni",
-                "value": "52009010061"
-              }
-            ],
-            "patient": {
-              "reference": "Patient/7050"
-            },
-            "relationship": [
-              {
-                "coding": [
-                  {
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
-                    "code": "DEPEN",
-                    "display": "Eestkostetav"
-                  }
-                ]
-              }
-            ],
-            "name": [
-              {
-                "family": "KIVI",
-                "given": [
-                  "ALBERT"
-                ]
-              }
-            ]
-          }
-        ],
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "186063005",
-              "display": "Power of attorney"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/7050"
-        },
-        "effectivePeriod": {
-          "start": "2020-09-28T00:00:00+03:00"
-        },
-        "issued": "2026-01-23T10:05:30.927+02:00",
-        "performer": [
-          {
-            "reference": "#0c9772a4-fcaa-47e2-a606-670a2f3addf1"
-          }
-        ],
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "https://fhir.ee/CodeSystem/hooldusoiguse-liik",
-              "code": "H20",
-              "display": "Täielik varahooldusõigus"
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
 
 ### Haridus
 
-Andmed päritakse [$education](OperationDefinition-patient-education.html) operatsiooniga, mis saab ühe parameetri - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes):
+Patsiendi kõrgeim haridustase. Andmed päritakse [$education](OperationDefinition-patient-education.html) operatsiooniga.  
 
-```
-GET {MPI}/Patient/$education?patient=Patient/3744
 
-GET {MPI}/Patient/$education?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944
 
-GET {MPI}/Patient/$education?patient.identifier=37408074944
-```
+### Puudemäär
 
-ning saab vastuseks Observationi
+Patsiendi puudemäär Sotsiaalkindlustusametist (SKA). Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga. 
 
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "versionId": "1",
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-education-level"
-          ]
-        },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "82589-3",
-              "display": "Highest level of education"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/6744"
-        },
-        "issued": "2026-01-23T10:02:48.849+02:00",
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "https://fhir.ee/CodeSystem/omandatud-korgeim-haridus",
-              "code": "0",
-              "display": "Hariduseta, alusharidus"
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
 
-### Puude määr
-
-Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga, mis saab ühe parameetri - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes):
-
-```
-GET {MPI}/Patient/$disability?patient=Patient/7073
-
-GET {MPI}/Patient/$disability?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944
-
-GET {MPI}/Patient/$disability?patient.identifier=37408074944
-```
-
-ning saab vastuseks on [Disability](StructureDefinition-ee-mpi-socialhistory-disability.html) Observationi
-
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "versionId": "1",
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-disability"
-          ]
-        },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://loinc.org",
-              "code": "95377-8",
-              "display": "Disability type"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/7073"
-        },
-        "effectivePeriod": {
-          "start": "2024-02-29T00:00:00+02:00",
-          "end": "2027-02-27T00:00:00+02:00"
-        },
-        "issued": "2026-01-23T10:03:48.782+02:00",
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "https://fhir.ee/CodeSystem/puude-raskusaste",
-              "code": "SYGAV_PUUE",
-              "display": "sügav puue"
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
 
 ### Teovõime
 
-Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html) operatsiooniga, mis saab ühe parameetri - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes):
+Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html) operatsiooniga. Antud operatsioon tagastab kehtiva teovõime otsuse, mis võib olla seotud kas teovõime puudumisega või piiratud teovõimega.
 
-```
-GET {MPI}/Patient/$legal-status?patient=Patient/874
 
-GET {MPI}/Patient/$legal-status?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944
-
-GET {MPI}/Patient/$legal-status?patient.identifier=37408074944
-```
-
-ning saab vastuseks on [LegalStatus](StructureDefinition-ee-mpi-socialhistory-legal-status.html) Observationi
-
-```json
-{
-  "resourceType": "Bundle",
-  "type": "collection",
-  "entry": [
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "meta": {
-          "versionId": "1",
-          "profile": [
-            "https://fhir.ee/mpi/StructureDefinition/ee-mpi-socialhistory-legal-status"
-          ]
-        },
-        "status": "final",
-        "category": [
-          {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                "code": "social-history",
-                "display": "Social history"
-              }
-            ]
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "8625004",
-              "display": "Legal status"
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/14459"
-        },
-        "issued": "2026-01-23T10:04:24.472+02:00",
-        "valueCodeableConcept": {
-          "coding": [
-            {
-              "system": "https://fhir.ee/CodeSystem/teovoime-staatus",
-              "code": "T2",
-              "display": "Teovõimetu"
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
 
 ### Töövõime
 
-Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga, mis saab ühe parameetri - [patsiendi identifikaator](operations.html#patsienti-identifikaatorid-operatsioonipäringutes):
+Patsiendi töövõime otsus Sotsiaaklkindlustusametist (SKA). Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga. Töövõime operatsioon tagastab kehtiva töövõime otsuse. 
 
-```
-GET {MPI}/Patient/$incapacity-for-work?patient=Patient/7076
 
-GET {MPI}/Patient/$incapacity-for-work?patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944
 
-GET {MPI}/Patient/$incapacity-for-work?patient.identifier=37408074944
-```
+### Töökoha ja ameti andmed
+Patsiendi kõik töökoha ja ametikoha andmed, mis päritakse TÖR-st. Andmed päritakse [$occupation](OperationDefinition-patient-occupation.html) operatsiooniga. 
 
-ning saab vastuseks on [IncapacityForWork](StructureDefinition-ee-mpi-socialhistory-incapacity-for-work.html) Observationi
 
-Operatsioon leiab alati hetkel kehtiva otsuse.
+### Surmateave lisamine
 
+Teatud operatsioonide puhul, kui tegemist on surnud isiku koodiga, siis kasutajale edastatakse [OperationOutcome-is](OperationOutcome-DeceasedWarning.html) teavitus. 
+
+Operatsioonid, mis edastavad teavituse surnud isiku kohta: 
+* [Teovõime](OperationDefinition-patient-legal-status.html) 
+* [Töövõime](OperationDefinition-patient-incapacity-for-work.html) 
+* [Haridus](OperationDefinition-patient-education.html)
+* [Puudemäär](OperationDefinition-patient-disability.html) 
+
+Näide, kus lisatakse operatsiooni vastusesse teavitus:
 ```json
 {
   "resourceType": "Bundle",
@@ -769,7 +165,7 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
           "start": "2020-09-14T00:00:00+03:00",
           "end": "2023-09-13T00:00:00+03:00"
         },
-        "issued": "2026-01-23T10:04:54.715+02:00",
+        "issued": "2026-03-18T13:56:22.035+02:00",
         "valueCodeableConcept": {
           "coding": [
             {
@@ -780,45 +176,27 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
           ]
         }
       }
+    },
+    {
+      "resource": {
+        "resourceType": "OperationOutcome",
+        "issue": [
+          {
+            "severity": "warning",
+            "code": "informational",
+            "details": {
+              "coding": [
+                {
+                  "system": "https://mpi.tehik.ee",
+                  "code": "MPI-101"
+                }
+              ],
+              "text": "Patsient on surnud"
+            }
+          }
+        ]
+      }
     }
   ]
 }
 ```
-
-### Suhted ja hooldusõigused
-
-Operatsioon [$legal-relationship](OperationDefinition-patient-legal-relationship.html) võimaldab pärida patsiendi seaduslikke kehtivaid suhteid teiste isikutega ja
-hooldusõigusi nende vahel. Andmed tulevad Rahvastikuregistrist.
-
-## Tööprintsiip
-
-### Vahemälu (cache)
-
-MPI operatsioonid teostavad päringu algallikasse (registrisse) ning tagastavad vastuse kasutajale ilma andmeid salvestamata MPI andmebaasi. Iga välise registri
-eest vastutab omaette mikroteenus, mis säilitab päringu vastuse oma vahemälus konfigureeritud ajaks (tavaliselt ühe päeva jooksul). Päring algallikast
-värskendab andmed vahemälus.
-
-### Vahemälust pärimine
-
-Iga operatsioon mis toetab vahemälu sisaldab parameetri *nocache*. *nocache* parameetri vaikimisi väärtuseks on *false*, s.t. vaikimisi andmed võetakse
-vahemälust. xTee päringu käivitamiseks ilmutatud kujul *nocache* väärtuseks tuleb määrata *true*.
-
-### Patsiendi identifikaatorid operatsioonides
-
-Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$education](OperationDefinition-patient-education.html), [$legal-guardian](OperationDefinition-patient-legal-guardian.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$patient-legal-relationship](OperationDefinition-patient-legal-relationship.html), [$legal-status](OperationDefinition-patient-legal-status.html), [$occupation](OperationDefinition-patient-occupation.html) ja [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) võimaldavad pärida järgmiste patsiendi identifikaatoritega:
-
-- Viide patsiendile ```Patient/1234```
-
-- Eesti isikukood süsteemiga ```patient.identifier=https://fhir.ee/sid/pid/est/ni|37408074944```
-
-- Eesti isikukood süsteemita ```patient.identifier=37408074944```
-
-- Eesti isikukood kooloniga ```patient:identifier=https://fhir.ee/sid/pid/est/ni|37408074944```
-
-- Eesti isikukood kooloniga ja süsteemita ```patient:identifier=37408074944```
-
-
-### Surmateave lisamine
-
-Operatsioonid [$legal-status](OperationDefinition-patient-legal-status.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$education](OperationDefinition-patient-education.html), [$disability](OperationDefinition-patient-disability.html) lisavad vastusesse [OperationOutcomei](OperationOutcome-DeceasedWarning.html), juhul kui patsient on surnud.
-{% fragment OperationOutcome/DeceasedWarning JSON %}

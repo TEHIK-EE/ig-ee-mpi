@@ -1,6 +1,5 @@
 Käesolev juhend kirjeldab isikute identifitseerimise dokumenteerimise korda Eesti isikukoodiga, 
-välisriigi isiku koodiga ning tundmatute ja surnult sündinute andmete edastamisel tervise infosüsteemi MPI teenusesse. 
-Lisaks on selgitatud dubleerivate patsientide koodide sidumise lahendust.
+välisriigi isiku koodiga ning tundmatute ja surnult sündinute andmete edastamisel PÜT teenusesse.
 
 ### Identity system
 Detailne info identifitseerimissüsteemi kohta on leitav [EEBase](https://fhir.ee/ig/ee-base/current/) juurutusjuhendis.
@@ -17,27 +16,28 @@ Eesti isikukoodi puhul kasutada URL-i **https://fhir.ee/sid/pid/est/ni**. Eesti 
     }
   ]
 ```
-NB! Siinkohal on oluline, et riigi valik saaks tehtud vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
+**NB!** Siinkohal on oluline, et riigi valik saaks tehtud vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
 Ehk, kui isikul on olemas Eesti isikukood, aga rahvuselt või kodakondsuselt on ta muu riigi kodanik, siis tuleb valida ikkagi Eesti riigi tunnus isikukoodi juures.
 
 ### Välisriigi isiku kood
-Välisriigist pärit patsiendi puhul, kellel puudub Eesti isikukood ja kes on identifitseeritav mingi välisriigi dokumendi alusel, 
-kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)). 
-Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). 
+Välisriigist pärit isiku puhul, kellel puudub Eesti isikukood ja  on identifitseeritav välisriigi dokumendi alusel, 
+soovitame kasutada dokumenteerimiseks TIS-põhist välisriigi isiku URL-i (vastavad identifitseerimissüsteemid on kirjeldatud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)). 
+
+**NB!** Siin on oluline meelde jätta, et eelviimane url-i komponent on kolmekohaline riigikood ja viimane on identifikaatori tüüp koodisüsteemist [v2-0203](http://terminology.hl7.org/CodeSystem/v2-0203). 
 
 Olulisemad tüübid on:
-- NI - riiklik identifikaator / nationanal identifier
-- PPN - passi number / passport
-- CZ - Id kaardi number / citezenship card number
+- NI - riiklik identifikaator / national identifier
+- PPN - passinumber / passport
+- CZ - Id kaardi number / citizenship card number
 - DL - juhiloa number / driver's licence number   
 
 Identifitseerimissüsteemi kasutatakse väljal **system** ja identifikaatorit või passinumbrit väljal **value**. Täiendavalt saab määrata dokumendinumbri lõpukuupäeva.
 
-Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
+**NB!** Siinkohal on oluline, et riigi valik tehtaks vastavalt dokumendi väljastanud riigile, mitte vastavalt rahvusele/kodakondsusele. 
 Eelistada dokumendil isikukoodi ID-d, selle puudumisel sisestada vastava dokumendi number.
 
 Riikidel, mille identifitseeritavatel dokumentidel eksisteerib ka isikukood (NI tüüp), tuleb alati see määrata.
-Loetelu identifikaatori prefiksitest mille puhul on kohustulik määrata ka riigi isikukood: 
+Loetelu identifikaatori prefiksitest, mille puhul on kohustulik määrata ka riigi isikukood: 
 [Isikukoodi kohustuslikkus identifitseerimisel](https://akk.tehik.ee/classifier/resources/value-sets/isikukoodi-kohustuslikkus-identifitseerimisel/summary)
 
 Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pass:
@@ -59,10 +59,10 @@ Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pas
 ```
 
 ### Tundmatu isiku kood
-Kui isikukood ei ole teada ehk tegemist on nö tundmatu isikuga, siis TTO saab pärida tundmatu isikkukoodi MPI-st kasutada operatsiooni [MR numbri genereerimiseks](OperationDefinition-patient-generate-mrn.html).
+Kui isikukood ei ole teada ehk tegemist on nö tundmatu isikuga, siis TTO saab pärida tundmatu isikukoodi PÜT-st kasutades operatsiooni [MR numbri genereerimiseks](OperationDefinition-patient-generate-mrn.html).
 Genereeritud koodi saab kasutada koos **https://fhir.ee/sid/pid/est/mr** urliga.
 
-Tundmatu isiku esitamise näide1:
+Tundmatu isiku esitamise näide 1:
 ```json
   "identifier" : [
     {
@@ -72,13 +72,15 @@ Tundmatu isiku esitamise näide1:
   ]
 ```
 
-TTO saab kasutada ka enda poolt genereeritud identifikaatorit kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. 
-URL TTO identifikaatori jaoks peab olema kujul **https://fhir.ee/sid/pid/est/prn/$BRcode**, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. 
-Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendiidentifikaatorid siis koodide mitte kattuvus peab olema lahendatud asutusesiseselt.
+TTO saab kasutada ka enda poolt genereeritud identifikaatorit, kasutades selleks oma asutuse jaoks mõeldud identifitseerimissüsteemi. 
+URL TTO identifikaatori jaoks peab olema **https://fhir.ee/sid/pid/est/prn/$BRcode** kujul, kus $BRcode peab olema asendatud TTO Äriregistri koodiga. 
+
+Kui asutuses on mitu infosüsteemi, mis genereerivad patsiendi identifikaatoreid, siis koodide mitte-kattuvus peab olema lahendatud asutusesiseselt.
+
 Lubatud TTO identifikaatori süsteemid on loetletud koodisüsteemis [Isikute ja asutuste identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary). 
 Puuduva TTO identifikaatori süsteemi lisamiseks palume pöörduda Tehiku it-abisse, saates soovitud asutuse nimetus ning registrikood.
 
-Tundmatu isiku esitamise näide2:
+Tundmatu isiku esitamise näide 2:
 ```json
   "identifier" : [
     {
@@ -88,11 +90,13 @@ Tundmatu isiku esitamise näide2:
   ]
 ```
 
-### Surnult sündinu kood
+### Surnult sündinud kood
 Sünniregistri poolt väljastatud kood surnult sündinute identifitseerimiseks.
 Surnult sünni puhul antakse surnule spetsiaalne Eesti isikukoodi sarnane kood. 
-Surnult sündinu kood esitatakse tervise infosüsteemis eraldi URL-iga "https://fhir.ee/sid/pid/est/". 
-Surnult sünni puhul ei registreerita nime Rahvastikuregistris. Surnult sündinu esitamise näide:
+Surnult sündinud kood esitatakse tervise infosüsteemis eraldi URL-iga "https://fhir.ee/sid/pid/est/". 
+Surnult sünni puhul ei registreerita nime Rahvastikuregistris. 
+
+Surnult sündinu esitamise näide:
 ```json
   "identifier" : [
     {

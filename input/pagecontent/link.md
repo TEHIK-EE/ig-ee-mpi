@@ -1,198 +1,46 @@
+Järgnev alamleht kirjeldab patsientide sidumist ja lahti-sidumist. 
 ### Patsientide sidumine
-Tehakse [$link operatsiooniga](OperationDefinition-patient-link.html)
+Kasutada [$link operatsiooni](OperationDefinition-patient-link.html)
 
 #### Reeglid ja piirangud
-- "target" on primaarne patsient, kes ei tohi olla surnud ega seotud teise primaarse patsiendiga.
-- "source" on sekundaarne patsient.
-- Eesti isikukoodiga patsient peab alati olema primaarne patsient.
-  - Kahte Eesti isikukoodiga patsienti ei saa siduda, isikukoodi muudatus tuleb Rahvastikuregistri kaudu automaatselt.
-- Kui sidumisel on mõlemal patsiendil sama süsteemiga identifikaatorid (näiteks mõlemal on Soome isikukood), siis sekundaarse patsiendi identifikaatorile pannakse lõppkuupäev (ka Eesti isikukoodi puhul).
+- Mõlemad identifikaatorid (source ja target) peavad olema olemas. 
+- Sekundaarne patsient (source) ei tohi olla Eesti isikukoodiga ehk:
+  - Eesti isikukoodiga patsienti ei saa siduda teise Eesti isikukoodiga. Eesti isikukoodide muudatused tulevad Rahvastikuregistrist. 
+  - Eesti isikukoodiga patsienti ei saa siduda teise välismaalase isiku koodiga. 
+  - Eesti isikukoodiga patsienti ei saa siduda tundmatu identifikaatoriga patsiendiga.
+- Välismaalase isiku koodiga patsienti ei saa siduda tundmatu identifikaatoriga patsiendiga.
+- Tundmatu identifikaatoriga patsienti ei saa siduda teise tundmatu identifikaatoriga patsiendiga.
+- Primaarne patsient (target) võib olla Eesti isikukoodiga või välismaalase isiku koodiga. Ei tohi olla tundmatu identifikaatoriga.  
+- Sekundaarne patsient (source) ei tohi olla seotud juba primaarse patsiendiga. 
+- Kui sidumisel on mõlemal patsiendil (source ja target) sama süsteemiga identifikaatorid (näiteks Soome isikukood), siis sekundaarse patsiendi identifikaatorile lisatakse lõpukuupäev. 
 - Sidumise tulemused hoitakse `Patient.link` väljas.
   - `Patient` ressursi salvestamisel rakendus ignoreerib `link` välja sisu. 
   - `link` välja saab muuta ainult operatsioonide abil.
 - Saab siduda mitu sekundaarset patsienti ühe primaarse patsiendiga:
   - Primaarsel patsiendil tekib mitu `link` välja `replaces` tüübiga.
   - Sekundaarsetel patsientidel tekib üks `link` väli `replaced-by` tüübiga.
-- "target" patsiendil ei tohi olla `link` välja `replaced-by` tüübiga.
-  - Tuleb võtta `replaced-by` patsient ja kasutada selle "target" patsiendina.
-- `replaces` tüübiga loetletud ka kõik transitiivselt seotud patsiendid.
-  - Näiteks kui tehakse sidumised A -> B, C -> D ja B -> D, siis patsiendid A, B ja C on patsiendi D `link` väljal `replaces` tüübiga loetletud.
+- Primaarsel patsiendil ei tohi olla `link` väljas `replaced-by` tüüpi. Ainult `replaces`
+- `replaces` tüübiga loetletakse kõik transitiivselt seotud patsiendid:
+  - Näide: kui tehakse sidumised A -> B, C -> D ja B -> D, siis patsiendid A, B ja C on patsiendi D `link` väljal `replaces` tüübiga loetletud.
+- Otsing annab mõlema identifikaatori puhul sama tulemuse, st mõlema identifikaatori järgi leitakse kõik patsiendid, kes on seotud ühe ja sama primaarse patsiendiga.
+
 
 
 ### Patsientide lahti sidumine
-Tehakse [$unlink operatsiooniga](OperationDefinition-patient-unlink.html)
+Kasutada [$unlink operatsiooni](OperationDefinition-patient-unlink.html)
 
 #### Reeglid ja piirangud
-- Lahti sidumisel patsiendid peavad olema seotud (`Patient.link` element on täidetud).
-- Peale lahti sidumist on eemaldatakse lingid (`Patient.link`) kahe patsiendi vahel.
-
-### Linkide kasutamine teises FHIR serveris (visioon)
-Tüüpiline päring FHIR serveris Observation ressurssi vastu näeb välja nii:
-```
-[fhir-server-base]/Observation?patient=123
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 3,
-   ..K, O, D
-}
- 
-[fhir-server-base]/Observation?patient=789
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 5,
-  ..A, L, I, T, Y
-}
-```
-, kus 123 ja 789 on patsiendi refererence-id (või teiste sõnadega patsiendi id MPI-s). Oletame, et esimesel patsiendi on identifikaator UK123 ja teisel on EE789. Siis päring identifikaatori kohta annab samad tulemused:
-
-```
-[fhir-server-base]/Observation?patient.identifier=UK123
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 3,
-  ..K, O, D
-}
- 
-[fhir-server-base]/Observation?patient.identifier=EE789
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 5,
-  ..A, L, I, T, Y
-}  
-```
-
-Peale patsientide sidumist:
-```
-POST [mpi]/Patient/$link
-[some headers]
-{
-  "resourceType": "Parameters",
-  "parameter": [
-    {
-      "name": "source-patient",
-      "valueReference": {
-          "reference": "Patient/123"
-      }      
-    },
-    {
-      "name": "target-patient",
-      "valueReference": {
-          "reference": "Patient/789"
-      }
-    }
-  ]
-}
-```
-
-Esimesel patsiendil tekib link teisele patsiendile koos tunnusega, et ta on asendatud:
-```
-GET [fhir-server-base]/Patient/123
-[some headers]
-{
-  "id": "123",
-  ...
-  "link": [
-    {
-      "other": {
-        "reference": "Patient/789"
-      }
-    },
-    "type": "replaced-by"
-    }
-  ]
-}
-```
-
-ning teisel patsiendil tekib link esimesele patsiendile koos tunnusega, et ta on seda asendanud:
-```
-GET [fhir-server-base]/Patient/789
-[some headers]
-{
-  "id": "789",
-  ...
-  "link": [
-    {
-       "other": {
-        "reference": "Patient/123"
-      }
-    },
-    "type": "replaces"
-    }
-  ]
-}
-```
-
-Antud muudatused ei muuda andmeid lähteregistrites, st et päringud id järgi annavad endiselt samu tulemusi:
-```
-[fhir-server-base]/Observation?patient=123
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 3,
-  ..K, O, D
-}
- 
-[fhir-server-base]/Observation?patient=789
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 5,
-  ..A, L, I, T, Y
-}  
-```
-
-Tänu sidumisele leiab päring identifikaatori järgi mitte ühe patsiendi id vaid kahe ning päring nii ühe kui teise identifikaatori järgi tagastab sama andmehulga:
-```
-[fhir-server-base]/Observation?patient.identifier=UK123
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 8,
-  ..K, O, D, A, L, I, T, Y
-}
-
-[fhir-server-base]/Observation?patient.identifier=EE789
-{
-  "resourceType": "Bundle",
-  "type": "searchset",
-  "total": 8,
-  ..K, O, D, A, L, I, T, Y
-}  
-```
-
-Juhul kui sidumine oli tehtud ekslikult ja need kaks patsienti tuleb lahti ühendada, siis kasutatakse unlink operatsiooni:
-```
-POST [mpi]/Patient/$unlink
-[some headers]
-{
-  "resourceType": "Parameters",
-  "parameter": [
-    {
-      "name": "source-patient",
-      "valueReference": {
-          "reference": "Patient/123"
-      }      
-    },
-    {
-      "name": "target-patient",
-      "valueReference": {
-          "reference": "Patient/789"
-      }      
-    }
-  ]
-}
-```
-Selle tulemusena lingid kahe patsiendi vahel kustutatakse. Ühtlasi Observation päringud identifikaatorite järgi tagastavad uuesti 3 kirjet Patient/123 puhul ja 5 kirjet Patient/789 puhul.
+- Lahti sidumisel peavad patsiendid olema eelnevalt seotud (`Patient.link` element on täidetud).
+- Pärast lahti sidumist on eemaldatakse lingid (`Patient.link`) kahe patsiendi vahel.
+- Pärast lahti sidumist saab sekundaarset patsienti (source) uuesti siduda mõne teise primaarse patsiendiga (target).
+- Kui patsiendid ei ole omavahel seotud, siis lahti sidumine ebaõnnestub ning edastatakse veateade. 
+- Eesti isikukoodidega isikuid ei saa lahti siduda
 
 
-### Liitmine (Merge) 
-Kuigi FHIR API-s esineb patsiendi ühendamise operatsioon *[http://hl7.org/fhir/OperationDefinition/Patient-merge](http://hl7.org/fhir/patient-operation-merge.html), mis liidab kahe patsiendi andmed jäädavalt (liidetav kaotatakse ära).
-MPI ei paku antud operatsiooni patsientide liitmiseks, kuna ta ei ole tagasipööratav.
 
-### Teised ressursid
-#### TIS
-TIS võimaldab siduda patsiente. Selleks kasutatakse HL7 V3 sõnumit [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid](https://pub.e-tervis.ee/standards2/Standards/8.0/DL/XML/PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_dublikaadid.xml). Hetkel TIS ei paku patsientide lahti sidumise teenust.
+### Patsientide sidumine TIS-i kaudu 
+TIS võimaldab siduda patsiente, kus kehtivad samad reeglid ja piirangud, mis link operatsioonil. 
+
+Selleks kasutatakse HL7 V3 sõnumit, mille info leiab [PRPA_IN201102UV01_PatientLivingSubject_Information_Revised_duplikaadid](https://akk.tehik.ee/public_data_structure/dubleerivate-patsientide-sidumine/1.0).
+
+**NB!** TIS-i kaudu ei saa lahti siduda patsiente. 

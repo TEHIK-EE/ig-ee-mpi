@@ -1,7 +1,7 @@
 Instance: ee-mpi-external-system-presence
 InstanceOf: SearchParameter
 Title: "EE Mpi Patient external system presence"
-Description: "Otsinguparameeter patsiendi olemasolu kontrollimiseks välises infosüsteemis"
+Description: "Search parameter to check the patient's existence in an external information system"
 Usage: #definition
 * name = "EEMPIExternalSystemPresence"
 * status = #active

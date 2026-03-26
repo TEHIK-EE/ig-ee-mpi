@@ -1,6 +1,6 @@
 ### Üldised kontrollid
 
-Kõik päringus ja ressurssid peavad järgima FHIR spetsifikatsiooni.
+Kõik päringud ja ressurssid peavad järgima FHIR spetsifikatsiooni.
 
 Sissetulevad päringud ja andmed valideeritakse:
 
@@ -8,13 +8,14 @@ Sissetulevad päringud ja andmed valideeritakse:
 - PÜT profiilide vastu
 - PÜT rakenduse poolt lubatud tegevuste nimekirja vastu (nimekiri tegevustest leitav CapabilityStatement-is aadressil [$mpi-url/fhir/metadata](#))
 - Kontrollitakse kasutatavat terminoloogiat profiilide ja terminoloogia serveri vastu
-- Autoriseerimisserveri vastu, tegevust saab teostada ainult kasutaja vastava rolli olemasolul
+- Autoriseerimisserveri vastu, tegevust saab kasutaja teostada ainult  vastava rolli olemasolul
 
 ### PÜT rakenduse sisesed kontrollid
 
 #### Patsiendid
-Eesti isikikoodiga patsiendi loomine pole lubatud. `Patient` ressurss ei tohi loomisel sisalda identifikaatori süsteemiga https://fhir.ee/sid/pid/est/ni.
-Eesti isikukoodiga patsiendi tuleb pärida alati [lookup](operations.html#eesti-isikukoodiga-patsiendi-otsing) operatisooniga, kus on kasutatud allikana Rahvastikuregister.
+* Eesti isikukoodiga patsiendi loomine pole lubatud.
+* `Patient` ressurss ei tohi loomisel sisaldada identifikaatorit süsteemiga https://fhir.ee/sid/pid/est/ni. 
+* Eesti isikukoodiga patsienti tuleb pärida alati [lookup](operations.html#eesti-isikukoodiga-patsiendi-otsing) operatsiooniga, kus kasutatav allikas on Rahvastikuregister.
 Operatsioon tagastab `Patient` ressursi koos id-ga, mille abil saab patsiendi andmeid uuendada.
 
 #### Telecom väärtused
@@ -55,7 +56,7 @@ Eesti numeratsiooniplaan [riigiteataja.ee/akt/881042](https://www.riigiteataja.e
 | Eesti mobiiltelefoni number | `^5[0-9](\d{5,6})$` | Eesti riigikood kujul +372 või 00372 ignoreeritakse valideerimisel, kuid salvestatakse alati kujul +372.            |
 | Välismaa telefoni number    | `^\+[1-9]\d{1,14}$` | Kontrollitakse ainult pikkust ja riigi koodi olemasolu. Teiste riikide reegleid ei rakendata numbri valideerimisel. |
 
-Telefoninumbrid salvestatkse registri alati riigi koodiga kujul +XXXYYYYYY ilma tühikudeta ja sulgudeta. Juhul kui PÜT-i jõuab valiidne Eesti number ilma
+Telefoninumbrid salvestatakse registrisse alati riigi koodiga kujul +XXXYYYYYY ilma tühikudeta ja sulgudeta. Juhul kui PÜT-i jõuab valiidne Eesti number ilma
 riigikoodita siis riigikood lisatakse telefoninumbrile automaatselt.
 
 ##### Emailid
@@ -67,14 +68,14 @@ Salvestatakse ainult valiidsed emailid muutumata kujul.
 #### Aadress
 
 FHIR aadress kasutatakse postikonventsioonide väljendamiseks.
-Aadressi vorming kirjeldatud [EEBase Address](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address.html) andmetüübi kirjelduses.
-Kohustlikuks elemendiks on riigikood, mis peab vastama [iso3166-1-alpha2](http://hl7.org/fhir/R5/valueset-iso3166-1-2.html) vormingule.
+Aadressi vorming on kirjeldatud [EEBase Address](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address.html) andmetüübi kirjelduses.
+Kohustuslikuks elemendiks on riigikood, mis peab vastama [iso3166-1-alpha2](http://hl7.org/fhir/R5/valueset-iso3166-1-2.html) vormingule.
 Tagasiühildamiseks praeguse lahendusega (ajutiselt) toetaks ka [iso3166-1-alpha3](http://hl7.org/fhir/R5/valueset-iso3166-1-3.html) riigikood.
 
 ##### Eesti aadress
-Eesti aadress on aadress mille riigikood on `EE` (Eesti).
+Eesti aadress on aadress, mille riigikood on `EE` (Eesti).
 
-MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb MPI-sse automaatselt Rahvastikuregistrist automaatselt.
+MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb MPI-sse Rahvastikuregistrist automaatselt.
 
 - Eesti aadressi puhul on kohustuslik `ADR-ID` ja `ADS-OID` väärtus ADS registrist. Kõik teised väljad on informatiivsed ja ei oma sisulist tähendust. Vaata aadressi
   kasutamise [juhiseid](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address.html#notes) EEBase spetsifikatsioonis.
@@ -84,26 +85,26 @@ MPI-sse saab salvestada ainult isiku lisa-aadress, ametlik elukoha aadress tuleb
 
 ###### Kvaliteedinõuded
 
-Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aaddress Rahvastikuregistri järgi.
+Lisa-aadress peab vastama samadele kvaliteedinõuetele, mis elukoha aadress Rahvastikuregistri järgi.
 Aadressite edastamiseks MPI-sse tuleb järgida Maa-ameti poolt koostatud [juhendi](https://geoportaal.maaamet.ee/docs/aadress/elukoha_ja_lisaaadressi_valiku_juhend.pdf). 
-Kui aadress ei vasta nõuetele MPI lisab sellele [notice](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
+Kui aadress ei vasta nõuetele lisab MPI sellele [notice](https://fhir.ee/ig/ee-base/current/site/StructureDefinition-ee-address-definitions.html#diff_Address.extension:notice) veatekstiga.
 
 **Kui lisa-aadress vastab kvaliteedinõuetele, siis saadetakse see automaatselt Rahvastikuregistrisse.**
 
 ##### Välismaa aadress
 
-Välismaa aadress on aadress mille riigiks ei ole `EE` (Eesti).
+Välismaa aadress on aadress, mille riigiks ei ole `EE` (Eesti).
 Välismaa aadressi puhul on kohustuslik ainult riigi kood ja tekst. Välismaa aadressi puhul teisi kontrolle ei teostata.
 
 #### Identifikaatorid
-- Identifikaatorite eemaldamine ja muutmine ei ole lubatud. Kui patsiendi identifikaator kaotanud kehtivuse siis tuleb määrata kehtivuse lõppuaeg (`Identifier.period`).
+- Identifikaatorite eemaldamine ja muutmine ei ole lubatud. Kui patsiendi identifikaator on kaotanud kehtivuse, siis tuleb määrata kehtivuse lõpuaeg (`Identifier.period`).
 - Identifikaatorite lisamine on lubatud (v.a Eesti isikukoodiga identifikaator).
 - Eesit isikukoodi identifikaatori muutmine (s.h `Identifier` väljad) ei ole lubatud.
 - [Isikukoodi kohustuslikkus identifitseerimisel](https://akk.tehik.ee/classifier/resources/value-sets/isikukoodi-kohustuslikkus-identifitseerimisel/summary)
 
 #### Kontaktisikud
 
-Patsiendil saab olla kuni 3 kehtivat kontaktisikut (RelatedPerson ressurssi CON suhetüübiga), limiidi ületades tuleb MPI-042 koodiga viga.
+Patsiendil saab olla kuni 3 kehtivat kontaktisikut (RelatedPerson ressurssi CON suhetüübiga), limiidi ületades tuleb viga.
 
 ### Suhtluskeeled
 

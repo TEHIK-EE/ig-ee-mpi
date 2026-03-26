@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryLegalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-status
 Title:          "EE MPI SocialHistory Legal Status"
-Description:    "Patsiendi teovõime staatus."
+Description:    "The patient's legal capacity status."
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..

@@ -7,17 +7,17 @@ Profile: EEMPIPatientUnknown
 Parent: EEMPIPatient
 Id: ee-mpi-patient-unknown
 Title: "EE MPI Patient Unknown"
-Description: "Kasutamiseks EMO-s, kiirabis, anonüümsete patsientide ning keskkonnaproovide puhul"
+Description: "For use in the emergency room, ambulance, for anonymous and/or unknown patients"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name ..1
 * name[nickname] 1..1
-* name[nickname].use ^short = "Tundmatu patsiendi tunnus"
-* name[nickname].text ^short = "Tundmatu patsiendi hüüdnimi"
+* name[nickname].use ^short = "Unknown patient characteristic"
+* name[nickname].text ^short = "Unknown patient nickname"
 * name[official] 0..0
 * identifier ..1
 * identifier obeys mpi-pid-1
-* identifier ^short = "Tundmatu identifikaator"
+* identifier ^short = "Unknown patient identifier"
 * gender 1..
 * telecom ..0
 * multipleBirth[x] ..0

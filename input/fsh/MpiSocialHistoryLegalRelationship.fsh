@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryLegalRelationship
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-relationship
 Title:          "EE MPI SocialHistory Legal Relationship"
-Description:    "Kehtiv ametlik suhe patsiendiga ja isiku hooldusõigus (Rahvastikuregistri andmete põhinev)."
+Description:    "Type of legal relationship and custody status between the patient and the person"
 * status = #final (exactly)
 * contained 1..1
 * contained ^slicing.discriminator[0].type = #type
@@ -11,14 +11,14 @@ Description:    "Kehtiv ametlik suhe patsiendiga ja isiku hooldusõigus (Rahvast
 * contained ^slicing.rules = #open
 * contained contains relatedPerson 1..1
 * contained[relatedPerson] only RelatedPerson
-* contained[relatedPerson] ^short = "Isik, kellega patsiendil on kehtiv ametlik suhe"
+* contained[relatedPerson] ^short = "Person with whom the patient has a valid official relationship"
 * contained[relatedPerson].implicitRules ..0
 * contained[relatedPerson].contained ..0
 * contained[relatedPerson].modifierExtension ..0
 * contained[relatedPerson].active ..0
 
 * contained[relatedPerson].relationship 1..1
-* contained[relatedPerson].relationship ^short = "Suhetüüp patsiendi ja seotud isiku vahel"
+* contained[relatedPerson].relationship ^short = "Type of relationship between patient and related person"
 * contained[relatedPerson].relationship from $legal-relationship-type-VS (required)
 
 * category 1..1
@@ -32,11 +32,11 @@ Description:    "Kehtiv ametlik suhe patsiendiga ja isiku hooldusõigus (Rahvast
 * subject only Reference(EEMPIPatientVerified)
 * performer 1..1
 * performer only Reference(EEBaseRelatedPerson)
-* performer ^short = "Viide contained RelatedPerson ressursile"
+* performer ^short = "Reference to the contained RelatedPerson resource"
 * value[x] 0..1
 * value[x] only CodeableConcept
 * valueCodeableConcept from $custody-type-VS
-* value[x] ^short = "Hooldusõiguse liik patsiendi ja seotud isiku vahel (kui on olemas)"
+* value[x] ^short = "Type of custody between the patient and the related person (if any)"
 
 * effective[x] ..0
 * encounter ..0

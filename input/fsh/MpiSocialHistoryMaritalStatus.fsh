@@ -5,7 +5,7 @@ Profile:        EEMPISocialHistoryMaritalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-marital-status
 Title:          "EE MPI SocialHistory Marital Status"
-Description:    "Abielu või suhte liik."
+Description:    "Type of marriage or relationship."
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -13,9 +13,9 @@ Description:    "Abielu või suhte liik."
 * code = $SCT#125680007 "Marital status" (exactly)
 * effective[x] 0..1 MS
 * effective[x] only Period
-* effective[x] ^short = "Suhete periood"
+* effective[x] ^short = "Relationship period"
 * issued 1.. MS
-* issued ^short = "Ajahetk, millal antud fakt fikseeriti"
+* issued ^short = "The time when a given fact was recorded"
 * subject 1..1 MS
 * subject only Reference(EEBasePatient)
 * value[x] 1..1 MS

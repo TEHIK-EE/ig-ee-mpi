@@ -8,7 +8,7 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* description = "The link operation is used to link two patient resources. One of the two patients is identified as the source and one as the target. The link with type 'replaces' is created in target patient resource and points to source patient, the another link with type 'replaced-by' is created in source patient resource and points to target patient."
+* description = "The link operation is used to link two patient resources. One of the two patients is identified as the source and one as the target. The link with type 'replaces' is created in target patient resource and points to source patient; another link with type 'replaced-by' is created in source patient resource and points to target patient."
 * affectsState = true
 * code = #link
 * resource = #Patient
@@ -32,7 +32,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "A direct resource reference to the **target** patient resource.\r\rThis is the surviving patient resource, the target for the link."
+* parameter[=].documentation = "A direct resource reference to the **target** patient resource.\r\rThis is the **surviving patient resource**, the target for the link."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient"
 * parameter[+].name = #target-patient-identifier
@@ -65,7 +65,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The unlink operation is used to unlink two patient resources. One of the two patients is identified as the source and one as the target. The links between the source and target Patients will be removed."
+* description = "The unlink operation is used to unlink two previously linked patient resources. One of the two patients is identified as the source and one as the target. The links between the source and target patients will be removed."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = true
 * code = #unlink
@@ -117,7 +117,7 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* description = "The foreign operation perform complex search over non-estonian patient resources."
+* description = "The foreign patient search operation to perform search over non-estonian patient resources."
 * affectsState = false
 * code = #foreign
 * resource = #Patient
@@ -128,7 +128,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Three-letter country code of the identifier issuer according to the ISO standard."
+* parameter[=].documentation = "Three-letter country code of the issuer of the identifier according to the ISO standard."
 * parameter[=].type = #string
 
 * parameter[+].name = #birthdate
@@ -190,7 +190,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The lookup operation looking for patient data in the external registers."
+* description = "The lookup operation used to search for patient data in the external registers."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #lookup
@@ -235,7 +235,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The list of legal guardians specified in the Population Register."
+* description = "The list of patient's legal guardians specified by the Population Register."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #legal-guardian
@@ -255,7 +255,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "In what legal status related persons are returned. Supported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian"
+* parameter[=].documentation = "In what legal status related persons are returned.\r\rSupported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian"
 * parameter[=].type = #string
 * parameter[+].name = #nocache
 * parameter[=].use = #in
@@ -286,7 +286,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The list of power of attorneys in the Population Register. Data returned only for a minor. When an adult is given in patient parameter, then only patient's children and dependents under age of 18 are returned."
+* description = "The list of patient's power of attorneys from the Population Register. **Data returned only for a minor**.\r\rWhen an adult is given in patient parameter, then only patient's children and dependents under the age of 18 are returned."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #power-of-attorney
@@ -306,7 +306,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
-* parameter[=].documentation = "Whether operation should return only guardians: mother, father or legal guardian. By default *false*. Supported only for minors (under age of 18)."
+* parameter[=].documentation = "Whether operation should return only guardians (mother, father or legal guardian). By default *false*. Supported only for minors (under age of 18)."
 * parameter[=].type = #boolean
 * parameter[+].name = #nocache
 * parameter[=].use = #in
@@ -337,7 +337,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The highest education level in the Education Register."
+* description = "Patient's highest obtained level of education from the Public Registry."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #education
@@ -373,7 +373,7 @@ Usage: #definition
 * status = #active
 * kind = #operation
 * experimental = false
-* description = "Generate the new unique Medical Record Number may be used for unknown/anonymous patient's identification."
+* description = "To generate a new unique Medical Record Number. Can be used for unknown/anonymous patient's identification."
 * affectsState = false
 * code = #mrn
 * resource = #Patient
@@ -384,7 +384,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns text representataion of Medical Record Number."
+* parameter[=].documentation = "Returns a text representation of Medical Record Number."
 * parameter[=].type = #Identifier
 
 
@@ -399,7 +399,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The patient disability from Social Insurance Board (SKA)."
+* description = "Patient's level of disability from the Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #disability
@@ -439,7 +439,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The observation of patient incapacity for work from Social Insurance Board (SKA)."
+* description = "Patient's incapacity for work status from the Social Insurance Board (SKA)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #incapacity-for-work
@@ -479,7 +479,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The observation of patient occupations from Employment Register (TÖR)."
+* description = "Patient's occupation(s) from the Employment Register (TÖR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #occupation
@@ -519,7 +519,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The observation of patient legal status from Population Register (RR)."
+* description = "Patient's current legal status from the Population Register (RR)."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #legal-status
@@ -558,7 +558,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "Operations that returns a list of valid (at the moment of the request) patient legal relationships based on data from Population Register (RR). Returns also custody types where applicable."
+* description = "Patient's legal relationships from the Public Registry. Returns also custody types, where applicable."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #legal-relationship

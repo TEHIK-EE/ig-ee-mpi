@@ -18,29 +18,29 @@ Profile: EEMPIPatientStillborn
 Parent: EEMPIPatient
 Id: ee-mpi-patient-stillborn
 Title: "EE MPI Patient Stillborn"
-Description: "Profiil surnult sündinu andmete kirjeldamiseks"
+Description: "Profile for describing stillborn data"
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
-* name ^short = "Surnult sündinu nimi võib puududa"
+* name ^short = "The name of a stillborn child may be missing."
 * name ..1
 * name contains temp 0..1 MS
-* name[temp] ^short = "Ajutine nimi"
+* name[temp] ^short = "Temporary name"
 * name[temp].use = #temp (exactly)
 * name[temp].family 1..1 MS
 * name[temp].given 0..1 MS
-* name[temp].given ^short = "Surnult sündinu eesnimi võib puududa"
+* name[temp].given ^short = "The first name of a stillborn child may be missing."
 //* identifier.system from EEMPIPatientIdentityStillborn (required)
-* identifier ^short = "Surnult sündinu identifikaator"
+* identifier ^short = "Stillborn identifier"
 * obeys mpi-pid-2
 * telecom ..0
 * birthDate 1.. MS
 * deceased[x] 1..1 MS
 * deceased[x] only dateTime
-* deceased[x] ^short = "Patsiendi surmaaeg"
+* deceased[x] ^short = "Patient's time of death"
 * address ..0
 * multipleBirth[x] 1..1 MS
 * multipleBirth[x] only integer
-* multipleBirth[x] ^short = "Sünnijärjekord"
+* multipleBirth[x] ^short = "Birth order"
 * communication ..0
 
 

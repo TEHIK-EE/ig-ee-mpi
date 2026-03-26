@@ -1,9 +1,10 @@
-Sellel lehel kirjeldatud võimalikud olukorrad ja soovitused nende lahendamiseks.
+Sellel lehel kirjeldatud võimalikud olukorrad ja näited.
 
-### UC-01 Patsient Eesti dokumendiga
-Juhul kui vastuvõtule tuleb patsient kes suudab tuvastada ennast Eesti dokumendiga patsiendi tuvastamiseks tuleb kasutada Eesti isikukood.
+### UC-01 Eesti patsient
+Vastuvõtule tuleb patsient, kes tuvastab end Eesti dokumendiga. 
+Kasutada Eesti isikukood.
 
-Näide patsiendist Eesti isikukoodiga:
+Näide:
 ```json
 {
     "resourceType": "Patient",
@@ -32,12 +33,12 @@ Näide patsiendist Eesti isikukoodiga:
 }
 ```
 
-### UC-02 Patsient teiese riigi dokumendiga
-Juhul kui vastuvõtule tuleb patsient kes suudab tuvastada ennast teise riigi dokumendiga siis tuleb:
-- tuleb eelistada välisriigi isiku identifikaatori (a la isikukoodi);
-- dokumentidest tuleb eelistada passi;
-- kui passi pole siis tuleb veenduda, et antud dokument on toetatud dokumentide hulgas (vaata loendi [Patsiendi identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-identifikaatorite-domeen/summary));
-- tuleb kasutada dokumendi numbri ja vastava identifitseerimissüsteemi patsiendi identifitseerimiseks.
+### UC-02 Välisriigi patsient
+Vastuvõtule tuleb patsient, kes tuvastab end teise riigi dokumendiga. 
+- Eelistada välisriigi isiku identifikaatori (nt isikukood);
+- Eelistada dokumentidest passi;
+  - passi puudumisel veenduda, et antud dokument on toetatud dokumentide hulgas (vaata loendit [Patsiendi identifikaatorite domeen](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-identifikaatorite-domeen/summary));
+- Kasutada dokumendi numbrit ja vastavat identifitseerimissüsteemi patsiendi identifitseerimiseks.
 
 Näide patsiendist Saksamaa passiga:
 ```json
@@ -67,15 +68,15 @@ Näide patsiendist Saksamaa passiga:
 }
 ```
 
-### UC-03 Patsient ilma dokumendita
-Juhul kui vastuvõtule tuleb patsient kes ei suuda tõestada enda identiteedi või dokumendi liik ei kuulu toetatavate hulka siis antud patsiendi tuleb registreerida tundmatu patsiendina.
-Patsiendi registreerimisele võiks eelneda MRN numbri päring.
+### UC-03 Patsient dokumendita
+Vastuvõtule saabub patsient, keda ei suudata identifitseerida või tema antud dokumendi liik ei kuulu toetatavate hulka. Patsienti tuleb registreerida tundmatu patsiendina.
+Soovituslikult võiks katsiendi registreerimisele eelneda MRN numbri päring.
 
 Näide MRN numbri päringust:
 ```
 POST /Patient/$mrn
 ```
-ja vastusest
+Näide vastusest:
 ```json
 {
     "resourceType": "Parameters",
@@ -91,7 +92,7 @@ ja vastusest
 } 
 ```
 
-Ning näide tundmatu patsiendi registreemisest:
+Näide tundmatu patsiendi registreerimisest:
 ```json
 {
     "resourceType": "Patient",

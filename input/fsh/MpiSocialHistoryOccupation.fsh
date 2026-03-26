@@ -4,7 +4,7 @@ Profile:        EEMPISocialHistoryOccupation
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-occupation
 Title:          "EE MPI SocialHistory Occupation"
-Description:    "Töötamine"
+Description:    "Employment and occupation of the patient."
 * status = #final
 * category 1..1
 * category.coding[obscat] 1..1
@@ -31,7 +31,7 @@ Description:    "Töötamine"
 * subject only Reference(EEMPIPatientVerified)
 * performer 1..1
 * performer only Reference(EEBaseOrganization)
-* performer ^short = "Tööandja asutus. Viide contained ressursile"
+* performer ^short = "Employer's institution. Reference to contained resource"
 * encounter ..0
 * value[x] ..0
 * basedOn ..0
@@ -57,14 +57,14 @@ Description:    "Töötamine"
 * component[job].value[x] 1..1
 * component[job].value[x] only CodeableConcept
 * component[job].valueCodeableConcept from OCCUP_VS
-* component[job].valueCodeableConcept ^short = "Tööamet."
+* component[job].valueCodeableConcept ^short = "Occupation."
 * component[rate].code = $SCT#224374003 "Regularity of work"
 * component[rate].value[x] 1..1
 * component[rate].value[x] only Quantity
 * component[rate].value[x].unit = UCUM#1
 * component[rate].value[x].comparator ..0
-* component[rate].valueQuantity ^short = "Töökoormus (0..1]."
-* component[rate] ^short = "Lepinguline töökoormus."
+* component[rate].valueQuantity ^short = "Employment type (0..1]."
+* component[rate] ^short = "Contractual employment type."
 
 * contained 1..1
 * contained ^slicing.discriminator[0].type = #type
@@ -72,7 +72,7 @@ Description:    "Töötamine"
 * contained ^slicing.ordered = false
 * contained ^slicing.rules = #open
 * contained contains employer 1..1
-* contained[employer] ^short = "Tööandja asutus"
+* contained[employer] ^short = "Employer's institution"
 * contained[employer] only EEBaseOrganization
 * contained[employer].contact.address.use = #work
 * contained[employer].contact.address.country = #EE

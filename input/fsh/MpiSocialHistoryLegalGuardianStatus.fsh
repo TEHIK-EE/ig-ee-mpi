@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryLegalGuardianStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-legal-guardian-status
 Title:          "EE MPI SocialHistory Legal Guardian Status"
-Description:    "Seadusliku eeskostja staatus"
+Description:    "Legal guardian status"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -14,11 +14,11 @@ Description:    "Seadusliku eeskostja staatus"
 * subject only Reference(EEBasePatient)
 * performer 1.. MS
 * performer only Reference(EEBaseOrganization or EEBaseRelatedPerson)
-* performer ^short = "Asutus ja/või isikud, kellel on eeskoste õigus."
+* performer ^short = "Institution and/or persons with the right of guardianship."
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * valueCodeableConcept from $legal-guardian-status-VS
-* value[x] ^short = "Eeskoste liik."
+* value[x] ^short = "Type of guardianship."
 * note ..1 MS
 * basedOn ..0
 * partOf ..0
@@ -49,13 +49,13 @@ Usage:  #inline
   * system = "https://fhir.ee/sid/pid/est/ni"
   * value = "48501212711"
 * name
-  * family = "Eeskostja perekonnanimi"
-  * given = "Eeskostja eesnimi"
+  * family = "Guardian's last name"
+  * given = "Guardian's first name"
 
 
 Instance: LegalGuardianStatus
 InstanceOf: EEMPISocialHistoryLegalGuardianStatus
-Description: "Example of patient legal duardian"
+Description: "Example of patient legal guardian"
 Usage: #example
 * contained[0] = eeskostja
 * contained[+] = kov

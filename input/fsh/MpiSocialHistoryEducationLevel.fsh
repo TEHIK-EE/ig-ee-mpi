@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryEducationLevel
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-education-level
 Title:          "EE MPI SocialHistory Education Level"
-Description:    "Haridustase"
+Description:    "Education level"
 * status = #final (exactly)
 
 * category 1..1
@@ -13,7 +13,7 @@ Description:    "Haridustase"
 * code = $SCT#105421008 "Educational achievement"
 
 * issued 1..1
-* issued ^short = "Ajahetk, millal antud päring tehti"
+* issued ^short = "The time when this query was made"
 
 * subject 1..1
 * subject only Reference(EEMPIPatientVerified)

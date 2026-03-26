@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryDisability
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-disability
 Title:          "EE MPI SocialHistory Disability"
-Description:    "Puude raskusaste"
+Description:    "Severity of disability"
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..

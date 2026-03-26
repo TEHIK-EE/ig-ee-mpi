@@ -1,4 +1,4 @@
-Antud juhend selgitab põhireeglid patsiendi andmete pärimiseks ja sõnumite koostamiseks.
+Antud juhend selgitab põhireegleid patsiendi andmete pärimiseks ja sõnumite koostamiseks.
 
 Testimiseks laadige alla Postman [kollektsiooni](MPI%20X-Road.postman_collection.json) näidetega ja häälestage keskkonna muutujad
 
@@ -18,14 +18,16 @@ AUTH_URL: $host/r1/$env/GOV/70009770/tis/auth
 
 ### Ligipääsud
 
-Kollektsiooni proovimiseks TTO peab tellima õigused X-tee teenustele GOV/70009770/tis/mpi ja GOV/70009770/tis/auth ee-dev keskkonnas.
+Kollektsiooni testimiseks peab TTO tellima õigused ee-dev keskkonnas X-tee teenustele: 
+* GOV/70009770/tis/mpi
+* GOV/70009770/tis/auth
 
 ### Autoriseerimine
 
 Autoriseerimine on protsess, mille käigus kasutaja saab õigusi/privileege teatud ressursidele.
 Autoriseerimise käigus valideeritakse kasutaja väidetav roll ning kuuluvus asutusele, mille alt tehakse päringuid.
 
-**Token-is kodeeritud kasutaja isikukood ja nimi kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
+**NB! Token-is kodeeritud kasutaja isikukoodi ja nime kasutatakse audit logides, mis kuvatakse ka patsiendile Andmejälgijas!**
 
 #### Tokeni pärimine
 
@@ -44,7 +46,7 @@ POST päring `{{AUTH_URL}}/v2/token` järgmise "application/json" sisuga
 }
 ```
 
-Päringu kehas tuleb määrata kasutja roll, isikukood ja asutuse kood. Antud kombinatsioon valideeritakse TAM registri vastu.
+Päringu kehas tuleb määrata kasutaja roll, isikukood ja asutuse kood. Antud kombinatsioon valideeritakse TAM registri vastu.
 Rakenduse nimi peab kajastama kasutatud TTO tarkvara, suvaline tekst ilma tühikudeta.
 
 Vastus:
@@ -63,11 +65,12 @@ Vastus:
 
 Tokeni eluiga on on N sekundit (token päringu vastuses väli expiresIn), kliendirakendus võib tokeni cache-da kuni N sekundit ja taaskasutada erinevates
 päringutes.
-**NB! Token on kasutajapõhine, kliendirakendus ei tohi jagada sama tokeni mitme erineva kasutaja vahel!**
+
+**NB! Token on kasutajapõhine, kliendirakendus ei tohi jagada sama tokenit mitme erineva kasutaja vahel!**
 
 #### Tokeni kasutamine
 
-Tokeni tuleb kasutatada `Authorization` päises `Bearer ` prefiksiga. Näiteks
+Tokenit tuleb kasutatada `Authorization` päises `Bearer ` prefiksiga. Näiteks
 
 ```
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
@@ -75,9 +78,9 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....
 
 #### API otspunkti õigused
 
-Iga FHIR API otspunkt kontrollib õigusi, mis on rollipõhised. Rollide kohta saab
-lugeda [siin](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenuse-kasutajate-rollid).
-Õiguste maatriks asub [siin](permissions.html).
+Iga FHIR API otspunkt kontrollib õigusi, mis on rollipõhised. 
+* Rollide kohta saab lugeda [siin](https://teabekeskus.tehik.ee/et/teenused/tis-teenused/tis-andmevahetus/autoriseerimise-teenuse-kasutajate-rollid). 
+* Õiguste maatriks asub [siin](permissions.html).
 
 ### Päised (HTTP headers)
 
@@ -89,12 +92,12 @@ Igas päringus tuleb määrata REST päringu päises mitmed tunnused:
 | Content-Type  | application/json või application/xml või application/fhir+json või application/fhir+xml |                                                                                                                                                                                      |   
 | Authorization | Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiA....                                              | Auth teenuse poolt saadud token                                                                                                                                                      |   
 | x-road-id     |                                                                                         | Unikaalne päringu id                                                                                                                                                                 |    
-| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud, teatud päringutel on kohustuslik. <br/>Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. |
+| x-road-issue  |                                                                                         | Tekstiline selgitus miks antud päring on tehtud. Teatud päringutel on kohustuslik. <br/>Tekst kuvatakse Andmejälgijas. Päis edastatakse alampäringute puhul teistesse süsteemidesse. |
 | x-road-client | $env/$class/$org-code/$client-id                                                        | X-tee rest kliendi määrav identifikaator, vt https://www.x-tee.ee/docs/live/xroad/pr-rest_x-road_message_protocol_for_rest.html#43-use-of-http-headers                               |
 
 ### Andmete pärimine
 
-Patsiendi andmete pärimiseks saab esitada REST päringu mis tagastab kas üksiku ressurssi või ressursside kollektsiooni (edaspidi *Bundle*).
+Patsiendi andmete pärimiseks saab esitada REST päringu, mis tagastab kas üksiku ressurssi või ressursside kollektsiooni (edaspidi *Bundle*).
 
 #### Ressurss
 
@@ -141,7 +144,7 @@ Näide sektsiooni andmetest minimaalse andmekoosseisuga:
 
 #### Otsing
 
-Otsing teostatkse päringuga:
+Otsing teostatakse päringuga:
 
 ```
 GET {MPI}/Patient?{params}
@@ -180,7 +183,7 @@ GET {MPI}/Patient?identifier=https://fhir.ee/sid/pid/est/ni%7C37412251234
 
 Vastusena tuleb (searchset) Bundle mis tagastab meta informatsiooni päringu kohta (total, link) ja kollektsiooni (entry) ressursidest.
 
-- **total** näitab mitu ressursi on kättesaadav antud otsigu kriteeriaga.
+- **total** näitab mitu ressursi on kättesaadav antud otsigu kriteeriumitega.
 - **link** paging-u jaoks olulised viited, näiteks esimene leht, viimane, järgmine (next), kui olemas.
 
 ```json
@@ -236,16 +239,17 @@ kui otsing tehakse **riikliku identifikaatori süsteemiga või hierarhiliselt mi
 
 - Patsiendi identifikaatorite hierarhiliselt lõppsüsteemid
   leiate [sellest loendist](https://akk.tehik.ee/classifier/resources/value-sets/patsiendi-identifikaatorite-domeen/summary).
-- Kõik riiklikud identifikaatorite süsteemid on toodud [kodisüsteemis](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)
+- Kõik riiklikud identifikaatorite süsteemid on toodud [koodisüsteemis](https://akk.tehik.ee/classifier/resources/code-systems/identifikaatorite-domeen/summary)
   hierarhia tasemega 2.
 
 Näiteks kui otsite `https://fhir.ee/sid/pid/fin|xxx-123` identifikaatori alusel, võite saada tulemuseks isikuid, kellel on Soome isikukood numbriga xxx-123 (
 `https://fhir.ee/sid/pid/fin/ni|xxx-123`), aga ka neid, kellel on Soome pass numbriga xxx-123 (`https://fhir.ee/sid/pid/fin/ppn|xxx-123`).
+
 Kui otsite ilma riigikoodita, näiteks `https://fhir.ee/sid/pid|xxx-123`, tagastatakse kõik patsiendid, kellel on identifikaatoriks `xxx-123`.
 
 ### Operatsioonid
 
-Vaata [toetavate operatsioonide](operations.html) nimekirja.
+Vaata [toetatud operatsioonide](operations.html) nimekirja.
 
 #### Ressurssi ajalugu
 
@@ -275,7 +279,7 @@ GET {MPI}/Patient/_history?_since=2023-03-31&_count=10
 
 #### Üldised nõuded
 
-Patsiendi andmete saatmiseks PEAB iga FHIR-i ressurss sisaldama ressursi tüüpi (“resourceType”) ja profiili (“meta.profile”).
+Patsiendi andmete saatmiseks peab iga FHIR-i ressurss sisaldama ressursi tüüpi (“resourceType”) ja profiili (“meta.profile”).
 
 ```json
 ...
@@ -315,7 +319,9 @@ Vastuse päis "Location" sisaldab lingi loodud ressursile ja versioonile. Ressur
 Location: {MPI}/fhir/Patient/3/_history/1
 ```
 
-Vastuses kehas on tagastatud salvestatud või uuendatud ressurs. **NB! vastuse keha võib olla erinev saadetud kehast ja sisaldada parandatud andmeid, millega
+Vastuses kehas on tagastatud salvestatud või uuendatud ressurs. 
+
+**NB! vastuse keha võib olla erinev saadetud kehast ja sisaldada parandatud andmeid, millega
 arendaja peab arvestama!**
 
 Loogilise vea puhul tuleb koodiga 40X viga. Juhul kui teenus ei ole kättesaadav, tuleb 50X viga.
@@ -325,13 +331,13 @@ loogilistest [koodidest](errors.html).
 #### Identifikaatorite lisamine
 
 - Olemasolevale patsiendile saab lisada uusi identifikaatoreid, kuid olemasolevaid identifikaatoreid ei tohi eemaldada.
-- Kui lisatav identifikaator on juba teisele patsiendile määratud, siis andmete muutmisel (PUT päringu korral) tuleb veateade koodiga `MPI-017`.
-- Kui teil on kindlus et lisatav identifikaator siiski kuulub uuendatavale patsiendile ja tegemist on sama isikuga, siis tuleb kaks Patient ressursi omavahel
+- Kui lisatav identifikaator on juba teisele patsiendile määratud, siis andmete muutmisel (PUT päringu korral) tuleb veateade.
+- Kui teil on kindlus, et lisatav identifikaator siiski kuulub uuendatavale patsiendile ja tegemist on sama isikuga, siis tuleb kaks Patient ressursi omavahel
   siduda [link operatsiooniga](link.html).
 
 #### Vastuse väljade piiramine
 
-Vastuse väljade piiramiseks tuleb kasutada `_elements` [parameetri](https://hl7.org/fhir/search.html#elements).
+Vastuse väljade piiramiseks tuleb kasutada `_elements` [parameetrit](https://hl7.org/fhir/search.html#elements).
 Väärtuseks tuleb panna komaga eraldatud väljade nimed, mida soovitakse kätte saada.
 
 Näidis päring:
@@ -340,7 +346,7 @@ Näidis päring:
 GET /Patient/123?_elements=name.family,gender
 ```
 
-Tagastab soovitud välajad ning alati ka kohustuslikud väljad nagu `id` ja `meta`:
+Tagastab soovitud väljad ning alati ka kohustuslikud väljad nagu `id` ja `meta`:
 
 ```json
 {
@@ -370,7 +376,7 @@ Tagastab soovitud välajad ning alati ka kohustuslikud väljad nagu `id` ja `met
 
 ### Aeg ja ajatsoon
 
-Ressurside vastuvõtmisel MPI FHIR liides toetab ajad erinevates ajatsoonides, näiteks UTC `1974-12-25T23:00:00Z` või offset'iga `1974-12-26T01:00:00+02:00`.
+Ressurside vastuvõtmisel MPI FHIR liides toetab aegu erinevates ajatsoonides, näiteks UTC `1974-12-25T23:00:00Z` või offset'iga `1974-12-26T01:00:00+02:00`.
 Vaata formaati [spetsifikatsioonist](http://hl7.org/fhir/datatypes.html#dateTime).
 Kui ajatsooni offset pole määratud, näiteks _date_ tüüpi puhul, siis arvestatakse et aeg on Eesti ajatsoonis ehk `Europe/Tallinn`. FHIR vastuses olevad ajad on
 alati toodud Eesti ajatsoonis.
