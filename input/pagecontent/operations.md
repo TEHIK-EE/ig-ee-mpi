@@ -112,7 +112,7 @@ Patsiendi töövõime otsus Sotsiaaklkindlustusametist (SKA). Andmed päritakse 
 Patsiendi kõik töökoha ja ametikoha andmed, mis päritakse TÖR-st. Andmed päritakse [$occupation](OperationDefinition-patient-occupation.html) operatsiooniga. 
 
 
-### Surmateave lisamine
+### Surmateabe lisamine
 
 Teatud operatsioonide puhul, kui tegemist on surnud isiku koodiga, siis kasutajale edastatakse [OperationOutcome-is](OperationOutcome-DeceasedWarning.html) teavitus. 
 
