@@ -604,3 +604,45 @@ Usage: #definition
 * parameter[=].max = "1"
 * parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances of [EEMPISocialHistoryLegalRelationship](StructureDefinition-ee-mpi-socialhistory-legal-relationship.html) profile. If multiple custody types are found between two persons, then multiple Observation instances for the same patient relationship are returned."
 * parameter[=].type = #Bundle
+
+Instance: patient-name
+InstanceOf: OperationDefinition
+Usage: #definition
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-name"
+* version = "5.0.0"
+* name = "EEMPIPatientName"
+* title = "Patient name"
+* status = #active
+* kind = #operation
+* experimental = false
+* publisher = "HL7 Estonia"
+* description = "Returns patient's name."
+* jurisdiction = $m49.htm#Estonia "Estonia"
+* affectsState = false
+* code = #name
+* resource = #Patient
+* system = false
+* type = true
+* instance = false
+
+* parameter[0].name = #patient
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "1"
+* parameter[=].documentation = "A direct resource reference to the patient resource."
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+
+* parameter[+].name = #name
+* parameter[=].use = #out
+* parameter[=].min = 1
+* parameter[=].max = "*"
+* parameter[=].documentation = "Patient's name."
+* parameter[=].type = #HumanName
+
+* parameter[+].name = #warning
+* parameter[=].use = #out
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "Warning returned when patient is deceased. Contains OperationOutcome with MPI-101."
+* parameter[=].type = #OperationOutcome
