@@ -19,7 +19,6 @@ Description: "For use in the emergency room, ambulance, for anonymous and/or unk
 * identifier obeys mpi-pid-1
 * identifier ^short = "Unknown patient identifier"
 * gender 1..
-* telecom ..0
 * multipleBirth[x] ..0
 
 
