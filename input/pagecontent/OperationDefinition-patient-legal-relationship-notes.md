@@ -17,6 +17,17 @@ Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähta
 
 Sama parameeter võib esineda mitu korda (rakendatud OR loogika).
 
+#### Cache-Control päise semantika
+
+Päringu vastustes kasutatakse HTTP Cache-Control päist, mis võimaldab kontrollida vastuse vahemällu salvestamist ja kehtivust.
+
+- **no-cache**: Kui vastuse päises on `Cache-Control: no-cache`, tähendab see, et vastust ei tohi vahemällu salvestada või tuleb enne kasutamist alati serverist värskendada. See tagab, et iga päring annab kõige värskema info.
+
+**Soovitused kasutamiseks:**
+- Kui päringu tulemus võib kiiresti muutuda või sisaldab tundlikku infot, kasutatakse `no-cache`.
+
+```Cache-Control: no-cache```
+
 #### Näited
 
 Näide päringust, kus soovime leida kõiki isikuid, kellega patsiendil on kas GUARD tüüpi suhe või 67822003 tüüpi suhe ning kellel on H20 või H10 tüüpi hooldusõigus:
