@@ -17,14 +17,15 @@ Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähta
 
 Sama parameeter võib esineda mitu korda (rakendatud OR loogika).
 
-#### Cache-Control päise semantika
+#### Cache-Control päringu päise semantika
 
-Päringu vastustes kasutatakse HTTP Cache-Control päist, mis võimaldab kontrollida vastuse vahemällu salvestamist ja kehtivust.
+Päringus võib kasutada HTTP päist Cache-Control, et mõjutada andmete vahemälust lugemist.
 
-- **no-cache**: Kui vastuse päises on `Cache-Control: no-cache`, tähendab see, et vastust ei tohi vahemällu salvestada või tuleb enne kasutamist alati serverist värskendada. See tagab, et iga päring annab kõige värskema info.
+- **no-cache**: Kui päring sisaldab päist `Cache-Control: no-cache`, siis mikroteenus ei kasuta salvestatud andmeid. Selle asemel tehakse Rahvastikuregistrisse uus päring ning tagastatakse värsked andmed.
 
 **Soovitused kasutamiseks:**
-- Kui päringu tulemus võib kiiresti muutuda või sisaldab tundlikku infot, kasutatakse `no-cache`.
+- Kasuta `Cache-Control: no-cache`, kui on oluline saada Rahvastikuregistrist alati kõige värskemad andmed.
+- Päis on kasulik olukordades, kus andmed võivad olla hiljuti muutunud või kui soovitakse vältida vahemälu kasutamist.
 
 ```Cache-Control: no-cache```
 

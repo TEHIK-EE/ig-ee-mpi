@@ -1,11 +1,11 @@
 #### Kohustuslik põhjendus
 Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähtav patsiendile eesti.ee portaalis Andmejälgija kaudu. 
 
-#### Cache-Control päise semantika
+#### Cache-Control päringu päise semantika
 
 Päringus võib kasutada HTTP päist Cache-Control, et mõjutada andmete vahemälust lugemist.
 
-- **no-cache**: Kui päring sisaldab päist `Cache-Control: no-cache`, siis mikroteenus ei kasuta salvestatud andmeid. Selle asemel tehakse Rahvastikuregistrisse uus päring ning tagastatakse värsked andme.
+- **no-cache**: Kui päring sisaldab päist `Cache-Control: no-cache`, siis mikroteenus ei kasuta salvestatud andmeid. Selle asemel tehakse Rahvastikuregistrisse uus päring ning tagastatakse värsked andmed.
 
 **Soovitused kasutamiseks:**
 - Kasuta `Cache-Control: no-cache`, kui on oluline saada Rahvastikuregistrist alati kõige värskemad andmed.
