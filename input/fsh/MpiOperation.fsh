@@ -257,12 +257,6 @@ Usage: #definition
 * parameter[=].max = "1"
 * parameter[=].documentation = "In what legal status related persons are returned.\r\rSupported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian"
 * parameter[=].type = #string
-* parameter[+].name = #nocache
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
-* parameter[=].type = #boolean
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 1
@@ -307,12 +301,6 @@ Usage: #definition
 * parameter[=].min = 0
 * parameter[=].max = "1"
 * parameter[=].documentation = "Whether operation should return only guardians (mother, father or legal guardian). By default *false*. Supported only for minors (under age of 18)."
-* parameter[=].type = #boolean
-* parameter[+].name = #nocache
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
 * parameter[=].type = #boolean
 * parameter[+].name = #return
 * parameter[=].use = #out
@@ -592,12 +580,6 @@ Usage: #definition
 * parameter[=].binding.strength = #required
 * parameter[=].binding.valueSet = $custody-type-VS
 
-* parameter[+].name = #nocache
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "Specifies when the operation should ignore the value stored in the cache and should re-request data from the source. By default *false*."
-* parameter[=].type = #boolean
 * parameter[+].name = #return
 * parameter[=].use = #out
 * parameter[=].min = 1
