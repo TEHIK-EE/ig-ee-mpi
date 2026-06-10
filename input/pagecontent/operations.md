@@ -102,6 +102,11 @@ Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html)
 
 
 
+### Nimi
+
+Andmed päritakse [$name](OperationDefinition-patient-name.html) operatsiooniga. Operatsioon tagastab patsiendi täisnime..
+
+
 ### Töövõime
 
 Patsiendi töövõime otsus Sotsiaaklkindlustusametist (SKA). Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga. Töövõime operatsioon tagastab kehtiva töövõime otsuse. 
@@ -121,6 +126,7 @@ Operatsioonid, mis edastavad teavituse surnud isiku kohta:
 * [Töövõime](OperationDefinition-patient-incapacity-for-work.html) 
 * [Haridus](OperationDefinition-patient-education.html)
 * [Puudemäär](OperationDefinition-patient-disability.html) 
+* [Nimi](OperationDefinition-patient-name.html)
 
 Näide, kus lisatakse operatsiooni vastusesse teavitus:
 ```json
