@@ -4,7 +4,6 @@ Instance: DeceasedWarning
 InstanceOf: OperationOutcome
 Usage: #example
 
-* text.status = #additional
 
 * issue[0].severity = #warning
 * issue[0].code = #informational

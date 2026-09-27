@@ -49,8 +49,8 @@ Välisriigi isiku esitamise näide, kus patsiendil on Soome isikukood ja USA pas
 
     },
     {
-      "system" : "https://fhir.ee/sid/pid/usa/ppn",
-      "value" : "KW039580340958",
+      "system" : "https://fhir.ee/sid/pid/swe/ppn",
+      "value" : "N857623628",
       "period" : {
         "end" : "2023-12-28"
       }

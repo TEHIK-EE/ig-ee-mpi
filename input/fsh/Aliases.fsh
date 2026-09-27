@@ -38,5 +38,3 @@ Alias: $administrative-gender = https://fhir.ee/CodeSystem/administratiivne-sugu
 
 Alias: $legal-relationship-type-VS = https://fhir.ee/ValueSet/isiku-suhte-tyybid-hl7-ja-snomed
 
-Alias: $patient-identifier-domain-VS = https://fhir.ee/ValueSet/patsiendi-identifikaatorite-domeen
-

@@ -3,7 +3,6 @@ InstanceOf: OperationOutcome
 Description: "Issue returned when the identifier system is allowed, but no patient was found"
 Usage: #inline
 
-* text.status = #additional
 * issue[0].severity = #warning
 * issue[0].code = #not-found
 * issue[0].details.coding[0].system = $mpi
@@ -16,7 +15,6 @@ InstanceOf: OperationOutcome
 Description: "Issue returned when the identifier system is not in the patsiendi-identifikaatorite-domeen value set"
 Usage: #inline
 
-* text.status = #additional
 * issue[0].severity = #error
 * issue[0].code = #invalid
 * issue[0].details.coding[0].system = $mpi
