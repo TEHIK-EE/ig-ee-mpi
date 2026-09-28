@@ -1,11 +1,11 @@
+#### Kirjeldus
+The operation is allowed for everyone, authorization is not required. The requesting organization is saved in the audit log based on the **x-road-client** HTTP header. Iga esitatud identifikaatori `system` kontrollitakse väärtushulga [patsiendi-identifikaatorite-domeen](https://akk.tehik.ee/classifier/fhir/ValueSet/patsiendi-identifikaatorite-domeen) vastu. Vastuses tagastatakse alati sama identifikaator, mis päringus, lisaks kas viide leitud patsiendile või `OperationOutcome` (kui patsienti ei leitud või identifikaatori süsteem ei ole lubatud).
+
 #### Päringu meetod
 Toetatud on ainult `POST` päring, identifikaatorid edastatakse päringu kehas `Parameters` ressursina.
 
 #### Identifikaatori valideerimine
 `identifier.system` peab olema väärtushulga [patsiendi-identifikaatorite-domeen](https://akk.tehik.ee/classifier/fhir/ValueSet/patsiendi-identifikaatorite-domeen) kood (nt `https://fhir.ee/sid/pid/est/ni`) või selle koodi `oid` omaduse väärtus (nt `urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2`).
-
-#### Piirangud
-Ühe süsteemiga identifikaatorite arv päringus ei tohi ületada limit väärtust (vaikimisi 100).
 
 #### Näited
 Näide päringust:

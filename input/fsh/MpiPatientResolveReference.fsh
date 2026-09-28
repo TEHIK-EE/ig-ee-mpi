@@ -7,7 +7,7 @@ Usage: #inline
 * issue[0].code = #not-found
 * issue[0].details.coding[0].system = $mpi
 * issue[0].details.coding[0].code = #MPI-021
-* issue[0].details.text = "Patsiendi identifikaatorit ei leitud"
+* issue[0].details.text = "Patsienti ei leitud"
 
 
 Instance: PatientResolveReferenceInvalidSystemIssue

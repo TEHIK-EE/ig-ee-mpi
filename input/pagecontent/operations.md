@@ -40,7 +40,7 @@ Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$educ
 
 ### Patsiendi id-de pärimine identifikaatorite alusel
 
-Operatsioon [Patient/$resolve-reference](OperationDefinition-patient-resolve-reference.html) võimaldab ühe päringuga pärida mitme identifikaatori kohta korraga vastavad patsiendi viited (`Patient/{id}`). Operatsioon on avatud kõigile autenditud kasutajatele. Iga esitatud identifikaatori `system` kontrollitakse väärtushulga [patsiendi-identifikaatorite-domeen](https://akk.tehik.ee/classifier/fhir/ValueSet/patsiendi-identifikaatorite-domeen) vastu. Vastuses tagastatakse alati sama identifikaator, mis päringus, lisaks kas viide leitud patsiendile või `OperationOutcome` (kui patsienti ei leitud või identifikaatori süsteem ei ole lubatud).
+Operatsioon [Patient/$resolve-reference](OperationDefinition-patient-resolve-reference.html) võimaldab ühe päringuga pärida mitme identifikaatori kohta korraga vastavad patsiendi viited (`Patient/{id}`).
 
 ### Välismaalaste otsing
 
