@@ -38,6 +38,10 @@ Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$educ
 
 
 
+### Patsiendi id-de pärimine identifikaatorite alusel
+
+Operatsioon [Patient/$resolve-reference](OperationDefinition-patient-resolve-reference.html) võimaldab ühe päringuga pärida mitme identifikaatori kohta korraga vastavad patsiendi viited (`Patient/{id}`).
+
 ### Välismaalaste otsing
 
 Välismaalaste otsimiseks juhul, kui identifikaator ei ole teada, tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html).

@@ -628,3 +628,58 @@ Usage: #definition
 * parameter[=].max = "1"
 * parameter[=].documentation = "Warning returned when patient is deceased. Contains OperationOutcome with MPI-101."
 * parameter[=].type = #OperationOutcome
+
+Instance: patient-resolve-reference
+InstanceOf: OperationDefinition
+Usage: #definition
+* extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
+* extension[=].valueInteger = 1
+* extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
+* extension[=].valueCode = #trial-use
+* url = "https://fhir.ee/mpi/OperationDefinition/patient-resolve-reference"
+* version = "5.0.0"
+* name = "EEMPIPatientResolveReference"
+* title = "Resolve Patient Reference"
+* status = #active
+* kind = #operation
+* experimental = false
+* publisher = "HL7 Estonia"
+* description = "Resolves patient identifiers to MPI Patient references."
+* jurisdiction = $m49.htm#Estonia "Estonia"
+* affectsState = false
+* code = #resolve-reference
+* comment = "Only POST is supported. identifier.system must be a code of the patsiendi-identifikaatorite-domeen value set, or the value of that code's oid property. An identifier without system or value fails the whole request. If the number of identifiers with the same system exceeds 100, the whole request fails. An invalid system is returned in match.issue. Per-identifier issues do not fail the request: the response is HTTP 200 with a Parameters resource, even if every identifier has an issue."
+* resource = #Patient
+* system = false
+* type = true
+* instance = false
+* parameter[0].name = #identifier
+* parameter[=].use = #in
+* parameter[=].min = 1
+* parameter[=].max = "*"
+* parameter[=].documentation = "Patient identifier to resolve. At least one is required, and system and value are mandatory. identifier.system must be a code of the https://fhir.ee/ValueSet/patsiendi-identifikaatorite-domeen value set, or the value of that code's oid property. At most 100 identifiers per system."
+* parameter[=].type = #Identifier
+* parameter[+].name = #match
+* parameter[=].use = #out
+* parameter[=].min = 1
+* parameter[=].max = "*"
+* parameter[=].documentation = "Result for each submitted identifier. Contains either `patient` or `issue`. Clients should pair results with the request by `match.identifier`."
+* parameter[=].part[0].name = #identifier
+* parameter[=].part[=].use = #out
+* parameter[=].part[=].min = 1
+* parameter[=].part[=].max = "1"
+* parameter[=].part[=].documentation = "Identifier as submitted in the request."
+* parameter[=].part[=].type = #Identifier
+* parameter[=].part[+].name = #patient
+* parameter[=].part[=].use = #out
+* parameter[=].part[=].min = 0
+* parameter[=].part[=].max = "1"
+* parameter[=].part[=].documentation = "Reference to the found patient."
+* parameter[=].part[=].type = #Reference
+* parameter[=].part[=].targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient"
+* parameter[=].part[+].name = #issue
+* parameter[=].part[=].use = #out
+* parameter[=].part[=].min = 0
+* parameter[=].part[=].max = "1"
+* parameter[=].part[=].documentation = "OperationOutcome for this identifier: warning if patient not found, error if identifier.system is not allowed."
+* parameter[=].part[=].type = #OperationOutcome

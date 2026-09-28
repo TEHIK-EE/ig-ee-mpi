@@ -11,7 +11,7 @@ GET {MPI}/Patient/$name?patient.identifier=https://fhir.ee/sid/pid/est/ni|374080
 GET {MPI}/Patient/$name?patient.identifier=37408074944
 ```
 
-ning saab vastuseks on [Name](StructureDefinition-ee-mpi-patient-name-parameters.html) Parameteri
+ning saab vastuseks `Parameters` ressursi patsiendi nimega
 
 ```json
 {
