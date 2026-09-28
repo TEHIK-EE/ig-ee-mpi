@@ -68,18 +68,18 @@ Otsingu tekst: EST | 49403136515
 FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/est/ni|49403136515
 ```
 
-#### Otsing juhusliku SWE dokumendi numbri järgi
+#### Otsing juhusliku USA dokumendi numbri järgi
 
 ```
-Otsingu tekst: SWE | N857623628
-FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/swe|N857623628
+Otsingu tekst: USA | E00007734
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/usa|E00007734
 ```
 
-#### Otsing SWE passinumbri järgi
+#### Otsing USA passinumbri järgi
 
 ```
-Otsingu tekst: SWE | N857623628
-FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/swe/ppn|N857623628
+Otsingu tekst: USA | E00007734
+FHIR päring: GET /Patient?identifier=https://fhir.ee/sid/pid/usa/ppn|E00007734
 ```
 
 #### Välismaalase otsing 

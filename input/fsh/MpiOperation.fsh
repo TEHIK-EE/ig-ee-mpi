@@ -648,7 +648,7 @@ Usage: #definition
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #resolve-reference
-* comment = "Only POST is supported. identifier.system must be in the patsiendi-identifikaatorite-domeen value set (URL and OID forms are allowed). An invalid system is returned in match.issue (MPI-067). Per-identifier issues do not fail the request: the response is HTTP 200 with a Parameters resource, even if every identifier has an issue."
+* comment = "Only POST is supported. identifier.system must be a code of the patsiendi-identifikaatorite-domeen value set, or the value of that code's oid property. An identifier without system or value fails the whole request. If the number of identifiers with the same system exceeds 100, the whole request fails. An invalid system is returned in match.issue. Per-identifier issues do not fail the request: the response is HTTP 200 with a Parameters resource, even if every identifier has an issue."
 * resource = #Patient
 * system = false
 * type = true
@@ -657,7 +657,7 @@ Usage: #definition
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "*"
-* parameter[=].documentation = "Patient identifier to resolve. At least one is required (MPI-078). identifier.system must be in the https://fhir.ee/ValueSet/patsiendi-identifikaatorite-domeen value set (URL or OID form), otherwise match.issue with MPI-067 is returned."
+* parameter[=].documentation = "Patient identifier to resolve. At least one is required, and system and value are mandatory. identifier.system must be a code of the https://fhir.ee/ValueSet/patsiendi-identifikaatorite-domeen value set, or the value of that code's oid property. At most 100 identifiers per system."
 * parameter[=].type = #Identifier
 * parameter[+].name = #match
 * parameter[=].use = #out
@@ -681,5 +681,5 @@ Usage: #definition
 * parameter[=].part[=].use = #out
 * parameter[=].part[=].min = 0
 * parameter[=].part[=].max = "1"
-* parameter[=].part[=].documentation = "OperationOutcome for this identifier: warning if patient not found (MPI-021), error if identifier.system is not allowed (MPI-067)."
+* parameter[=].part[=].documentation = "OperationOutcome for this identifier: warning if patient not found, error if identifier.system is not allowed."
 * parameter[=].part[=].type = #OperationOutcome

@@ -22,9 +22,41 @@ Usage: #inline
 * issue[0].details.text = "Patsiendi identifikaatori süsteem https://example.com/unknown-system ei ole lubatud"
 
 
+Instance: PatientResolveReferenceSwedish
+InstanceOf: EEMPIPatientVerified
+Description: "Patient with a Swedish national identifier, used in the Patient/$resolve-reference example."
+Usage: #example
+* id = "pat3"
+* identifier[0]
+  * system = "https://fhir.ee/sid/pid/swe/ni"
+  * value = "198112189876"
+* name[official]
+  * use = #official
+  * given = "Anna"
+  * family = "Svensson"
+* gender = #female
+* birthDate = "1981-12-18"
+
+
+Instance: PatientResolveReferenceFinnish
+InstanceOf: EEMPIPatientVerified
+Description: "Patient with a Finnish national identifier, used in the Patient/$resolve-reference example."
+Usage: #example
+* id = "pat4"
+* identifier[0]
+  * system = "https://fhir.ee/sid/pid/fin/ni"
+  * value = "131052-308T"
+* name[official]
+  * use = #official
+  * given = "Matti"
+  * family = "Virtanen"
+* gender = #male
+* birthDate = "1952-10-13"
+
+
 Instance: PatientResolveReferenceExample
 InstanceOf: Parameters
-Description: "Example of Patient/$resolve-reference response: first (URL system) and second (OID system) identifiers are resolved to patient references, third identifier is not found, fourth identifier has a system that is not allowed"
+Description: "Example of Patient/$resolve-reference response: first and second (URL systems) and third (OID system) identifiers are resolved to patient references, fourth identifier is not found, fifth identifier has a system that is not allowed"
 Usage: #example
 * id = "patient-resolve-reference-example"
 
@@ -37,21 +69,28 @@ Usage: #example
 
 * parameter[1].name = "match"
 * parameter[1].part[0].name = "identifier"
-* parameter[1].part[0].valueIdentifier.system = "urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2"
-* parameter[1].part[0].valueIdentifier.value = "SWE-12345567"
+* parameter[1].part[0].valueIdentifier.system = "https://fhir.ee/sid/pid/fin/ni"
+* parameter[1].part[0].valueIdentifier.value = "131052-308T"
 * parameter[1].part[1].name = "patient"
-* parameter[1].part[1].valueReference.reference = "Patient/pat2"
+* parameter[1].part[1].valueReference.reference = "Patient/pat4"
 
 * parameter[2].name = "match"
 * parameter[2].part[0].name = "identifier"
-* parameter[2].part[0].valueIdentifier.system = "https://fhir.ee/sid/pid/est/ni"
-* parameter[2].part[0].valueIdentifier.value = "49010012345"
-* parameter[2].part[1].name = "issue"
-* parameter[2].part[1].resource = PatientResolveReferenceNotFoundIssue
+* parameter[2].part[0].valueIdentifier.system = "urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2"
+* parameter[2].part[0].valueIdentifier.value = "198112189876"
+* parameter[2].part[1].name = "patient"
+* parameter[2].part[1].valueReference.reference = "Patient/pat3"
 
 * parameter[3].name = "match"
 * parameter[3].part[0].name = "identifier"
-* parameter[3].part[0].valueIdentifier.system = "https://example.com/unknown-system"
-* parameter[3].part[0].valueIdentifier.value = "12345678901"
+* parameter[3].part[0].valueIdentifier.system = "https://fhir.ee/sid/pid/est/ni"
+* parameter[3].part[0].valueIdentifier.value = "49010012345"
 * parameter[3].part[1].name = "issue"
-* parameter[3].part[1].resource = PatientResolveReferenceInvalidSystemIssue
+* parameter[3].part[1].resource = PatientResolveReferenceNotFoundIssue
+
+* parameter[4].name = "match"
+* parameter[4].part[0].name = "identifier"
+* parameter[4].part[0].valueIdentifier.system = "https://example.com/unknown-system"
+* parameter[4].part[0].valueIdentifier.value = "12345678901"
+* parameter[4].part[1].name = "issue"
+* parameter[4].part[1].resource = PatientResolveReferenceInvalidSystemIssue

@@ -2,7 +2,10 @@
 Toetatud on ainult `POST` päring, identifikaatorid edastatakse päringu kehas `Parameters` ressursina.
 
 #### Identifikaatori valideerimine
-`identifier.system` peab kuuluma väärtushulka [patsiendi-identifikaatorite-domeen](https://akk.tehik.ee/classifier/fhir/ValueSet/patsiendi-identifikaatorite-domeen). Lubatud on nii URL (nt `https://fhir.ee/sid/pid/est/ni`) kui ka OID (nt `urn:oid:1.3.6.1.4.1.28284.6.2.2.16.246.2`) kujul süsteemid.
+`identifier.system` peab olema väärtushulga [patsiendi-identifikaatorite-domeen](https://akk.tehik.ee/classifier/fhir/ValueSet/patsiendi-identifikaatorite-domeen) kood (nt `https://fhir.ee/sid/pid/est/ni`) või selle koodi `oid` omaduse väärtus (nt `urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2`).
+
+#### Piirangud
+Ühe süsteemiga identifikaatorite arv päringus ei tohi ületada limit väärtust (vaikimisi 100).
 
 #### Näited
 Näide päringust:
@@ -23,8 +26,15 @@ POST {MPI}/Patient/$resolve-reference
     {
       "name": "identifier",
       "valueIdentifier": {
+        "system": "https://fhir.ee/sid/pid/fin/ni",
+        "value": "131052-308T"
+      }
+    },
+    {
+      "name": "identifier",
+      "valueIdentifier": {
         "system": "urn:oid:1.3.6.1.4.1.28284.6.2.2.16.752.2",
-        "value": "SWE-12345567"
+        "value": "198112189876"
       }
     },
     {
@@ -50,7 +60,11 @@ Vastusena tuleb iga identifikaatori kohta `match`, mis sisaldab kas viidet leitu
 {% include Parameters-patient-resolve-reference-example-json-html.xhtml %}
 
 #### Vead
-Kui päringus puudub `identifier` parameeter, tagastatakse viga `MPI-078`:
+Kogu päring lükatakse tagasi, kui:
+- päringus puudub `identifier` parameeter või identifikaatoril puudub `system` või `value` — viga `MPI-078`;
+- ühe süsteemiga identifikaatorite arv ületab limit väärtust — viga `MPI-095`.
+
+Näide vastusest (`MPI-078`):
 
 ```json
 {
