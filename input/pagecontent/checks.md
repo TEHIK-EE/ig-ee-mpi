@@ -48,13 +48,13 @@ Näide:
 
 ##### Telefonid
 
-Eesti numeratsiooniplaan [riigiteataja.ee/akt/881042](https://www.riigiteataja.ee/akt/881042) reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
+Eesti numeratsiooniplaan ([riigiteataja.ee/akt/123052018005](https://www.riigiteataja.ee/akt/123052018005), lisa "Eesti numeratsiooniplaan") reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
 
-| Telefoninumbrid             | Regex valem         | Kirjeldus                                                                                                           |
-|:----------------------------|:--------------------|:--------------------------------------------------------------------------------------------------------------------|
-| Eesti lauatelefoni number   | `^(32               | 33                                                                                                                  |35|38|39|6[0-9]|7[1-9]|88)(\d{5})$` | Eesti riigikood kujul +372 või 00372 ignoreeritakse valideerimisel, kuid salvestatakse alati kujul +372. |
-| Eesti mobiiltelefoni number | `^5[0-9](\d{5,6})$` | Eesti riigikood kujul +372 või 00372 ignoreeritakse valideerimisel, kuid salvestatakse alati kujul +372.            |
-| Välismaa telefoni number    | `^\+[1-9]\d{1,14}$` | Kontrollitakse ainult pikkust ja riigi koodi olemasolu. Teiste riikide reegleid ei rakendata numbri valideerimisel. |
+| Telefoninumbrid             | Regex valem                                                    | Kirjeldus                                                                                                           |
+|:----------------------------|:---------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| Eesti lauatelefoni number   | <code>^(32|33|35|38|39|4[3-8]|6[0-9]|7[1-9]|88)(\d{5})$</code> | Eesti riigikood kujul +372 või 00372 ignoreeritakse valideerimisel, kuid salvestatakse alati kujul +372.            |
+| Eesti mobiiltelefoni number | <code>^(5[0-9](\d{5,6})|8[1-4](\d{6}))$</code>            | Eesti riigikood kujul +372 või 00372 ignoreeritakse valideerimisel, kuid salvestatakse alati kujul +372.            |
+| Välismaa telefoni number    | `^\+[1-9]\d{1,14}$`                                            | Kontrollitakse ainult pikkust ja riigi koodi olemasolu. Teiste riikide reegleid ei rakendata numbri valideerimisel. |
 
 Telefoninumbrid salvestatakse registrisse alati riigi koodiga kujul +XXXYYYYYY ilma tühikudeta ja sulgudeta. Juhul kui PÜT-i jõuab valiidne Eesti number ilma
 riigikoodita siis riigikood lisatakse telefoninumbrile automaatselt.
