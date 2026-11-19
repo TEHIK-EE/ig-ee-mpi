@@ -48,7 +48,7 @@ Näide:
 
 ##### Telefonid
 
-Eesti numeratsiooniplaan ([riigiteataja.ee/akt/123052018005](https://www.riigiteataja.ee/akt/123052018005), lisa "Eesti numeratsiooniplaan") reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
+Eesti numeratsiooniplaan ([riigiteataja.ee/et/akt/110042024005](https://www.riigiteataja.ee/et/akt/110042024005), [lisa](https://www.riigiteataja.ee/aktilisa/1100/4202/4005/MKM_m11_lisa.pdf#)), reguleerib lubatud telefoninumbrite numeratsiooni Eestis.
 
 | Telefoninumbrid             | Regex valem                                                    | Kirjeldus                                                                                                           |
 |:----------------------------|:---------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
