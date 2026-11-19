@@ -49,7 +49,7 @@ Description: "Common MPI limitations on Patient resource"
 
 Invariant: phone-regex
 Description: "The phone number must be in the correct Estonian format (landline, mobile or international number)"
-Expression: "value.matches('(^\\\\+(?!372)[1-9]\\\\d{1,14}$)|(^(\\\\+372|00372)?5(\\\\d{6,7})$)|(^(\\\\+372|00372)?(32|33|35|38|39|6[0-9]|7[1-9]|88)(\\\\d{5})$)')"
+Expression: "value.matches('(^\\\\+(?!372)[1-9]\\\\d{1,14}$)|(^(\\\\+372|00372)?5(\\\\d{6,7})$)|(^(\\\\+372|00372)?8[1-4](\\\\d{6})$)|(^(\\\\+372|00372)?(32|33|35|38|39|4[3-8]|6[0-9]|7[1-9]|88)(\\\\d{5})$)')"
 Severity: #error
 
 Invariant: email-regex
