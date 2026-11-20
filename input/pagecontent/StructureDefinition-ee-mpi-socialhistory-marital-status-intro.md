@@ -1,0 +1,1 @@
+PÜT ei päri perekonnaseisu Rahvastikuregistrist ega muust allikast. Perekonnaseis on PÜT-is ainult siis, kui liidestuja on selle FHIR API kaudu salvestanud. Lubatud on kõik väärtuskomplekti [marital-status](http://hl7.org/fhir/R5/valueset-marital-status.html) koodid ja PÜT tagastab koodi, mis salvestati.

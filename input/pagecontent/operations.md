@@ -24,7 +24,7 @@ Hetkel on toetatud järgmised päringud:
 
 ### Patsiendi identifikaatorid operatsioonides
 
-Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$education](OperationDefinition-patient-education.html), [$legal-guardian](OperationDefinition-patient-legal-guardian.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$patient-legal-relationship](OperationDefinition-patient-legal-relationship.html), [$legal-status](OperationDefinition-patient-legal-status.html), [$occupation](OperationDefinition-patient-occupation.html) ja [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) võimaldavad pärida järgmiste patsiendi identifikaatoritega:
+Operatsioonid [$disability](OperationDefinition-patient-disability.html), [$education](OperationDefinition-patient-education.html), [$legal-guardian](OperationDefinition-patient-legal-guardian.html), [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html), [$legal-relationship](OperationDefinition-patient-legal-relationship.html), [$legal-status](OperationDefinition-patient-legal-status.html), [$name](OperationDefinition-patient-name.html), [$occupation](OperationDefinition-patient-occupation.html) ja [$power-of-attorney](OperationDefinition-patient-power-of-attorney.html) võimaldavad pärida järgmiste patsiendi identifikaatoritega:
 
 - Viide patsiendile ```Patient/1234```
 
@@ -46,7 +46,7 @@ Operatsioon [Patient/$resolve-reference](OperationDefinition-patient-resolve-ref
 
 Välismaalaste otsimiseks juhul, kui identifikaator ei ole teada, tuleb kasutada operatsiooni [Patient/$foreign](OperationDefinition-patient-foreign.html).
 
-##### Toetatud otsinguparameetrid
+#### Toetatud otsinguparameetrid
 
 | Parameeter         | Kohustuslik | Kirjeldus                                                                                   | Väärtustatud näidis    |   
 |--------------------|-------------|---------------------------------------------------------------------------------------------|------------------------|
@@ -70,11 +70,11 @@ Mõlema operatsiooni kasutamise reeglid ja piirangud on kirjeldatud [siin](link.
 
 Sotsiaalsed tunnused päritakse X-tee teenuste kaudu ja tagastatakse Observation ressurssidena.
 Tüüpiliselt ei sisalda tagastatav Observation ressurss id väärtust ning peegeldab päringus **hetkeolukorda**.
-Sotsiaalsete tunnuste operatsioonid pärivad andmed alati allikregistritest, sõltumata nende olemasolust vahemälus.
+Operatsioonid, millel on parameeter *nocache*, võtavad andmed vaikimisi vahemälust (vt [Vahemälu](#vahemälu-cache-ja-sealt-pärimine)).
 
 ### Seadusliku eeskostja staatus
 
-Rahvastikuregistris nimetatud seaduslike eestkostjate nimekiri. Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga. 
+Rahvastikuregistris nimetatud patsiendi eestkostjad (`legal-status=58626002`) või eestkostetavad (`legal-status=365569001`). Andmed päritakse [$legal-guardian](OperationDefinition-patient-legal-guardian.html) operatsiooniga. Vastuse elementide `subject`, `performer` ja `value` tähendus mõlema päringusuuna jaoks on kirjeldatud [operatsiooni juures](OperationDefinition-patient-legal-guardian.html#vastus).
 
 ### Suhted ja hooldusõigused
 
@@ -96,7 +96,7 @@ Patsiendi kõrgeim haridustase. Andmed päritakse [$education](OperationDefiniti
 
 ### Puudemäär
 
-Patsiendi puudemäär Sotsiaalkindlustusametist (SKA). Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga. 
+Patsiendi puudemäär Sotsiaalkindlustusametist (SKA). Andmed päritakse [$disability](OperationDefinition-patient-disability.html) operatsiooniga. Operatsioon tagastab ainult kehtiva ja tulevikus kehtima hakkava puude otsuse.
 
 
 
@@ -108,12 +108,12 @@ Andmed päritakse [$legal-status](OperationDefinition-patient-legal-status.html)
 
 ### Nimi
 
-Andmed päritakse [$name](OperationDefinition-patient-name.html) operatsiooniga. Operatsioon tagastab patsiendi täisnime..
+Andmed päritakse [$name](OperationDefinition-patient-name.html) operatsiooniga. Operatsioon tagastab patsiendi täisnime.
 
 
 ### Töövõime
 
-Patsiendi töövõime otsus Sotsiaaklkindlustusametist (SKA). Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga. Töövõime operatsioon tagastab kehtiva töövõime otsuse. 
+Patsiendi töövõime otsus Töötukassast. Andmed päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga. Töövõime operatsioon tagastab kehtiva töövõime otsuse. 
 
 
 
@@ -173,7 +173,7 @@ Näide, kus lisatakse operatsiooni vastusesse teavitus:
         },
         "effectivePeriod": {
           "start": "2020-09-14T00:00:00+03:00",
-          "end": "2023-09-13T00:00:00+03:00"
+          "end": "2027-09-13T00:00:00+03:00"
         },
         "issued": "2026-03-18T13:56:22.035+02:00",
         "valueCodeableConcept": {

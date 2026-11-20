@@ -1,0 +1,1 @@
+Töövõime otsus päritakse [$incapacity-for-work](OperationDefinition-patient-incapacity-for-work.html) operatsiooniga X-tee kaudu Töötukassast. PÜT andmeid ei salvesta. Väärtus on väärtuskomplektist [Töövõime liik](https://akk.tehik.ee/classifier/resources/value-sets/toovoime-liik/summary).

@@ -39,8 +39,8 @@ Kasutusjuhu põhised patsiendi profiilid on
 |----------------------------------------------------------------------------|-------------------------------------------------------|
 | [EEMPIPatientVerified](StructureDefinition-ee-mpi-patient-verified.html)   | Dokumendi alusel tuvastatud patsiendi registreerimine |
 | [EEMPIPatientUnknown](StructureDefinition-ee-mpi-patient-unknown.html)     | Tundmatu või anonüümse patsiendi registreerimine      |
-| [EEMPIPatientNewborn](StructureDefinition-ee-mpi-patient-newborn.html)     | Vastsündinu patsiendi registreerimine                 |
-| [EEMPIPatientStillborn](StructureDefinition-ee-mpi-patient-stillborn.html) | Surnult sündinud patsiendi registreerimine            |
+| [EEMPIPatientNewborn](StructureDefinition-ee-mpi-patient-newborn.html)     | Vastsündinu patsiendi registreerimine. **Ei kasutata.** |
+| [EEMPIPatientStillborn](StructureDefinition-ee-mpi-patient-stillborn.html) | Surnult sündinud patsiendi registreerimine. **Ei kasutata.** |
 
 
 ### Ärianalüüs

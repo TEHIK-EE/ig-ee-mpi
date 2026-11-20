@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryDisability
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-disability
 Title:          "EE MPI SocialHistory Disability"
-Description:    "Severity of disability"
+Description:    "Severity of disability. MPI queries the decisions from the Social Insurance Board (SKA) over X-Road: the decision in force and a decision that comes into force in the future."
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -35,4 +35,4 @@ Description: "Example of patient disability"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2021-11-23"
-* valueCodeableConcept = $disability-level#KESKMINE_PUUE "Keskmine puue"
+* valueCodeableConcept = $disability-level#KESKMINE_PUUE "keskmine puue"

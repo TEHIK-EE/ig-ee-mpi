@@ -1,6 +1,9 @@
 #### Kohustuslik põhjendus
 Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähtav patsiendile eesti.ee portaalis Andmejälgija kaudu. 
 
+#### Vastus
+Andmed päritakse X-tee kaudu Töötukassast. Operatsioon tagastab hetkel kehtiva töövõime otsuse.
+
 #### Näited
 ```
 GET {MPI}/Patient/$incapacity-for-work?patient=Patient/7076
@@ -11,8 +14,6 @@ GET {MPI}/Patient/$incapacity-for-work?patient.identifier=37408074944
 ```
 
 ning saab vastuseks on [IncapacityForWork](StructureDefinition-ee-mpi-socialhistory-incapacity-for-work.html) Observationi
-
-Operatsioon leiab alati hetkel kehtiva otsuse.
 
 ```json
 {
@@ -54,7 +55,7 @@ Operatsioon leiab alati hetkel kehtiva otsuse.
         },
         "effectivePeriod": {
           "start": "2020-09-14T00:00:00+03:00",
-          "end": "2023-09-13T00:00:00+03:00"
+          "end": "2027-09-13T00:00:00+03:00"
         },
         "issued": "2026-01-23T10:04:54.715+02:00",
         "valueCodeableConcept": {

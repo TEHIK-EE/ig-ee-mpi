@@ -2,7 +2,7 @@ Profile: EEMPIPatientNewborn
 Parent: EEMPIPatient
 Id: ee-mpi-patient-newborn
 Title: "EE MPI Patient Newborn"
-Description: "Profile for describing newborn data"
+Description: "Profile for describing newborn data. **Not used:** MPI does not create patients with this profile and has no business logic for it."
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name contains temp 0..1 MS

@@ -5,7 +5,7 @@ Profile:        EEMPISocialHistoryMaritalStatus
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-marital-status
 Title:          "EE MPI SocialHistory Marital Status"
-Description:    "Type of marriage or relationship."
+Description:    "Type of marriage or relationship. MPI does not query marital status from the Population Register (RR) or any other source. MPI only has the marital status that a client has saved through the FHIR API, and returns the code that was saved."
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
