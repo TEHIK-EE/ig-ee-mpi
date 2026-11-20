@@ -19,6 +19,9 @@ Description: "For use in the emergency room, ambulance, for anonymous and/or unk
 * identifier obeys mpi-pid-1
 * identifier ^short = "Unknown patient identifier"
 * gender 1..
+* birthDate ^comment = "MPI stores the birth date with its precision. An approximate age is sent as an imprecise birth date, e.g. `1980` or `1980-05`."
+* birthDate.extension[age] ^comment = "Not stored or returned by MPI. Send an approximate age as an imprecise birth date."
+* birthDate.extension[accuracyIndicator] ^comment = "Not stored or returned by MPI. The precision of the birth date is given by the date itself (`1980`, `1980-05`, `1980-05-14`)."
 * multipleBirth[x] ..0
 
 
@@ -34,8 +37,7 @@ Usage: #example
   * use = #nickname
   * text = "Malle Maasikas"
 * gender = #male
-* birthDate = "1973-02-10"
-  * extension[accuracyIndicator].valueCoding = EEDateAccuracyIndicator#AAA "Day, month and year are accurate"
+* birthDate = "1973"
 * address
   * use = #temp
   * country = "EE"

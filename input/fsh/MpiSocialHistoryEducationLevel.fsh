@@ -48,4 +48,4 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "2025-06-21T00:00:00+02:00"
-* valueCodeableConcept = $education-level#6 "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"
+* valueCodeableConcept = $education-level#6 "Bakalaureus või sellega võrdne, rakenduskõrgharidus"

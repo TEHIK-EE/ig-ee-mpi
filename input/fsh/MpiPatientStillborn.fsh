@@ -18,7 +18,7 @@ Profile: EEMPIPatientStillborn
 Parent: EEMPIPatient
 Id: ee-mpi-patient-stillborn
 Title: "EE MPI Patient Stillborn"
-Description: "Profile for describing stillborn data"
+Description: "Profile for describing stillborn data. **Not used:** MPI does not create patients with this profile and has no business logic for it."
 * ^status = #draft
 * ^publisher = "HL7 Estonia"
 * name ^short = "The name of a stillborn child may be missing."

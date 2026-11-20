@@ -17,17 +17,16 @@ Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähta
 
 Sama parameeter võib esineda mitu korda (rakendatud OR loogika).
 
-#### Cache-Control päringu päise semantika
+#### Vahemälu (cache)
 
-Päringus võib kasutada HTTP päist Cache-Control, et mõjutada andmete vahemälust lugemist.
+Seosed päritakse Rahvastikuregistrist ja salvestatakse MPI andmebaasi. Vaikimisi tagastab MPI salvestatud andmed. Rahvastikuregistrisse tehakse päring ainult siis, kui patsiendi seoseid ei ole sealt veel kordagi päritud.
 
-- **no-cache**: Kui päring sisaldab päist `Cache-Control: no-cache`, siis mikroteenus ei kasuta salvestatud andmeid. Selle asemel tehakse Rahvastikuregistrisse uus päring ning tagastatakse värsked andmed.
+Värskete andmete saamiseks:
 
-**Soovitused kasutamiseks:**
-- Kasuta `Cache-Control: no-cache`, kui on oluline saada Rahvastikuregistrist alati kõige värskemad andmed.
-- Päis on kasulik olukordades, kus andmed võivad olla hiljuti muutunud või kui soovitakse vältida vahemälu kasutamist.
+- parameeter `nocache=true` või päis `Cache-Control: no-cache`: MPI teeb alati uue päringu Rahvastikuregistrisse;
+- päis `Cache-Control: max-age=N`: MPI teeb uue päringu, kui andmed on Rahvastikuregistrist päritud rohkem kui N sekundit tagasi.
 
-```Cache-Control: no-cache```
+Kasuta neid, kui on oluline saada Rahvastikuregistrist kõige värskemad andmed, nt kui andmed võivad olla hiljuti muutunud.
 
 #### Näited
 
