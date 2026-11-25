@@ -295,7 +295,6 @@ Patsiendi andmete saatmiseks peab iga FHIR-i ressurss sisaldama ressursi tüüpi
 
 Profiil on reeglite kogum, mis seotud kindla kasutusjuhuga. MPI toetab [tuvastatud](StructureDefinition-ee-mpi-patient-verified.html)
 ja [tundmatu](StructureDefinition-ee-mpi-patient-unknown.html) patsiendi registreerimist.
-[Vastsündinu](StructureDefinition-ee-mpi-patient-newborn.html) ja [surnultsündinu](StructureDefinition-ee-mpi-patient-stillborn.html) profiile ei kasutata.
 Iga patsiendi lisamisel või muutmisel tuleb määrata vastav [profiil](patient.html#eempipatient).
 
 #### Päring (request)

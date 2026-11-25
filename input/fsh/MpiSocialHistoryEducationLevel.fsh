@@ -10,7 +10,7 @@ Description:    "Education level"
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 
 * code 1..1
-* code = $SCT#105421008 "Educational achievement"
+* code = $SCT#105421008
 
 * issued 1..1
 * issued ^short = "The time when this query was made"
