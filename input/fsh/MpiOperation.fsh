@@ -124,7 +124,7 @@ Usage: #definition
 * system = false
 * type = true
 * instance = false
-* parameter[0].name = #identifier-country
+* parameter[0].name = #identifier_country
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
@@ -235,7 +235,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "The list of patient's legal guardians specified by the Population Register."
+* description = "Patient's legal guardians or wards specified by the Population Register. The direction is given by the legal-status parameter."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #legal-guardian
@@ -251,11 +251,17 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "When *true*, MPI queries the Population Register again instead of returning the relations stored in MPI. Same as the `Cache-Control: no-cache` request header. By default *false*."
+* parameter[=].type = #boolean
 * parameter[+].name = #legal-status
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "In what legal status related persons are returned.\r\rSupported SNOMED codes: 365569001 - Finding of wardship, 58626002 - Legal guardian"
+* parameter[=].documentation = "Which related persons are returned.\r\rSupported SNOMED codes: 58626002 - patient's legal guardians, 365569001 - patient's wards."
 * parameter[=].type = #string
 * parameter[+].name = #return
 * parameter[=].use = #out
@@ -296,6 +302,12 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "When *true*, MPI queries the Population Register again instead of returning the relations stored in MPI. Same as the `Cache-Control: no-cache` request header. By default *false*."
+* parameter[=].type = #boolean
 * parameter[+].name = #guardian-only
 * parameter[=].use = #in
 * parameter[=].min = 0
@@ -350,7 +362,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with [EEMPISocialHistoryEducationLevel](StructureDefinition-ee-mpi-socialhistory-education-level.html) Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with [EEMPISocialHistoryEducationLevel](StructureDefinition-ee-mpi-socialhistory-education-level.html) Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateabe-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 Instance: patient-generate-mrn
@@ -387,7 +399,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "Patient's level of disability from the Social Insurance Board (SKA)."
+* description = "Patient's level of disability from the Social Insurance Board (SKA). Returns only the decision in force and a decision that comes into force in the future."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #disability
@@ -412,7 +424,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateabe-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
@@ -427,7 +439,7 @@ Usage: #definition
 * kind = #operation
 * experimental = false
 * publisher = "HL7 Estonia"
-* description = "Patient's incapacity for work status from the Social Insurance Board (SKA)."
+* description = "Patient's incapacity for work status from the Estonian Unemployment Insurance Fund (Töötukassa). Returns the decision in force."
 * jurisdiction = $m49.htm#Estonia "Estonia"
 * affectsState = false
 * code = #incapacity-for-work
@@ -452,7 +464,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateabe-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
@@ -532,7 +544,7 @@ Usage: #definition
 * parameter[=].use = #out
 * parameter[=].min = 1
 * parameter[=].max = "1"
-* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateave-lisamine) with warning severity and an MPI error code."
+* parameter[=].documentation = "Returns Bundle (with type 'collection') with Observation instances. In case the patient is deceased, MPI also returns an [OperationOutcome](operations.html#surmateabe-lisamine) with warning severity and an MPI error code."
 * parameter[=].type = #Bundle
 
 
@@ -561,6 +573,12 @@ Usage: #definition
 * parameter[=].documentation = "A direct resource reference to the patient resource."
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = "http://hl7.org/fhir/StructureDefinition/Patient"
+* parameter[+].name = #nocache
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "1"
+* parameter[=].documentation = "When *true*, MPI queries the Population Register again instead of returning the relations stored in MPI. Same as the `Cache-Control: no-cache` request header. By default *false*."
+* parameter[=].type = #boolean
 
 * parameter[+].name = #relationship-type
 * parameter[=].use = #in

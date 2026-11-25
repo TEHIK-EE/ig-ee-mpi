@@ -7,7 +7,7 @@ Description:    "Current custody of the patient"
 * category 1..
 * category.coding[obscat] 1..
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
-* code = $SCT#186063005 "Power of attorney observable" (exactly)
+* code = $SCT#186063005
 * effective[x] 1..1 MS
 * effective[x] only Period
 * subject 1..1 MS

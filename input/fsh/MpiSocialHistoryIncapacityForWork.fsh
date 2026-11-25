@@ -2,7 +2,7 @@ Profile:        EEMPISocialHistoryIncapacityForWork
 Parent:         EEBaseObservation
 Id:             ee-mpi-socialhistory-incapacity-for-work
 Title:          "EE MPI SocialHistory Incapacity For Work"
-Description:    "Type of work capacity"
+Description:    "Type of work capacity. MPI queries the decision from Töötukassa (Estonian Unemployment Insurance Fund) over X-Road and does not store it."
 * status = #final (exactly)
 * category 1..
 * category.coding[obscat] 1..
@@ -15,7 +15,7 @@ Description:    "Type of work capacity"
 * performer ..0
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
-* valueCodeableConcept from $work-ability-type
+* valueCodeableConcept from $work-ability-type-VS
 * encounter ..0
 * basedOn ..0
 * partOf ..0
@@ -35,4 +35,4 @@ Description: "Example of patient's incapacity for work"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * effectivePeriod.start = "2024-04-03T00:00:00+03:00"
-* valueCodeableConcept = $work-ability-type-VS#puudub "Puuduv töövõime"
+* valueCodeableConcept = $work-ability-type#Puudub "Puuduv töövõime"

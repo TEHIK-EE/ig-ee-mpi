@@ -10,7 +10,7 @@ Description:    "Education level"
 * category.coding[obscat] = OBSCAT#social-history "Social history" (exactly)
 
 * code 1..1
-* code = $SCT#105421008 "Educational achievement"
+* code = $SCT#105421008
 
 * issued 1..1
 * issued ^short = "The time when this query was made"
@@ -48,4 +48,4 @@ Description: "Example of patient education"
 Usage: #example
 * subject = Reference(Patient/pat1)
 * issued = "2025-06-21T00:00:00+02:00"
-* valueCodeableConcept = $education-level#6 "Bakalaureus või sellega võrdsustatud, rakenduskõrgharidus"
+* valueCodeableConcept = $education-level#6 "Bakalaureus või sellega võrdne, rakenduskõrgharidus"

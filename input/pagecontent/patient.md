@@ -7,8 +7,6 @@ graph TD
     EEBasePatient -->|päritud| EEMPIPatient
     EEMPIPatient -->|Tuvastatud| EEMPIPatientVerified
     EEMPIPatient -->|Tundmatu| EEMPIPatientUnknown
-    EEMPIPatient -->|Vastsündinu| EEMPIPatientNewborn
-    EEMPIPatient -->|Surnultsündinu| EEMPIPatientStillBorn
     EEBaseRelatedPerson --> |päritud| EEMPIRelatedPerson
     EEMPIPatient --> |seotud| EEMPIRelatedPerson
     EEBaseObservation --> |päritud| MpiSocialHistoryLegalGuardianStatus
@@ -39,8 +37,6 @@ Kasutusjuhu põhised patsiendi profiilid on
 |----------------------------------------------------------------------------|-------------------------------------------------------|
 | [EEMPIPatientVerified](StructureDefinition-ee-mpi-patient-verified.html)   | Dokumendi alusel tuvastatud patsiendi registreerimine |
 | [EEMPIPatientUnknown](StructureDefinition-ee-mpi-patient-unknown.html)     | Tundmatu või anonüümse patsiendi registreerimine      |
-| [EEMPIPatientNewborn](StructureDefinition-ee-mpi-patient-newborn.html)     | Vastsündinu patsiendi registreerimine                 |
-| [EEMPIPatientStillborn](StructureDefinition-ee-mpi-patient-stillborn.html) | Surnult sündinud patsiendi registreerimine            |
 
 
 ### Ärianalüüs

@@ -1,6 +1,9 @@
 #### Kohustuslik põhjendus
 Antud päring nõuab **x-road-issue** HTTP päise lisamist. Põhjendus on nähtav patsiendile eesti.ee portaalis Andmejälgija kaudu.
 
+#### Vastus
+Operatsioon tagastab ainult kehtiva ja tulevikus kehtima hakkava puude otsuse. Andmed päritakse X-tee kaudu Sotsiaalkindlustusametist (SKA).
+
 #### Näited
 Näide päringust:
 ```

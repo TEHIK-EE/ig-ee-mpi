@@ -23,9 +23,6 @@
 - Arvestab erinevate [patsiendi liikidega](patient.html)
   - <input type="checkbox"/> Toetab [tuvastatud patsiendi](StructureDefinition-ee-mpi-patient-verified.html) andmekoosseisu.
   - <input type="checkbox"/> Toetab [tundmatu, anonüümse patsiendi](StructureDefinition-ee-mpi-patient-unknown.html) või mitte-elusa patsiendi (nt õhk, keskkonnaproovid, ..) andmekoosseisu (kui TTO-l on vastav raviprofiil)
-  - Arvestab, et tulevikus tuleb toetada 
-    - <input type="checkbox"/> [vastsündinud patsiendi](StructureDefinition-ee-mpi-patient-newborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)
-    - <input type="checkbox"/> [surnultsündinud patsiendi](StructureDefinition-ee-mpi-patient-stillborn.html) andmekoosseisu (kui TTO-l on vastav raviprofiil)  
 - Oskab opereerida [RelatedPerson](http://hl7.org/fhir/relatedperson.html) ressursiga  
   - <input type="checkbox"/> Toetab [seotud isiku](StructureDefinition-ee-mpi-related-person.html) andmekoosseisu `GET/PUT/POST/DELETE /RelatedPerson`
   - <input type="checkbox"/> Toetab seotud isikute otsingut `GET /RelatedPerson?patient=value`
